@@ -1,0 +1,24 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Build / temp
+node_modules/
+dist/
+.cache/
+*.log
+
+# Local-only assets
+*.zip
+
+# Claude Code internals
+.claude/

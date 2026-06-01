@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FFFFFF">
+  <title>Knowledge Hub — Galent</title>
+  <meta name="description" content="The thinking behind the delivery. Whitepapers, blog posts, and videocasts written by Galent practitioners — no vendor spin.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="icon" href="../assets/images/logo.png?v=3" type="image/png">
+</head>
+<body>
+
+  <header class="nav" id="site-nav">
+    <a href="index.html" class="brand" aria-label="Galent — Home">
+      <img src="../assets/images/logo.png?v=3" alt="Galent">
+    </a>
+    <nav class="menu" aria-label="Primary" id="primary-menu">
+      <a href="platform.html">Platform</a>
+      <a href="fde.html">FDE</a>
+      <a href="about.html">About</a>
+      <a href="knowledge-hub.html" class="lvl-2">Knowledge Hub</a>
+      <span class="sep" aria-hidden="true"></span>
+      <a href="#subscribe" class="btn" style="padding:10px 18px;font-size:14px">Subscribe <span class="arr">→</span></a>
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero" style="min-height: auto; padding: clamp(80px, 12vw, 140px) var(--gutter) clamp(48px, 8vw, 80px);">
+      <div class="hero-aurora" aria-hidden="true">
+        <canvas id="cv-aurora"></canvas>
+      </div>
+      <div class="hero-content">
+        <span class="badge"><span class="dot">01</span>Knowledge Hub</span>
+        <h1 class="t-hero">
+          <span style="display:block;">The Thinking Behind</span>
+          <span style="display:block;"><em class="ac-p">the Delivery.</em></span>
+        </h1>
+        <p class="t-body-lg">
+          Written by Galent practitioners. <em class="ac-g">No vendor spin.</em> Field-tested insight on AI-native delivery, legacy modernisation, forward-deployed engineering, and the systems we build inside regulated enterprise environments.
+        </p>
+      </div>
+    </section>
+
+    <!-- KNOWLEDGE HUB CONTENT — tabs + search + panels -->
+    <section id="hub" style="padding-top: var(--space-2xl);">
+      <div class="container">
+
+        <div class="hub-toolbar" data-reveal>
+          <div class="hub-tabs" role="tablist" aria-label="Knowledge Hub sections">
+            <button class="hub-tab active" data-target="panel-blogs" role="tab" aria-selected="true">
+              Blogs <span class="count">6</span>
+            </button>
+            <button class="hub-tab" data-target="panel-whitepapers" role="tab" aria-selected="false">
+              Whitepapers <span class="count">3</span>
+            </button>
+            <button class="hub-tab" data-target="panel-videocasts" role="tab" aria-selected="false">
+              Videocasts <span class="count">3</span>
+            </button>
+          </div>
+
+          <label class="hub-search">
+            <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <circle cx="7" cy="7" r="5"/><path d="m13.5 13.5-3-3"/>
+            </svg>
+            <input type="search" placeholder="Search articles, whitepapers, videocasts…" aria-label="Search Knowledge Hub">
+          </label>
+        </div>
+
+        <!-- ============ BLOGS PANEL ============ -->
+        <div class="hub-panel active" id="panel-blogs" role="tabpanel" aria-hidden="false">
+          <div class="card-grid">
+
+            <a href="#" class="card-item" data-reveal>
+              <div class="card-thumb alt-1"><span class="icon">📊</span></div>
+              <div class="card-body">
+                <div class="card-meta"><span class="category">Blog · Insight</span><span>14 May 2026</span></div>
+                <h3>Why 85% of Enterprise AI PoCs Fail</h3>
+                <p class="excerpt">PoCs fail because context dies between sprints. Here's the structural reason most enterprise AI never reaches production — and what to fix before the next pilot.</p>
+                <span class="card-cta">Read more <span class="arr">→</span></span>
+              </div>
+            </a>
+
+            <a href="#" class="card-item" data-reveal style="transition-delay:.06s">
+              <div class="card-thumb alt-2"><span class="icon">🧠</span></div>
+              <div class="card-body">
+                <div class="card-meta"><span class="category">Blog · Engineering</span><span>02 May 2026</span></div>
+                <h3>The Future of AI in Software Engineering</h3>
+                <p class="excerpt">Copilots assist tasks. Orchestrators run programmes. The shift from individual augmentation to enterprise-scale delivery — and why it changes how teams are built.</p>
+                <span class="card-cta">Read more <span class="arr">→</span></span>
+              </div>
+            </a>
+
+            <a href="#" class="card-item" data-reveal style="transition-delay:.12s">
+              <div class="card-thumb alt-3"><span class="icon">🏗️</span></div>
+              <div class="card-body">
+                <div class="card-meta"><span class="category">Blog · Modernisation</span><span>21 Apr 2026</span></div>
+                <h3>Legacy Modernisation: From Chaos to Intelligence</h3>
+                <p class="excerpt">Most modernisation programmes treat legacy as a migration problem. We treat it as an intelligence problem — and ship 15× faster as a result.</p>
+                <span class="card-cta">Read more <span class="arr">→</span></span>
+              </div>
+            </a>
+
+            <a href="#" class="card-item" data-reveal>
+              <div class="card-thumb alt-4"><span class="icon">⚡</span></div>
+              <div class="card-body">
+                <div class="card-meta"><span class="category">Blog · Delivery</span><span>09 Apr 2026</span></div>
+                <h3>How Forward-Deployed Engineers Accelerate Delivery</h3>
+                <p class="excerpt">FDEs don't sit on the outside writing tickets. They sit inside the system, shape architecture in real time, and own outcomes. Why embedded delivery wins.</p>
+                <span class="card-cta">Read more <span class="arr">→</span></span>
+              </div>
+            </a>
+
+            <a href="#" class="card-item" data-reveal style="transition-delay:.06s">
+              <div class="card-thumb alt-5"><span class="icon">🛡️</span></div>
+              <div class="card-body">
+                <div class="card-meta"><span class="category">Blog · Quality</span><span>27 Mar 2026</span></div>
+                <h3>AI-Driven Quality Engineering: Beyond Test Automation</h3>
+                <p class="excerpt">Test automation finds defects. AI quality engineering makes them structurally impossible — predicted, healed, and prevented before generation.</p>
+                <span class="card-cta">Read more <span class="arr">→</span></span>
+              </div>
+            </a>
+
+            <a href="#" class="card-item" data-reveal style="transition-delay:.12s">
+              <div class="card-thumb alt-6"><span class="icon">🚀</span></div>
+              <div class="card-body">
+                <div class="card-meta"><span class="category">Blog · Platforms</span><span>11 Mar 2026</span></div>
+                <h3>Orchestrating Enterprise Platforms with Einstein AI</h3>
+                <p class="excerpt">Salesforce projects fail when CRM, ERP, and data live in silos. Enterprise360 unifies them — Einstein-augmented from first interaction to revenue recognition.</p>
+                <span class="card-cta">Read more <span class="arr">→</span></span>
+              </div>
+            </a>
+
+          </div>
+        </div>
+
+        <!-- ============ WHITEPAPERS PANEL ============ -->
+        <div class="hub-panel" id="panel-whitepapers" role="tabpanel" aria-hidden="true">
+          <div class="card-grid">
+
+            <a href="#" class="card-item" data-reveal>
+              <div class="card-thumb alt-1"><span class="icon">📄</span></div>
+              <div class="card-body">
+                <div class="card-meta"><span class="category">Whitepaper · Strategy</span><span>32 pages · PDF</span></div>
+                <h3>Enterprise AI Implementation Guide</h3>
+                <p class="excerpt">The end-to-end playbook for deploying AI inside regulated enterprises — scoping, sequencing, build, ship, measure. With the architecture patterns that survive production.</p>
+                <span class="card-cta">Download <span class="arr">→</span></span>
+              </div>
+            </a>
+
+            <a href="#" class="card-item" data-reveal style="transition-delay:.08s">
+              <div class="card-thumb alt-2"><span class="icon">🧩</span></div>
+              <div class="card-body">
+                <div class="card-meta"><span class="category">Whitepaper · Technical</span><span>24 pages · PDF</span></div>
+                <h3>Context Engine Best Practices</h3>
+                <p class="excerpt">Why context window management is the Achilles heel of every AI deployment — and how Knowledge Graph + Context Graph solve it for team-scale programmes.</p>
+                <span class="card-cta">Download <span class="arr">→</span></span>
+              </div>
+            </a>
+
+            <a href="#" class="card-item" data-reveal style="transition-delay:.16s">
+              <div class="card-thumb alt-3"><span class="icon">🔧</span></div>
+              <div class="card-body">
+                <div class="card-meta"><span class="category">Whitepaper · Reliability</span><span>28 pages · PDF</span></div>
+                <h3>Building Reliable, AI-Native Systems</h3>
+                <p class="excerpt">Reliability-as-Code, predictive SRE, and self-healing patterns for production AI systems. With reference architectures for multi-cloud and hybrid environments.</p>
+                <span class="card-cta">Download <span class="arr">→</span></span>
+              </div>
+            </a>
+
+          </div>
+        </div>
+
+        <!-- ============ VIDEOCASTS PANEL ============ -->
+        <div class="hub-panel" id="panel-videocasts" role="tabpanel" aria-hidden="true">
+          <div class="card-grid">
+
+            <a href="#" class="card-item" data-reveal>
+              <div class="card-thumb alt-4">
+                <span class="play-btn" aria-hidden="true">▶</span>
+                <span class="runtime">28:14</span>
+              </div>
+              <div class="card-body">
+                <div class="card-meta"><span class="category">Videocast · Episode 03</span><span>Apr 2026</span></div>
+                <h3>AI Agents in Enterprise Operations</h3>
+                <p class="excerpt">Inside Galent's Everything Ops model — how DevOps, SecOps, FinOps, and SRE agents collaborate as a single AI-powered operating fabric.</p>
+                <span class="card-cta">Watch <span class="arr">→</span></span>
+              </div>
+            </a>
+
+            <a href="#" class="card-item" data-reveal style="transition-delay:.08s">
+              <div class="card-thumb alt-5">
+                <span class="play-btn" aria-hidden="true">▶</span>
+                <span class="runtime">34:52</span>
+              </div>
+              <div class="card-body">
+                <div class="card-meta"><span class="category">Videocast · Episode 02</span><span>Mar 2026</span></div>
+                <h3>Future of Legacy Modernisation</h3>
+                <p class="excerpt">From 6-year programmes to 6-month outcomes. How GalentAI's Legacy Transformation Command turns COBOL estates into modern systems without business disruption.</p>
+                <span class="card-cta">Watch <span class="arr">→</span></span>
+              </div>
+            </a>
+
+            <a href="#" class="card-item" data-reveal style="transition-delay:.16s">
+              <div class="card-thumb alt-6">
+                <span class="play-btn" aria-hidden="true">▶</span>
+                <span class="runtime">22:07</span>
+              </div>
+              <div class="card-body">
+                <div class="card-meta"><span class="category">Videocast · Episode 01</span><span>Feb 2026</span></div>
+                <h3>Building Quality Into AI Workflows</h3>
+                <p class="excerpt">Quality, security, and accessibility as one unified AI system — not three separate practices stitched together. The four engines, demonstrated.</p>
+                <span class="card-cta">Watch <span class="arr">→</span></span>
+              </div>
+            </a>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SUBSCRIBE / GET ALERTS CTA -->
+    <section id="subscribe">
+      <div class="container">
+        <div class="cta-card" data-reveal>
+          <span class="badge"><span class="dot">02</span>Stay in the Loop</span>
+          <h2 class="t-h1">Get the next piece, <em style="color:#fff;font-style:normal;border-bottom:2px solid var(--brand-purple);padding-bottom:2px;">before everyone else.</em></h2>
+          <p class="t-body-lg">
+            One email a month. New whitepapers, technical deep-dives, and videocast drops. Written by Galent practitioners. Easy unsubscribe.
+          </p>
+          <form style="display:inline-flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top: var(--space-lg);align-items:center;" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Subscribed ✓';">
+            <input type="email" required placeholder="you@company.com" aria-label="Email address" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:12px 18px;border-radius: var(--radius-full);font-size:15px;font-family:inherit;min-width:260px;outline:none;">
+            <button type="submit" class="btn">Subscribe <span class="arr">→</span></button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div>
+      <div class="brand-mark">
+        <img src="../assets/images/logo.png?v=3" alt="Galent">
+      </div>
+      <p>Engineering outcomes. Not headcount. Technology services delivered at 3–4× velocity, powered by GalentAI.</p>
+      <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.5px;color:var(--brand-purple);">OUTPACE · OUTPLAY · OUTSTAND</div>
+    </div>
+    <div>
+      <h5>Platform</h5>
+      <ul>
+        <li><a href="platform.html">GalentAI</a></li>
+        <li><a href="platform.html#how">NeuroQL Engine</a></li>
+        <li><a href="platform.html#how">RCM Engine</a></li>
+        <li><a href="platform.html#how">Knowledge Graph</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Tech Services</h5>
+      <ul>
+        <li><a href="services/legacy-modernisation.html">App Dev &amp; Modernization</a></li>
+        <li><a href="services/itsm-transformation.html">Managed Services</a></li>
+        <li><a href="services/data-transformation.html">Data &amp; Platforms</a></li>
+        <li><a href="services/enterprise-platforms.html">Context Engineering</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Company</h5>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="knowledge-hub.html">Knowledge Hub</a></li>
+        <li><a href="fde.html">Talk to an FDE</a></li>
+        <li><a href="#subscribe">Subscribe</a></li>
+      </ul>
+    </div>
+    <div class="bottom">
+      <div>© 2026 Galent · All rights reserved.</div>
+      <div>Outpace · Outplay · Outstand</div>
+    </div>
+  </footer>
+
+  <script src="js/animations.js"></script>
+  <script src="js/cms.js"></script>
+  <script>
+    Galent.aurora(document.getElementById('cv-aurora'));
+    Galent.persistentReveal();
+    Galent.stickyNav('site-nav');
+  </script>
+
+</body>
+</html>

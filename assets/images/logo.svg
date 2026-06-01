@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 56" role="img" aria-label="Galent">
+  <defs>
+    <!-- Soft Gaussian blur — gives the watercolor-blob look -->
+    <filter id="g-soft" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="1.6"/>
+    </filter>
+  </defs>
+
+  <!-- Pebble mark — three soft organic blobs -->
+  <g filter="url(#g-soft)">
+    <!-- Green leaf: top-left -->
+    <ellipse cx="16" cy="18" rx="13" ry="11" fill="#1ED197"/>
+    <!-- Orange dot: top-right, small -->
+    <circle  cx="36" cy="14" r="4.5" fill="#FF5A1F"/>
+    <!-- Large purple oval: bottom, slightly to the right, biggest shape -->
+    <ellipse cx="25" cy="34" rx="20" ry="15" fill="#7B2CBF"/>
+  </g>
+
+  <!-- Wordmark — kept crisp, outside the filter -->
+  <text x="58" y="38" font-family="Plus Jakarta Sans, Inter, system-ui, sans-serif" font-weight="700" font-size="26" letter-spacing="-0.6" fill="#121317">Galent</text>
+</svg>

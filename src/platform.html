@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FFFFFF">
+  <title>GalentAI · The Platform — Galent</title>
+  <meta name="description" content="GalentAI is built for one thing: production-grade outcomes at enterprise scale. Deterministic, auditable delivery — running on your existing people, processes, and stack.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="icon" href="../assets/images/logo.png?v=3" type="image/png">
+</head>
+<body>
+
+  <header class="nav" id="site-nav">
+    <a href="index.html" class="brand" aria-label="Galent — Home">
+      <img src="../assets/images/logo.png?v=3" alt="Galent" width="168" height="40">
+    </a>
+    <nav class="menu" aria-label="Primary" id="primary-menu">
+      <a href="platform.html">Platform</a>
+      <a href="fde.html">FDE</a>
+      <a href="about.html">About</a>
+      <a href="knowledge-hub.html" class="lvl-2">Knowledge Hub</a>
+      <span class="sep" aria-hidden="true"></span>
+      <a href="#cta" class="btn" style="padding:10px 18px;font-size:14px">Get started <span class="arr">→</span></a>
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-aurora" aria-hidden="true">
+        <canvas id="cv-aurora"></canvas>
+      </div>
+      <div class="hero-content">
+        <span class="badge"><span class="dot">01</span>GalentAI · Platform</span>
+        <h1 class="t-hero">
+          <span style="display:block">AI Is Everywhere.</span>
+          <span style="display:block">Except in Your <em class="ac-p">P&amp;L.</em></span>
+        </h1>
+        <p class="t-body-lg">
+          Most enterprise AI produces impressive PoCs and little else. Not because the models aren't capable. Because nobody solved how to deploy them — repeatably, at scale, in production.
+        </p>
+        <p class="t-body-lg" style="margin-top: var(--space-md); max-width: 60ch; font-weight: 500; color: var(--on-surface);">
+          GalentAI is built for one thing: production-grade outcomes at enterprise scale. Not demos. Deterministic, auditable delivery — running on your existing people, processes, and stack.
+        </p>
+        <div class="cta-row" style="margin-top: var(--space-2xl);">
+          <a href="#cta" class="btn">Schedule a leadership briefing <span class="arr">→</span></a>
+          <a href="#how" class="btn ghost">See how it works <span class="arr">→</span></a>
+        </div>
+      </div>
+      <div class="scroll-cue" aria-hidden="true"><span class="t-mono">SCROLL</span><span class="line"></span></div>
+    </section>
+
+    <!-- THE CORE PROBLEM -->
+    <section id="problem">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="badge"><span class="dot">02</span>The Core Problem</span>
+          <h2 class="t-h1">The Achilles Heel of Every AI Deployment Is <em class="ac-p">Context.</em></h2>
+          <p class="t-body-lg">
+            Load too much into a context window and accuracy degrades. Load the wrong content and results become unreliable. This is why AI works for individual tasks and fails for team-scale programmes.
+          </p>
+        </div>
+
+        <figure data-reveal style="max-width: 880px; margin: 0 auto var(--space-2xl); padding: var(--space-2xl); background: var(--surface-container); border-radius: var(--radius-lg); border-left: 4px solid var(--brand-purple);">
+          <blockquote style="margin: 0; font-size: clamp(20px, 2.2vw, 26px); line-height: 1.35; color: var(--on-surface); font-weight: 500; letter-spacing: -0.3px;">
+            "The biggest problem isn't individual AI wins. It's getting meaningful results as a team — across handoffs, sprints, programmes — rather than individual heroism."
+          </blockquote>
+        </figure>
+
+        <p class="t-body-lg" data-reveal style="max-width: 760px; margin: 0 auto; text-align: center; color: var(--on-surface); font-weight: 500;">
+          GalentAI solves this by changing how the model behaves — not prompting around its limitations.
+        </p>
+      </div>
+    </section>
+
+    <!-- PLATFORM PERFORMANCE -->
+    <section id="performance" style="padding-bottom: var(--space-3xl);">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="badge"><span class="dot">03</span>Platform Performance</span>
+          <h2 class="t-h1">Measured across <em class="ac-p">production deployments.</em></h2>
+        </div>
+        <div class="stat-strip six" data-reveal>
+          <div class="item p">
+            <div class="big">3–4<span class="unit">×</span></div>
+            <div class="label">Delivery velocity</div>
+          </div>
+          <div class="item g">
+            <div class="big">85–90<span class="unit">%</span></div>
+            <div class="label">Fewer PoC failures</div>
+          </div>
+          <div class="item p">
+            <div class="big">99<span class="unit">%+</span></div>
+            <div class="label">Code accuracy</div>
+          </div>
+          <div class="item g">
+            <div class="big">70<span class="unit">%</span></div>
+            <div class="label">Fewer context failures</div>
+          </div>
+          <div class="item o">
+            <div class="big">41<span class="unit">%</span></div>
+            <div class="label">Bug premium eliminated</div>
+          </div>
+          <div class="item p">
+            <div class="big">10<span class="unit">×</span></div>
+            <div class="label">Less AI-generated debt</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS — Four Engines -->
+    <section id="how">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="badge"><span class="dot">04</span>How It Works</span>
+          <h2 class="t-h1">Four Engines. One <em class="ac-g">Closed-Loop Execution System.</em></h2>
+          <p class="t-body-lg">
+            Each engine solves a specific failure mode in conventional AI-assisted delivery. Together they are deterministic, compliant, and persistent across the full programme lifecycle.
+          </p>
+        </div>
+
+        <div class="engines-grid">
+          <!-- 3.1 NeuroQL Engine -->
+          <article class="engine-card" data-reveal>
+            <div class="num">3.1</div>
+            <h3 class="t-h3">NeuroQL Engine</h3>
+            <div class="kicker">Natural Language → Code · Patent Pending</div>
+            <p>
+              The deterministic execution engine. AmbientAI monitors the execution environment in real time — knowing what data is relevant, when, and why. It feeds a MicroPrompt architecture that breaks complex tasks into sequential queries under 2,000 tokens each. The output is TONIC — a compact, schema-driven language that encodes AI's operating contract: token-efficient, versioned, deterministically compiled across teams, runs, and clients.
+            </p>
+            <ul>
+              <li>AmbientAI: phase, persona, dependencies, business rules — loaded precisely</li>
+              <li>MicroPrompts: sequential, each under 2,000 tokens</li>
+              <li>TONIC: schema-driven, versioned, compiled</li>
+              <li>70% fewer context window failures</li>
+              <li>Full chain-of-reasoning audit trail</li>
+              <li>4-tier memory: execution, episodic, semantic, principle</li>
+            </ul>
+          </article>
+
+          <!-- 3.2 RCM Engine -->
+          <article class="engine-card" data-reveal style="transition-delay:.08s">
+            <div class="num">3.2</div>
+            <h3 class="t-h3">RCM Engine — Reasoning &amp; Compliance Management</h3>
+            <div class="kicker">Runtime Governance · Patent Pending</div>
+            <p>
+              Neurosymbolic AI: neural understanding combined with symbolic rule enforcement. When a model proposes an action, the symbolic layer validates it against your business rules, compliance requirements, and architectural constraints — before execution. Not after incident review.
+            </p>
+            <ul>
+              <li>Closed loop: Sense → Propose → Validate → Execute → Learn → Adapt</li>
+              <li>Neural proposes — symbolic validates — output is deterministic</li>
+              <li>99%+ code accuracy via neurosymbolic validation</li>
+              <li>Compliance automation with full auditable proof</li>
+              <li>Zero hallucination-led deployment risk</li>
+              <li>Dual explainability: neural + symbolic, separately traceable</li>
+            </ul>
+          </article>
+
+          <!-- 3.3 Enterprise Knowledge Graph -->
+          <article class="engine-card" data-reveal style="transition-delay:.16s">
+            <div class="num">3.3</div>
+            <h3 class="t-h3">Enterprise Knowledge Graph</h3>
+            <div class="kicker">Organisational Intelligence</div>
+            <p>
+              Before any engagement executes, GalentAI builds the Knowledge Graph — a living, queryable map of your entire system ecosystem. Code, logs, data schemas, infrastructure, tickets, runbooks — ingested, continuously updated, always current. "What breaks if we change this?" becomes a seconds-long query — not weeks of manual analysis.
+            </p>
+            <ul>
+              <li>Source code (AST), logs, data schemas, tickets, runbooks — all ingested</li>
+              <li>Functional map, architecture diagrams, deployment topology — generated</li>
+              <li>90% faster legacy code understanding</li>
+              <li>Blast-radius and impact analysis in seconds</li>
+              <li>Living documentation — eliminates SME dependency</li>
+              <li>Full temporal versioning and lineage tracking</li>
+            </ul>
+          </article>
+
+          <!-- 3.4 Context Graph -->
+          <article class="engine-card" data-reveal style="transition-delay:.24s">
+            <div class="num">3.4</div>
+            <h3 class="t-h3">Context Graph</h3>
+            <div class="kicker">Dependency Mapping &amp; Governance</div>
+            <p>
+              The Knowledge Graph captures what exists. The Context Graph captures what should happen — the governing framework for every SDLC phase. Business rules buried in code, scattered across docs, or locked in tribal knowledge are extracted into structured epics. Every decision is recorded as a Decision Trace: what, why, who, when. Institutional memory that compounds across every sprint.
+            </p>
+            <ul>
+              <li>Governs all SDLC phases: architecture → design → dev → test → deploy → SRE</li>
+              <li>Business logic syndication from code, docs, tribal knowledge</li>
+              <li>Decision trace: what, why, who, when — full provenance</li>
+              <li>45ms context retrieval at the 95th percentile</li>
+              <li>Institutional memory compounding across every sprint</li>
+              <li>Knowledge Graph + Context Graph = context-driven SDLC</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARCHITECTURE -->
+    <section id="architecture">
+      <div class="container">
+        <div class="split" data-reveal>
+          <div class="text">
+            <span class="badge"><span class="dot">05</span>Architecture</span>
+            <h2 class="t-h2">"<em class="ac-p">One Size Fits One.</em>"</h2>
+            <p class="t-body-lg">
+              One-size-fits-all AI deployments look great in demos and collapse in production. They assume the organisation adapts to the tool. GalentAI adapts to the organisation. Delivered through Reverse Conway's Maneuver — value streams designed first, architecture assembled to support them.
+            </p>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top: var(--space-md)">
+              <span class="badge"><span class="dot">→</span>151+ languages</span>
+              <span class="badge green"><span class="dot">→</span>1,115+ integrations</span>
+              <span class="badge orange"><span class="dot">→</span>Cloud · hybrid · on-prem</span>
+            </div>
+          </div>
+          <div class="visual">
+            <canvas id="cv-compass"></canvas>
+          </div>
+        </div>
+
+        <div style="height: var(--space-2xl)"></div>
+
+        <div class="arch-grid" data-reveal>
+          <div class="arch-cell">
+            <h4>Composable by design</h4>
+            <p>Sits on top of your existing tools, frameworks, patterns, and infrastructure. No retooling required.</p>
+          </div>
+          <div class="arch-cell">
+            <h4>Reverse Conway's Maneuver</h4>
+            <p>Value streams first. Architecture assembled to support them. Boundary agents at the handoff points.</p>
+          </div>
+          <div class="arch-cell">
+            <h4>Preserve the developer pipeline</h4>
+            <p>GalentAI augments your teams. Doesn't replace them. AI scales alongside people.</p>
+          </div>
+          <div class="arch-cell">
+            <h4>Enterprise-wide collective intelligence</h4>
+            <p>Transforms individual heroism into repeatable team outcomes — consistent across handoffs, runs, clients.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- APPLIED AI AT SCALE -->
+    <section id="applied" style="padding-bottom: var(--space-3xl);">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="badge"><span class="dot">06</span>Applied AI at Scale</span>
+          <h2 class="t-h1">The Four Engines Are the Foundation. <em class="ac-g">This Is What Runs on Top.</em></h2>
+        </div>
+        <div class="stat-strip six" data-reveal>
+          <div class="item p"><div class="big">125<span class="unit">+</span></div><div class="label">Reusable agents</div></div>
+          <div class="item g"><div class="big">70<span class="unit">+</span></div><div class="label">Validated use cases</div></div>
+          <div class="item p"><div class="big">20<span class="unit">+</span></div><div class="label">Design patterns</div></div>
+          <div class="item o"><div class="big">15<span class="unit">+</span></div><div class="label">Agentic AI techniques</div></div>
+          <div class="item p"><div class="big">12</div><div class="label">Delivery methods</div></div>
+          <div class="item g"><div class="big">9</div><div class="label">Core engines</div></div>
+        </div>
+        <p class="t-body-sm" data-reveal style="text-align:center; margin-top: var(--space-lg); color: var(--on-surface-variant);">
+          This library grows with every client engagement — compounding returns across programmes.
+        </p>
+      </div>
+    </section>
+
+    <!-- HOW YOU GET IT -->
+    <section id="get-it">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="badge"><span class="dot">07</span>How You Get It</span>
+          <h2 class="t-h1">The Platform Comes With <em class="ac-p">the People.</em></h2>
+          <p class="t-body-lg">
+            GalentAI doesn't ship as a licence. It arrives operationalised — deployed and run by Galent's Forward-Deployed Engineers inside your environment. We don't run pilots. We build production-grade AI operating models.
+          </p>
+        </div>
+
+        <div class="steps" data-reveal>
+          <div class="step">
+            <div class="n">01 · Scoping</div>
+            <div class="body">
+              <h4>We map your stack, constraints, and target outcomes.</h4>
+              <p>GalentAI configured before day one.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="n">02 · Knowledge Graph construction</div>
+            <div class="body">
+              <h4>Codebase, infrastructure, logs, and operational data ingested.</h4>
+              <p>Enterprise graph live within days.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="n">03 · Context Graph activation</div>
+            <div class="body">
+              <h4>Business logic extracted from code, docs, and tribal knowledge.</h4>
+              <p>Governing framework live.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="n">04 · Delivery at acceleration</div>
+            <div class="body">
+              <h4>FDEs operate GalentAI inside your teams.</h4>
+              <p>Deterministic outputs. Full compliance. Zero hallucinations in production.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="n">05 · Compounding intelligence</div>
+            <div class="body">
+              <h4>Every decision captured. Every outcome learned from.</h4>
+              <p>The platform gets faster as the engagement matures.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GET STARTED -->
+    <section id="cta">
+      <div class="container">
+        <div class="cta-card" data-reveal>
+          <span class="badge"><span class="dot">08</span>Get Started</span>
+          <h2 class="t-h1">Turn AI Strategy into <em style="color:#fff;font-style:normal;border-bottom:2px solid var(--brand-purple);padding-bottom:2px;">Deterministic Execution.</em></h2>
+          <p class="t-body-lg">
+            We show you how GalentAI operates inside your environment — your stack, your constraints, your outcomes on the table.
+          </p>
+          <div style="display:inline-flex;flex-wrap:wrap;gap:12px;justify-content:center">
+            <a href="#" class="btn">Schedule a leadership briefing <span class="arr">→</span></a>
+            <a href="#" class="btn ghost">Request a platform deep dive <span class="arr">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div>
+      <div class="brand-mark">
+        <img src="../assets/images/logo.png?v=3" alt="Galent" width="168" height="40">
+      </div>
+      <p>Engineering outcomes. Not headcount. Technology services delivered at 3–4× velocity, powered by GalentAI.</p>
+      <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.5px;color:var(--brand-purple);">OUTPACE · OUTPLAY · OUTSTAND</div>
+    </div>
+    <div>
+      <h5>Platform</h5>
+      <ul>
+        <li><a href="platform.html">GalentAI</a></li>
+        <li><a href="platform.html#how">NeuroQL Engine</a></li>
+        <li><a href="platform.html#how">RCM Engine</a></li>
+        <li><a href="platform.html#how">Knowledge Graph</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Services</h5>
+      <ul>
+        <li><a href="services/legacy-modernisation.html">App Dev &amp; Modernization</a></li>
+        <li><a href="services/itsm-transformation.html">Managed Services</a></li>
+        <li><a href="services/data-transformation.html">Data &amp; Platforms</a></li>
+        <li><a href="services/enterprise-platforms.html">Context Engineering</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Company</h5>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="knowledge-hub.html">Knowledge Hub</a></li>
+        <li><a href="fde.html">Talk to an FDE</a></li>
+        <li><a href="#cta">Talk to us</a></li>
+      </ul>
+    </div>
+    <div class="bottom">
+      <div>© 2026 Galent · All rights reserved.</div>
+      <div>Outpace · Outplay · Outstand</div>
+    </div>
+  </footer>
+
+  <script src="js/animations.js"></script>
+  <script>
+    Galent.aurora(document.getElementById('cv-aurora'));
+    Galent.compass(document.getElementById('cv-compass'));
+    Galent.persistentReveal();
+    Galent.stickyNav('site-nav');
+  </script>
+
+</body>
+</html>
