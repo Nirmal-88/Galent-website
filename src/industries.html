@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FFFFFF">
+  <title>Industries — Galent</title>
+  <meta name="description" content="Galent operates inside regulated, complex, high-velocity environments — technology, BFSI, healthcare, manufacturing, life sciences, retail, and GCC transformations.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="icon" href="../assets/images/logo.png?v=4" type="image/png">
+</head>
+<body>
+
+  <header class="nav" id="site-nav">
+    <a href="index.html" class="brand" aria-label="Galent — Home">
+      <img src="../assets/images/logo.png?v=4" alt="Galent">
+    </a>
+    <nav class="menu" aria-label="Primary" id="primary-menu">
+      <a href="platform.html">Platform</a>
+      <a href="fde.html">FDE</a>
+      <a href="about.html">About</a>
+      <a href="knowledge-hub.html">Knowledge Hub</a>
+      <div class="has-dropdown">
+        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="services-menu">
+          Tech Services <span class="caret" aria-hidden="true">▾</span>
+        </button>
+        <div class="dropdown-panel" id="services-menu" role="menu" aria-hidden="true">
+          <div class="dropdown-group">
+            <h6>App Dev &amp; Modernization</h6>
+            <a href="services/legacy-modernisation.html" role="menuitem">Legacy Modernization</a>
+            <a href="services/brownfield-greenfield.html" role="menuitem">Brownfield &amp; Greenfield</a>
+            <a href="services/quality-engineering.html" role="menuitem">Quality Engineering</a>
+          </div>
+          <div class="dropdown-group">
+            <h6>Managed Services</h6>
+            <a href="services/itsm-transformation.html" role="menuitem">ITSM Transformation</a>
+            <a href="services/sre-observability.html" role="menuitem">SRE &amp; Observability</a>
+            <a href="services/everything-ops.html" role="menuitem">Everything Ops</a>
+          </div>
+          <div class="dropdown-group">
+            <h6>Data &amp; Platforms</h6>
+            <a href="services/data-transformation.html" role="menuitem">Data Transformation</a>
+            <a href="services/enterprise-platforms.html" role="menuitem">Enterprise Platforms</a>
+          </div>
+        </div>
+      </div>
+      <a href="industries.html">Industries</a>
+      <span class="sep" aria-hidden="true"></span>
+      <a href="#cta" class="btn" style="padding:10px 18px;font-size:14px">Talk to us <span class="arr">→</span></a>
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-aurora" aria-hidden="true">
+        <canvas id="cv-aurora"></canvas>
+      </div>
+      <div class="hero-content">
+        <span class="badge"><span class="dot">01</span>Industries</span>
+        <h1 class="t-hero">
+          <span style="display:block;">We Work Where the</span>
+          <span style="display:block;"><em class="ac-g">Stakes Are High.</em></span>
+        </h1>
+        <p class="t-body-lg">
+          Our engagements run inside regulated, complex, high-velocity environments. That's not a constraint for us — <em class="ac-p">it's where we work best.</em>
+        </p>
+        <p class="t-body-lg" style="margin-top: var(--space-md);">
+          Seven industries. One AI-native delivery model. Every programme orchestrated by GalentAI and owned by Forward-Deployed Engineers embedded in your team.
+        </p>
+        <div class="cta-row" style="margin-top: var(--space-2xl);">
+          <a href="#cta" class="btn">Talk to us <span class="arr">→</span></a>
+          <a href="#sectors" class="btn ghost">Explore sectors <span class="arr">→</span></a>
+        </div>
+      </div>
+      <div class="scroll-cue" aria-hidden="true"><span class="t-mono">SCROLL</span><span class="line"></span></div>
+    </section>
+
+    <!-- INDUSTRIES — 7 detail cards -->
+    <section id="sectors">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="badge"><span class="dot">02</span>Sectors We Serve</span>
+          <h2 class="t-h1">Seven industries. <em class="ac-p">One delivery model.</em></h2>
+          <p class="t-body-lg">Each programme is shaped to the sector's constraints — regulation, data sensitivity, scale, and pace. The platform stays the same; the context adapts.</p>
+        </div>
+
+        <div class="industries-page">
+
+          <a href="services/quality-engineering.html" class="industry-card" data-reveal>
+            <div class="num">01 · Technology</div>
+            <h3>Technology &amp; Software</h3>
+            <p>AI-native DevOps, intelligent QA, agentic automation.</p>
+            <h6>Use cases</h6>
+            <ul>
+              <li>Autonomous CI/CD pipelines</li>
+              <li>AI-driven quality engineering</li>
+              <li>Cloud cost optimisation</li>
+              <li>Production-grade ML deployment</li>
+            </ul>
+            <span class="card-cta">Explore services <span class="arr">→</span></span>
+          </a>
+
+          <a href="services/data-transformation.html" class="industry-card g" data-reveal style="transition-delay:.06s">
+            <div class="num">02 · BFSI</div>
+            <h3>BFSI</h3>
+            <p>Risk, compliance, and customer intelligence.</p>
+            <h6>Use cases</h6>
+            <ul>
+              <li>Fraud detection and anomaly scoring</li>
+              <li>Regulatory compliance automation</li>
+              <li>Customer 360 with Einstein-augmented insights</li>
+              <li>Risk-aware AI in trading and lending</li>
+            </ul>
+            <span class="card-cta">Explore services <span class="arr">→</span></span>
+          </a>
+
+          <a href="services/itsm-transformation.html" class="industry-card o" data-reveal style="transition-delay:.12s">
+            <div class="num">03 · Healthcare</div>
+            <h3>Healthcare &amp; Insurance</h3>
+            <p>Claims, patient data, care automation.</p>
+            <h6>Use cases</h6>
+            <ul>
+              <li>HIPAA-compliant AI on patient data</li>
+              <li>Claims processing and adjudication</li>
+              <li>Care coordination and triage automation</li>
+              <li>Predictive cohort modelling</li>
+            </ul>
+            <span class="card-cta">Explore services <span class="arr">→</span></span>
+          </a>
+
+          <a href="services/data-transformation.html" class="industry-card" data-reveal style="transition-delay:.18s">
+            <div class="num">04 · Manufacturing</div>
+            <h3>Manufacturing &amp; Consumer</h3>
+            <p>Supply chain, predictive maintenance, demand forecasting.</p>
+            <h6>Use cases</h6>
+            <ul>
+              <li>Predictive maintenance and uptime intelligence</li>
+              <li>Demand forecasting and inventory optimisation</li>
+              <li>Supply chain anomaly detection</li>
+              <li>Quality control with vision AI</li>
+            </ul>
+            <span class="card-cta">Explore services <span class="arr">→</span></span>
+          </a>
+
+          <a href="services/data-transformation.html" class="industry-card g" data-reveal style="transition-delay:.24s">
+            <div class="num">05 · Life Sciences</div>
+            <h3>Life Sciences</h3>
+            <p>Research acceleration, predictive modelling, compliance.</p>
+            <h6>Use cases</h6>
+            <ul>
+              <li>AI-accelerated research and discovery</li>
+              <li>Clinical trial intelligence and optimisation</li>
+              <li>Regulatory submission automation</li>
+              <li>Pharmacovigilance and adverse-event monitoring</li>
+            </ul>
+            <span class="card-cta">Explore services <span class="arr">→</span></span>
+          </a>
+
+          <a href="services/enterprise-platforms.html" class="industry-card o" data-reveal style="transition-delay:.30s">
+            <div class="num">06 · Retail / CPG</div>
+            <h3>Retail / CPG</h3>
+            <p>Personalisation, inventory optimisation, AI-enhanced merchandising.</p>
+            <h6>Use cases</h6>
+            <ul>
+              <li>Personalised recommendation engines</li>
+              <li>Dynamic pricing and assortment intelligence</li>
+              <li>Inventory and replenishment automation</li>
+              <li>AI-driven merchandising and store ops</li>
+            </ul>
+            <span class="card-cta">Explore services <span class="arr">→</span></span>
+          </a>
+
+          <a href="services/legacy-modernisation.html" class="industry-card" data-reveal style="transition-delay:.36s">
+            <div class="num">07 · GCC</div>
+            <h3>GCC Transformations</h3>
+            <p>End-to-end AI-native transformation programmes.</p>
+            <h6>Use cases</h6>
+            <ul>
+              <li>AI-native GCC build and operate</li>
+              <li>Talent platform and FDE acceleration</li>
+              <li>Cross-LOB transformation programmes</li>
+              <li>Cost-to-value GCC operating model</li>
+            </ul>
+            <span class="card-cta">Explore services <span class="arr">→</span></span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta">
+      <div class="container">
+        <div class="cta-card" data-reveal>
+          <span class="badge"><span class="dot">03</span>Get Started</span>
+          <h2 class="t-h1">Let's talk about <em style="color:#fff;font-style:normal;border-bottom:2px solid var(--brand-purple);padding-bottom:2px;">your industry.</em></h2>
+          <p class="t-body-lg">
+            Every sector has its own regulatory shape, data realities, and pace. Tell us where you operate — we'll show you how Galent has solved it before, and what your first sprint would deliver.
+          </p>
+          <div style="display:inline-flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top: var(--space-lg);">
+            <a href="#" class="btn">Talk to us <span class="arr">→</span></a>
+            <a href="fde.html" class="btn ghost">Talk to an FDE <span class="arr">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div>
+      <div class="brand-mark">
+        <img src="../assets/images/logo.png?v=4" alt="Galent">
+      </div>
+      <p>Engineering outcomes. Not headcount. Technology services delivered at 3–4× velocity, powered by GalentAI.</p>
+      <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.5px;color:var(--brand-purple);">OUTPACE · OUTPLAY · OUTSTAND</div>
+    </div>
+    <div>
+      <h5>Platform</h5>
+      <ul>
+        <li><a href="platform.html">GalentAI</a></li>
+        <li><a href="platform.html#how">NeuroQL Engine</a></li>
+        <li><a href="platform.html#how">RCM Engine</a></li>
+        <li><a href="platform.html#how">Knowledge Graph</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Tech Services</h5>
+      <ul>
+        <li><a href="services/legacy-modernisation.html">App Dev &amp; Modernization</a></li>
+        <li><a href="services/itsm-transformation.html">Managed Services</a></li>
+        <li><a href="services/data-transformation.html">Data &amp; Platforms</a></li>
+        <li><a href="services/enterprise-platforms.html">Context Engineering</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Company</h5>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="industries.html">Industries</a></li>
+        <li><a href="knowledge-hub.html">Knowledge Hub</a></li>
+        <li><a href="fde.html">Talk to an FDE</a></li>
+      </ul>
+    </div>
+    <div class="bottom">
+      <div>© 2026 Galent · All rights reserved.</div>
+      <div>Outpace · Outplay · Outstand</div>
+    </div>
+  </footer>
+
+  <script src="js/animations.js"></script>
+  <script>
+    Galent.aurora(document.getElementById('cv-aurora'));
+    Galent.persistentReveal();
+    Galent.stickyNav('site-nav');
+  </script>
+
+</body>
+</html>

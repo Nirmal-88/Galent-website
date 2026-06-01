@@ -289,6 +289,36 @@
         a.addEventListener('click', () => { menu.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); });
       });
     }
+
+    // Tech Services dropdown / mega-menu — click to open, click outside to close
+    nav.querySelectorAll('.has-dropdown').forEach(dd => {
+      const t = dd.querySelector('.dropdown-toggle');
+      const p = dd.querySelector('.dropdown-panel');
+      if (!t || !p) return;
+      t.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = dd.classList.toggle('open');
+        t.setAttribute('aria-expanded', open ? 'true' : 'false');
+        p.setAttribute('aria-hidden', open ? 'false' : 'true');
+      });
+    });
+    document.addEventListener('click', (e) => {
+      nav.querySelectorAll('.has-dropdown.open').forEach(dd => {
+        if (!dd.contains(e.target)) {
+          dd.classList.remove('open');
+          const t = dd.querySelector('.dropdown-toggle'); if (t) t.setAttribute('aria-expanded', 'false');
+          const p = dd.querySelector('.dropdown-panel'); if (p) p.setAttribute('aria-hidden', 'true');
+        }
+      });
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      nav.querySelectorAll('.has-dropdown.open').forEach(dd => {
+        dd.classList.remove('open');
+        const t = dd.querySelector('.dropdown-toggle'); if (t) { t.setAttribute('aria-expanded', 'false'); t.focus(); }
+        const p = dd.querySelector('.dropdown-panel'); if (p) p.setAttribute('aria-hidden', 'true');
+      });
+    });
   };
 
   // Count-up — animates [data-countup] integers when revealed.

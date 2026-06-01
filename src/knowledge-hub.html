@@ -11,19 +11,44 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/design-system.css">
-  <link rel="icon" href="../assets/images/logo.png?v=3" type="image/png">
+  <link rel="icon" href="../assets/images/logo.png?v=4" type="image/png">
 </head>
 <body>
 
   <header class="nav" id="site-nav">
     <a href="index.html" class="brand" aria-label="Galent — Home">
-      <img src="../assets/images/logo.png?v=3" alt="Galent">
+      <img src="../assets/images/logo.png?v=4" alt="Galent">
     </a>
     <nav class="menu" aria-label="Primary" id="primary-menu">
       <a href="platform.html">Platform</a>
       <a href="fde.html">FDE</a>
       <a href="about.html">About</a>
-      <a href="knowledge-hub.html" class="lvl-2">Knowledge Hub</a>
+      <a href="knowledge-hub.html">Knowledge Hub</a>
+      <div class="has-dropdown">
+        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="services-menu">
+          Tech Services <span class="caret" aria-hidden="true">▾</span>
+        </button>
+        <div class="dropdown-panel" id="services-menu" role="menu" aria-hidden="true">
+          <div class="dropdown-group">
+            <h6>App Dev &amp; Modernization</h6>
+            <a href="services/legacy-modernisation.html" role="menuitem">Legacy Modernization</a>
+            <a href="services/brownfield-greenfield.html" role="menuitem">Brownfield &amp; Greenfield</a>
+            <a href="services/quality-engineering.html" role="menuitem">Quality Engineering</a>
+          </div>
+          <div class="dropdown-group">
+            <h6>Managed Services</h6>
+            <a href="services/itsm-transformation.html" role="menuitem">ITSM Transformation</a>
+            <a href="services/sre-observability.html" role="menuitem">SRE &amp; Observability</a>
+            <a href="services/everything-ops.html" role="menuitem">Everything Ops</a>
+          </div>
+          <div class="dropdown-group">
+            <h6>Data &amp; Platforms</h6>
+            <a href="services/data-transformation.html" role="menuitem">Data Transformation</a>
+            <a href="services/enterprise-platforms.html" role="menuitem">Enterprise Platforms</a>
+          </div>
+        </div>
+      </div>
+      <a href="industries.html">Industries</a>
       <span class="sep" aria-hidden="true"></span>
       <a href="#subscribe" class="btn" style="padding:10px 18px;font-size:14px">Subscribe <span class="arr">→</span></a>
     </nav>
@@ -251,7 +276,7 @@
   <footer class="footer">
     <div>
       <div class="brand-mark">
-        <img src="../assets/images/logo.png?v=3" alt="Galent">
+        <img src="../assets/images/logo.png?v=4" alt="Galent">
       </div>
       <p>Engineering outcomes. Not headcount. Technology services delivered at 3–4× velocity, powered by GalentAI.</p>
       <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.5px;color:var(--brand-purple);">OUTPACE · OUTPLAY · OUTSTAND</div>

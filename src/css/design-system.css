@@ -192,6 +192,83 @@ em.ac-o { color: var(--brand-orange); font-style: normal; }
 .nav .menu a.btn:hover { background: var(--grey-1000); color: var(--surface); }
 .nav .menu .sep { width: 1px; height: 18px; background: var(--surface-container-higher); margin: 0 4px; }
 
+/* Tech Services dropdown / mega-menu */
+.has-dropdown { position: relative; }
+.dropdown-toggle {
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--on-surface);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background .15s ease;
+}
+.dropdown-toggle:hover { background: var(--surface-container); }
+.dropdown-toggle .caret { font-size: 9px; transition: transform .2s ease; opacity: 0.7; }
+.has-dropdown.open .dropdown-toggle { background: var(--surface-container); }
+.has-dropdown.open .dropdown-toggle .caret { transform: rotate(180deg); }
+
+.dropdown-panel {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  background: var(--surface);
+  border: 1px solid var(--surface-container-higher);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
+  box-shadow: 0 24px 56px -20px rgba(18,19,23,0.20);
+  display: none;
+  z-index: 60;
+  min-width: 640px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+.has-dropdown.open .dropdown-panel { display: grid; }
+.dropdown-group h6 {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--brand-purple);
+  margin: 0 0 var(--space-sm);
+  font-weight: 500;
+}
+.dropdown-group a {
+  display: block;
+  padding: 10px 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--on-surface);
+  border-top: 1px solid var(--surface-container-high);
+  transition: color .15s ease, padding-left .2s var(--ease-out);
+}
+.dropdown-group a:first-of-type { border-top: 0; }
+.dropdown-group a:hover { color: var(--brand-purple); padding-left: 4px; }
+
+/* Mobile: dropdown becomes inline accordion inside hamburger menu */
+@media (max-width: 720px) {
+  .has-dropdown { width: 100%; }
+  .dropdown-toggle { width: 100%; justify-content: space-between; padding: 12px 16px; min-height: 44px; border-radius: var(--radius-sm); }
+  .dropdown-panel {
+    position: static;
+    min-width: 0;
+    grid-template-columns: 1fr;
+    border: 0;
+    padding: 0 16px var(--space-md);
+    box-shadow: none;
+    gap: var(--space-md);
+    background: transparent;
+  }
+  .dropdown-group h6 { margin-top: var(--space-sm); }
+  .dropdown-group a { padding: 10px 0; }
+}
+
 /* Hamburger toggle — hidden on desktop, shown on mobile */
 .nav-toggle {
   display: none;
@@ -677,6 +754,84 @@ section { padding: var(--space-4xl) 0; }
 /* REVEAL */
 [data-reveal] { opacity: 0; transform: translateY(20px); transition: opacity .8s var(--ease-out), transform .8s var(--ease-out); }
 [data-reveal].in { opacity: 1; transform: translateY(0); }
+
+/* ==================================================================
+ * INDUSTRIES PAGE — rich detail cards (3-col responsive grid)
+ * ================================================================== */
+.industries-page {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+@media (max-width: 980px) { .industries-page { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .industries-page { grid-template-columns: 1fr; } }
+
+.industry-card {
+  background: var(--surface-container);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  transition: background .25s ease, transform .25s var(--ease-out);
+  color: inherit;
+  text-decoration: none;
+}
+.industry-card:hover { background: var(--surface-container-high); transform: translateY(-2px); }
+.industry-card .num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  color: var(--brand-purple);
+}
+.industry-card.g .num { color: var(--brand-green-deep); }
+.industry-card.o .num { color: var(--brand-orange); }
+.industry-card h3 {
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+  margin: 0;
+  color: var(--on-surface);
+}
+.industry-card > p {
+  color: var(--on-surface-variant);
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 0;
+}
+.industry-card h6 {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+  margin: var(--space-sm) 0 0;
+  font-weight: 500;
+}
+.industry-card ul {
+  list-style: none; padding: 0; margin: 0;
+}
+.industry-card ul li {
+  padding: 8px 0;
+  border-top: 1px dashed var(--surface-container-higher);
+  font-size: 14px;
+  color: var(--on-surface);
+  line-height: 1.4;
+}
+.industry-card ul li:first-child { border-top: 0; }
+.industry-card .card-cta {
+  margin-top: auto;
+  padding-top: var(--space-md);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--brand-purple);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.industry-card:hover .card-cta { color: var(--brand-purple-deep); }
+.industry-card .card-cta .arr { transition: transform .2s var(--ease-out); }
+.industry-card:hover .card-cta .arr { transform: translateX(3px); }
 
 /* ==================================================================
  * KNOWLEDGE HUB — tabs, search, content cards
