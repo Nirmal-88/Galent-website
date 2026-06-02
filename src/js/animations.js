@@ -464,5 +464,131 @@
     els.forEach(el => io.observe(el));
   };
 
+  // ============================================================
+  // CONTACT MODAL — injected sitewide. Binds to a[href="#"] and any
+  // [data-contact] trigger. Submits via mailto: fallback (no backend).
+  // ============================================================
+  Galent.contactModal = function (opts) {
+    const to = (opts && opts.to) || 'nirmal.r@galent.com';
+
+    // Inject markup once.
+    if (!document.querySelector('.gx-modal-backdrop')) {
+      const wrap = document.createElement('div');
+      wrap.className = 'gx-modal-backdrop';
+      wrap.setAttribute('role', 'dialog');
+      wrap.setAttribute('aria-modal', 'true');
+      wrap.setAttribute('aria-labelledby', 'gx-modal-title');
+      wrap.innerHTML = `
+        <div class="gx-modal">
+          <button class="close" aria-label="Close">×</button>
+          <div class="gx-form-view">
+            <span class="badge"><span class="dot">→</span>Talk to Galent</span>
+            <h3 id="gx-modal-title">Tell us what you're trying to deliver.</h3>
+            <p>We'll come back with how we'd approach it, what to expect, and which FDE archetypes you'll be working with.</p>
+            <form novalidate>
+              <label>Name
+                <input name="name" type="text" required autocomplete="name" placeholder="Jane Doe">
+              </label>
+              <label>Company
+                <input name="company" type="text" required autocomplete="organization" placeholder="Company name">
+              </label>
+              <label>Work email
+                <input name="email" type="email" required autocomplete="email" placeholder="jane@company.com">
+              </label>
+              <label>What are you trying to deliver?
+                <textarea name="brief" rows="4" placeholder="A sentence or two about the programme, the constraints, and the outcome you need."></textarea>
+              </label>
+              <div class="submit-row">
+                <button type="submit" class="btn">Send <span class="arr">→</span></button>
+              </div>
+            </form>
+          </div>
+          <div class="gx-confirm" hidden>
+            <div class="check">✓</div>
+            <h3>Your draft is ready in your email client.</h3>
+            <p>Hit send from there and we'll be in touch within one business day.</p>
+            <div class="submit-row">
+              <button type="button" class="btn ghost gx-modal-close">Close</button>
+            </div>
+          </div>
+        </div>`;
+      document.body.appendChild(wrap);
+    }
+
+    const backdrop = document.querySelector('.gx-modal-backdrop');
+    const formView = backdrop.querySelector('.gx-form-view');
+    const confirmView = backdrop.querySelector('.gx-confirm');
+    const form = backdrop.querySelector('form');
+    let lastFocused = null;
+
+    function open() {
+      lastFocused = document.activeElement;
+      backdrop.classList.add('open');
+      formView.hidden = false;
+      confirmView.hidden = true;
+      form.reset();
+      setTimeout(() => backdrop.querySelector('input[name="name"]').focus(), 80);
+    }
+    function close() {
+      backdrop.classList.remove('open');
+      if (lastFocused && lastFocused.focus) lastFocused.focus();
+    }
+
+    backdrop.addEventListener('click', (e) => { if (e.target === backdrop) close(); });
+    backdrop.querySelector('.close').addEventListener('click', close);
+    backdrop.querySelectorAll('.gx-modal-close').forEach(b => b.addEventListener('click', close));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && backdrop.classList.contains('open')) close();
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const name = (data.get('name') || '').toString().trim();
+      const company = (data.get('company') || '').toString().trim();
+      const email = (data.get('email') || '').toString().trim();
+      const brief = (data.get('brief') || '').toString().trim();
+      if (!name || !company || !email) {
+        form.querySelectorAll('input[required]').forEach(i => {
+          if (!i.value.trim()) i.style.borderColor = '#DC2626';
+        });
+        return;
+      }
+      const subject = encodeURIComponent(`Galent enquiry — ${company}`);
+      const body = encodeURIComponent(
+        `Name: ${name}\nCompany: ${company}\nEmail: ${email}\n\nWhat we're trying to deliver:\n${brief || '(not provided)'}\n\n— Sent from galent-website.vercel.app`
+      );
+      window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+      formView.hidden = true;
+      confirmView.hidden = false;
+    });
+
+    // Bind every "dead" link or [data-contact] trigger to open the modal.
+    function bind() {
+      const selectors = [
+        'a[href="#"]:not([data-no-modal])',
+        'a[href="#cta"]:not([data-no-modal])',
+        '[data-contact]'
+      ];
+      document.querySelectorAll(selectors.join(',')).forEach(a => {
+        if (a.__gxBound) return;
+        a.__gxBound = true;
+        a.addEventListener('click', (e) => {
+          // Only intercept if the anchor truly goes nowhere or is an explicit contact CTA.
+          e.preventDefault();
+          open();
+        });
+      });
+    }
+    bind();
+    // Re-bind if the DOM mutates (modals injected by other code, etc.)
+    if ('MutationObserver' in window) {
+      new MutationObserver(() => bind()).observe(document.body, { childList: true, subtree: true });
+    }
+
+    Galent.openContactModal = open;
+    Galent.closeContactModal = close;
+  };
+
   window.Galent = Galent;
 })();

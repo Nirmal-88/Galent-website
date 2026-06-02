@@ -180,21 +180,18 @@
       </div>
     </section>
 
-    <!-- INDUSTRIES STRIP -->
+    <!-- WHO WE BUILD FOR — replaces duplicated industries strip -->
     <section style="background: var(--surface-container); padding: var(--space-4xl) 0;">
-      <div class="container">
-        <div class="section-head" data-reveal style="text-align: left;">
-          <span class="section-num">05 · Where we work</span>
-          <h2 class="t-display-italic">Sectors where <em>stakes are high.</em></h2>
-        </div>
-        <div class="industries" data-reveal>
-          <a href="industries.html#technology" class="ind"><div class="num">01</div><strong>Technology &amp; Software</strong><span>AI-native DevOps, intelligent QA</span></a>
-          <a href="industries.html#bfsi" class="ind"><div class="num">02</div><strong>BFSI</strong><span>Risk, compliance, customer intelligence</span></a>
-          <a href="industries.html#healthcare" class="ind"><div class="num">03</div><strong>Healthcare</strong><span>Claims, patient data, care automation</span></a>
-          <a href="industries.html#manufacturing" class="ind"><div class="num">04</div><strong>Manufacturing</strong><span>Supply chain, predictive maintenance</span></a>
-          <a href="industries.html#life-sciences" class="ind"><div class="num">05</div><strong>Life Sciences</strong><span>Research, compliance, trials</span></a>
-          <a href="industries.html#retail" class="ind"><div class="num">06</div><strong>Retail / CPG</strong><span>Personalisation, inventory</span></a>
-          <a href="industries.html#gcc" class="ind"><div class="num">07</div><strong>GCC Transformations</strong><span>End-to-end programmes</span></a>
+      <div class="container container-narrow">
+        <div data-reveal>
+          <span class="section-num">05 · Who we build for</span>
+          <h2 class="t-display-italic" style="margin-top: var(--space-sm);">Regulated. Complex. <em>High-velocity.</em></h2>
+          <p class="t-body-lg" style="margin-top: var(--space-lg);">
+            Galent works best where the stakes are tangible and the tolerance for failure is low. We sit alongside engineering and platform teams running programmes in <strong style="color: var(--on-surface); font-weight: 600;">heavily regulated, technically dense, and operationally critical</strong> environments — banking, healthcare, life sciences, manufacturing, and large-scale tech.
+          </p>
+          <p class="t-body-lg" style="margin-top: var(--space-md);">
+            What unites them: a real cost to standing still, a real cost to ripping and replacing, and a leadership team that needs delivery to move <em style="color: var(--page-accent); font-style: italic;">at platform speed without compromising on governance.</em> That's the gap we close. <a href="industries.html" style="color: var(--page-accent); border-bottom: 1px solid currentColor;">See the full sector list →</a>
+          </p>
         </div>
       </div>
     </section>
@@ -261,6 +258,7 @@
   <script>
     Galent.persistentReveal();
     Galent.stickyNav('site-nav');
+    Galent.contactModal();
     Galent.countUps();
   </script>
 

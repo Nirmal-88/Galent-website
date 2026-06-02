@@ -191,6 +191,15 @@
           <div class="item p"><div class="big">15<span class="unit">×</span></div><div class="label">Faster legacy modernisation, 92% lower risk</div></div>
           <div class="item o"><div class="big">70<span class="unit">%</span></div><div class="label">Reduction in context-loss defects</div></div>
         </div>
+
+        <!-- Anonymised pull quote — programme-level field reference -->
+        <div class="pull-quote" data-reveal>
+          <span class="mark">"</span>
+          <blockquote>
+            Their Knowledge Graph mapped our 14-year COBOL estate in 72 hours. We'd been trying to do that manually for three years.
+            <span class="by">— CTO, Global Insurance Firm</span>
+          </blockquote>
+        </div>
       </div>
     </section>
 
@@ -257,6 +266,7 @@
     Galent.compass(document.getElementById('cv-compass'));
     Galent.persistentReveal();
     Galent.stickyNav('site-nav');
+    Galent.contactModal();
 
     // Engine data — populates the detail panel when a node is clicked.
     const ENGINES = {

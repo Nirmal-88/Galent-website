@@ -78,8 +78,15 @@
           <a href="#how" class="btn ghost">See how we deliver <span class="arr">→</span></a>
         </div>
       </div>
-      <div class="scroll-cue" aria-hidden="true"><span class="t-mono">SCROLL</span><span class="line"></span></div>
+      <a href="#about" class="scroll-chevron" aria-label="Scroll to next section"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
     </section>
+
+
+        <div class="powered-by" data-reveal>
+          <span class="label">POWERED BY GALENTAI</span>
+          <a class="pill" href="../platform.html#engines"><span class="dot"></span>Knowledge Graph</a>
+          <a class="pill" href="../platform.html#engines"><span class="dot"></span>NeuroQL Engine</a>
+        </div>
 
     <!-- OUTCOMES — 4-stat strip -->
     <section id="outcomes" style="padding-bottom: var(--space-3xl)">
@@ -239,39 +246,19 @@
 
         <div class="service-related" data-reveal>
           <a href="brownfield-greenfield.html">
-            <div class="num">App Dev &amp; Modernization</div>
+            <span class="num">// 01</span>
             <strong>Brownfield &amp; Greenfield</strong>
-            <span>One platform · one methodology.</span>
+            <span>One platform · one method</span>
           </a>
           <a href="quality-engineering.html">
-            <div class="num">App Dev &amp; Modernization</div>
+            <span class="num">// 02</span>
             <strong>Quality Engineering</strong>
-            <span>Autonomous QA across every sprint.</span>
-          </a>
-          <a href="itsm-transformation.html">
-            <div class="num">Managed Services</div>
-            <strong>ITSM Transformation</strong>
-            <span>Less noise · faster resolution.</span>
-          </a>
-          <a href="sre-observability.html">
-            <div class="num">Managed Services</div>
-            <strong>SRE &amp; Observability</strong>
-            <span>Full-stack · enterprise scale.</span>
-          </a>
-          <a href="everything-ops.html">
-            <div class="num">Managed Services</div>
-            <strong>Everything Ops</strong>
-            <span>DevOps · DataOps · MLOps · One model.</span>
+            <span>Autonomous QA per sprint</span>
           </a>
           <a href="data-transformation.html">
-            <div class="num">Data &amp; Platforms</div>
+            <span class="num">// 03</span>
             <strong>Data Transformation</strong>
-            <span>AI-native pipelines · autonomous operations.</span>
-          </a>
-          <a href="enterprise-platforms.html">
-            <div class="num">Data &amp; Platforms</div>
-            <strong>Enterprise Platforms</strong>
-            <span>Salesforce &amp; ERP rebuilt as revenue engines.</span>
+            <span>AI-native pipelines</span>
           </a>
         </div>
       </div>
@@ -316,10 +303,10 @@
     <div>
       <h5>Tech Services</h5>
       <ul>
-        <li><a href="legacy-modernisation.html">Legacy Modernization</a></li>
-        <li><a href="brownfield-greenfield.html">Brownfield &amp; Greenfield</a></li>
-        <li><a href="itsm-transformation.html">ITSM Transformation</a></li>
-        <li><a href="data-transformation.html">Data Transformation</a></li>
+        <li><a href="../services/legacy-modernisation.html">Legacy Modernization</a></li>
+        <li><a href="../services/quality-engineering.html">Quality Engineering</a></li>
+        <li><a href="../services/itsm-transformation.html">ITSM Transformation</a></li>
+        <li><a href="../services/data-transformation.html">Data Transformation</a></li>
       </ul>
     </div>
     <div>
@@ -341,6 +328,7 @@
   <script>
     Galent.persistentReveal();
     Galent.stickyNav('site-nav');
+    Galent.contactModal();
   </script>
 
 </body>

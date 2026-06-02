@@ -124,7 +124,8 @@
       <div class="container">
         <div class="hub-toolbar" data-reveal>
           <div class="hub-tabs" role="tablist" aria-label="Knowledge categories">
-            <button class="hub-tab active" data-target="panel-blogs" role="tab" aria-selected="true" aria-controls="panel-blogs" tabindex="0">Blogs <span class="count">6</span></button>
+            <button class="hub-tab active" data-target="panel-all" role="tab" aria-selected="true" aria-controls="panel-all" tabindex="0">All <span class="count">12</span></button>
+            <button class="hub-tab" data-target="panel-blogs" role="tab" aria-selected="false" aria-controls="panel-blogs" tabindex="0">Blogs <span class="count">6</span></button>
             <button class="hub-tab" data-target="panel-whitepapers" role="tab" aria-selected="false" aria-controls="panel-whitepapers" tabindex="0">Whitepapers <span class="count">3</span></button>
             <button class="hub-tab" data-target="panel-videocasts" role="tab" aria-selected="false" aria-controls="panel-videocasts" tabindex="0">Videocasts <span class="count">3</span></button>
           </div>
@@ -135,7 +136,7 @@
         </div>
 
         <!-- BLOGS -->
-        <div class="hub-panel active" id="panel-blogs" role="tabpanel" aria-hidden="false">
+        <div class="hub-panel" id="panel-blogs" role="tabpanel" aria-hidden="true">
           <div class="card-grid">
             <a class="card-item" href="knowledge/ai-didnt-disrupt-tech-services.html" data-reveal>
               <div class="card-thumb alt-1"><div class="icon">✎</div></div>
@@ -325,6 +326,7 @@
   <script>
     Galent.persistentReveal();
     Galent.stickyNav('site-nav');
+    Galent.contactModal();
   </script>
 
 </body>
