@@ -22,7 +22,7 @@
     <nav class="menu" aria-label="Primary" id="primary-menu">
       <a href="platform.html">Platform</a>
       <a href="fde.html">FDE</a>
-      <a href="about.html">About</a>
+      <a href="about.html" aria-current="page">About</a>
       <a href="knowledge-hub.html">Knowledge Hub</a>
       <div class="has-dropdown">
         <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="services-menu">
@@ -59,11 +59,8 @@
 
   <main id="top">
 
-    <!-- HERO — origin-story tone -->
-    <section class="hero">
-      <div class="hero-aurora" aria-hidden="true">
-        <canvas id="cv-aurora"></canvas>
-      </div>
+    <!-- HERO — origin-story tone (static gradient) -->
+    <section class="hero" style="background: radial-gradient(ellipse at 50% 20%, rgba(30,209,151,0.10), transparent 55%), radial-gradient(ellipse at 70% 80%, rgba(123,44,191,0.06), transparent 50%);">
       <div class="hero-content">
         <span class="badge"><span class="dot">01</span>About Galent</span>
         <h1 class="t-hero">
@@ -256,13 +253,12 @@
     </div>
     <div class="bottom">
       <div>© 2026 Galent · All rights reserved.</div>
-      <div>Outpace · Outplay · Outstand</div>
+
     </div>
   </footer>
 
   <script src="js/animations.js"></script>
   <script>
-    Galent.aurora(document.getElementById('cv-aurora'), { palette: [Galent.BRAND.green, Galent.BRAND.purple, Galent.BRAND.orange] });
     Galent.persistentReveal();
     Galent.stickyNav('site-nav');
     Galent.countUps();

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#FFFFFF">
   <title>ITSM Transformation — Galent</title>
-  <meta name="description" content="Galent reimagines ITSM as an AI-orchestrated, self-optimising operation — service desks become autonomous resolution engines.">
+  <meta name="description" content="Predictive ITSM that scales without noise. GalentAI-orchestrated incident, change, and request workflows running on your stack.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="../css/design-system.css">
   <link rel="icon" href="../assets/images/logo.png?v=4" type="image/png">
 </head>
-<body>
+<body data-page="service-itsm">
 
   <header class="nav" id="site-nav">
     <a href="../index.html" class="brand" aria-label="Galent — Home">
@@ -25,7 +25,7 @@
       <a href="../about.html">About</a>
       <a href="../knowledge-hub.html">Knowledge Hub</a>
       <div class="has-dropdown">
-        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="services-menu">
+        <button class="dropdown-toggle" aria-current="page" aria-expanded="false" aria-haspopup="true" aria-controls="services-menu">
           Tech Services <span class="caret" aria-hidden="true">▾</span>
         </button>
         <div class="dropdown-panel" id="services-menu" role="menu" aria-hidden="true">
@@ -59,8 +59,8 @@
 
   <main id="top">
 
-    <section class="hero">
-      <div class="hero-aurora" aria-hidden="true"><canvas id="cv-aurora"></canvas></div>
+    <section class="hero" style="background: radial-gradient(ellipse at 30% 30%, rgba(123,44,191,0.06), transparent 55%);">
+      
       <div class="hero-content">
         <span class="badge"><span class="dot">01</span>Tech Services · Managed Services</span>
         <h1 class="t-hero">
@@ -269,13 +269,12 @@
     </div>
     <div class="bottom">
       <div>© 2026 Galent · All rights reserved.</div>
-      <div>Outpace · Outplay · Outstand</div>
+
     </div>
   </footer>
 
   <script src="../js/animations.js"></script>
   <script>
-    Galent.aurora(document.getElementById('cv-aurora'));
     Galent.persistentReveal();
     Galent.stickyNav('site-nav');
   </script>

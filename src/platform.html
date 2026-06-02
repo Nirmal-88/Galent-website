@@ -20,7 +20,7 @@
       <img src="assets/images/logo.png?v=4" alt="Galent">
     </a>
     <nav class="menu" aria-label="Primary" id="primary-menu">
-      <a href="platform.html">Platform</a>
+      <a href="platform.html" aria-current="page">Platform</a>
       <a href="fde.html">FDE</a>
       <a href="about.html">About</a>
       <a href="knowledge-hub.html">Knowledge Hub</a>
@@ -59,26 +59,27 @@
 
   <main id="top">
 
-    <!-- HERO — narrow, technical -->
-    <section class="hero">
-      <div class="hero-aurora" aria-hidden="true">
-        <canvas id="cv-aurora"></canvas>
-      </div>
-      <div class="hero-content">
-        <span class="badge"><span class="dot">01</span>GalentAI · Platform</span>
-        <h1 class="t-hero">
-          <span style="display:block">AI Is Everywhere.</span>
-          <span style="display:block">Except in Your <em class="ac-p">P&amp;L.</em></span>
-        </h1>
-        <p class="t-body-lg">
-          Most enterprise AI produces impressive PoCs and little else. Not because the models aren't capable. Because nobody solved how to deploy them — repeatably, at scale, in production.
-        </p>
-        <p class="t-body-lg" style="margin-top: var(--space-md); max-width: 60ch; font-weight: 500; color: var(--on-surface);">
-          GalentAI is built for one thing: production-grade outcomes at enterprise scale. Not demos. Deterministic, auditable delivery — running on your existing people, processes, and stack.
-        </p>
-        <div class="cta-row" style="margin-top: var(--space-2xl);">
-          <a href="#" class="btn">Schedule a leadership briefing <span class="arr">→</span></a>
-          <a href="#engines" class="btn ghost">Explore the platform <span class="arr">→</span></a>
+    <!-- HERO — SPLIT LAYOUT: text left, orbital compass right -->
+    <section class="platform-hero">
+      <div class="split-hero">
+        <div class="text">
+          <span class="badge"><span class="dot">01</span>GalentAI · Platform</span>
+          <h1 class="t-hero" style="font-size: clamp(40px, 5.6vw, 60px);">
+            AI Is Everywhere. Except in Your <em class="ac-p">P&amp;L.</em>
+          </h1>
+          <p class="t-body-lg">
+            Most enterprise AI produces impressive PoCs and little else. Not because the models aren't capable. Because nobody solved how to deploy them — repeatably, at scale, in production.
+          </p>
+          <p class="t-body-lg" style="margin-top: var(--space-md); max-width: 60ch; font-weight: 500; color: var(--on-surface);">
+            GalentAI is built for one thing: production-grade outcomes at enterprise scale. Not demos. Deterministic, auditable delivery — running on your existing people, processes, and stack.
+          </p>
+          <div class="cta-row" style="margin-top: var(--space-2xl);">
+            <a href="#" class="btn">Schedule a leadership briefing <span class="arr">→</span></a>
+            <a href="#engines" class="btn ghost">Explore the platform <span class="arr">→</span></a>
+          </div>
+        </div>
+        <div class="compass-visual" aria-hidden="true">
+          <canvas id="cv-compass"></canvas>
         </div>
       </div>
     </section>
@@ -247,13 +248,13 @@
     </div>
     <div class="bottom">
       <div>© 2026 Galent · All rights reserved.</div>
-      <div>Outpace · Outplay · Outstand</div>
+
     </div>
   </footer>
 
   <script src="js/animations.js"></script>
   <script>
-    Galent.aurora(document.getElementById('cv-aurora'));
+    Galent.compass(document.getElementById('cv-compass'));
     Galent.persistentReveal();
     Galent.stickyNav('site-nav');
 

@@ -21,7 +21,7 @@
     </a>
     <nav class="menu" aria-label="Primary" id="primary-menu">
       <a href="platform.html">Platform</a>
-      <a href="fde.html">FDE</a>
+      <a href="fde.html" aria-current="page">FDE</a>
       <a href="about.html">About</a>
       <a href="knowledge-hub.html">Knowledge Hub</a>
       <div class="has-dropdown">
@@ -59,11 +59,8 @@
 
   <main id="top">
 
-    <!-- HERO — warm-toned aurora -->
-    <section class="hero">
-      <div class="hero-aurora" aria-hidden="true">
-        <canvas id="cv-aurora"></canvas>
-      </div>
+    <!-- HERO — static warm-tone gradient (no canvas animation) -->
+    <section class="hero" style="background: radial-gradient(ellipse at 20% 30%, rgba(255,90,31,0.10), transparent 55%), radial-gradient(ellipse at 80% 70%, rgba(123,44,191,0.08), transparent 50%);">
       <div class="hero-content">
         <span class="badge"><span class="dot">01</span>Forward-Deployed Engineering</span>
         <h1 class="t-hero">
@@ -190,11 +187,69 @@
       </div>
     </section>
 
-    <!-- SHIFTS -->
+    <!-- TESTIMONIAL-STYLE PULL QUOTES — empty scaffold -->
+    <section style="padding: var(--space-4xl) 0;">
+      <div class="container">
+        <div class="section-head" data-reveal style="text-align: left;">
+          <span class="badge"><span class="dot">05</span>From the field</span>
+          <h2 class="t-display-italic">What FDE-led delivery <em>feels like.</em></h2>
+          <p class="t-body-lg" style="margin-top: var(--space-md);">Quotes from the engineering and platform leaders running programmes alongside our Forward-Deployed Engineers. Attributed copy follows as clients clear publication.</p>
+        </div>
+        <div class="testimonial-grid" data-stagger>
+          <div class="testimonial">
+            <span class="mark">"</span>
+            <blockquote>
+              <span class="placeholder"></span>
+              <span class="placeholder w-90"></span>
+              <span class="placeholder w-70"></span>
+            </blockquote>
+            <div class="author">
+              <div class="avatar">—</div>
+              <div class="who">
+                <span class="placeholder w-120"></span>
+                <span class="placeholder w-80"></span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial">
+            <span class="mark">"</span>
+            <blockquote>
+              <span class="placeholder"></span>
+              <span class="placeholder w-90"></span>
+              <span class="placeholder w-60"></span>
+            </blockquote>
+            <div class="author">
+              <div class="avatar">—</div>
+              <div class="who">
+                <span class="placeholder w-120"></span>
+                <span class="placeholder w-80"></span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial">
+            <span class="mark">"</span>
+            <blockquote>
+              <span class="placeholder"></span>
+              <span class="placeholder w-70"></span>
+              <span class="placeholder w-90"></span>
+            </blockquote>
+            <div class="author">
+              <div class="avatar">—</div>
+              <div class="who">
+                <span class="placeholder w-120"></span>
+                <span class="placeholder w-80"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 SHIFTS -->
     <section style="background: var(--surface-container); padding: var(--space-4xl) 0;">
       <div class="container container-narrow">
         <div class="section-head" data-reveal style="text-align: left;">
-          <span class="section-num">05 · The shift</span>
+          <span class="section-num">06 · The shift</span>
           <h2 class="t-display-italic">From conventional <em>to embedded.</em></h2>
         </div>
         <ul class="shift-list" data-reveal>
@@ -211,7 +266,7 @@
     <section id="cta">
       <div class="container">
         <div class="cta-card" data-reveal>
-          <span class="badge"><span class="dot">06</span>Engage an FDE</span>
+          <span class="badge"><span class="dot">07</span>Engage an FDE</span>
           <h2 class="t-h1">An FDE in your team. <em style="color:#fff;font-style:normal;border-bottom:2px solid var(--page-accent);padding-bottom:2px;">By next sprint.</em></h2>
           <p class="t-body-lg">Tell us what you need shipped. We'll match an FDE archetype to your programme and brief you on the engagement model.</p>
           <div style="display:inline-flex;flex-wrap:wrap;gap:12px;justify-content:center">
@@ -261,13 +316,12 @@
     </div>
     <div class="bottom">
       <div>© 2026 Galent · All rights reserved.</div>
-      <div>Outpace · Outplay · Outstand</div>
+
     </div>
   </footer>
 
   <script src="js/animations.js"></script>
   <script>
-    Galent.aurora(document.getElementById('cv-aurora'), { palette: [Galent.BRAND.orange, Galent.BRAND.purple, Galent.BRAND.green] });
     Galent.persistentReveal();
     Galent.stickyNav('site-nav');
   </script>

@@ -16,7 +16,7 @@
 <body data-page="home">
 
   <header class="nav" id="site-nav">
-    <a href="index.html" class="brand" aria-label="Galent — Home">
+    <a href="index.html" aria-current="page" class="brand" aria-label="Galent — Home">
       <img src="assets/images/logo.png?v=4" alt="Galent">
     </a>
     <nav class="menu" aria-label="Primary" id="primary-menu">
@@ -59,7 +59,7 @@
 
   <main id="top">
 
-    <!-- HERO — network/velocity backdrop -->
+    <!-- 01 HERO — kinetic network backdrop -->
     <section class="hero">
       <div class="hero-network" aria-hidden="true">
         <canvas id="cv-network"></canvas>
@@ -78,7 +78,9 @@
           <a href="#how" class="btn ghost">See how it works <span class="arr">→</span></a>
         </div>
       </div>
-      <div class="scroll-cue" aria-hidden="true"><span class="t-mono">SCROLL</span><span class="line"></span></div>
+      <a href="#problem" class="scroll-chevron" aria-label="Scroll to next section">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </a>
     </section>
 
     <!-- LOGO STRIP — empty scaffold for client logos -->
@@ -86,7 +88,7 @@
       <div class="container">
         <div class="logo-strip-wrap" data-reveal>
           <p class="label">Trusted by engineering and platform leaders</p>
-          <div class="logo-strip">
+          <div class="logo-strip" data-stagger>
             <div class="logo-slot">CLIENT LOGO</div>
             <div class="logo-slot">CLIENT LOGO</div>
             <div class="logo-slot">CLIENT LOGO</div>
@@ -98,21 +100,7 @@
       </div>
     </section>
 
-    <!-- INTRO — two quote-style statements -->
-    <section style="padding-top: var(--space-3xl); padding-bottom: var(--space-4xl);">
-      <div class="container">
-        <div class="intro-grid">
-          <p data-reveal>
-            We don't add more engineers. We <em class="ac-p">collapse the work</em> into a single AI-native delivery model — context, execution, quality, and compliance.
-          </p>
-          <p data-reveal style="transition-delay:.08s">
-            Same category. <em class="ac-g">Different delivery model.</em> Outcome-owned. Embedded. Backed by GalentAI at every stage.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROBLEM — 3 feature cards -->
+    <!-- 02 PROBLEM — 3 feature cards on light -->
     <section id="problem">
       <div class="container">
         <div class="section-head" data-reveal>
@@ -122,20 +110,20 @@
             Not the models. Not the ambition. The model of delivery itself — fragmented teams, generic tooling, AI bolted onto unchanged workflows.
           </p>
         </div>
-        <div class="feature-grid">
-          <div class="feature p" data-reveal>
-            <span class="badge">PoCs that stall</span>
+        <div class="feature-grid" data-stagger>
+          <div class="feature p">
+            <span class="badge"><span class="dot">→</span>PoCs that stall</span>
             <div class="big">85<span class="unit">%</span></div>
             <h3 class="t-h3">Enterprise AI PoCs never reach production</h3>
             <p class="t-body">Copilots assist tasks. They don't orchestrate programmes. Context collapses across handoffs; decisions get reinvented every sprint.</p>
           </div>
-          <div class="feature g" data-reveal style="transition-delay:.08s">
+          <div class="feature g">
             <span class="badge green"><span class="dot">→</span>Quality drift</span>
             <div class="big">41<span class="unit">%</span></div>
             <h3 class="t-h3">Bug premium shipped straight into technical debt</h3>
             <p class="t-body">AI-generated code ships defects that compound across releases. Quality is checked after the fact — not embedded at generation.</p>
           </div>
-          <div class="feature o" data-reveal style="transition-delay:.16s">
+          <div class="feature o">
             <span class="badge orange"><span class="dot">→</span>Modernisation drag</span>
             <div class="big">6.4<span class="unit">yrs</span></div>
             <h3 class="t-h3">Average legacy modernisation — many never complete</h3>
@@ -145,40 +133,39 @@
       </div>
     </section>
 
-    <!-- OUTCOMES — interactive hover stat cards -->
-    <section id="outcomes" style="padding-bottom: var(--space-3xl)">
+    <!-- 03 OUTCOMES — dark band with signal animation behind stats; animated count-ups -->
+    <section id="outcomes" class="panel-dark fullbleed" style="padding: var(--space-4xl) 0;">
       <div class="container">
         <div class="section-head" data-reveal>
           <span class="badge"><span class="dot">03</span>Outcomes</span>
-          <h2 class="t-h1">Numbers from <em class="ac-p">live programmes.</em></h2>
-          <p class="t-body-lg">Hover any tile for the operating detail behind the metric.</p>
+          <h2 class="t-h1" style="color:#fff;">Numbers from <em style="color: var(--brand-orange); font-style: normal;">live programmes.</em></h2>
         </div>
-        <div class="stat-hover-grid" data-reveal>
-          <div class="stat-hover">
-            <div class="big">3–4<span class="unit">×</span></div>
-            <div class="label">Delivery velocity vs conventional services</div>
-            <div class="reveal">Same programme, same scope. GalentAI compresses context, execution, and QA into one orchestrated loop — velocity decoupled from team size.</div>
-          </div>
-          <div class="stat-hover">
-            <div class="big">99<span class="unit">%+</span></div>
-            <div class="label">Code accuracy, embedded at generation</div>
-            <div class="reveal">Quality is enforced where code is written, not in a downstream review. RCM Engine governs every change against policy and tests.</div>
-          </div>
-          <div class="stat-hover">
-            <div class="big">15<span class="unit">×</span></div>
-            <div class="label">Faster legacy modernisation, 92% lower risk</div>
-            <div class="reveal">Tribal knowledge is captured in Context Graph before a single line is touched. Migrations move in weeks, not years.</div>
-          </div>
-          <div class="stat-hover">
-            <div class="big">70<span class="unit">%</span></div>
-            <div class="label">Fewer context failures across sprints</div>
-            <div class="reveal">Decisions, constraints, and rationale persist across every session. New engineers — human or agent — pick up where work left off.</div>
+
+        <div class="signal-bg-wrap" data-reveal>
+          <canvas id="cv-signal" class="signal-bg" aria-hidden="true"></canvas>
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md); padding: var(--space-2xl) 0;" data-stagger>
+            <div style="text-align: left;">
+              <div style="font-size: clamp(56px, 7vw, 88px); font-weight: 500; letter-spacing: -2px; line-height: 1; color: #fff;"><span data-countup="3">0</span>–<span data-countup="4">0</span><span style="font-size: 0.5em; opacity: 0.6; font-weight: 400; margin-left: 4px;">×</span></div>
+              <div style="margin-top: var(--space-md); font-size: 14.5px; color: rgba(255,255,255,0.65); letter-spacing: 0.1px; max-width: 22ch;">Programme velocity vs. conventional services</div>
+            </div>
+            <div style="text-align: left;">
+              <div style="font-size: clamp(56px, 7vw, 88px); font-weight: 500; letter-spacing: -2px; line-height: 1; color: #fff;"><span data-countup="99">0</span><span style="font-size: 0.5em; opacity: 0.6; font-weight: 400; margin-left: 4px;">%+</span></div>
+              <div style="margin-top: var(--space-md); font-size: 14.5px; color: rgba(255,255,255,0.65); letter-spacing: 0.1px; max-width: 22ch;">Code accuracy at PR — embedded at generation</div>
+            </div>
+            <div style="text-align: left;">
+              <div style="font-size: clamp(56px, 7vw, 88px); font-weight: 500; letter-spacing: -2px; line-height: 1; color: #fff;"><span data-countup="15">0</span><span style="font-size: 0.5em; opacity: 0.6; font-weight: 400; margin-left: 4px;">×</span></div>
+              <div style="margin-top: var(--space-md); font-size: 14.5px; color: rgba(255,255,255,0.65); letter-spacing: 0.1px; max-width: 22ch;">Faster legacy modernisation, 92% lower risk</div>
+            </div>
+            <div style="text-align: left;">
+              <div style="font-size: clamp(56px, 7vw, 88px); font-weight: 500; letter-spacing: -2px; line-height: 1; color: #fff;"><span data-countup="70">0</span><span style="font-size: 0.5em; opacity: 0.6; font-weight: 400; margin-left: 4px;">%</span></div>
+              <div style="margin-top: var(--space-md); font-size: 14.5px; color: rgba(255,255,255,0.65); letter-spacing: 0.1px; max-width: 22ch;">Reduction in context-loss defects across sprints</div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- HOW — the Galent Difference (kept, but compass replaced by clean comparison) -->
+    <!-- 04 GALENT DIFFERENCE — comparison card (dark left / accent right) -->
     <section id="how">
       <div class="container">
         <div class="section-head" data-reveal>
@@ -189,19 +176,19 @@
           </p>
         </div>
 
-        <div class="compare" data-reveal>
-          <div class="col them">
+        <div class="compare-card" data-reveal>
+          <div class="pane left">
             <h3><span class="pip"></span>Conventional services</h3>
             <ul>
-              <li><span class="ic">×</span>Generic AI copilots per engineer</li>
-              <li><span class="ic">×</span>Context lost across handoffs</li>
-              <li><span class="ic">×</span>Quality checked after the fact</li>
-              <li><span class="ic">×</span>Compliance reviewed post-deployment</li>
-              <li><span class="ic">×</span>Speed capped by headcount</li>
-              <li><span class="ic">×</span>Technical debt deferred</li>
+              <li><span class="ic">✕</span>Generic AI copilots per engineer</li>
+              <li><span class="ic">✕</span>Context lost across handoffs</li>
+              <li><span class="ic">✕</span>Quality checked after the fact</li>
+              <li><span class="ic">✕</span>Compliance reviewed post-deployment</li>
+              <li><span class="ic">✕</span>Speed capped by headcount</li>
+              <li><span class="ic">✕</span>Technical debt deferred</li>
             </ul>
           </div>
-          <div class="col us">
+          <div class="pane right">
             <h3><span class="pip"></span>How Galent delivers</h3>
             <ul>
               <li><span class="ic">✓</span>GalentAI orchestrates the full SDLC</li>
@@ -216,16 +203,16 @@
       </div>
     </section>
 
-    <!-- SERVICES — 2x2 -->
-    <section id="services">
+    <!-- 05 SERVICES — 2x2 -->
+    <section id="services" style="background: var(--surface-container); padding: var(--space-4xl) 0;">
       <div class="container">
         <div class="section-head" data-reveal>
           <span class="badge"><span class="dot">05</span>What we do</span>
           <h2 class="t-h1">One service line. <em class="ac-p">Four delivery categories.</em></h2>
           <p class="t-body-lg">Embedded specialists. GalentAI at every stage.</p>
         </div>
-        <div class="services">
-          <div class="svc" data-reveal>
+        <div class="services" data-stagger>
+          <div class="svc" style="background: var(--surface);">
             <span class="badge"><span class="dot">→</span>App Dev &amp; Modernization</span>
             <h3 class="t-h2">Legacy systems, <em class="ac-p">rebuilt at velocity.</em></h3>
             <ul>
@@ -234,7 +221,7 @@
               <li><a href="services/quality-engineering.html"><span>Quality Engineering</span><span class="meta">Autonomous QA per sprint</span></a></li>
             </ul>
           </div>
-          <div class="svc" data-reveal style="transition-delay:.08s">
+          <div class="svc" style="background: var(--surface);">
             <span class="badge green"><span class="dot">→</span>Managed Services</span>
             <h3 class="t-h2">Operations that <em class="ac-g">scale without noise.</em></h3>
             <ul>
@@ -243,23 +230,87 @@
               <li><a href="services/everything-ops.html"><span>Everything Ops</span><span class="meta">DevOps · DataOps · MLOps</span></a></li>
             </ul>
           </div>
-          <div class="svc" data-reveal style="transition-delay:.16s">
+          <div class="svc" style="background: var(--surface);">
             <span class="badge orange"><span class="dot">→</span>Data &amp; Platforms</span>
             <h3 class="t-h2">Data systems built <em class="ac-o">AI-ready.</em></h3>
             <ul>
               <li><a href="services/data-transformation.html"><span>Data Transformation</span><span class="meta">AI-native pipelines</span></a></li>
               <li><a href="services/enterprise-platforms.html"><span>Enterprise Platforms</span><span class="meta">Salesforce &amp; ERP rebuilt</span></a></li>
-              <li><a href="services/data-transformation.html"><span>Autonomous Operations</span><span class="meta">Less ops · more signal</span></a></li>
             </ul>
           </div>
-          <div class="svc" data-reveal style="transition-delay:.24s">
+          <div class="svc" style="background: var(--surface);">
             <span class="badge"><span class="dot">→</span>Context Engineering</span>
             <h3 class="t-h2">The substrate that <em class="ac-p">makes velocity possible.</em></h3>
             <ul>
-              <li><a href="platform.html"><span>Knowledge Graph</span><span class="meta">Living map of your enterprise</span></a></li>
-              <li><a href="platform.html"><span>Context Graph</span><span class="meta">Persistent reasoning · traceable</span></a></li>
-              <li><a href="platform.html"><span>Policy Engine</span><span class="meta">Governed before execution</span></a></li>
+              <li><a href="platform.html#engines"><span>Knowledge Graph</span><span class="meta">Living map of your enterprise</span></a></li>
+              <li><a href="platform.html#engines"><span>Context Graph</span><span class="meta">Persistent reasoning · traceable</span></a></li>
+              <li><a href="platform.html#engines"><span>Policy Engine</span><span class="meta">Governed before execution</span></a></li>
             </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 FDE Archetypes — enriched cards: big badge, title, day-one specifics, outcome metric -->
+    <section id="fde">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="badge"><span class="dot">06</span>Engagement Model</span>
+          <h2 class="t-h1">Embedded. Outcome-owned. <em class="ac-p">AI-native.</em></h2>
+          <p class="t-body-lg">Galent's Forward-Deployed Engineers sit inside your teams — in your environment, at your pace. They don't hand work over a fence. They own the outcome end-to-end, backed by GalentAI at every step.</p>
+        </div>
+        <div class="fde-rich-grid" data-stagger>
+          <div class="fde-rich">
+            <div class="role-badge">FDSE</div>
+            <h4>Full-stack + AI engineer</h4>
+            <ul>
+              <li>Owns programme outcome, not tickets</li>
+              <li>Builds, ships, observes — single pair of hands</li>
+              <li>Translates business intent into shipped systems</li>
+            </ul>
+            <div class="metric">
+              <strong>3–4× velocity</strong>
+              <span>vs. conventional FTE</span>
+            </div>
+          </div>
+          <div class="fde-rich">
+            <div class="role-badge">FDDE</div>
+            <h4>Data engineer</h4>
+            <ul>
+              <li>Maps data flow, contracts, lineage on day one</li>
+              <li>AI-ready pipelines wired into your stack</li>
+              <li>Governance by design, not by audit</li>
+            </ul>
+            <div class="metric">
+              <strong>10× pipeline</strong>
+              <span>build vs. baseline</span>
+            </div>
+          </div>
+          <div class="fde-rich">
+            <div class="role-badge">FDQE</div>
+            <h4>Quality engineer</h4>
+            <ul>
+              <li>Coverage modelling before generation begins</li>
+              <li>Autonomous, predictive QA per sprint</li>
+              <li>RCM policy gates run on every PR</li>
+            </ul>
+            <div class="metric">
+              <strong>99%+ accuracy</strong>
+              <span>at PR time</span>
+            </div>
+          </div>
+          <div class="fde-rich">
+            <div class="role-badge">FDSRE</div>
+            <h4>Reliability engineer</h4>
+            <ul>
+              <li>SLOs defined and instrumented day one</li>
+              <li>Auto-remediation runbooks before ship</li>
+              <li>Operational risk designed out, not patched</li>
+            </ul>
+            <div class="metric">
+              <strong>70% fewer</strong>
+              <span>context-loss incidents</span>
+            </div>
           </div>
         </div>
       </div>
@@ -269,12 +320,12 @@
     <section id="testimonials" style="background: var(--surface-container); padding: var(--space-4xl) 0;">
       <div class="container">
         <div class="section-head" data-reveal>
-          <span class="badge"><span class="dot">06</span>What clients say</span>
+          <span class="badge"><span class="dot">07</span>What clients say</span>
           <h2 class="t-h1">When the model works, <em class="ac-p">the words follow.</em></h2>
           <p class="t-body-lg">Attributed quotes from engineering, platform, and transformation leaders running on GalentAI.</p>
         </div>
-        <div class="testimonial-grid">
-          <div class="testimonial" data-reveal>
+        <div class="testimonial-grid" data-stagger>
+          <div class="testimonial">
             <span class="mark">"</span>
             <blockquote>
               <span class="placeholder"></span>
@@ -289,7 +340,7 @@
               </div>
             </div>
           </div>
-          <div class="testimonial" data-reveal style="transition-delay:.1s">
+          <div class="testimonial">
             <span class="mark">"</span>
             <blockquote>
               <span class="placeholder"></span>
@@ -304,7 +355,7 @@
               </div>
             </div>
           </div>
-          <div class="testimonial" data-reveal style="transition-delay:.2s">
+          <div class="testimonial">
             <span class="mark">"</span>
             <blockquote>
               <span class="placeholder"></span>
@@ -323,72 +374,90 @@
       </div>
     </section>
 
-    <!-- FDE — 4 cards -->
-    <section id="fde">
-      <div class="container">
-        <div class="section-head" data-reveal>
-          <span class="badge"><span class="dot">07</span>Engagement Model</span>
-          <h2 class="t-h1">Embedded. Outcome-owned. <em class="ac-p">AI-native.</em></h2>
-          <p class="t-body-lg">Galent's Forward-Deployed Engineers sit inside your teams — in your environment, at your pace. They don't hand work over a fence. They own the outcome end-to-end, backed by GalentAI at every step.</p>
-        </div>
-        <div class="fde-grid">
-          <div class="fde" data-reveal><div class="code">FDSE</div><h4>Full-stack + AI engineers</h4><p>Architecture to production. Outcome-owned, embedded inside your team.</p></div>
-          <div class="fde" data-reveal style="transition-delay:.06s"><div class="code">FDDE</div><h4>Data engineers</h4><p>Building AI-ready data ecosystems inside your stack.</p></div>
-          <div class="fde" data-reveal style="transition-delay:.12s"><div class="code">FDQE</div><h4>Quality engineers</h4><p>Shifting assurance left — autonomous and predictive across every sprint.</p></div>
-          <div class="fde" data-reveal style="transition-delay:.18s"><div class="code">FDSRE</div><h4>Reliability engineers</h4><p>Self-healing systems from day one. Operational risk eliminated by design.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- INDUSTRIES -->
+    <!-- 08 INDUSTRIES — 7-card grid with sector hook -->
     <section id="industries">
       <div class="container">
         <div class="section-head" data-reveal>
           <span class="badge"><span class="dot">08</span>Industries</span>
           <h2 class="t-h1">We work where the <em class="ac-g">stakes are high.</em></h2>
         </div>
-        <div class="industries">
-          <a href="industries.html#technology" class="ind" data-reveal><div class="num">01</div><strong>Technology &amp; Software</strong><span>AI-native DevOps, intelligent QA</span></a>
-          <a href="industries.html#bfsi" class="ind" data-reveal style="transition-delay:.04s"><div class="num">02</div><strong>BFSI</strong><span>Risk, compliance, customer intelligence</span></a>
-          <a href="industries.html#healthcare" class="ind" data-reveal style="transition-delay:.08s"><div class="num">03</div><strong>Healthcare &amp; Insurance</strong><span>Claims, patient data, care automation</span></a>
-          <a href="industries.html#manufacturing" class="ind" data-reveal style="transition-delay:.12s"><div class="num">04</div><strong>Manufacturing</strong><span>Supply chain, predictive maintenance</span></a>
-          <a href="industries.html#life-sciences" class="ind" data-reveal style="transition-delay:.16s"><div class="num">05</div><strong>Life Sciences</strong><span>Research acceleration, compliance</span></a>
-          <a href="industries.html#retail" class="ind" data-reveal style="transition-delay:.20s"><div class="num">06</div><strong>Retail / CPG</strong><span>Personalisation, inventory, merchandising</span></a>
-          <a href="industries.html#gcc" class="ind" data-reveal style="transition-delay:.24s"><div class="num">07</div><strong>GCC Transformations</strong><span>End-to-end AI-native programmes</span></a>
+        <div class="home-sector-grid" data-stagger>
+          <a href="industries.html#technology" class="home-sector-card" style="--sector-color: #4F46E5;">
+            <span class="num">// 01</span>
+            <h4>Technology &amp; Software</h4>
+            <p class="hook">Where the platform IS the product and engineering velocity is the moat.</p>
+            <span class="arr">EXPLORE →</span>
+          </a>
+          <a href="industries.html#bfsi" class="home-sector-card" style="--sector-color: #0EA5E9;">
+            <span class="num">// 02</span>
+            <h4>BFSI</h4>
+            <p class="hook">Where compliance and change have to coexist — and legacy is everywhere.</p>
+            <span class="arr">EXPLORE →</span>
+          </a>
+          <a href="industries.html#healthcare" class="home-sector-card" style="--sector-color: var(--brand-green-deep);">
+            <span class="num">// 03</span>
+            <h4>Healthcare &amp; Insurance</h4>
+            <p class="hook">Where patient data, regulation, and operational AI live on the same plane.</p>
+            <span class="arr">EXPLORE →</span>
+          </a>
+          <a href="industries.html#manufacturing" class="home-sector-card" style="--sector-color: #EA580C;">
+            <span class="num">// 04</span>
+            <h4>Manufacturing</h4>
+            <p class="hook">Where reliability and predictive intelligence translate directly to margin.</p>
+            <span class="arr">EXPLORE →</span>
+          </a>
+          <a href="industries.html#life-sciences" class="home-sector-card" style="--sector-color: #DC2626;">
+            <span class="num">// 05</span>
+            <h4>Life Sciences</h4>
+            <p class="hook">Where discovery speed and compliance discipline matter at the same time.</p>
+            <span class="arr">EXPLORE →</span>
+          </a>
+          <a href="industries.html#retail" class="home-sector-card" style="--sector-color: var(--brand-orange);">
+            <span class="num">// 06</span>
+            <h4>Retail &amp; CPG</h4>
+            <p class="hook">Where personalisation, supply, and merchandising move on the same fabric.</p>
+            <span class="arr">EXPLORE →</span>
+          </a>
+          <a href="industries.html#gcc" class="home-sector-card" style="--sector-color: var(--brand-purple);">
+            <span class="num">// 07</span>
+            <h4>GCC Transformations</h4>
+            <p class="hook">Where in-house engineering is being built and AI-native sets the bar from day one.</p>
+            <span class="arr">EXPLORE →</span>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- CASES — empty case study scaffolds, sector-tagged -->
-    <section id="cases">
+    <!-- 09 OUTCOMES from live programmes — anonymised case studies -->
+    <section id="cases" style="background: var(--surface-container); padding: var(--space-4xl) 0;">
       <div class="container">
         <div class="section-head" data-reveal>
-          <span class="badge"><span class="dot">09</span>Client Outcomes</span>
+          <span class="badge"><span class="dot">09</span>Outcomes from live programmes</span>
           <h2 class="t-h1">What gets <em class="ac-p">delivered.</em></h2>
-          <p class="t-body-lg">Programme-level outcomes by sector. Numbers populated as case studies clear publication.</p>
+          <p class="t-body-lg">Anonymised programme-level outcomes from live engagements. Named case studies follow as clients clear publication.</p>
         </div>
-        <div class="case-grid">
-          <article class="case-study" data-reveal>
-            <span class="sector">Technology</span>
+        <div class="case-grid" data-stagger>
+          <article class="case-study">
+            <span class="anon">A TIER-1 TECHNOLOGY COMPANY</span>
             <p class="problem">AI deployment bottlenecked by manual pipeline development across product squads.</p>
             <div class="metric-row">
-              <span class="metric-placeholder" aria-label="Outcome metric pending"></span>
+              <span class="metric-placeholder" aria-label="Outcome metric pending publication"></span>
               <span class="metric-desc">Cycle time · model deployment · platform engineering</span>
             </div>
           </article>
-          <article class="case-study" data-reveal style="transition-delay:.08s">
-            <span class="sector">Financial Services</span>
+          <article class="case-study">
+            <span class="anon">A GLOBAL BFSI FIRM</span>
             <p class="problem">Legacy CRM blocking sales velocity and compliance reporting at scale.</p>
             <div class="metric-row">
-              <span class="metric-placeholder" aria-label="Outcome metric pending"></span>
+              <span class="metric-placeholder" aria-label="Outcome metric pending publication"></span>
               <span class="metric-desc">Sales decision speed · regulatory compliance</span>
             </div>
           </article>
-          <article class="case-study" data-reveal style="transition-delay:.16s">
-            <span class="sector">Healthcare</span>
+          <article class="case-study">
+            <span class="anon">A LEADING HEALTHCARE NETWORK</span>
             <p class="problem">HIPAA-compliant AI on sensitive patient data at enterprise scale.</p>
             <div class="metric-row">
-              <span class="metric-placeholder" aria-label="Outcome metric pending"></span>
+              <span class="metric-placeholder" aria-label="Outcome metric pending publication"></span>
               <span class="metric-desc">Data operations automation · compliance posture</span>
             </div>
           </article>
@@ -396,7 +465,7 @@
       </div>
     </section>
 
-    <!-- CTA -->
+    <!-- 10 CTA -->
     <section id="cta">
       <div class="container">
         <div class="cta-card" data-reveal>
@@ -450,15 +519,16 @@
     </div>
     <div class="bottom">
       <div>© 2026 Galent · All rights reserved.</div>
-      <div>Outpace · Outplay · Outstand</div>
     </div>
   </footer>
 
   <script src="js/animations.js"></script>
   <script>
     Galent.network(document.getElementById('cv-network'));
+    Galent.signal(document.getElementById('cv-signal'));
     Galent.persistentReveal();
     Galent.stickyNav('site-nav');
+    Galent.countUps();
   </script>
 
 </body>

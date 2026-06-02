@@ -372,9 +372,10 @@
   // ============================================================
   // REVEAL — fades + lifts elements into view as they scroll on.
   // Supports [data-reveal], [data-reveal="left|right|scale"].
+  // [data-stagger] containers add 80ms cascade to their direct children.
   // ============================================================
   Galent.persistentReveal = function () {
-    const els = document.querySelectorAll('[data-reveal]');
+    const els = document.querySelectorAll('[data-reveal], [data-stagger]');
     if (!('IntersectionObserver' in window)) {
       els.forEach(el => el.classList.add('in'));
       return;
@@ -386,7 +387,7 @@
           io.unobserve(e.target);
         }
       }
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     els.forEach(el => io.observe(el));
   };
 
