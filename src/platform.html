@@ -125,33 +125,26 @@
       </div>
     </section>
 
-    <!-- LIGHT — Why this matters -->
+    <!-- LIGHT — Live Knowledge Graph (interactive, hover + click) -->
     <section>
       <div class="container">
-        <div class="section-head" data-reveal>
-          <span class="section-num">03 · Why this matters</span>
-          <h2 class="t-display-italic">AI that <em>runs.</em></h2>
-          <p class="t-body-lg" style="margin-top: var(--space-md);">
-            Most enterprise AI lives in a notebook. GalentAI takes models from concept to compounding revenue — through a deterministic, governed delivery pipeline that wraps your code, data, and policies.
-          </p>
-        </div>
-
-        <div class="arch-grid" data-reveal>
-          <div class="arch-cell">
-            <h4>Production-grade by default</h4>
-            <p>Every output ships with tests, observability, and compliance attestations. Not bolted on — generated inline.</p>
+        <div class="kg-section" data-reveal>
+          <div class="kg-text">
+            <span class="section-num">03 &middot; The substrate</span>
+            <h2 class="t-display-italic">The Knowledge Graph <em>your enterprise becomes.</em></h2>
+            <p class="t-body-lg" style="margin-top: var(--space-md);">
+              GalentAI builds a living map of your engineering organisation &mdash; code, data, policies, deployments, incidents, runbooks &mdash; and keeps it addressable to every human and agent in the loop.
+            </p>
+            <p class="t-body" style="margin-top: var(--space-md);">
+              Hover any node. Click to explore. Every connection here is a live signal in a real programme.
+            </p>
+            <div class="kg-legend">
+              <span><span class="dot" style="background:#1ED197;"></span>Live signal traversing an edge</span>
+              <span><span class="dot" style="background:#7B2CBF;"></span>Hover / focus highlight</span>
+            </div>
           </div>
-          <div class="arch-cell">
-            <h4>Auditable end-to-end</h4>
-            <p>Every decision the platform makes is traceable, attributable, and reproducible. Including the AI ones.</p>
-          </div>
-          <div class="arch-cell">
-            <h4>Deterministic delivery</h4>
-            <p>Same context, same prompt, same outcome. RCM Engine enforces policy gates before any change merges.</p>
-          </div>
-          <div class="arch-cell">
-            <h4>Runs on your stack</h4>
-            <p>Your repos. Your cloud. Your IAM. GalentAI plugs in — it does not replace your operating model.</p>
+          <div class="kg-canvas-host">
+            <canvas id="cv-knowledge-graph" aria-hidden="true"></canvas>
           </div>
         </div>
       </div>
@@ -264,6 +257,7 @@
   <script src="js/animations.js"></script>
   <script>
     Galent.compass(document.getElementById('cv-compass'));
+    Galent.knowledgeGraph(document.getElementById('cv-knowledge-graph'));
     Galent.persistentReveal();
     Galent.stickyNav('site-nav');
     Galent.contactModal();

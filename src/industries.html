@@ -77,105 +77,236 @@
       </div>
     </section>
 
-    <!-- SECTOR GRID — color-coded tiles, each links to relevant service -->
+    <!-- SECTOR ACCORDION — quick-jump pills + 7 expandable strips -->
     <section id="sectors">
       <div class="container">
-        <div class="section-head" data-reveal>
-          <span class="section-num">02 · Sectors</span>
+        <div class="section-head" data-reveal style="text-align: left; margin-bottom: var(--space-md);">
+          <span class="section-num">02 &middot; Sectors</span>
           <h2 class="t-display-italic">Where we <em>operate.</em></h2>
         </div>
 
-        <div class="sector-grid" data-reveal>
-          <a href="services/quality-engineering.html" class="sector-tile s-tech" id="technology" data-num="01">
-            <div class="num">01 &#8212; TECHNOLOGY &amp; SOFTWARE</div>
-            <h3>Technology &amp; Software</h3>
-            <p class="sub">Where the platform IS the product, and engineering velocity is the moat.</p>
-            <ul>
-              <li>Autonomous QA across product squads</li>
-              <li>Platform-grade test orchestration</li>
-              <li>Predictive coverage modelling</li>
-              <li>RCM-governed quality at PR time</li>
-            </ul>
-            <span class="arrow">Explore Quality Engineering <span class="arr">→</span></span>
-          </a>
+        <nav class="sector-quickjump" aria-label="Jump to sector">
+          <a href="#technology" data-jump="technology">Tech</a>
+          <a href="#bfsi" data-jump="bfsi">BFSI</a>
+          <a href="#healthcare" data-jump="healthcare">Healthcare</a>
+          <a href="#manufacturing" data-jump="manufacturing">Manufacturing</a>
+          <a href="#life-sciences" data-jump="life-sciences">Life Sciences</a>
+          <a href="#retail" data-jump="retail">Retail/CPG</a>
+          <a href="#gcc" data-jump="gcc">GCC</a>
+        </nav>
 
-          <a href="services/enterprise-platforms.html" class="sector-tile s-bfsi" id="bfsi" data-num="02">
-            <div class="num">02 &#8212; BFSI</div>
-            <h3>Banking, Financial Services &amp; Insurance</h3>
-            <p class="sub">Where compliance and change have to coexist — and legacy is everywhere.</p>
-            <ul>
-              <li>Salesforce &amp; ERP rebuilt for regulated scale</li>
-              <li>Risk, fraud, and AML platform consolidation</li>
-              <li>Regulatory reporting automation</li>
-              <li>Customer-intelligence stack at scale</li>
-            </ul>
-            <span class="arrow">Explore Enterprise Platforms <span class="arr">→</span></span>
-          </a>
+        <div class="sector-accordion" data-reveal>
 
-          <a href="services/itsm-transformation.html" class="sector-tile s-health" id="healthcare" data-num="03">
-            <div class="num">03 &#8212; HEALTHCARE &amp; INSURANCE</div>
-            <h3>Healthcare &amp; Insurance</h3>
-            <p class="sub">Where patient data, regulation, and operational AI all live on the same plane.</p>
-            <ul>
-              <li>Predictive ITSM on clinical and claims systems</li>
-              <li>HIPAA-aware change and incident workflows</li>
-              <li>Self-healing ops for care platforms</li>
-              <li>Less noise, faster resolution</li>
-            </ul>
-            <span class="arrow">Explore ITSM Transformation <span class="arr">→</span></span>
-          </a>
+          <div class="sector-strip" id="technology" style="--sector-color: #7B2CBF;" data-num="01">
+            <div class="strip-header">
+              <div class="strip-num">01</div>
+              <div class="strip-title">
+                <strong>Technology &amp; Software</strong>
+                <span>Where the platform IS the product, and engineering velocity is the moat.</span>
+              </div>
+              <div class="strip-cta">Explore<span class="toggle">+</span></div>
+            </div>
+            <div class="strip-body">
+              <div>
+                <h2>Technology &amp; Software</h2>
+                <p>Tech companies live and die by engineering velocity. Galent embeds Forward-Deployed QA and platform engineers inside your product squads, governs every PR with RCM policy gates, and shifts coverage modelling left so quality is defined before code is generated.</p>
+                <ul>
+                  <li>Autonomous QA across product squads</li>
+                  <li>Platform-grade test orchestration</li>
+                  <li>Predictive coverage modelling</li>
+                  <li>RCM-governed quality at PR time</li>
+                </ul>
+                <a href="services/quality-engineering.html" class="strip-btn">Explore Quality Engineering &rarr;</a>
+              </div>
+              <div class="metric-quad">
+                <div class="metric-box"><div class="big">99%+</div><div class="lbl">Code accuracy at PR</div></div>
+                <div class="metric-box"><div class="big">70%</div><div class="lbl">Fewer context-loss defects</div></div>
+                <div class="metric-box"><div class="big">3&ndash;4&times;</div><div class="lbl">Sprint velocity</div></div>
+                <div class="metric-box"><div class="big">0</div><div class="lbl">Manual regression cycles</div></div>
+              </div>
+            </div>
+          </div>
 
-          <a href="services/data-transformation.html" class="sector-tile s-mfg" id="manufacturing" data-num="04">
-            <div class="num">04 &#8212; MANUFACTURING</div>
-            <h3>Manufacturing</h3>
-            <p class="sub">Where operational reliability and predictive intelligence translate directly to margin.</p>
-            <ul>
-              <li>Plant-floor and IoT data unification</li>
-              <li>Predictive maintenance pipelines at fleet scale</li>
-              <li>Supply-chain visibility data products</li>
-              <li>AI-native pipelines wired into MES &amp; ERP</li>
-            </ul>
-            <span class="arrow">Explore Data Transformation <span class="arr">→</span></span>
-          </a>
+          <div class="sector-strip" id="bfsi" style="--sector-color: #2563EB;" data-num="02">
+            <div class="strip-header">
+              <div class="strip-num">02</div>
+              <div class="strip-title">
+                <strong>Banking, Financial Services &amp; Insurance</strong>
+                <span>Where compliance and change have to coexist &mdash; and legacy is everywhere.</span>
+              </div>
+              <div class="strip-cta">Explore<span class="toggle">+</span></div>
+            </div>
+            <div class="strip-body">
+              <div>
+                <h2>BFSI</h2>
+                <p>Regulated finance demands two things that usually fight each other: airtight compliance and continuous change. Galent rebuilds Salesforce and core platform stacks around the GalentAI engine, with policy and audit baked into every change &mdash; from CRM to cash.</p>
+                <ul>
+                  <li>Salesforce &amp; ERP rebuilt for regulated scale</li>
+                  <li>Risk, fraud, and AML platform consolidation</li>
+                  <li>Regulatory reporting automation</li>
+                  <li>Customer-intelligence stack at scale</li>
+                </ul>
+                <a href="services/enterprise-platforms.html" class="strip-btn">Explore Enterprise Platforms &rarr;</a>
+              </div>
+              <div class="metric-quad">
+                <div class="metric-box"><div class="big">800%</div><div class="lbl">Faster sales decisions</div></div>
+                <div class="metric-box"><div class="big">100%</div><div class="lbl">Compliance maintained</div></div>
+                <div class="metric-box"><div class="big">3&ndash;4&times;</div><div class="lbl">Programme velocity</div></div>
+                <div class="metric-box"><div class="big">15&times;</div><div class="lbl">Faster modernisation</div></div>
+              </div>
+            </div>
+          </div>
 
-          <a href="services/data-transformation.html" class="sector-tile s-life" id="life-sciences" data-num="05">
-            <div class="num">05 &#8212; LIFE SCIENCES</div>
-            <h3>Life Sciences</h3>
-            <p class="sub">Where speed to discovery and compliance discipline both matter — at the same time.</p>
-            <ul>
-              <li>Research-acceleration AI pipelines</li>
-              <li>Clinical-trial data platforms</li>
-              <li>GxP-grade lineage and governance</li>
-              <li>Real-world evidence at scale</li>
-            </ul>
-            <span class="arrow">Explore Data Transformation <span class="arr">→</span></span>
-          </a>
+          <div class="sector-strip" id="healthcare" style="--sector-color: #06B6D4;" data-num="03">
+            <div class="strip-header">
+              <div class="strip-num">03</div>
+              <div class="strip-title">
+                <strong>Healthcare &amp; Insurance</strong>
+                <span>Where patient data, regulation, and operational AI live on the same plane.</span>
+              </div>
+              <div class="strip-cta">Explore<span class="toggle">+</span></div>
+            </div>
+            <div class="strip-body">
+              <div>
+                <h2>Healthcare &amp; Insurance</h2>
+                <p>Healthcare cannot tolerate noisy ITSM or unclear ownership when patient outcomes are on the line. Galent brings HIPAA-aware change workflows, predictive incident triage, and self-healing operations to clinical, claims, and care-coordination systems.</p>
+                <ul>
+                  <li>Predictive ITSM on clinical and claims systems</li>
+                  <li>HIPAA-aware change and incident workflows</li>
+                  <li>Self-healing ops for care platforms</li>
+                  <li>Less noise, faster resolution</li>
+                </ul>
+                <a href="services/itsm-transformation.html" class="strip-btn">Explore ITSM Transformation &rarr;</a>
+              </div>
+              <div class="metric-quad">
+                <div class="metric-box"><div class="big">90%</div><div class="lbl">Data ops automated</div></div>
+                <div class="metric-box"><div class="big">0</div><div class="lbl">Compliance breaches</div></div>
+                <div class="metric-box"><div class="big">70%</div><div class="lbl">Fewer escalations</div></div>
+                <div class="metric-box"><div class="big">99.99%</div><div class="lbl">Critical-system uptime</div></div>
+              </div>
+            </div>
+          </div>
 
-          <a href="services/enterprise-platforms.html" class="sector-tile s-retail" id="retail" data-num="06">
-            <div class="num">06 &#8212; RETAIL &amp; CPG</div>
-            <h3>Retail &amp; CPG</h3>
-            <p class="sub">Where personalisation, supply, and merchandising move on the same fabric.</p>
-            <ul>
-              <li>Commerce, OMS, and ERP unification</li>
-              <li>Merchandising and pricing on a single platform</li>
-              <li>Customer-intelligence stack at scale</li>
-              <li>Inventory and demand systems modernisation</li>
-            </ul>
-            <span class="arrow">Explore Enterprise Platforms <span class="arr">→</span></span>
-          </a>
+          <div class="sector-strip" id="manufacturing" style="--sector-color: #F59E0B;" data-num="04">
+            <div class="strip-header">
+              <div class="strip-num">04</div>
+              <div class="strip-title">
+                <strong>Manufacturing</strong>
+                <span>Where reliability and predictive intelligence translate directly to margin.</span>
+              </div>
+              <div class="strip-cta">Explore<span class="toggle">+</span></div>
+            </div>
+            <div class="strip-body">
+              <div>
+                <h2>Manufacturing</h2>
+                <p>Plant-floor data, IoT telemetry, MES and ERP signal &mdash; all of it pays off only when the data is unified and AI-ready. Galent builds the pipelines and data products that make predictive maintenance, supply-chain visibility, and Industry 4.0 a daily reality.</p>
+                <ul>
+                  <li>Plant-floor and IoT data unification</li>
+                  <li>Predictive maintenance pipelines at fleet scale</li>
+                  <li>Supply-chain visibility data products</li>
+                  <li>AI-native pipelines wired into MES &amp; ERP</li>
+                </ul>
+                <a href="services/data-transformation.html" class="strip-btn">Explore Data Transformation &rarr;</a>
+              </div>
+              <div class="metric-quad">
+                <div class="metric-box"><div class="big">10&times;</div><div class="lbl">Faster pipeline build</div></div>
+                <div class="metric-box"><div class="big">~30%</div><div class="lbl">Downtime reduction</div></div>
+                <div class="metric-box"><div class="big">99%+</div><div class="lbl">Data contract integrity</div></div>
+                <div class="metric-box"><div class="big">0</div><div class="lbl">Schema-drift incidents</div></div>
+              </div>
+            </div>
+          </div>
 
-          <a href="services/legacy-modernisation.html" class="sector-tile s-gcc" id="gcc" data-num="07">
-            <div class="num">07 &#8212; GCC TRANSFORMATIONS</div>
-            <h3>Global Capability Centres</h3>
-            <p class="sub">Where in-house engineering is being built — and AI-native delivery defines the bar from day one.</p>
-            <ul>
-              <li>Legacy stacks unwound at 15× velocity</li>
-              <li>92% lower risk vs. conventional modernisation</li>
-              <li>FDE-led centre-of-excellence buildout</li>
-              <li>Platform-native delivery patterns</li>
-            </ul>
-            <span class="arrow">Explore Legacy Modernization <span class="arr">→</span></span>
-          </a>
+          <div class="sector-strip" id="life-sciences" style="--sector-color: #1ED197;" data-num="05">
+            <div class="strip-header">
+              <div class="strip-num">05</div>
+              <div class="strip-title">
+                <strong>Life Sciences</strong>
+                <span>Where discovery speed and compliance discipline matter at the same time.</span>
+              </div>
+              <div class="strip-cta">Explore<span class="toggle">+</span></div>
+            </div>
+            <div class="strip-body">
+              <div>
+                <h2>Life Sciences</h2>
+                <p>Research velocity and GxP-grade governance need to coexist on the same data fabric. Galent designs lineage-aware pipelines for clinical trials, research acceleration, and real-world evidence &mdash; without compromising audit readiness.</p>
+                <ul>
+                  <li>Research-acceleration AI pipelines</li>
+                  <li>Clinical-trial data platforms</li>
+                  <li>GxP-grade lineage and governance</li>
+                  <li>Real-world evidence at scale</li>
+                </ul>
+                <a href="services/data-transformation.html" class="strip-btn">Explore Data Transformation &rarr;</a>
+              </div>
+              <div class="metric-quad">
+                <div class="metric-box"><div class="big">3&times;</div><div class="lbl">Trial data turnaround</div></div>
+                <div class="metric-box"><div class="big">100%</div><div class="lbl">GxP audit-ready</div></div>
+                <div class="metric-box"><div class="big">15&times;</div><div class="lbl">Faster RWE assembly</div></div>
+                <div class="metric-box"><div class="big">0</div><div class="lbl">Lineage gaps</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sector-strip" id="retail" style="--sector-color: #EF4444;" data-num="06">
+            <div class="strip-header">
+              <div class="strip-num">06</div>
+              <div class="strip-title">
+                <strong>Retail &amp; CPG</strong>
+                <span>Where personalisation, supply, and merchandising move on the same fabric.</span>
+              </div>
+              <div class="strip-cta">Explore<span class="toggle">+</span></div>
+            </div>
+            <div class="strip-body">
+              <div>
+                <h2>Retail &amp; CPG</h2>
+                <p>Commerce, OMS, and ERP traditionally live in silos that throttle velocity. Galent unifies them as a single revenue platform, with customer intelligence and merchandising operating on the same data backbone.</p>
+                <ul>
+                  <li>Commerce, OMS, and ERP unification</li>
+                  <li>Merchandising and pricing on a single platform</li>
+                  <li>Customer-intelligence stack at scale</li>
+                  <li>Inventory and demand systems modernisation</li>
+                </ul>
+                <a href="services/enterprise-platforms.html" class="strip-btn">Explore Enterprise Platforms &rarr;</a>
+              </div>
+              <div class="metric-quad">
+                <div class="metric-box"><div class="big">2&times;</div><div class="lbl">Inventory turn</div></div>
+                <div class="metric-box"><div class="big">~25%</div><div class="lbl">Lift on personalised pages</div></div>
+                <div class="metric-box"><div class="big">15&times;</div><div class="lbl">Platform consolidation</div></div>
+                <div class="metric-box"><div class="big">3&ndash;4&times;</div><div class="lbl">Sprint velocity</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sector-strip" id="gcc" style="--sector-color: #FF5A1F;" data-num="07">
+            <div class="strip-header">
+              <div class="strip-num">07</div>
+              <div class="strip-title">
+                <strong>Global Capability Centres</strong>
+                <span>Where in-house engineering is being built and AI-native sets the bar from day one.</span>
+              </div>
+              <div class="strip-cta">Explore<span class="toggle">+</span></div>
+            </div>
+            <div class="strip-body">
+              <div>
+                <h2>GCC Transformations</h2>
+                <p>New centres of excellence are being built worldwide; the wrong choice is to copy a legacy SI model. Galent helps you build GCCs that are AI-native from week one &mdash; embedded FDEs, platform-led patterns, and a delivery cadence that compounds.</p>
+                <ul>
+                  <li>Legacy stacks unwound at 15&times; velocity</li>
+                  <li>92% lower risk vs. conventional modernisation</li>
+                  <li>FDE-led centre-of-excellence buildout</li>
+                  <li>Platform-native delivery patterns</li>
+                </ul>
+                <a href="services/legacy-modernisation.html" class="strip-btn">Explore Legacy Modernization &rarr;</a>
+              </div>
+              <div class="metric-quad">
+                <div class="metric-box"><div class="big">15&times;</div><div class="lbl">Faster modernisation</div></div>
+                <div class="metric-box"><div class="big">92%</div><div class="lbl">Lower modernisation risk</div></div>
+                <div class="metric-box"><div class="big">3&ndash;4&times;</div><div class="lbl">Programme velocity</div></div>
+                <div class="metric-box"><div class="big">72hr</div><div class="lbl">Legacy estate mapped</div></div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -256,6 +387,50 @@
     Galent.persistentReveal();
     Galent.stickyNav('site-nav');
     Galent.contactModal();
+
+    document.querySelectorAll('.sector-strip .strip-header').forEach(h => {
+      h.addEventListener('click', () => {
+        const strip = h.parentElement;
+        const open = strip.classList.toggle('open');
+        if (open) {
+          document.querySelectorAll('.sector-strip.open').forEach(s => {
+            if (s !== strip) s.classList.remove('open');
+          });
+        }
+      });
+    });
+
+    document.querySelectorAll('.sector-quickjump a').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const id = a.getAttribute('data-jump');
+        const strip = document.getElementById(id);
+        if (!strip) return;
+        e.preventDefault();
+        document.querySelectorAll('.sector-strip.open').forEach(s => s.classList.remove('open'));
+        strip.classList.add('open');
+        const offset = 100;
+        const y = strip.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      });
+    });
+
+    if ('IntersectionObserver' in window) {
+      const links = document.querySelectorAll('.sector-quickjump a');
+      const linkById = Object.fromEntries(
+        Array.from(links).map(a => [a.getAttribute('data-jump'), a])
+      );
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          const link = linkById[e.target.id];
+          if (!link) return;
+          if (e.isIntersecting) {
+            links.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-40% 0px -45% 0px' });
+      document.querySelectorAll('.sector-strip').forEach(s => io.observe(s));
+    }
   </script>
 
 </body>

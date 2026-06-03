@@ -481,6 +481,293 @@
   };
 
   // ============================================================
+  // KNOWLEDGE GRAPH — animated, interactive node-edge graph for the
+  // Platform Architecture section. 18 named nodes, breathing scale,
+  // signal dots travelling along edges, hover highlight, click tooltip.
+  // ============================================================
+  Galent.knowledgeGraph = function (canvas, panelHost) {
+    if (!canvas) return () => {};
+    const host = canvas.parentElement;
+    const ctx = canvas.getContext('2d');
+    let W = 0, H = 0, dpr = 1;
+    function size() {
+      const m = fit(canvas, host);
+      W = canvas.width; H = canvas.height; dpr = m.dpr;
+    }
+    size();
+    new ResizeObserver(size).observe(host);
+
+    // 18 nodes with hand-tuned normalised positions (stable layout).
+    // Each: { id, label, short, x (0-1), y (0-1), description }
+    const NODES = [
+      { id: 0,  label: 'Codebase',      short: 'Code',     x: 0.18, y: 0.22, desc: 'AST-parsed source tree. GalentAI maps every function, dependency, and change history.' },
+      { id: 1,  label: 'Logs',          short: 'Logs',     x: 0.30, y: 0.10, desc: 'Streaming runtime telemetry. Correlated against deploys, SLOs, and changesets.' },
+      { id: 2,  label: 'Schemas',       short: 'Schemas',  x: 0.45, y: 0.18, desc: 'Live data contracts. Drift detected before it reaches production.' },
+      { id: 3,  label: 'Tickets',       short: 'Tickets',  x: 0.62, y: 0.10, desc: 'Linked work items. Decisions, owners, and history threaded back into the graph.' },
+      { id: 4,  label: 'Runbooks',      short: 'Runbooks', x: 0.78, y: 0.20, desc: 'Operational playbooks. Auto-triggered against alert signatures.' },
+      { id: 5,  label: 'CI/CD',         short: 'CI/CD',    x: 0.88, y: 0.36, desc: 'Pipeline state. Every change traced from PR to production.' },
+      { id: 6,  label: 'Infra',         short: 'Infra',    x: 0.84, y: 0.55, desc: 'Live topology of clouds, clusters, and services. State refreshed continuously.' },
+      { id: 7,  label: 'APIs',          short: 'APIs',     x: 0.74, y: 0.72, desc: 'Live contracts and consumers. Breaking-change blast radius computed in real time.' },
+      { id: 8,  label: 'Events',        short: 'Events',   x: 0.60, y: 0.84, desc: 'Domain event flow across services. Order, timing, retries — all observable.' },
+      { id: 9,  label: 'ML Models',     short: 'Models',   x: 0.45, y: 0.78, desc: 'Model registry, lineage, evaluations. Performance drift gated by RCM.' },
+      { id: 10, label: 'SLOs',          short: 'SLOs',     x: 0.30, y: 0.88, desc: 'Live reliability targets. GalentAI tracks breach risk and triggers auto-remediation.' },
+      { id: 11, label: 'Policies',      short: 'Policy',   x: 0.16, y: 0.78, desc: 'Compliance, security, and architectural constraints enforced before generation.' },
+      { id: 12, label: 'Data Pipelines',short: 'Pipelines',x: 0.08, y: 0.58, desc: 'AI-native pipelines. Quality, lineage, and lineage-aware schema evolution.' },
+      { id: 13, label: 'Architecture',  short: 'Arch',     x: 0.14, y: 0.40, desc: 'Live architectural model. Patterns, constraints, and decisions kept addressable.' },
+      { id: 14, label: 'Business Rules',short: 'Rules',    x: 0.34, y: 0.32, desc: 'Domain logic, encoded and queryable. Discoverable across the codebase.' },
+      { id: 15, label: 'Test Coverage', short: 'Tests',    x: 0.56, y: 0.30, desc: 'Coverage modelling per function. Gaps surfaced before code is generated.' },
+      { id: 16, label: 'Deployments',   short: 'Deploys',  x: 0.66, y: 0.50, desc: 'Every release attributed. Roll-forward and roll-back wired into the graph.' },
+      { id: 17, label: 'Alerts',        short: 'Alerts',   x: 0.42, y: 0.50, desc: 'Active and historic incidents. Pattern-matched against runbooks and SLOs.' },
+    ];
+
+    // Edge list (hand-picked, ~1.8 connections per node). Stable topology.
+    const EDGES = [
+      [0,14],[0,15],[0,13],[0,5],
+      [1,17],[1,10],[1,6],
+      [2,12],[2,15],[2,14],
+      [3,17],[3,16],[3,11],
+      [4,17],[4,6],[4,11],
+      [5,16],[5,15],
+      [6,10],[6,7],
+      [7,8],[7,16],
+      [8,9],[8,17],
+      [9,15],[9,11],
+      [10,17],[10,11],
+      [11,13],
+      [12,2],[12,9],
+      [13,14],
+      [14,15],
+      [16,5],
+    ];
+    // Deduplicate
+    const seen = new Set();
+    const edges = EDGES.filter(([a,b]) => {
+      const k = a < b ? a+'-'+b : b+'-'+a;
+      if (seen.has(k)) return false;
+      seen.add(k);
+      return true;
+    });
+
+    // Phase offsets for breathing animation
+    NODES.forEach((n, i) => n.phase = i * 0.41);
+
+    // Active signal dots travelling along edges
+    const signals = [];
+    let lastSpawn = 0;
+    const SPAWN_INTERVAL = 1200; // ms
+
+    // Node activation timestamps (for the brief glow on signal arrival)
+    NODES.forEach(n => { n.activeUntil = 0; });
+
+    // Pointer state
+    let hoverId = -1;
+    let activeId = -1; // clicked / tooltip-open
+    let pointerInside = false;
+
+    function nodeAtPointer(px, py) {
+      // px,py in CSS pixels relative to host
+      for (let i = NODES.length - 1; i >= 0; i--) {
+        const n = NODES[i];
+        const nx = n.x * (W / dpr);
+        const ny = n.y * (H / dpr);
+        const dx = px - nx, dy = py - ny;
+        if (dx*dx + dy*dy <= 26*26) return i;
+      }
+      return -1;
+    }
+
+    // Tooltip panel — HTML overlay, positioned smart-relative to host.
+    const panel = document.createElement('div');
+    panel.className = 'kg-panel';
+    panel.style.cssText = 'position:absolute; background:#0a0a0a; border:1px solid #1e1e1e; border-radius:8px; padding:14px 16px; max-width:240px; font-family:inherit; color:#fff; box-shadow:0 8px 32px rgba(0,0,0,0.4); opacity:0; transform:translateY(4px); transition:opacity .15s ease, transform .15s ease; pointer-events:none; z-index:5; font-size:13px;';
+    panel.innerHTML = '<button class="kg-close" aria-label="Close" style="position:absolute;top:6px;right:6px;background:transparent;border:0;color:rgba(255,255,255,0.6);font-size:16px;line-height:1;cursor:pointer;padding:4px 6px;">×</button><div class="kg-title" style="font-weight:700;font-size:13px;color:#fff;padding-right:18px;margin-bottom:6px;"></div><div class="kg-desc" style="font-size:12.5px;line-height:1.5;color:rgba(255,255,255,0.72);margin-bottom:8px;"></div><div class="kg-neighbours" style="display:flex;flex-wrap:wrap;gap:4px;"></div>';
+    (panelHost || host).appendChild(panel);
+    const panelTitle = panel.querySelector('.kg-title');
+    const panelDesc  = panel.querySelector('.kg-desc');
+    const panelNeigh = panel.querySelector('.kg-neighbours');
+    const panelClose = panel.querySelector('.kg-close');
+
+    function showPanel(id) {
+      activeId = id;
+      const n = NODES[id];
+      panelTitle.textContent = n.label;
+      panelDesc.textContent  = n.desc;
+      // Connected neighbours
+      const conns = edges.filter(([a,b]) => a === id || b === id).map(([a,b]) => a === id ? b : a);
+      panelNeigh.innerHTML = '';
+      conns.forEach(j => {
+        const pill = document.createElement('span');
+        pill.style.cssText = 'background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.86);font-size:10px;padding:3px 8px;border-radius:9999px;letter-spacing:0.2px;font-family:"JetBrains Mono", monospace;';
+        pill.textContent = NODES[j].label;
+        panelNeigh.appendChild(pill);
+      });
+      // Smart-position
+      const cssW = W / dpr, cssH = H / dpr;
+      const nx = n.x * cssW, ny = n.y * cssH;
+      const placeLeft = n.x > 0.55;
+      const placeAbove = n.y > 0.65;
+      panel.style.left = placeLeft ? '' : (nx + 34) + 'px';
+      panel.style.right = placeLeft ? (cssW - nx + 34) + 'px' : '';
+      panel.style.top = placeAbove ? '' : (ny - 8) + 'px';
+      panel.style.bottom = placeAbove ? (cssH - ny - 8) + 'px' : '';
+      panel.style.opacity = '1';
+      panel.style.transform = 'translateY(0)';
+      panel.style.pointerEvents = 'auto';
+    }
+    function hidePanel() {
+      activeId = -1;
+      panel.style.opacity = '0';
+      panel.style.transform = 'translateY(4px)';
+      panel.style.pointerEvents = 'none';
+    }
+
+    panelClose.addEventListener('click', (e) => { e.stopPropagation(); hidePanel(); });
+    document.addEventListener('click', (e) => {
+      if (activeId === -1) return;
+      if (!host.contains(e.target) && !panel.contains(e.target)) hidePanel();
+    });
+
+    function handleMove(e) {
+      const r = host.getBoundingClientRect();
+      const px = e.clientX - r.left;
+      const py = e.clientY - r.top;
+      pointerInside = px >= 0 && py >= 0 && px < r.width && py < r.height;
+      hoverId = pointerInside ? nodeAtPointer(px, py) : -1;
+      host.style.cursor = hoverId >= 0 ? 'pointer' : '';
+    }
+    function handleClick(e) {
+      const r = host.getBoundingClientRect();
+      const px = e.clientX - r.left;
+      const py = e.clientY - r.top;
+      const id = nodeAtPointer(px, py);
+      if (id >= 0) {
+        e.stopPropagation();
+        if (activeId === id) hidePanel();
+        else showPanel(id);
+      }
+    }
+    host.addEventListener('mousemove', handleMove);
+    host.addEventListener('mouseleave', () => { hoverId = -1; pointerInside = false; host.style.cursor = ''; });
+    host.addEventListener('click', handleClick);
+
+    const t0 = performance.now();
+    let raf;
+    function frame() {
+      const now = performance.now();
+      const t = (now - t0) / 1000;
+      ctx.clearRect(0, 0, W, H);
+
+      // Spawn signal dots
+      if (now - lastSpawn > SPAWN_INTERVAL) {
+        lastSpawn = now;
+        const ei = (Math.random() * edges.length) | 0;
+        const [a, b] = edges[ei];
+        signals.push({ a, b, start: now, duration: 800 + Math.random()*400 });
+      }
+
+      // Determine highlighted edges/neighbours based on hover or active
+      const focusId = hoverId !== -1 ? hoverId : activeId;
+      const focusNeighbours = new Set();
+      if (focusId !== -1) {
+        edges.forEach(([a,b]) => {
+          if (a === focusId) focusNeighbours.add(b);
+          else if (b === focusId) focusNeighbours.add(a);
+        });
+      }
+
+      // ---- Draw edges ----
+      ctx.lineWidth = 1 * dpr;
+      edges.forEach(([a, b]) => {
+        const A = NODES[a], B = NODES[b];
+        const isFocus = focusId !== -1 && (a === focusId || b === focusId);
+        ctx.strokeStyle = isFocus
+          ? rgbA(BRAND.purple, 0.5)
+          : rgbA(BRAND.ink, 0.10);
+        ctx.beginPath();
+        ctx.moveTo(A.x * W, A.y * H);
+        ctx.lineTo(B.x * W, B.y * H);
+        ctx.stroke();
+      });
+
+      // ---- Draw signal dots and check arrivals ----
+      for (let i = signals.length - 1; i >= 0; i--) {
+        const s = signals[i];
+        const p = Math.min(1, (now - s.start) / s.duration);
+        const eased = 1 - Math.pow(1 - p, 3);
+        const A = NODES[s.a], B = NODES[s.b];
+        const x = (A.x + (B.x - A.x) * eased) * W;
+        const y = (A.y + (B.y - A.y) * eased) * H;
+        ctx.fillStyle = rgbA(BRAND.green, 0.92);
+        ctx.beginPath();
+        ctx.arc(x, y, 3.5 * dpr, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = rgbA(BRAND.green, 0.20);
+        ctx.beginPath();
+        ctx.arc(x, y, 7 * dpr, 0, Math.PI * 2);
+        ctx.fill();
+        if (p >= 1) {
+          NODES[s.b].activeUntil = now + 400;
+          signals.splice(i, 1);
+        }
+      }
+
+      // ---- Draw nodes ----
+      ctx.font = `500 ${9 * dpr}px Inter, "Plus Jakarta Sans", sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      for (let i = 0; i < NODES.length; i++) {
+        const n = NODES[i];
+        const breathe = 1 + 0.08 * Math.sin(t * 0.9 + n.phase);
+        const r = 22 * dpr * breathe;
+        const cx = n.x * W;
+        const cy = n.y * H;
+
+        const isHover = hoverId === i;
+        const isActive = activeId === i;
+        const isNeighbour = focusNeighbours.has(i);
+        const isSignalActive = now < n.activeUntil;
+
+        // Neighbour halo
+        if (isNeighbour) {
+          ctx.fillStyle = rgbA(BRAND.purple, 0.08);
+          ctx.beginPath();
+          ctx.arc(cx, cy, 30 * dpr, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Node body
+        let fill = '#FFFFFF';
+        if (isSignalActive) fill = `rgba(241,232,251, 1)`;
+        ctx.fillStyle = fill;
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Node stroke
+        ctx.lineWidth = (isHover || isActive ? 2 : 1.5) * dpr;
+        ctx.strokeStyle = (isHover || isActive)
+          ? rgbA(BRAND.purple, 1)
+          : rgbA(BRAND.ink, 0.18);
+        ctx.stroke();
+
+        // Label
+        ctx.fillStyle = rgbA(BRAND.ink, isHover || isActive ? 1 : 0.78);
+        ctx.fillText(n.short, cx, cy);
+      }
+
+      raf = requestAnimationFrame(frame);
+    }
+    raf = requestAnimationFrame(frame);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      host.removeEventListener('mousemove', handleMove);
+      host.removeEventListener('click', handleClick);
+      if (panel.parentElement) panel.parentElement.removeChild(panel);
+    };
+  };
+
+  // ============================================================
   // CONTACT MODAL — injected sitewide. Binds to a[href="#"] and any
   // [data-contact] trigger. Submits via mailto: fallback (no backend).
   // ============================================================
