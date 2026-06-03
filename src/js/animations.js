@@ -338,7 +338,12 @@
       });
     }
 
+    let runningCleanups = [];
     function activate(key) {
+      // Tear down any live canvas animations from the previous engine
+      runningCleanups.forEach(fn => { try { fn(); } catch (e) {} });
+      runningCleanups = [];
+
       nodes.forEach(n => n.classList.toggle('active', n.dataset.engine === key));
       const e = engines[key];
       if (!e || !detail) return;
@@ -351,6 +356,17 @@
         </div>
         <div class="mockup">${e.mockup}</div>
       `;
+      // Initialise any data-galent-anim canvases inside the injected mockup
+      detail.querySelectorAll('[data-galent-anim]').forEach(cv => {
+        const kind = cv.getAttribute('data-galent-anim');
+        if (kind === 'signal' && typeof Galent.signal === 'function') {
+          const stop = Galent.signal(cv);
+          if (typeof stop === 'function') runningCleanups.push(stop);
+        } else if (kind === 'network' && typeof Galent.network === 'function') {
+          const stop = Galent.network(cv);
+          if (typeof stop === 'function') runningCleanups.push(stop);
+        }
+      });
     }
 
     nodes.forEach(n => {

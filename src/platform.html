@@ -97,19 +97,19 @@
             <svg class="engine-diagram-svg" aria-hidden="true"></svg>
             <div class="engine-hub">GalentAI</div>
             <button class="engine-node" data-engine="neuroql" data-pos="top" aria-pressed="false">
-              <span class="code">// 01</span>
+              <span class="code">01 &#8212;</span>
               <span class="name">NeuroQL</span>
             </button>
             <button class="engine-node" data-engine="rcm" data-pos="right" aria-pressed="false">
-              <span class="code">// 02</span>
+              <span class="code">02 &#8212;</span>
               <span class="name">RCM</span>
             </button>
             <button class="engine-node" data-engine="kg" data-pos="bottom" aria-pressed="false">
-              <span class="code">// 03</span>
+              <span class="code">03 &#8212;</span>
               <span class="name">Knowledge Graph</span>
             </button>
             <button class="engine-node" data-engine="context" data-pos="left" aria-pressed="false">
-              <span class="code">// 04</span>
+              <span class="code">04 &#8212;</span>
               <span class="name">Context Graph</span>
             </button>
           </div>
@@ -271,7 +271,7 @@
     // Engine data — populates the detail panel when a node is clicked.
     const ENGINES = {
       neuroql: {
-        code: '// 01 · NEUROQL ENGINE',
+        code: '01 &#8212; NEUROQL ENGINE',
         name: 'NeuroQL — orchestrated execution',
         description: 'A query language for the SDLC itself. NeuroQL composes engineering work as a graph — every task, dependency, and acceptance criterion is addressable, traceable, and re-runnable.',
         bullets: [
@@ -283,18 +283,23 @@
         mockup: `
           <div class="mockup-window">
             <div class="titlebar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label">neuroql · plan.run</span></div>
-            <div class="content">
-              <span class="mock-pill">PLAN</span><span class="mock-pill" style="background:var(--brand-green-soft);color:var(--brand-green-deep);">RUNNING</span>
-              <div style="height:8px"></div>
-              <div class="mock-bar-row"><div class="bar" style="height:62%"></div><div class="bar" style="height:78%"></div><div class="bar" style="height:45%"></div><div class="bar" style="height:88%"></div><div class="bar" style="height:60%"></div><div class="bar" style="height:72%"></div><div class="bar" style="height:38%"></div><div class="bar" style="height:90%"></div></div>
-              <div class="mock-line"></div>
-              <div class="mock-line medium"></div>
-              <div class="mock-line short"></div>
+            <div class="content" style="padding: 0;">
+              <div style="padding: var(--space-md) var(--space-md) 0;">
+                <span class="mock-pill">PLAN</span><span class="mock-pill" style="background:var(--brand-green-soft);color:var(--brand-green-deep);">RUNNING</span>
+              </div>
+              <div class="signal-wrap">
+                <canvas data-galent-anim="signal" aria-hidden="true"></canvas>
+              </div>
+              <div style="padding: 6px var(--space-md) var(--space-md);">
+                <div class="mock-line"></div>
+                <div class="mock-line medium"></div>
+                <div class="mock-line short"></div>
+              </div>
             </div>
           </div>`
       },
       rcm: {
-        code: '// 02 · RCM ENGINE',
+        code: '02 &#8212; RCM ENGINE',
         name: 'RCM — Reasoning · Compliance · Memory',
         description: 'The governance layer. Policy, compliance, and architectural constraints are enforced before any change reaches production. RCM is why GalentAI is deterministic, not probabilistic.',
         bullets: [
@@ -318,7 +323,7 @@
           </div>`
       },
       kg: {
-        code: '// 03 · KNOWLEDGE GRAPH',
+        code: '03 &#8212; KNOWLEDGE GRAPH',
         name: 'Knowledge Graph — organisational memory',
         description: 'Every decision, dependency, owner, and constraint your enterprise has ever made — captured, addressable, queryable. The substrate that makes velocity compound.',
         bullets: [
@@ -346,7 +351,7 @@
           </div>`
       },
       context: {
-        code: '// 04 · CONTEXT GRAPH',
+        code: '04 &#8212; CONTEXT GRAPH',
         name: 'Context Graph — persistent reasoning',
         description: 'The state behind every prompt. The Context Graph holds the full reasoning trail across a programme so decisions stay coherent across sessions, sprints, and team members.',
         bullets: [
