@@ -3889,7 +3889,25 @@ footer.footer a {
 }
 footer.footer a:hover { color: #FFFFFF; }
 footer.footer p { color: rgba(255,255,255,0.55); }
-/* Logo retains its original brand-coloured PNG on black */
+
+/* Logo sits on a small white surface — the PNG's dark wordmark stays
+   readable while the colored glyph keeps its brand gradient.       */
+footer.footer .brand-mark {
+  display: inline-flex;
+  align-items: center;
+  background: #FFFFFF;
+  padding: 10px 20px;
+  border-radius: 12px;
+  margin-bottom: var(--space-md);
+  width: fit-content;
+  box-shadow: 0 8px 24px -16px rgba(255,255,255,0.18);
+}
+footer.footer .brand-mark img,
+footer.footer .brand-mark svg {
+  height: 52px;
+  width: auto;
+  display: block;
+}
 footer.footer .bottom {
   border-top: 1px solid rgba(255,255,255,0.08);
   color: rgba(255,255,255,0.45);
