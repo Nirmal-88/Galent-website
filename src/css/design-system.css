@@ -2843,9 +2843,10 @@ body[data-page="home"] .scroll-chevron {
   opacity: 0.9;
 }
 
-/* ---- PURE-BLACK CTA BLOCK (sitewide) ---- */
+/* ---- CTA BLOCK ---- section background is white; the card itself
+   stays dark with a brand-gradient glow so it remains the eye-catcher. */
 .cta-card {
-  background: #000000;
+  background: #0A0B10;
 }
 .cta-card::before {
   background:
@@ -2853,12 +2854,7 @@ body[data-page="home"] .scroll-chevron {
     radial-gradient(circle at 15% 95%,  rgba(30,209,151,0.22) 0%, transparent 60%),
     radial-gradient(circle at 88% 85%,  rgba(255,90,31,0.14) 0%, transparent 55%);
 }
-body[data-page="home"] section:last-of-type,
-body[data-page="home"] #cta { background: #000000; }
-body[data-page="home"] #cta .cta-card { background: #000000; }
-/* Ensure the actual final section sits inside a pure-black band */
-section#cta { background: #000000; padding-top: var(--space-4xl); padding-bottom: var(--space-4xl); }
-section#cta + footer.footer { border-top-color: rgba(255,255,255,0.08); }
+section#cta { padding-top: var(--space-4xl); padding-bottom: var(--space-4xl); }
 
 /* ---- PULSE + FLOW on the Platform engine diagram ---- */
 .engine-diagram-svg line {
