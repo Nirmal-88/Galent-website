@@ -3380,9 +3380,7 @@ section#cta + footer.footer a { color: rgba(255,255,255,0.65); }
 section#cta + footer.footer a:hover { color: #FFFFFF; }
 section#cta + footer.footer .bottom { border-top-color: rgba(255,255,255,0.08); }
 section#cta + footer.footer p { color: rgba(255,255,255,0.55); }
-section#cta + footer.footer .brand-mark img {
-  filter: brightness(0) invert(1);
-}
+/* Logo stays in its original brand colours on the black footer */
 
 /* ==================================================================
  * 2026-06-03 — Comprehensive redesign pass (knowledge graph, accordion,
@@ -3891,9 +3889,7 @@ footer.footer a {
 }
 footer.footer a:hover { color: #FFFFFF; }
 footer.footer p { color: rgba(255,255,255,0.55); }
-footer.footer .brand-mark img {
-  filter: brightness(0) invert(1);
-}
+/* Logo retains its original brand-coloured PNG on black */
 footer.footer .bottom {
   border-top: 1px solid rgba(255,255,255,0.08);
   color: rgba(255,255,255,0.45);
