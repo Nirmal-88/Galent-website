@@ -3900,38 +3900,6 @@ footer.footer .bottom > div:first-child + div { /* center column tagline */
 /* The footer "brand" tagline (Outpace · Outplay · Outstand) under the logo */
 footer.footer .brand-tagline { color: rgba(198,241,53,0.65); letter-spacing: 2px; }
 
-/* ==================================================================
- * GRADUAL BLUR — vanilla port of the reactbits.dev GradualBlur component.
- * Hosts get N stacked backdrop-filter layers, each masked by a linear
- * gradient so the blur fades along one edge of the host.
- * ================================================================== */
-.gradual-blur {
-  pointer-events: none;
-  isolation: isolate;
-}
-.gradual-blur-parent { overflow: hidden; }
-.gradual-blur-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-.gradual-blur-inner > div {
-  -webkit-backdrop-filter: inherit;
-  backdrop-filter: inherit;
-}
-.gradual-blur-page {
-  position: fixed !important;
-}
-/* Fallback for browsers without backdrop-filter — soft surface gradient
-   so the bottom of the host still feels like it fades. */
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .gradual-blur-inner > div {
-    background: linear-gradient(to top, rgba(10,11,16,0.35), transparent);
-    opacity: 0.65;
-  }
-}
-
 /* ---- SCROLL CHEVRON on dark backgrounds ---- */
 .panel-dark .scroll-chevron,
 body[data-page="home"] .scroll-chevron {

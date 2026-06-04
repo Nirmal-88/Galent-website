@@ -256,11 +256,12 @@
 
   <script src="js/animations.js"></script>
   <script>
-    Galent.compass(document.getElementById('cv-compass'));
-    Galent.knowledgeGraph(document.getElementById('cv-knowledge-graph'));
-    Galent.persistentReveal();
-    Galent.stickyNav('site-nav');
-    Galent.contactModal();
+    // Reveal first — never let a canvas init failure leave the page invisible.
+    try { Galent.persistentReveal(); } catch (e) { console.error('reveal', e); document.querySelectorAll('[data-reveal],[data-stagger]').forEach(el => el.classList.add('in')); }
+    try { Galent.stickyNav('site-nav'); }   catch (e) { console.error('stickyNav', e); }
+    try { Galent.contactModal(); }          catch (e) { console.error('contactModal', e); }
+    try { Galent.compass(document.getElementById('cv-compass')); } catch (e) { console.error('compass', e); }
+    try { Galent.knowledgeGraph(document.getElementById('cv-knowledge-graph')); } catch (e) { console.error('knowledgeGraph', e); }
 
     // Engine data — populates the detail panel when a node is clicked.
     const ENGINES = {
@@ -371,7 +372,8 @@
       }
     };
 
-    Galent.enginesDiagram(document.getElementById('engine-diagram-root'), ENGINES);
+    try { Galent.enginesDiagram(document.getElementById('engine-diagram-root'), ENGINES); }
+    catch (e) { console.error('enginesDiagram', e); }
   </script>
 
 </body>
