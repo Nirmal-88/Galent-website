@@ -710,7 +710,9 @@
   };
 
   // Auto-init scanner — reads [data-gradual-blur="<position>"] plus
-  // optional data-blur-* attribute overrides.
+  // optional data-blur-* attribute overrides. Also injects a page-level
+  // bottom blur strip on every page so the effect is always visible
+  // somewhere — opt out by setting <body data-no-page-blur>.
   Galent.initGradualBlurs = function () {
     document.querySelectorAll('[data-gradual-blur]').forEach(host => {
       if (host.__gbApplied) return;
@@ -727,6 +729,22 @@
       const z = host.getAttribute('data-blur-z');          if (z) opts.zIndex = parseInt(z, 10);
       Galent.gradualBlur(host, opts);
     });
+
+    // Page-level bottom strip — always visible, blurs whatever scrolls past.
+    if (!document.body.hasAttribute('data-no-page-blur') && !document.body.__gbPageApplied) {
+      document.body.__gbPageApplied = true;
+      Galent.gradualBlur(document.body, {
+        target: 'page',
+        position: 'bottom',
+        height: '6rem',
+        strength: 2,
+        divCount: 6,
+        curve: 'bezier',
+        exponential: true,
+        opacity: 1,
+        zIndex: 50,
+      });
+    }
   };
 
   // Run the scanner once on DOMContentLoaded so pages don't have to call it.
