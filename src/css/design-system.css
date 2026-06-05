@@ -2845,6 +2845,12 @@ body[data-page] .nav-group-label { color: var(--page-accent); }
 body[data-page="home"] .hero {
   background: #0A0B10;
   color: #FFFFFF;
+  /* Pull the content closer to the top — tighter top padding + shorter
+     min-height so the badge sits up just under the sticky nav. */
+  min-height: clamp(420px, 60vh, 640px);
+  padding-top: clamp(24px, 3.5vw, 44px);
+  align-items: start;
+  padding-bottom: clamp(56px, 8vw, 100px);
 }
 body[data-page="home"] .hero::before {
   content: '';

@@ -84,27 +84,27 @@
 
     // Build a graph of nodes. Spread across the canvas at random anchors
     // and slowly drift them around their home position.
-    const NODES = 22;
+    const NODES = 48;
     const nodes = [];
     for (let i = 0; i < NODES; i++) {
       nodes.push({
-        hx: 0.08 + Math.random() * 0.84,
-        hy: 0.08 + Math.random() * 0.84,
+        hx: 0.04 + Math.random() * 0.92,
+        hy: 0.04 + Math.random() * 0.92,
         ax: Math.random() * Math.PI * 2,
         ay: Math.random() * Math.PI * 2,
         sp: 0.0004 + Math.random() * 0.0009,
-        r:  1.8 + Math.random() * 2.8,
+        r:  1.4 + Math.random() * 2.6,
         c:  [BRAND.purple, BRAND.green, BRAND.orange, BRAND.indigo][i % 4],
       });
     }
-    // Edges: connect each node to a few nearby neighbours
+    // Edges: connect each node to its 3 nearest neighbours (denser web)
     const edges = [];
     for (let i = 0; i < nodes.length; i++) {
       const neighbours = nodes
         .map((n, j) => ({ j, d: (n.hx - nodes[i].hx) ** 2 + (n.hy - nodes[i].hy) ** 2 }))
         .filter(x => x.j !== i)
         .sort((a, b) => a.d - b.d)
-        .slice(0, 2);
+        .slice(0, 3);
       for (const { j } of neighbours) {
         if (!edges.some(e => (e.a === i && e.b === j) || (e.a === j && e.b === i))) {
           edges.push({ a: i, b: j, ph: Math.random(), sp: 0.18 + Math.random() * 0.35 });
