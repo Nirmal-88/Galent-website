@@ -2949,10 +2949,13 @@ body[data-page="home"] .scroll-chevron {
 }
 .powered-by.hero-powered {
   position: absolute;
-  left: max(var(--gutter), 6vw);
+  left: 50%;
   bottom: clamp(28px, 5vw, 56px);
+  transform: translateX(-50%);
   z-index: 3;
   margin: 0;
+  max-width: calc(100% - 2 * var(--gutter));
+  justify-content: center;
 }
 .powered-by .label {
   font-family: var(--font-mono);
@@ -2983,7 +2986,8 @@ body[data-page="home"] .scroll-chevron {
 @media (max-width: 880px) {
   .powered-by.hero-powered {
     position: static;
-    margin: var(--space-2xl) var(--gutter) 0;
+    transform: none;
+    margin: var(--space-2xl) auto 0;
   }
 }
 
