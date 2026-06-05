@@ -2950,7 +2950,7 @@ body[data-page="home"] .scroll-chevron {
 .powered-by.hero-powered {
   position: absolute;
   left: 50%;
-  bottom: clamp(28px, 5vw, 56px);
+  bottom: clamp(96px, 9vw, 128px);  /* leaves clearance for .scroll-chevron at bottom */
   transform: translateX(-50%);
   z-index: 3;
   margin: 0;
