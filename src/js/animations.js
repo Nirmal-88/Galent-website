@@ -805,7 +805,7 @@
                 <input name="email" type="email" required autocomplete="email" placeholder="jane@company.com">
               </label>
               <label>What are you trying to deliver?
-                <textarea name="brief" rows="4" placeholder="A sentence or two about the programme, the constraints, and the outcome you need."></textarea>
+                <textarea name="brief" rows="4" required placeholder="A sentence or two about the programme, the constraints, and the outcome you need."></textarea>
               </label>
               <div class="submit-row">
                 <button type="submit" class="btn">Send <span class="arr">→</span></button>
@@ -817,7 +817,7 @@
             <h3>Your draft is ready in your email client.</h3>
             <p>Hit send from there and we'll be in touch within one business day.</p>
             <div class="submit-row">
-              <button type="button" class="btn ghost gx-modal-close">Close</button>
+              <button type="button" aria-label="Close" class="btn ghost gx-modal-close">Close</button>
             </div>
           </div>
         </div>`;

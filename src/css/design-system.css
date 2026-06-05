@@ -2560,14 +2560,89 @@ body[data-page^="service-"] .hero .btn:not(.ghost):hover { background: var(--pag
 }
 .gx-modal .close:hover { background: var(--surface-container-high); }
 .gx-modal .badge { margin-bottom: var(--space-md); }
-.gx-modal h3 {
+.gx-modal h3,
+.gx-modal #gx-modal-title,
+.gx-confirm h3 {
   font-size: clamp(22px, 3vw, 26px);
   font-weight: 600;
-  font-style: italic;
+  font-style: normal;
   letter-spacing: -0.4px;
   margin: 0 0 var(--space-sm);
   color: var(--on-surface);
 }
+
+/* Skip-to-content link (accessibility) */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: #fff;
+  padding: 8px 16px;
+  z-index: 9999;
+  font-size: 14px;
+  text-decoration: none;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* Footer-injected components from this task: privacy/terms strip, LinkedIn icon, group labels */
+.nav-group-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--brand-purple);
+  margin: 0 0 var(--space-sm);
+  font-weight: 500;
+}
+body[data-page] .nav-group-label { color: var(--page-accent); }
+
+.footer-social {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: var(--space-md);
+}
+.footer-social a {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  display: inline-grid; place-items: center;
+  color: rgba(255,255,255,0.72);
+  transition: background .15s ease, color .15s ease;
+}
+.footer-social a:hover { background: rgba(255,255,255,0.14); color: #FFFFFF; }
+.footer-social svg { width: 18px; height: 18px; display: block; }
+
+.footer .bottom .legal {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+}
+.footer .bottom .legal a {
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+}
+.footer .bottom .legal a:hover { color: #FFFFFF; }
+
+/* Text-link styled button (used in footer for modal-trigger anchors) */
+.link-button {
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  display: inline;
+}
+.link-button:hover { color: #FFFFFF; }
+.link-button:focus-visible { outline: 2px solid var(--brand-purple); outline-offset: 3px; border-radius: 2px; }
 .gx-modal p {
   font-size: 14.5px;
   line-height: 1.55;
