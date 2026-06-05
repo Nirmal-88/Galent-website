@@ -2948,14 +2948,14 @@ body[data-page="home"] .scroll-chevron {
   box-shadow: 0 8px 24px -16px rgba(18,19,23,0.10);
 }
 .powered-by.hero-powered {
-  position: absolute;
-  left: 50%;
-  bottom: clamp(96px, 9vw, 128px);  /* leaves clearance for .scroll-chevron at bottom */
-  transform: translateX(-50%);
-  z-index: 3;
-  margin: 0;
-  max-width: calc(100% - 2 * var(--gutter));
+  /* Sits in the natural flow as a grid child of the hero so it never
+     collides with the CTA buttons above or the chevron below. */
+  position: relative;
+  margin: var(--space-xl) auto 0;
+  transform: none;
   justify-content: center;
+  max-width: min(640px, calc(100% - 2 * var(--gutter)));
+  z-index: 2;
 }
 .powered-by .label {
   font-family: var(--font-mono);
@@ -2985,9 +2985,7 @@ body[data-page="home"] .scroll-chevron {
 .powered-by .pill:hover { background: var(--page-accent-soft); color: var(--page-accent); }
 @media (max-width: 880px) {
   .powered-by.hero-powered {
-    position: static;
-    transform: none;
-    margin: var(--space-2xl) auto 0;
+    margin: var(--space-lg) auto 0;
   }
 }
 
