@@ -433,7 +433,16 @@ section { padding: var(--space-4xl) 0; }
 .hero-content { position: relative; z-index: 1; max-width: 980px; margin: 0 auto; }
 .hero .badge { margin-bottom: var(--space-xl); }
 .hero .t-hero { margin-bottom: var(--space-xl); text-wrap: balance; }
-.hero .t-body-lg { max-width: 56ch; margin: 0 auto var(--space-2xl); color: var(--on-surface-variant); }
+.hero .t-body-lg { max-width: 56ch; margin: 0 auto var(--space-md); color: var(--on-surface-variant); }
+.hero .t-body-lg + .t-body-lg { margin-top: 0; }   /* inter-paragraph gap handled by the bottom margin above */
+.hero .hero-kicker {
+  font-weight: 600;
+  color: var(--on-surface);
+  margin-top: var(--space-sm);
+  margin-bottom: var(--space-xl);    /* a touch more breathing room before the CTAs */
+}
+.hero .cta-row { margin-top: var(--space-md); }
+body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
 .hero .cta-row { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
 
 .scroll-cue {
