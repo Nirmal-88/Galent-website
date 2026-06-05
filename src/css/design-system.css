@@ -416,14 +416,12 @@ section { padding: var(--space-4xl) 0; }
 /* HERO */
 .hero {
   position: relative;
-  padding: clamp(48px, 8vw, 96px) var(--gutter) clamp(56px, 9vw, 110px);
+  padding: clamp(36px, 6vw, 72px) var(--gutter) clamp(40px, 7vw, 88px);
   text-align: center;
   overflow: hidden;
-  /* Sticky nav is ~112px tall (80px logo + 32px padding). Use calc()
-     with that offset, and prefer dvh (dynamic viewport) on supporting
-     browsers so the hero settles correctly on mobile chrome. */
-  min-height: calc(100vh - 112px);
-  min-height: calc(100dvh - 112px);
+  /* Compact hero — clamps between 460px (small screens), 68vh (preferred),
+     and 720px (large screens) so it never dominates the viewport. */
+  min-height: clamp(460px, 68vh, 720px);
   display: grid;
   place-items: center;
 }
@@ -2595,10 +2593,9 @@ body[data-page] .svc li a:hover, body[data-page] .svc li a:hover .meta { color: 
 /* Platform hero — split layout with compass on right */
 .platform-hero {
   position: relative;
-  padding: clamp(48px, 7vw, 88px) var(--gutter);
+  padding: clamp(40px, 6vw, 72px) var(--gutter);
   overflow: hidden;
-  min-height: calc(100vh - 112px);
-  min-height: calc(100dvh - 112px);
+  min-height: clamp(480px, 70vh, 760px);
   display: grid;
   align-items: center;
 }
