@@ -2599,6 +2599,38 @@ body[data-page] .svc li a:hover, body[data-page] .svc li a:hover .meta { color: 
 }
 .signal-bg-wrap > *:not(.signal-bg) { position: relative; z-index: 1; }
 
+/* Home outcomes — 3-column / 2-column centred stat grid */
+.outcomes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 3vw, 36px) clamp(24px, 4vw, 56px);
+  padding: var(--space-md) 0 var(--space-sm);
+  align-items: center;
+  justify-items: center;
+}
+@media (max-width: 720px) { .outcomes-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 460px) { .outcomes-grid { grid-template-columns: 1fr; } }
+.outcome-stat { text-align: center; }
+.outcome-stat .big {
+  font-size: clamp(40px, 5.4vw, 68px);
+  font-weight: 500;
+  letter-spacing: -1.6px;
+  line-height: 1;
+  color: #FFFFFF;
+}
+.outcome-stat .big .unit {
+  font-size: 0.5em;
+  opacity: 0.6;
+  font-weight: 400;
+  margin-left: 4px;
+}
+.outcome-stat .label {
+  margin-top: var(--space-sm);
+  font-size: 14px;
+  color: rgba(255,255,255,0.65);
+  letter-spacing: 0.1px;
+}
+
 /* Platform hero — split layout with compass on right */
 .platform-hero {
   position: relative;
