@@ -3498,17 +3498,17 @@ body[data-page="hub"] main section:nth-of-type(3) { padding-top: 0; }
 
 /* ---- SERVICE PAGE VARIATION — break templates ---- */
 body[data-page^="service-"] .hero {
-  text-align: left;
+  text-align: center;
   padding-left: max(var(--gutter), 6vw);
   padding-right: max(var(--gutter), 6vw);
 }
 body[data-page^="service-"] .hero-content {
   max-width: 920px;
-  margin: 0;
+  margin: 0 auto;
 }
 body[data-page^="service-"] .hero .t-hero,
-body[data-page^="service-"] .hero .t-body-lg { text-align: left; }
-body[data-page^="service-"] .hero .cta-row { justify-content: flex-start; }
+body[data-page^="service-"] .hero .t-body-lg { text-align: center; }
+body[data-page^="service-"] .hero .cta-row { justify-content: center; }
 body[data-page^="service-"] .hero::before {
   content: '';
   position: absolute;
