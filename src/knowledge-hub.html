@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FFFFFF">
+  <title>Knowledge Hub — Galent</title>
+  <meta name="description" content="Galent Knowledge Hub — essays, whitepapers, and videocasts on AI-native delivery, the Forward-Deployed Engineering model, and the next era of tech services.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="icon" href="assets/images/logo.png?v=4" type="image/png">
+</head>
+<body data-page="hub">
+
+  <header class="nav" id="site-nav">
+    <a href="index.html" class="brand" aria-label="Galent — Home">
+      <img src="assets/images/logo.png?v=4" alt="Galent">
+    </a>
+    <nav class="menu" aria-label="Primary" id="primary-menu">
+      <a href="platform.html">Platform</a>
+      <a href="fde.html">FDE</a>
+      <a href="about.html">About</a>
+      <a href="knowledge-hub.html" aria-current="page">Knowledge Hub</a>
+      <div class="has-dropdown">
+        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="services-menu">
+          Tech Services <span class="caret" aria-hidden="true">▾</span>
+        </button>
+        <div class="dropdown-panel" id="services-menu" role="menu" aria-hidden="true">
+          <div class="dropdown-group">
+            <h6>App Dev &amp; Modernization</h6>
+            <a href="services/legacy-modernisation.html" role="menuitem">Legacy Modernization</a>
+            <a href="services/brownfield-greenfield.html" role="menuitem">Brownfield &amp; Greenfield</a>
+            <a href="services/quality-engineering.html" role="menuitem">Quality Engineering</a>
+          </div>
+          <div class="dropdown-group">
+            <h6>Managed Services</h6>
+            <a href="services/itsm-transformation.html" role="menuitem">ITSM Transformation</a>
+            <a href="services/sre-observability.html" role="menuitem">SRE &amp; Observability</a>
+            <a href="services/everything-ops.html" role="menuitem">Everything Ops</a>
+          </div>
+          <div class="dropdown-group">
+            <h6>Data &amp; Platforms</h6>
+            <a href="services/data-transformation.html" role="menuitem">Data Transformation</a>
+            <a href="services/enterprise-platforms.html" role="menuitem">Enterprise Platforms</a>
+          </div>
+        </div>
+      </div>
+      <a href="industries.html">Industries</a>
+      <span class="sep" aria-hidden="true"></span>
+      <a href="#" class="btn" style="padding:10px 18px;font-size:14px">Subscribe <span class="arr">→</span></a>
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO — editorial masthead, not aurora -->
+    <section style="padding: var(--space-4xl) 0 var(--space-2xl); border-bottom: 1px solid var(--surface-container-higher);">
+      <div class="container">
+        <div data-reveal style="max-width: 920px;">
+          <span class="section-num">01 · KNOWLEDGE HUB</span>
+          <h1 class="t-display-italic" style="margin-top: var(--space-sm);">Field notes from <em>AI-native delivery.</em></h1>
+          <p class="t-body-lg" style="margin-top: var(--space-lg); max-width: 60ch;">
+            Essays, whitepapers, and videocasts from the Galent team. What we're seeing inside enterprise programmes, where the operating model is bending, and what we're building in response.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED BANNER — the two real essays surfaced at the top -->
+    <section style="padding-top: var(--space-3xl); padding-bottom: var(--space-2xl);">
+      <div class="container">
+        <div class="kh-banner" data-reveal>
+          <div>
+            <span class="banner-label">PUBLISHED · ESSAY SERIES</span>
+            <h2>Two long-form essays from the CEO. <em style="font-style: italic; color: #1ED197;">Live now.</em></h2>
+            <p>Field notes from Ashwin Bharath on the structural fracture in tech services and the operating model that replaces it. Both pieces sit at the core of how we think about delivery in the Age of Intelligence.</p>
+            <a href="knowledge/ai-didnt-disrupt-tech-services.html" class="btn">Read the lead essay <span class="arr">→</span></a>
+          </div>
+          <div class="banner-card-list">
+            <a href="knowledge/ai-didnt-disrupt-tech-services.html">
+              <span class="meta">INDUSTRY · 10 MIN · ASHWIN BHARATH</span>
+              <strong>AI Didn't Disrupt Tech Services… It Exposed the Truth.</strong>
+            </a>
+            <a href="knowledge/grand-prix-model-of-ai-delivery.html">
+              <span class="meta">DELIVERY · 8 MIN · ASHWIN BHARATH</span>
+              <strong>The Grand Prix Model of AI Delivery</strong>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TABS — Blogs / Whitepapers / Videocasts -->
+    <section style="padding-top: var(--space-2xl);">
+      <div class="container">
+        <div class="hub-toolbar" data-reveal>
+          <div class="hub-tabs" role="tablist" aria-label="Knowledge categories">
+            <button class="hub-tab active" data-target="panel-all" role="tab" aria-selected="true" aria-controls="panel-all" tabindex="0">All <span class="count">12</span></button>
+            <button class="hub-tab" data-target="panel-blogs" role="tab" aria-selected="false" aria-controls="panel-blogs" tabindex="0">Blogs <span class="count">6</span></button>
+            <button class="hub-tab" data-target="panel-whitepapers" role="tab" aria-selected="false" aria-controls="panel-whitepapers" tabindex="0">Whitepapers <span class="count">3</span></button>
+            <button class="hub-tab" data-target="panel-videocasts" role="tab" aria-selected="false" aria-controls="panel-videocasts" tabindex="0">Videocasts <span class="count">3</span></button>
+          </div>
+          <div class="hub-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="search" placeholder="Search within active section…" aria-label="Search hub content">
+          </div>
+        </div>
+
+        <!-- BLOGS -->
+        <div class="hub-panel" id="panel-blogs" role="tabpanel" aria-hidden="true">
+          <div class="card-grid">
+            <a class="card-item" href="knowledge/ai-didnt-disrupt-tech-services.html" data-reveal>
+              <div class="card-thumb alt-1"><div class="icon">✎</div></div>
+              <div class="card-body">
+                <div class="card-meta"><span class="domain-tag industry">INDUSTRY</span><span class="category">ESSAY</span><span>10 MIN</span><span>BY ASHWIN BHARATH</span></div>
+                <h3>AI Didn't Disrupt Tech Services… It Exposed the Truth.</h3>
+                <p class="excerpt">Notes from the Indiaspora Global AI Summit 2026 panel on the global race for AI and the next tech services revolution.</p>
+                <span class="card-cta">Read essay <span class="arr">→</span></span>
+              </div>
+            </a>
+            <a class="card-item" href="knowledge/grand-prix-model-of-ai-delivery.html" data-reveal style="transition-delay:.06s">
+              <div class="card-thumb alt-4"><div class="icon">⚙</div></div>
+              <div class="card-body">
+                <div class="card-meta"><span class="domain-tag delivery">DELIVERY</span><span class="category">ESSAY</span><span>8 MIN</span><span>BY ASHWIN BHARATH</span></div>
+                <h3>The Grand Prix Model of AI Delivery</h3>
+                <p class="excerpt">Why an AI-native delivery stack is an F1 car — and what happens when you hand the keys to the wrong driver.</p>
+                <span class="card-cta">Read essay <span class="arr">→</span></span>
+              </div>
+            </a>
+            <a class="card-item" href="knowledge/stub-blog-3.html" data-reveal style="transition-delay:.12s">
+              <div class="card-thumb alt-2"><div class="icon">◆</div></div>
+              <div class="card-body">
+                <div class="card-meta"><span class="domain-tag platform">PLATFORM</span><span class="category">ESSAY</span><span>6 MIN</span><span>COMING SOON</span></div>
+                <h3>Why 85% of Enterprise AI PoCs Fail</h3>
+                <p class="excerpt">PoCs are easy. Production is hard. A look at why most enterprise AI never ships — and what the AI-native delivery model changes.</p>
+                <span class="card-cta">Read essay <span class="arr">→</span></span>
+              </div>
+            </a>
+            <a class="card-item" href="knowledge/stub-blog-4.html" data-reveal style="transition-delay:.18s">
+              <div class="card-thumb alt-3"><div class="icon">⌘</div></div>
+              <div class="card-body">
+                <div class="card-meta"><span class="domain-tag talent">TALENT</span><span class="category">ESSAY</span><span>7 MIN</span><span>COMING SOON</span></div>
+                <h3>The Future of AI in Software Engineering</h3>
+                <p class="excerpt">Where the SDLC is heading when context, code, and policy are addressable on the same graph — and what teams must change to keep up.</p>
+                <span class="card-cta">Read essay <span class="arr">→</span></span>
+              </div>
+            </a>
+            <a class="card-item" href="knowledge/stub-blog-5.html" data-reveal style="transition-delay:.24s">
+              <div class="card-thumb alt-5"><div class="icon">⊞</div></div>
+              <div class="card-body">
+                <div class="card-meta"><span class="domain-tag governance">GOVERNANCE</span><span class="category">ESSAY</span><span>9 MIN</span><span>COMING SOON</span></div>
+                <h3>Legacy Modernisation: From Chaos to Intelligence</h3>
+                <p class="excerpt">How AI-native delivery cuts modernisation timelines by 15× while reducing risk by 92%. The method behind the metrics.</p>
+                <span class="card-cta">Read essay <span class="arr">→</span></span>
+              </div>
+            </a>
+            <a class="card-item" href="knowledge/stub-blog-6.html" data-reveal style="transition-delay:.30s">
+              <div class="card-thumb alt-6"><div class="icon">◐</div></div>
+              <div class="card-body">
+                <div class="card-meta"><span class="domain-tag culture">CULTURE</span><span class="category">ESSAY</span><span>5 MIN</span><span>COMING SOON</span></div>
+                <h3>How Forward-Deployed Engineers Accelerate Delivery</h3>
+                <p class="excerpt">What FDEs do differently — and why the role only works when paired with a platform that earns its keep.</p>
+                <span class="card-cta">Read essay <span class="arr">→</span></span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- WHITEPAPERS -->
+        <div class="hub-panel" id="panel-whitepapers" role="tabpanel" aria-hidden="true">
+          <div class="card-grid">
+            <a class="card-item" href="knowledge/stub-wp-1.html" data-reveal>
+              <div class="card-thumb alt-1"><div class="icon">📄</div></div>
+              <div class="card-body">
+                <div class="card-meta"><span class="domain-tag delivery">DELIVERY</span><span class="category">WHITEPAPER</span><span>32 PAGES</span><span>COMING SOON</span></div>
+                <h3>The Economics of AI-Native Delivery</h3>
+                <p class="excerpt">A model-by-model breakdown of unit economics in headcount-led vs. platform-led delivery — and where the inflection point sits.</p>
+                <span class="card-cta">Request access <span class="arr">→</span></span>
+              </div>
+            </a>
+            <a class="card-item" href="knowledge/stub-wp-2.html" data-reveal style="transition-delay:.06s">
+              <div class="card-thumb alt-2"><div class="icon">📄</div></div>
+              <div class="card-body">
+                <div class="card-meta"><span class="domain-tag platform">PLATFORM</span><span class="category">WHITEPAPER</span><span>28 PAGES</span><span>COMING SOON</span></div>
+                <h3>Legacy Modernisation at 15× — A Method</h3>
+                <p class="excerpt">The repeatable method behind 15× faster, 92% lower-risk modernisation. Six phases, four artefacts, and one platform.</p>
+                <span class="card-cta">Request access <span class="arr">→</span></span>
+              </div>
+            </a>
+            <a class="card-item" href="knowledge/stub-wp-3.html" data-reveal style="transition-delay:.12s">
+              <div class="card-thumb alt-3"><div class="icon">📄</div></div>
+              <div class="card-body">
+                <div class="card-meta"><span class="domain-tag talent">TALENT</span><span class="category">WHITEPAPER</span><span>40 PAGES</span><span>COMING SOON</span></div>
+                <h3>Building the Forward-Deployed Pod</h3>
+                <p class="excerpt">An operating-model guide for engineering leaders building an FDE-led delivery capability — staffing, governance, metrics, ramp.</p>
+                <span class="card-cta">Request access <span class="arr">→</span></span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- VIDEOCASTS -->
+        <div class="hub-panel" id="panel-videocasts" role="tabpanel" aria-hidden="true">
+          <div class="card-grid">
+            <a class="card-item" href="knowledge/stub-vid-1.html" data-reveal>
+              <div class="card-thumb alt-1"><div class="play-btn">▶</div><div class="runtime">22:14</div></div>
+              <div class="card-body">
+                <div class="card-meta"><span class="domain-tag industry">INDUSTRY</span><span class="category">VIDEOCAST</span><span>22 MIN</span><span>COMING SOON</span></div>
+                <h3>The Global Race for AI · Indiaspora Summit 2026</h3>
+                <p class="excerpt">Ashwin Bharath in conversation with Sudheer Narayan (Bain &amp; Company) on the next tech services revolution.</p>
+                <span class="card-cta">Watch <span class="arr">→</span></span>
+              </div>
+            </a>
+            <a class="card-item" href="knowledge/stub-vid-2.html" data-reveal style="transition-delay:.06s">
+              <div class="card-thumb alt-4"><div class="play-btn">▶</div><div class="runtime">18:42</div></div>
+              <div class="card-body">
+                <div class="card-meta"><span class="domain-tag platform">PLATFORM</span><span class="category">VIDEOCAST</span><span>19 MIN</span><span>COMING SOON</span></div>
+                <h3>Inside GalentAI · An Engineering Walk-through</h3>
+                <p class="excerpt">A live walk through the 4 engines — NeuroQL, RCM, Knowledge Graph, Context Graph — and how they fit into one delivery loop.</p>
+                <span class="card-cta">Watch <span class="arr">→</span></span>
+              </div>
+            </a>
+            <a class="card-item" href="knowledge/stub-vid-3.html" data-reveal style="transition-delay:.12s">
+              <div class="card-thumb alt-2"><div class="play-btn">▶</div><div class="runtime">26:08</div></div>
+              <div class="card-body">
+                <div class="card-meta"><span class="domain-tag talent">TALENT</span><span class="category">VIDEOCAST</span><span>26 MIN</span><span>COMING SOON</span></div>
+                <h3>FDE Office Hours · Episode 01</h3>
+                <p class="excerpt">A Forward-Deployed Engineer fields live questions from engineering leaders mid-programme.</p>
+                <span class="card-cta">Watch <span class="arr">→</span></span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DARK SUBSCRIBE BAND -->
+    <section style="padding: var(--space-2xl) 0;">
+      <div class="container">
+        <div class="subscribe-band" data-reveal>
+          <h2>Stay in the loop.</h2>
+          <p>One short despatch a fortnight on AI-native delivery, the Forward-Deployed model, and what we're seeing inside enterprise programmes. No noise.</p>
+          <form class="sub-form" onsubmit="event.preventDefault(); if(typeof Galent!=='undefined'&&Galent.openContactModal){Galent.openContactModal();}">
+            <input type="email" placeholder="you@company.com" aria-label="Email address" required>
+            <button type="submit">Subscribe <span style="font-family: var(--font-mono); font-size: 14px;">→</span></button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta">
+      <div class="container">
+        <div class="cta-card" data-reveal>
+          <span class="badge"><span class="dot">03</span>Talk to us</span>
+          <h2 class="t-h1">New essays. <em style="color:#fff;font-style:normal;border-bottom:2px solid var(--page-accent);padding-bottom:2px;">In your inbox.</em></h2>
+          <p class="t-body-lg">Field notes on AI-native delivery, the Forward-Deployed Engineer model, and what we're seeing inside enterprise programmes. Roughly once a fortnight.</p>
+          <div style="display:inline-flex;flex-wrap:wrap;gap:12px;justify-content:center">
+            <a href="#" class="btn">Subscribe <span class="arr">→</span></a>
+            <a href="about.html" class="btn ghost">About Galent <span class="arr">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div>
+      <div class="brand-mark">
+        <img src="assets/images/logo.png?v=4" alt="Galent" width="168" height="40">
+      </div>
+      <p>Engineering outcomes. Not headcount. Technology services delivered at 3–4× velocity, powered by GalentAI.</p>
+      <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.5px;color:var(--brand-purple);">OUTPACE · OUTPLAY · OUTSTAND</div>
+    </div>
+    <div>
+      <h5>Platform</h5>
+      <ul>
+        <li><a href="platform.html">GalentAI</a></li>
+        <li><a href="platform.html#engines">NeuroQL Engine</a></li>
+        <li><a href="platform.html#engines">RCM Engine</a></li>
+        <li><a href="platform.html#engines">Knowledge Graph</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Tech Services</h5>
+      <ul>
+        <li><a href="services/legacy-modernisation.html">App Dev &amp; Modernization</a></li>
+        <li><a href="services/itsm-transformation.html">Managed Services</a></li>
+        <li><a href="services/data-transformation.html">Data &amp; Platforms</a></li>
+        <li><a href="services/enterprise-platforms.html">Context Engineering</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Company</h5>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="knowledge-hub.html">Knowledge Hub</a></li>
+        <li><a href="fde.html">Talk to an FDE</a></li>
+        <li><a href="#">Talk to us</a></li>
+      </ul>
+    </div>
+    <div class="bottom">
+      <div>© 2026 Galent · All rights reserved.</div>
+
+    </div>
+  </footer>
+
+  <script src="js/animations.js"></script>
+  <script src="js/cms.js"></script>
+  <script>
+    Galent.persistentReveal();
+    Galent.stickyNav('site-nav');
+    Galent.contactModal();
+  </script>
+
+</body>
+</html>
