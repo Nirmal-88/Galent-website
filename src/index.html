@@ -75,7 +75,7 @@
     <!-- 01 HERO — kinetic network backdrop -->
     <section id="hero" class="hero" aria-labelledby="hero-title">
       <div class="hero-network" aria-hidden="true">
-        <canvas id="cv-galaxy"></canvas>
+        <canvas id="cv-network"></canvas>
       </div>
       <div class="hero-content">
         <span class="badge"><span class="dot">01</span>Galent · Technology Services</span>
@@ -493,19 +493,7 @@
 
   <script src="js/animations.js"></script>
   <script>
-    Galent.galaxy(document.getElementById('cv-galaxy'), {
-      // Galent brand tuning — purple-led starfield with subtle green/orange variation.
-      hueShift: 270,
-      saturation: 0.55,
-      glowIntensity: 0.42,
-      density: 1.0,
-      starSpeed: 0.5,
-      rotationSpeed: 0.06,
-      twinkleIntensity: 0.4,
-      mouseRepulsion: true,
-      repulsionStrength: 2.0,
-      transparent: true,
-    });
+    Galent.network(document.getElementById('cv-network'));
     Galent.signal(document.getElementById('cv-signal'));
     Galent.persistentReveal();
     Galent.stickyNav('site-nav');
