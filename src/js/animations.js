@@ -112,17 +112,64 @@
       }
     }
 
+    // ---- Cursor tracking (normalised 0..1 over the canvas host) ----
+    // targetMouse* receives the raw cursor; smoothMouse* is LERP-smoothed
+    // so node attraction feels organic, not snappy. mouseActive falls
+    // off when the pointer leaves so nodes return to their drift state.
+    let targetMouseX = 0.5, targetMouseY = 0.5;
+    let smoothMouseX = 0.5, smoothMouseY = 0.5;
+    let mouseStrength = 0;          // 0..1 — eases in on hover, out on leave
+    let mouseTarget = 0;
+    const ATTRACT_RADIUS = 0.32;    // normalised distance — within ~32% of canvas
+    const ATTRACT_PULL  = 0.10;     // max displacement, normalised
+
+    function onMove(clientX, clientY) {
+      const r = host.getBoundingClientRect();
+      targetMouseX = (clientX - r.left) / r.width;
+      targetMouseY = (clientY - r.top)  / r.height;
+      mouseTarget = 1;
+    }
+    function handleMouseMove(e) { onMove(e.clientX, e.clientY); }
+    function handleTouchMove(e) {
+      if (e.touches && e.touches[0]) onMove(e.touches[0].clientX, e.touches[0].clientY);
+    }
+    function handleLeave() { mouseTarget = 0; }
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    host.addEventListener('mouseleave', handleLeave);
+
     function pos(n, t) {
-      return {
-        x: (n.hx + Math.sin(t * n.sp + n.ax) * 0.03) * W,
-        y: (n.hy + Math.cos(t * n.sp + n.ay) * 0.03) * H,
-      };
+      // Base drift — same gentle sine/cosine wander as before.
+      let nx = n.hx + Math.sin(t * n.sp + n.ax) * 0.03;
+      let ny = n.hy + Math.cos(t * n.sp + n.ay) * 0.03;
+
+      // Cursor attraction — falls off with distance, scaled by smoothed
+      // proximity strength so it never snaps.
+      if (mouseStrength > 0.001) {
+        const dx = smoothMouseX - nx;
+        const dy = smoothMouseY - ny;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < ATTRACT_RADIUS) {
+          // Eased falloff (1 at cursor, 0 at radius)
+          const falloff = Math.pow(1 - dist / ATTRACT_RADIUS, 1.6);
+          const pull = falloff * ATTRACT_PULL * mouseStrength;
+          nx += dx * pull;
+          ny += dy * pull;
+        }
+      }
+      return { x: nx * W, y: ny * H };
     }
 
     const t0 = performance.now();
     let raf;
     function frame() {
       const t = (performance.now() - t0);
+
+      // Smooth the cursor with a low-pass LERP.
+      smoothMouseX += (targetMouseX - smoothMouseX) * 0.08;
+      smoothMouseY += (targetMouseY - smoothMouseY) * 0.08;
+      mouseStrength += (mouseTarget - mouseStrength) * 0.05;
+
       ctx.clearRect(0, 0, W, H);
 
       // Edges
@@ -137,17 +184,25 @@
         ctx.stroke();
       }
 
-      // Traveling data packets — phase across each edge
+      // Traveling data packets — phase across each edge. Speed boost
+      // when the cursor is near the edge midpoint.
+      const cursorPx = { x: smoothMouseX * W, y: smoothMouseY * H };
       for (const e of edges) {
         const A = pos(nodes[e.a], t);
         const B = pos(nodes[e.b], t);
-        const p = ((t * 0.0006 * e.sp) + e.ph) % 1;
+        // Distance from cursor to the segment midpoint (cheap proxy)
+        const mx = (A.x + B.x) * 0.5, my = (A.y + B.y) * 0.5;
+        const cdx = cursorPx.x - mx, cdy = cursorPx.y - my;
+        const near = Math.max(0, 1 - Math.sqrt(cdx*cdx + cdy*cdy) / (Math.max(W, H) * 0.30));
+        const speedBoost = 1 + near * mouseStrength * 1.8;
+
+        const p = ((t * 0.0006 * e.sp * speedBoost) + e.ph) % 1;
         const x = A.x + (B.x - A.x) * p;
         const y = A.y + (B.y - A.y) * p;
         const alpha = Math.sin(p * Math.PI);
         ctx.fillStyle = rgbA(nodes[e.a].c, 0.7 * alpha);
         ctx.beginPath();
-        ctx.arc(x, y, 2 * scale, 0, Math.PI * 2);
+        ctx.arc(x, y, (2 + near * mouseStrength) * scale, 0, Math.PI * 2);
         ctx.fill();
       }
 
@@ -155,9 +210,16 @@
       for (const n of nodes) {
         const P = pos(n, t);
         const pulse = 0.6 + 0.4 * Math.sin(t * 0.002 + n.ax);
-        ctx.fillStyle = rgbA(n.c, 0.10 * pulse);
+
+        // Subtle proximity glow — halo grows when cursor is near this node.
+        const dxPx = cursorPx.x - P.x;
+        const dyPx = cursorPx.y - P.y;
+        const distPx = Math.sqrt(dxPx*dxPx + dyPx*dyPx);
+        const haloBoost = 1 + Math.max(0, 1 - distPx / (Math.max(W, H) * 0.18)) * mouseStrength * 1.2;
+
+        ctx.fillStyle = rgbA(n.c, 0.10 * pulse * haloBoost);
         ctx.beginPath();
-        ctx.arc(P.x, P.y, 12 * scale, 0, Math.PI * 2);
+        ctx.arc(P.x, P.y, 12 * scale * haloBoost, 0, Math.PI * 2);
         ctx.fill();
         ctx.fillStyle = rgbA(n.c, 0.92);
         ctx.beginPath();
@@ -172,7 +234,12 @@
       raf = requestAnimationFrame(frame);
     }
     frame();
-    return () => cancelAnimationFrame(raf);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchmove', handleTouchMove);
+      host.removeEventListener('mouseleave', handleLeave);
+    };
   };
 
   // ============================================================
@@ -191,32 +258,72 @@
     size();
     new ResizeObserver(size).observe(host);
 
+    // ---- Cursor parallax — the whole compass leans slightly toward
+    // the cursor and orbital tokens speed up when the cursor is near.
+    let targetOffX = 0, targetOffY = 0;
+    let smoothOffX = 0, smoothOffY = 0;
+    let mouseStrength = 0, mouseTarget = 0;
+    function onMove(clientX, clientY) {
+      const r = host.getBoundingClientRect();
+      // Normalised offset from the host centre, -1..1
+      const nx = ((clientX - r.left) / r.width  - 0.5) * 2;
+      const ny = ((clientY - r.top)  / r.height - 0.5) * 2;
+      targetOffX = Math.max(-1, Math.min(1, nx));
+      targetOffY = Math.max(-1, Math.min(1, ny));
+      mouseTarget = 1;
+    }
+    function handleMouseMove(e) { onMove(e.clientX, e.clientY); }
+    function handleTouchMove(e) {
+      if (e.touches && e.touches[0]) onMove(e.touches[0].clientX, e.touches[0].clientY);
+    }
+    function handleLeave() { mouseTarget = 0; }
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    host.addEventListener('mouseleave', handleLeave);
+
     const PHASES = ['Context', 'Plan', 'Generate', 'Review', 'Deploy', 'Operate'];
     const COLORS = [BRAND.purple, BRAND.purple, BRAND.orange, BRAND.orange, BRAND.green, BRAND.green];
     const t0 = performance.now();
+    let tWarp = 0;   // accumulates time-warped seconds (faster when cursor is near)
     let raf;
     function frame() {
-      const t = (performance.now() - t0) / 1000;
+      // LERP-smooth the cursor offset and the engagement strength
+      smoothOffX += (targetOffX - smoothOffX) * 0.08;
+      smoothOffY += (targetOffY - smoothOffY) * 0.08;
+      mouseStrength += (mouseTarget - mouseStrength) * 0.04;
+
+      // Time warp — orbital tokens speed up smoothly when the cursor is engaged.
+      const dt = (performance.now() - t0) / 1000;
+      const speedMul = 1 + mouseStrength * 1.1;
+      tWarp = dt * speedMul;
+      const t = tWarp;
+
+      // Parallax offset — compass leans up to ~6% of its radius toward the cursor.
+      const maxShift = Math.min(W, H) * 0.06;
+      const offX = smoothOffX * maxShift * mouseStrength;
+      const offY = smoothOffY * maxShift * mouseStrength;
+      const ccx = cx + offX, ccy = cy + offY;
+
       ctx.clearRect(0, 0, W, H);
       const R1 = Math.min(W, H) * 0.32;
       const R2 = Math.min(W, H) * 0.42;
       const R3 = Math.min(W, H) * 0.20;
       ctx.strokeStyle = 'rgba(18,19,23,0.10)'; ctx.lineWidth = scale;
       ctx.setLineDash([2*scale, 5*scale]);
-      ctx.beginPath(); ctx.arc(cx, cy, R2, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(ccx, ccy, R2, 0, Math.PI*2); ctx.stroke();
       ctx.setLineDash([]);
       ctx.strokeStyle = 'rgba(18,19,23,0.06)';
-      ctx.beginPath(); ctx.arc(cx, cy, R1, 0, Math.PI*2); ctx.stroke();
-      ctx.beginPath(); ctx.arc(cx, cy, R3, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(ccx, ccy, R1, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(ccx, ccy, R3, 0, Math.PI*2); ctx.stroke();
       ctx.strokeStyle = 'rgba(18,19,23,0.07)'; ctx.lineWidth = scale;
       for (let i = 0; i < PHASES.length; i++) {
         const a = -Math.PI/2 + (i/PHASES.length) * Math.PI*2;
-        ctx.beginPath(); ctx.moveTo(cx, cy);
-        ctx.lineTo(cx + Math.cos(a)*R1, cy + Math.sin(a)*R1); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(ccx, ccy);
+        ctx.lineTo(ccx + Math.cos(a)*R1, ccy + Math.sin(a)*R1); ctx.stroke();
       }
       for (let i = 0; i < PHASES.length; i++) {
         const a = -Math.PI/2 + (i/PHASES.length) * Math.PI*2;
-        const x = cx + Math.cos(a)*R1, y = cy + Math.sin(a)*R1;
+        const x = ccx + Math.cos(a)*R1, y = ccy + Math.sin(a)*R1;
         const c = COLORS[i];
         const pulse = 0.6 + 0.4 * Math.sin(t * 1.3 + i);
         ctx.fillStyle = rgbA(c, 0.10 * pulse);
@@ -228,23 +335,28 @@
         ctx.fillStyle = 'rgba(18,19,23,1)';
         ctx.font = `500 ${11*scale}px "Plus Jakarta Sans", sans-serif`;
         ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-        ctx.fillText(PHASES[i], cx + Math.cos(a)*(R1+22*scale), cy + Math.sin(a)*(R1+22*scale));
+        ctx.fillText(PHASES[i], ccx + Math.cos(a)*(R1+22*scale), ccy + Math.sin(a)*(R1+22*scale));
       }
       const hubR = R3 * 0.45;
-      const grd = ctx.createLinearGradient(cx-hubR, cy-hubR, cx+hubR, cy+hubR);
+      const grd = ctx.createLinearGradient(ccx-hubR, ccy-hubR, ccx+hubR, ccy+hubR);
       grd.addColorStop(0,    `rgb(${BRAND.purple.join(',')})`);
       grd.addColorStop(0.55, `rgb(${BRAND.green.join(',')})`);
       grd.addColorStop(1,    `rgb(${BRAND.orange.join(',')})`);
       ctx.fillStyle = grd;
-      ctx.beginPath(); ctx.arc(cx, cy, hubR, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(ccx, ccy, hubR, 0, Math.PI*2); ctx.fill();
       ctx.fillStyle = '#FFFFFF';
       ctx.font = `600 ${12*scale}px "Plus Jakarta Sans", sans-serif`;
       ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      ctx.fillText('GalentAI', cx, cy);
+      ctx.fillText('GalentAI', ccx, ccy);
       raf = requestAnimationFrame(frame);
     }
     frame();
-    return () => cancelAnimationFrame(raf);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchmove', handleTouchMove);
+      host.removeEventListener('mouseleave', handleLeave);
+    };
   };
 
   // ============================================================
