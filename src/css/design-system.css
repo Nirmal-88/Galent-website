@@ -407,8 +407,8 @@ em.ac-o { color: var(--brand-orange); font-style: normal; }
 .badge.orange .dot { background: var(--brand-orange); }
 
 /* SECTION */
-section { padding: var(--space-4xl) 0; }
-.section-head { max-width: 780px; margin: 0 auto var(--space-3xl); text-align: center; }
+section { padding: clamp(56px, 6.5vw, 96px) 0; }
+.section-head { max-width: 780px; margin: 0 auto clamp(28px, 3.5vw, 56px); text-align: center; }
 .section-head .badge { margin-bottom: var(--space-lg); }
 .section-head .t-h1 { margin-bottom: var(--space-lg); text-wrap: balance; }
 .section-head .t-body-lg { max-width: 56ch; margin: 0 auto; }
@@ -543,12 +543,19 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   border-bottom: 1px solid var(--surface-container-higher);
 }
 .stat-strip.six { grid-template-columns: repeat(6, 1fr); }
+/* Adaptive — 3-item strips divide evenly instead of leaving a quarter empty */
+.stat-strip:has(> .item:nth-child(3):last-child) {
+  grid-template-columns: repeat(3, 1fr);
+}
 @media (max-width: 800px) {
-  .stat-strip { grid-template-columns: repeat(2, 1fr); }
-  .stat-strip.six { grid-template-columns: repeat(2, 1fr); }
+  .stat-strip,
+  .stat-strip.six,
+  .stat-strip:has(> .item:nth-child(3):last-child) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 .stat-strip .item {
-  padding: var(--space-2xl) var(--space-lg);
+  padding: clamp(28px, 3vw, 48px) clamp(20px, 2vw, 32px);
   border-right: 1px solid var(--surface-container-higher);
 }
 .stat-strip .item:last-child { border-right: 0; }
@@ -1520,8 +1527,27 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   gap: clamp(16px, 1.6vw, 22px);
   align-items: stretch;
 }
-@media (max-width: 1080px) { .engines-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 620px)  { .engines-grid { grid-template-columns: 1fr; } }
+/* Adaptive layout — divide evenly based on the actual card count so no row
+   ever has empty cells. 4 cards → 2x2 ; 8 cards → 4-up ; otherwise 3-up. */
+.engines-grid:has(> .engine-card:nth-child(4):last-child) {
+  grid-template-columns: repeat(2, 1fr);
+}
+.engines-grid:has(> .engine-card:nth-child(8):last-child) {
+  grid-template-columns: repeat(4, 1fr);
+}
+@media (max-width: 1080px) {
+  .engines-grid,
+  .engines-grid:has(> .engine-card:nth-child(8):last-child) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 620px) {
+  .engines-grid,
+  .engines-grid:has(> .engine-card:nth-child(4):last-child),
+  .engines-grid:has(> .engine-card:nth-child(8):last-child) {
+    grid-template-columns: 1fr;
+  }
+}
 
 /* Engine card — Key Capabilities tile on every service page */
 .engine-card {
