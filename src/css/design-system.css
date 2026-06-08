@@ -1169,29 +1169,114 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
 .cap-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-lg);
+  gap: clamp(16px, 1.6vw, 22px);
 }
 @media (max-width: 980px) { .cap-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 640px) { .cap-grid { grid-template-columns: 1fr; } }
+
 .cap {
-  background: var(--surface-container);
-  border-radius: var(--radius-md);
-  padding: var(--space-xl);
-  display: flex; flex-direction: column; gap: var(--space-sm);
-  transition: background .25s ease;
+  --cap-color: var(--brand-purple);
+  position: relative;
+  isolation: isolate;
+  background: #FFFFFF;
+  border: 1px solid rgba(18, 19, 23, 0.07);
+  border-radius: 18px;
+  padding: clamp(22px, 1.9vw, 28px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform .35s var(--ease-out), border-color .35s ease, box-shadow .35s ease;
+  box-shadow: 0 1px 2px rgba(18, 19, 23, 0.04);
 }
-.cap:hover { background: var(--surface-container-high); }
-.cap h4 { font-size: 18px; font-weight: 500; letter-spacing: -0.2px; margin: 0; color: var(--on-surface); }
-.cap p { color: var(--on-surface-variant); font-size: 14.5px; line-height: 1.5; margin: 0; }
-.cap .metric {
+.cap:nth-child(1) { --cap-color: var(--brand-purple); }
+.cap:nth-child(2) { --cap-color: var(--brand-green-deep); }
+.cap:nth-child(3) { --cap-color: var(--brand-orange); }
+.cap:nth-child(4) { --cap-color: #4F46E5; }
+.cap:nth-child(5) { --cap-color: var(--brand-purple); }
+.cap:nth-child(6) { --cap-color: var(--brand-green-deep); }
+
+.cap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(110% 70% at 100% 0%, color-mix(in srgb, var(--cap-color) 10%, transparent) 0%, transparent 55%);
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity .35s ease;
+}
+.cap:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--cap-color) 30%, rgba(18,19,23,0.08));
+  box-shadow: 0 14px 32px -20px color-mix(in srgb, var(--cap-color) 50%, transparent),
+              0 2px 6px rgba(18, 19, 23, 0.04);
+}
+.cap:hover::before { opacity: 1; }
+
+.cap .cap-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+.cap .cap-num {
   font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.4px;
-  color: var(--brand-purple);
-  margin-top: var(--space-sm);
+  font-size: 11px;
+  letter-spacing: 0.7px;
+  color: var(--cap-color);
+  font-weight: 600;
 }
-.cap.g .metric { color: var(--brand-green-deep); }
-.cap.o .metric { color: var(--brand-orange); }
+.cap .cap-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--cap-color) 12%, #FFFFFF);
+  color: var(--cap-color);
+  border: 1px solid color-mix(in srgb, var(--cap-color) 22%, transparent);
+}
+
+.cap h4 {
+  font-size: clamp(17px, 1.4vw, 19px);
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  margin: 0;
+  color: var(--on-surface);
+  line-height: 1.25;
+}
+.cap p {
+  color: var(--on-surface-variant);
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.cap .cap-kpi {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px dashed rgba(18, 19, 23, 0.1);
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.cap .cap-kpi strong {
+  font-size: clamp(22px, 2vw, 28px);
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  color: var(--cap-color);
+  line-height: 1;
+}
+.cap .cap-kpi span {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+}
 
 .archetypes {
   display: grid;
@@ -1939,53 +2024,107 @@ body[data-page] .svc li a:hover, body[data-page] .svc li a:hover .meta { color: 
 .archetype-team {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-lg);
+  gap: clamp(18px, 1.8vw, 24px);
 }
 @media (max-width: 720px) { .archetype-team { grid-template-columns: 1fr; } }
+
 .archetype-card {
-  background: var(--surface-container);
-  border-radius: var(--radius-lg);
-  padding: var(--space-2xl);
-  display: grid;
-  grid-template-columns: 96px 1fr;
-  gap: var(--space-lg);
-  transition: background .25s ease, transform .25s var(--ease-out);
-}
-.archetype-card:hover { background: var(--surface-container-high); transform: translateY(-2px); }
-.archetype-avatar {
-  width: 96px; height: 96px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--page-accent), var(--page-accent-deep));
-  display: grid; place-items: center;
-  color: #fff;
-  font-weight: 600;
-  font-size: 22px;
-  font-family: var(--font-mono);
-  letter-spacing: -0.5px;
+  --role-color: var(--brand-purple);
   position: relative;
+  isolation: isolate;
+  background: #FFFFFF;
+  border: 1px solid rgba(18, 19, 23, 0.07);
+  border-radius: 20px;
+  padding: clamp(24px, 2vw, 30px);
+  display: grid;
+  grid-template-columns: 76px 1fr;
+  gap: clamp(18px, 1.6vw, 24px);
+  align-items: start;
+  transition: transform .35s var(--ease-out), border-color .35s ease, box-shadow .35s ease;
+  box-shadow: 0 1px 2px rgba(18, 19, 23, 0.04);
 }
-.archetype-avatar::after {
-  content: '';
+.archetype-team .archetype-card:nth-child(1) { --role-color: var(--brand-purple); }
+.archetype-team .archetype-card:nth-child(2) { --role-color: var(--brand-green-deep); }
+.archetype-team .archetype-card:nth-child(3) { --role-color: var(--brand-orange); }
+.archetype-team .archetype-card:nth-child(4) { --role-color: #4F46E5; }
+
+.archetype-card::before {
+  content: "";
   position: absolute;
-  left: -8px; bottom: -8px;
-  width: 28px; height: 28px;
-  border-radius: 50%;
-  background: var(--brand-green-deep);
-  border: 3px solid var(--surface-container);
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(110% 70% at 100% 0%, color-mix(in srgb, var(--role-color) 10%, transparent) 0%, transparent 55%);
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity .35s ease;
 }
-.archetype-body h3 { font-size: 19px; font-weight: 500; margin: 0 0 6px; letter-spacing: -0.2px; }
-.archetype-body .role { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.4px; color: var(--page-accent); display: block; margin-bottom: var(--space-sm); }
-.archetype-body p { font-size: 14.5px; line-height: 1.5; color: var(--on-surface-variant); margin: 0 0 var(--space-sm); }
-.archetype-body .skill {
-  display: inline-block;
-  padding: 3px 10px;
-  background: var(--page-accent-soft);
-  color: var(--page-accent-deep);
-  border-radius: var(--radius-full);
-  font-size: 11px;
+.archetype-card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--role-color) 35%, rgba(18,19,23,0.08));
+  box-shadow: 0 16px 36px -22px color-mix(in srgb, var(--role-color) 55%, transparent),
+              0 2px 6px rgba(18, 19, 23, 0.04);
+}
+.archetype-card:hover::before { opacity: 1; }
+
+/* Monogram tile — replaces the circular avatar + random green dot */
+.archetype-monogram {
+  width: 76px;
+  height: 76px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--role-color), color-mix(in srgb, var(--role-color) 60%, #121317));
+  display: grid;
+  place-items: center;
+  color: #FFFFFF;
   font-family: var(--font-mono);
-  letter-spacing: 0.3px;
-  margin: 4px 4px 0 0;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 6px 18px -10px color-mix(in srgb, var(--role-color) 70%, transparent);
+}
+
+.archetype-body { display: flex; flex-direction: column; gap: 6px; }
+.archetype-body .role {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--role-color);
+  display: block;
+}
+.archetype-body h3 {
+  font-size: clamp(19px, 1.6vw, 22px);
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  margin: 0;
+  line-height: 1.2;
+  color: var(--on-surface);
+}
+.archetype-body p {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--on-surface-variant);
+  margin: 0;
+}
+
+.archetype-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+.archetype-body .skill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  background: color-mix(in srgb, var(--role-color) 10%, #FFFFFF);
+  color: var(--role-color);
+  border: 1px solid color-mix(in srgb, var(--role-color) 22%, transparent);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.4px;
+  font-weight: 500;
 }
 
 /* ABOUT — TIMELINE / JOURNEY */
@@ -3437,22 +3576,6 @@ section#cta { padding-top: var(--space-4xl); padding-bottom: var(--space-4xl); }
 .belief:nth-child(even) { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); }
 
 /* FDE archetype cards — subtle border-glow on hover */
-.archetype-card {
-  position: relative;
-  overflow: hidden;
-}
-.archetype-card::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--page-accent);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .35s var(--ease-out);
-}
-.archetype-card:hover::after { transform: scaleX(1); }
-
 /* Case-study cards — slight rotation/scale on hover */
 .case-study {
   transition: transform .3s var(--ease-out), border-color .25s ease, box-shadow .25s ease;
@@ -3460,23 +3583,7 @@ section#cta { padding-top: var(--space-4xl); padding-bottom: var(--space-4xl); }
 .case-study:hover {
   transform: translateY(-4px) scale(1.01);
 }
-
-/* Capability cards on FDE — varied padding/typography */
-.cap {
-  position: relative;
-  overflow: hidden;
-}
-.cap::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 2px;
-  background: var(--page-accent);
-  transform: scaleY(0);
-  transform-origin: top;
-  transition: transform .3s var(--ease-out);
-}
-.cap:hover::before { transform: scaleY(1); }
+/* Archetype + cap card chrome owned by their primary blocks above */
 
 /* ---- KNOWLEDGE HUB — featured banner + densified grid ---- */
 .kh-banner {
