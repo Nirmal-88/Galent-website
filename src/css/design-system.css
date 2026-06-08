@@ -4260,3 +4260,30 @@ body[data-page="home"] .scroll-chevron {
 body[data-page="home"] .scroll-chevron:hover {
   background: rgba(255,255,255,0.14);
 }
+
+/* ==================================================================
+ * GLOBAL: kill italics site-wide. Headings, accents, quotes, callouts —
+ * all render upright. Accent colour weighting is preserved on <em>; only
+ * the slant is removed.
+ * ================================================================== */
+*,
+*::before,
+*::after,
+em,
+i,
+cite,
+address,
+blockquote,
+.t-display-italic,
+.t-display-italic em,
+.t-h1 em, .t-h2 em, .t-h3 em, .t-h4 em,
+.t-hero em,
+.kg-text .t-display-italic em,
+.article h1, .article h2, .article em,
+.stub h1, .stub em,
+.case-study em, .case-study .anon,
+.pull-quote, .pull-quote blockquote,
+.section-head em,
+[class*="ac-"] {
+  font-style: normal !important;
+}
