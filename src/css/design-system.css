@@ -4976,6 +4976,21 @@ body[data-page="home"] .scroll-chevron:hover {
 }
 
 /* ==================================================================
+ * SERVICE PAGES — kill the dead vertical whitespace between sections.
+ * Tightens every section's top/bottom padding, every section-head's
+ * bottom margin, and overrides any inline padding-bottom on #outcomes
+ * and the inflated 120px on #cta.
+ * ================================================================== */
+body[data-page^="service-"] main > section:not(.hero) { padding: clamp(32px, 3.6vw, 56px) 0; }
+body[data-page^="service-"] section#outcomes { padding-bottom: clamp(32px, 3.6vw, 56px) !important; }
+body[data-page^="service-"] section#cta { padding: clamp(40px, 4.2vw, 64px) 0; }
+body[data-page^="service-"] .section-head { margin: 0 auto clamp(20px, 2.4vw, 36px); }
+/* The stat-strip below "Outcomes" doesn't need a giant top gap after the head */
+body[data-page^="service-"] .stat-strip { margin-top: 0; }
+/* CTA card itself sits inside its section — trim its own internal padding too */
+body[data-page^="service-"] .cta-card { padding-top: clamp(36px, 4vw, 56px); padding-bottom: clamp(36px, 4vw, 56px); }
+
+/* ==================================================================
  * GLOBAL: kill italics site-wide. Headings, accents, quotes, callouts —
  * all render upright. Accent colour weighting is preserved on <em>; only
  * the slant is removed.
