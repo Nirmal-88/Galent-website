@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/design-system.css?v=kh-hero-1">
   <link rel="icon" href="assets/images/logo.png?v=4" type="image/png">
 </head>
 <body data-page="hub">
@@ -59,15 +59,57 @@
 
   <main id="top">
 
-    <!-- HERO — editorial masthead, not aurora -->
-    <section style="padding: var(--space-4xl) 0 var(--space-2xl); border-bottom: 1px solid var(--surface-container-higher);">
-      <div class="container">
-        <div data-reveal style="max-width: 920px;">
-          <span class="section-num">01 · KNOWLEDGE HUB</span>
-          <h1 class="t-display-italic" style="margin-top: var(--space-sm);">Field notes from <em>AI-native delivery.</em></h1>
+    <!-- HERO — editorial masthead with a live publishing stream visual -->
+    <section class="kh-hero" aria-labelledby="kh-hero-title">
+      <div class="kh-hero-grid" data-reveal>
+        <div class="kh-hero-text">
+          <span class="kh-live">
+            <span class="kh-live-dot" aria-hidden="true"></span>
+            Publishing &middot; live
+          </span>
+          <span class="section-num">01 &middot; Knowledge Hub</span>
+          <h1 id="kh-hero-title" class="t-display-italic" style="margin-top: var(--space-sm);">Field notes from <em>AI-native delivery.</em></h1>
           <p class="t-body-lg" style="margin-top: var(--space-lg); max-width: 60ch;">
             Essays, whitepapers, and videocasts from the Galent team. What we're seeing inside enterprise programmes, where the operating model is bending, and what we're building in response.
           </p>
+          <div class="kh-hero-meta">
+            <span><strong>14</strong> pieces published</span>
+            <span class="dot" aria-hidden="true">·</span>
+            <span>updated weekly</span>
+            <span class="dot" aria-hidden="true">·</span>
+            <span>2 new this month</span>
+          </div>
+        </div>
+
+        <div class="kh-hero-visual" aria-hidden="true">
+          <div class="kh-stack">
+            <article class="kh-tile kh-tile--p" style="--delay: 0s;">
+              <span class="kh-tile-kind">ESSAY &middot; 12 MIN</span>
+              <h4>AI Didn't Disrupt Tech Services. It Replaced the Operating Model.</h4>
+              <span class="kh-tile-meta">Ashwin Bharath · Apr 2026</span>
+            </article>
+            <article class="kh-tile kh-tile--g" style="--delay: -2s;">
+              <span class="kh-tile-kind">ESSAY &middot; 9 MIN</span>
+              <h4>The Grand Prix Model of AI Delivery</h4>
+              <span class="kh-tile-meta">Ashwin Bharath · May 2026</span>
+            </article>
+            <article class="kh-tile kh-tile--o" style="--delay: -4s;">
+              <span class="kh-tile-kind">WHITEPAPER &middot; 22 PG</span>
+              <h4>Forward-Deployed Engineering: A Reference Architecture</h4>
+              <span class="kh-tile-meta">Galent · Q2 2026</span>
+            </article>
+            <article class="kh-tile kh-tile--i" style="--delay: -6s;">
+              <span class="kh-tile-kind">VIDEOCAST &middot; 28 MIN</span>
+              <h4>What Breaks at Enterprise Scale &mdash; And What Doesn't</h4>
+              <span class="kh-tile-meta">Galent Field Notes · Vol. 03</span>
+            </article>
+          </div>
+          <div class="kh-stream" aria-hidden="true">
+            <div class="kh-stream-track">
+              <span>ESSAY</span><span>WHITEPAPER</span><span>VIDEOCAST</span><span>FIELD NOTE</span><span>BRIEF</span><span>PRESS</span><span>TALK</span>
+              <span>ESSAY</span><span>WHITEPAPER</span><span>VIDEOCAST</span><span>FIELD NOTE</span><span>BRIEF</span><span>PRESS</span><span>TALK</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
