@@ -2450,87 +2450,120 @@ body[data-page] .svc li a:hover, body[data-page] .svc li a:hover .meta { color: 
 .fde-rich-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-md);
+  gap: clamp(16px, 1.6vw, 22px);
 }
 @media (max-width: 1100px) { .fde-rich-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 640px)  { .fde-rich-grid { grid-template-columns: 1fr; } }
+
+/* Role card — each FDE engineer type as a compact info card */
 .fde-rich {
-  background: var(--surface-container);
-  border-radius: var(--radius-lg);
-  padding: var(--space-2xl);
-  display: flex; flex-direction: column; gap: var(--space-md);
-  transition: background .25s ease, transform .25s var(--ease-out);
-  min-height: 360px;
+  --role-color: var(--brand-purple);
+  position: relative;
+  isolation: isolate;
+  background: #FFFFFF;
+  border: 1px solid rgba(18, 19, 23, 0.07);
+  border-radius: 18px;
+  padding: clamp(22px, 1.8vw, 26px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: transform .35s var(--ease-out), border-color .35s ease, box-shadow .35s ease;
+  box-shadow: 0 1px 2px rgba(18, 19, 23, 0.04);
 }
-.fde-rich:hover { background: var(--surface-container-high); transform: translateY(-3px); }
-.fde-rich .role-badge {
+.fde-rich:nth-child(2) { --role-color: var(--brand-green-deep); }
+.fde-rich:nth-child(3) { --role-color: var(--brand-orange); }
+.fde-rich:nth-child(4) { --role-color: #4F46E5; }
+
+.fde-rich::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(120% 60% at 100% 0%, color-mix(in srgb, var(--role-color) 10%, transparent) 0%, transparent 55%);
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity .35s ease;
+}
+.fde-rich:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--role-color) 30%, rgba(18,19,23,0.08));
+  box-shadow: 0 14px 32px -20px color-mix(in srgb, var(--role-color) 50%, transparent),
+              0 2px 6px rgba(18, 19, 23, 0.04);
+}
+.fde-rich:hover::before { opacity: 1; }
+
+/* Header row: acronym tag + role discipline label */
+.fde-rich .role-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.fde-rich .role-tag {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 64px; height: 64px;
-  border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--brand-purple) 0%, var(--brand-purple-deep) 100%);
-  color: #fff;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 6px;
   font-family: var(--font-mono);
   font-weight: 600;
-  font-size: 16px;
-  letter-spacing: 0.2px;
-  margin-bottom: var(--space-xs);
+  font-size: 11.5px;
+  letter-spacing: 0.6px;
+  color: #FFFFFF;
+  background: var(--role-color);
 }
-.fde-rich:nth-child(2) .role-badge { background: linear-gradient(135deg, var(--brand-green-deep), #0A7A57); }
-.fde-rich:nth-child(3) .role-badge { background: linear-gradient(135deg, var(--brand-orange), #C73A00); }
-.fde-rich:nth-child(4) .role-badge { background: linear-gradient(135deg, #4F46E5, #3730A3); }
+.fde-rich .role-kind {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+}
+
 .fde-rich h4 {
-  font-size: 19px;
-  font-weight: 500;
+  font-size: clamp(17px, 1.4vw, 19px);
+  font-weight: 600;
   letter-spacing: -0.2px;
   margin: 0;
   color: var(--on-surface);
   line-height: 1.25;
 }
-.fde-rich ul {
-  list-style: none; padding: 0; margin: 0;
-  display: flex; flex-direction: column; gap: 6px;
-}
-.fde-rich ul li {
+.fde-rich .role-lede {
   font-size: 13.5px;
-  line-height: 1.45;
+  line-height: 1.55;
   color: var(--on-surface-variant);
-  padding-left: 16px;
+  margin: 0;
+}
+
+/* Deliverable bullets — ticked, accent-coloured */
+.fde-rich .role-bullets {
+  list-style: none;
+  padding: 14px 0 0;
+  margin: 0;
+  border-top: 1px dashed rgba(18, 19, 23, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.fde-rich .role-bullets li {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--on-surface);
+  padding-left: 22px;
   position: relative;
 }
-.fde-rich ul li::before {
-  content: '';
+.fde-rich .role-bullets li::before {
+  content: "";
   position: absolute;
-  left: 0; top: 8px;
-  width: 6px; height: 6px;
-  background: var(--brand-purple);
-  border-radius: 50%;
-}
-.fde-rich:nth-child(2) ul li::before { background: var(--brand-green-deep); }
-.fde-rich:nth-child(3) ul li::before { background: var(--brand-orange); }
-.fde-rich:nth-child(4) ul li::before { background: #4F46E5; }
-.fde-rich .metric {
-  margin-top: auto;
-  padding-top: var(--space-md);
-  border-top: 1px dashed var(--surface-container-higher);
-  display: flex; flex-direction: column; gap: 2px;
-}
-.fde-rich .metric strong {
-  font-size: 20px;
-  font-weight: 500;
-  letter-spacing: -0.3px;
-  color: var(--brand-purple);
-}
-.fde-rich:nth-child(2) .metric strong { color: var(--brand-green-deep); }
-.fde-rich:nth-child(3) .metric strong { color: var(--brand-orange); }
-.fde-rich:nth-child(4) .metric strong { color: #4F46E5; }
-.fde-rich .metric span {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--on-surface-variant);
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
+  left: 0;
+  top: 6px;
+  width: 12px;
+  height: 8px;
+  border-left: 1.5px solid var(--role-color);
+  border-bottom: 1.5px solid var(--role-color);
+  transform: rotate(-45deg);
+  transform-origin: 30% 70%;
 }
 
 /* ==================================================================
