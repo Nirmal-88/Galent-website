@@ -2538,55 +2538,150 @@ body[data-page] .svc li a:hover, body[data-page] .svc li a:hover .meta { color: 
  * ================================================================== */
 .home-sector-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-md);
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 1.6vw, 22px);
 }
-@media (max-width: 1100px) { .home-sector-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 640px)  { .home-sector-grid { grid-template-columns: 1fr; } }
-.home-sector-grid > a:nth-child(1),
-.home-sector-grid > a:nth-child(2),
-.home-sector-grid > a:nth-child(3),
-.home-sector-grid > a:nth-child(4) { grid-column: span 1; }
+@media (max-width: 1024px) { .home-sector-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 620px)  { .home-sector-grid { grid-template-columns: 1fr; } }
+
+/* Tile chrome — premium card with sector-tinted accents */
 .home-sector-card {
-  background: var(--surface-container);
-  border-radius: var(--radius-md);
-  padding: var(--space-xl);
+  position: relative;
+  isolation: isolate;
+  background: #FFFFFF;
+  border: 1px solid rgba(18, 19, 23, 0.07);
+  border-radius: 18px;
+  padding: clamp(22px, 2vw, 28px);
   text-decoration: none;
   color: inherit;
-  border-top: 3px solid var(--sector-color, var(--brand-purple));
-  transition: background .25s ease, transform .25s var(--ease-out);
-  display: flex; flex-direction: column; gap: var(--space-sm);
-  min-height: 180px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: "chip . chev" "body body body";
+  column-gap: 14px;
+  row-gap: clamp(18px, 2vw, 26px);
+  min-height: 220px;
+  overflow: hidden;
+  transition: transform .35s var(--ease-out), border-color .35s ease, box-shadow .35s ease;
+  box-shadow: 0 1px 2px rgba(18, 19, 23, 0.04);
 }
-.home-sector-card:hover { background: var(--surface-container-high); transform: translateY(-3px); }
-.home-sector-card .num {
+/* Soft inner gradient wash — barely-there tint of the sector colour */
+.home-sector-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(120% 80% at 100% 0%, color-mix(in srgb, var(--sector-color) 12%, transparent) 0%, transparent 55%),
+    linear-gradient(180deg, rgba(255,255,255,0) 0%, color-mix(in srgb, var(--sector-color) 4%, transparent) 100%);
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity .35s ease;
+}
+/* Sector-coloured hairline on the left edge — quiet, not a stripe */
+.home-sector-card::after {
+  content: "";
+  position: absolute;
+  left: 0; top: 18%; bottom: 18%;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: var(--sector-color, var(--brand-purple));
+  opacity: 0.55;
+  transition: opacity .35s ease, top .35s var(--ease-out), bottom .35s var(--ease-out);
+}
+.home-sector-card:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--sector-color) 35%, rgba(18,19,23,0.08));
+  box-shadow: 0 18px 40px -22px color-mix(in srgb, var(--sector-color) 55%, transparent),
+              0 2px 6px rgba(18, 19, 23, 0.05);
+}
+.home-sector-card:hover::before { opacity: 1; }
+.home-sector-card:hover::after { opacity: 1; top: 6%; bottom: 6%; }
+
+/* Numbered chip — replaces the bare mono number with a colored badge */
+.home-sector-card .num-chip {
+  grid-area: chip;
+  align-self: start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+  height: 38px;
+  padding: 0 10px;
+  border-radius: 999px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
+  font-weight: 600;
   letter-spacing: 0.5px;
   color: var(--sector-color, var(--brand-purple));
+  background: color-mix(in srgb, var(--sector-color) 14%, #FFFFFF);
+  border: 1px solid color-mix(in srgb, var(--sector-color) 28%, transparent);
 }
+
+/* Chevron — circular, sits in the top-right, slides on hover */
+.home-sector-card .card-chev {
+  grid-area: chev;
+  align-self: start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  color: var(--on-surface);
+  background: rgba(18, 19, 23, 0.04);
+  transition: background .25s ease, color .25s ease, transform .35s var(--ease-out);
+}
+.home-sector-card:hover .card-chev {
+  background: var(--sector-color, var(--brand-purple));
+  color: #FFFFFF;
+  transform: translate(3px, -3px);
+}
+
+/* Body */
+.home-sector-card .sector-body { grid-area: body; display: flex; flex-direction: column; gap: 8px; }
 .home-sector-card h4 {
-  font-size: 17px;
-  font-weight: 500;
   margin: 0;
-  letter-spacing: -0.2px;
+  font-size: clamp(19px, 1.5vw, 22px);
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  line-height: 1.2;
   color: var(--on-surface);
 }
 .home-sector-card .hook {
-  font-size: 13.5px;
-  line-height: 1.45;
-  color: var(--on-surface-variant);
   margin: 0;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--on-surface-variant);
+  max-width: 36ch;
 }
-.home-sector-card .arr {
-  margin-top: auto;
-  font-size: 12px;
-  color: var(--sector-color, var(--brand-purple));
+
+/* Featured tile — GCC #07 spans the full row as a wider banner */
+.home-sector-card--feature {
+  grid-column: 1 / -1;
+  min-height: 200px;
+  padding: clamp(26px, 2.2vw, 34px) clamp(28px, 2.4vw, 40px);
+  grid-template-areas: "chip body chev";
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  row-gap: 0;
+  column-gap: clamp(20px, 2vw, 32px);
+}
+.home-sector-card--feature .sector-body { gap: 6px; }
+.home-sector-card--feature h4 { font-size: clamp(22px, 1.9vw, 28px); }
+.home-sector-card--feature .hook { font-size: 15px; max-width: 64ch; }
+.home-sector-card--feature .feature-eyebrow {
   font-family: var(--font-mono);
-  letter-spacing: 0.4px;
-  transition: transform .2s var(--ease-out);
+  font-size: 11px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--sector-color, var(--brand-purple));
+  margin-bottom: 4px;
+  display: inline-block;
 }
-.home-sector-card:hover .arr { transform: translateX(3px); }
+@media (max-width: 620px) {
+  .home-sector-card--feature { grid-template-areas: "chip . chev" "body body body"; row-gap: 22px; }
+}
 
 /* Outcomes section signal background container */
 .signal-bg-wrap { position: relative; }
@@ -3302,28 +3397,7 @@ section#cta { padding-top: var(--space-4xl); padding-bottom: var(--space-4xl); }
 .sector-tile:hover::after { opacity: 0.14; transform: translate(-4px, -4px); }
 .sector-tile .num { border-bottom: none; }
 
-/* Home sector cards — varied row layout */
-.home-sector-grid {
-  grid-template-columns: repeat(12, 1fr);
-}
-@media (max-width: 1100px) { .home-sector-grid { grid-template-columns: repeat(6, 1fr); } }
-@media (max-width: 640px)  { .home-sector-grid { grid-template-columns: 1fr; } }
-.home-sector-card { grid-column: span 3; }
-.home-sector-card:nth-child(1) { grid-column: span 4; }
-.home-sector-card:nth-child(2) { grid-column: span 4; }
-.home-sector-card:nth-child(3) { grid-column: span 4; }
-.home-sector-card:nth-child(4) { grid-column: span 3; }
-.home-sector-card:nth-child(5) { grid-column: span 3; }
-.home-sector-card:nth-child(6) { grid-column: span 3; }
-.home-sector-card:nth-child(7) { grid-column: span 3; }
-@media (max-width: 1100px) {
-  .home-sector-card,
-  .home-sector-card:nth-child(n) { grid-column: span 3; }
-}
-@media (max-width: 640px) {
-  .home-sector-card,
-  .home-sector-card:nth-child(n) { grid-column: span 1; }
-}
+/* Home sector cards — layout owned by the primary block above (3-col + featured row) */
 
 /* Belief grid — alternating treatments */
 .belief:nth-child(odd) { background: rgba(255,255,255,0.06); }

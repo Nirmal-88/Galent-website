@@ -315,12 +315,37 @@
       ctx.strokeStyle = 'rgba(18,19,23,0.06)';
       ctx.beginPath(); ctx.arc(ccx, ccy, R1, 0, Math.PI*2); ctx.stroke();
       ctx.beginPath(); ctx.arc(ccx, ccy, R3, 0, Math.PI*2); ctx.stroke();
+
+      // Rotating outer tick marks
+      ctx.save(); ctx.translate(ccx, ccy); ctx.rotate(t * 0.08);
+      ctx.strokeStyle = 'rgba(18,19,23,0.20)'; ctx.lineWidth = scale;
+      for (let i = 0; i < 36; i++) {
+        const a = (i/36) * Math.PI*2;
+        ctx.beginPath();
+        ctx.moveTo(Math.cos(a)*(R2+6*scale), Math.sin(a)*(R2+6*scale));
+        ctx.lineTo(Math.cos(a)*(R2+12*scale), Math.sin(a)*(R2+12*scale));
+        ctx.stroke();
+      }
+      ctx.restore();
+
       ctx.strokeStyle = 'rgba(18,19,23,0.07)'; ctx.lineWidth = scale;
       for (let i = 0; i < PHASES.length; i++) {
         const a = -Math.PI/2 + (i/PHASES.length) * Math.PI*2;
         ctx.beginPath(); ctx.moveTo(ccx, ccy);
         ctx.lineTo(ccx + Math.cos(a)*R1, ccy + Math.sin(a)*R1); ctx.stroke();
       }
+
+      // Traveling tokens along each connector
+      for (let i = 0; i < PHASES.length; i++) {
+        const a = -Math.PI/2 + (i/PHASES.length) * Math.PI*2;
+        const x = ccx + Math.cos(a)*R1, y = ccy + Math.sin(a)*R1;
+        const p = (t * 0.35 + i * 0.17) % 1;
+        const alpha = Math.sin(p * Math.PI);
+        ctx.fillStyle = rgbA(COLORS[i], 0.9 * alpha);
+        ctx.beginPath();
+        ctx.arc(ccx + (x-ccx)*p, ccy + (y-ccy)*p, 2.5*scale, 0, Math.PI*2); ctx.fill();
+      }
+
       for (let i = 0; i < PHASES.length; i++) {
         const a = -Math.PI/2 + (i/PHASES.length) * Math.PI*2;
         const x = ccx + Math.cos(a)*R1, y = ccy + Math.sin(a)*R1;
@@ -344,6 +369,8 @@
       grd.addColorStop(1,    `rgb(${BRAND.orange.join(',')})`);
       ctx.fillStyle = grd;
       ctx.beginPath(); ctx.arc(ccx, ccy, hubR, 0, Math.PI*2); ctx.fill();
+      ctx.strokeStyle = 'rgba(18,19,23,0.08)'; ctx.lineWidth = scale;
+      ctx.beginPath(); ctx.arc(ccx, ccy, hubR + 6*scale, 0, Math.PI*2); ctx.stroke();
       ctx.fillStyle = '#FFFFFF';
       ctx.font = `600 ${12*scale}px "Plus Jakarta Sans", sans-serif`;
       ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
