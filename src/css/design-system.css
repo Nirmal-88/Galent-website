@@ -581,40 +581,136 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
 /* SERVICES (2x2) */
 .services {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-lg);
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(18px, 1.8vw, 24px);
 }
 @media (max-width: 880px) { .services { grid-template-columns: 1fr; } }
+
+/* Service category card — used on the home Services section */
 .svc {
-  background: var(--surface-container);
-  border-radius: var(--radius-lg);
-  padding: var(--space-2xl);
-  transition: background .25s ease, transform .25s var(--ease-out);
+  --svc-color: var(--brand-purple);
+  position: relative;
+  isolation: isolate;
+  background: #FFFFFF;
+  border: 1px solid rgba(18, 19, 23, 0.07);
+  border-radius: 20px;
+  padding: clamp(24px, 2.2vw, 32px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: transform .35s var(--ease-out), border-color .35s ease, box-shadow .35s ease;
+  box-shadow: 0 1px 2px rgba(18, 19, 23, 0.04);
+  overflow: hidden;
 }
-.svc:hover { background: var(--surface-container-high); }
-.svc .badge { margin-bottom: var(--space-lg); }
-.svc .t-h2 { margin-bottom: var(--space-md); font-size: clamp(26px, 3vw, 34px); }
-.svc ul { list-style: none; padding: 0; margin: var(--space-lg) 0 0; }
+.services > .svc:nth-child(1) { --svc-color: var(--brand-purple); }
+.services > .svc:nth-child(2) { --svc-color: var(--brand-green-deep); }
+.services > .svc:nth-child(3) { --svc-color: var(--brand-orange); }
+.services > .svc:nth-child(4) { --svc-color: #4F46E5; }
+
+.svc::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(110% 70% at 100% 0%, color-mix(in srgb, var(--svc-color) 12%, transparent) 0%, transparent 55%);
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity .35s ease;
+}
+.svc:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--svc-color) 32%, rgba(18,19,23,0.08));
+  box-shadow: 0 20px 44px -22px color-mix(in srgb, var(--svc-color) 55%, transparent),
+              0 2px 6px rgba(18, 19, 23, 0.05);
+}
+.svc:hover::before { opacity: 1; }
+
+/* Category badge — inherits the .badge base, sized down + sector-coloured */
+.svc .badge {
+  align-self: flex-start;
+  margin: 0 0 4px;
+  background: color-mix(in srgb, var(--svc-color) 12%, #FFFFFF);
+  border: 1px solid color-mix(in srgb, var(--svc-color) 26%, transparent);
+  color: var(--svc-color);
+  padding: 6px 14px 6px 8px;
+}
+.svc .badge .dot {
+  background: var(--svc-color);
+  color: #FFFFFF;
+}
+.svc .badge .dot::after { background: color-mix(in srgb, var(--svc-color) 35%, transparent); opacity: 1; }
+
+.svc ul {
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0;
+  display: flex;
+  flex-direction: column;
+}
 .svc li {
-  border-top: 1px solid var(--surface-container-higher);
+  border-top: 1px solid rgba(18, 19, 23, 0.07);
   font-size: 15px;
 }
-.svc li:first-child { border-top: 0; }
-.svc li > * {
-  padding: var(--space-md) 0;
-  display: flex; justify-content: space-between; gap: 14px;
-  align-items: baseline;
-}
+.svc li:first-child { border-top: 0; padding-top: 0; }
 .svc li a {
-  color: inherit;
+  color: var(--on-surface);
   text-decoration: none;
-  transition: color .15s ease, padding-left .2s var(--ease-out);
+  padding: 14px 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 14px;
+  position: relative;
+  transition: color .2s ease, padding-left .25s var(--ease-out);
 }
-.svc li a:hover { color: var(--brand-purple); padding-left: 6px; }
-.svc li a:hover .meta { color: var(--brand-purple); opacity: 0.7; }
-.svc li a::after { content: '→'; margin-left: 8px; opacity: 0; transition: opacity .2s ease, transform .2s ease; }
-.svc li a:hover::after { opacity: 0.5; transform: translateX(2px); }
-.svc li .meta { color: var(--on-surface-variant); font-family: var(--font-mono); font-size: 12px; }
+.svc li a > span:first-child {
+  font-weight: 600;
+  font-size: 15.5px;
+  letter-spacing: -0.2px;
+  color: var(--on-surface);
+}
+.svc li .meta {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.3px;
+  color: var(--on-surface-variant);
+  text-align: right;
+}
+.svc li a::after {
+  content: "→";
+  position: absolute;
+  right: -4px;
+  top: 50%;
+  transform: translate(-6px, -50%);
+  font-size: 14px;
+  color: var(--svc-color);
+  opacity: 0;
+  transition: opacity .2s ease, transform .25s var(--ease-out);
+}
+.svc li a:hover {
+  color: var(--svc-color);
+  padding-left: 6px;
+}
+.svc li a:hover > span:first-child { color: var(--svc-color); }
+.svc li a:hover .meta { color: color-mix(in srgb, var(--svc-color) 75%, var(--on-surface-variant)); }
+.svc li a:hover::after { opacity: 1; transform: translate(0, -50%); }
+
+/* Force dark-on-white text inside .svc even when the parent is .panel-dark */
+.panel-dark .svc,
+.panel-dark .svc h2,
+.panel-dark .svc h3,
+.panel-dark .svc h4,
+.panel-dark .svc p,
+.panel-dark .svc li,
+.panel-dark .svc li a,
+.panel-dark .svc li a > span:first-child {
+  color: var(--on-surface);
+}
+.panel-dark .svc li .meta { color: var(--on-surface-variant); }
+.panel-dark .svc li { border-top-color: rgba(18, 19, 23, 0.07); }
+.panel-dark .svc li a:hover,
+.panel-dark .svc li a:hover > span:first-child { color: var(--svc-color); }
 
 /* COMPARE */
 .compare {
