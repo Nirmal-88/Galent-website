@@ -1,0 +1,66 @@
+# Decap CMS configuration for Galent.
+# Schema definitions live here. Edits in the /admin/ UI write commits
+# back to this GitHub repo, which triggers a Vercel redeploy.
+
+backend:
+  name: github
+  repo: Nirmal-88/Galent-website
+  branch: main
+  base_url: https://galent-website.vercel.app
+  auth_endpoint: api/auth
+
+# Where Decap stores its drafts while editing (kept out of the live site)
+publish_mode: simple
+media_folder: "src/assets/images/uploads"
+public_folder: "/assets/images/uploads"
+
+site_url: https://galent-website.vercel.app
+display_url: https://galent-website.vercel.app
+logo_url: https://galent-website.vercel.app/assets/images/logo.png
+
+collections:
+  # ----------------------------------------------------------------------
+  # KNOWLEDGE HUB — edits content/knowledge.json directly (file mode)
+  # ----------------------------------------------------------------------
+  - name: "knowledge"
+    label: "Knowledge Hub"
+    label_singular: "Hub item"
+    description: "Blogs, whitepapers, and videocasts that appear on the Knowledge Hub page. Add a new item, change copy, or remove one — published changes appear live within ~1 minute."
+    files:
+      - name: "items"
+        label: "Hub items (list)"
+        file: "src/content/knowledge.json"
+        description: "All items shown on the Hub page. Drag to reorder. Click an item to edit."
+        fields:
+          - { name: "categories", label: "Categories (do not change unless you know what you're doing)", widget: "object", collapsed: true, fields: [
+              { name: "blogs",       label: "Blogs",       widget: "object", fields: [
+                { name: "label",    label: "Tab label",          widget: "string" },
+                { name: "ctaLabel", label: "Card CTA label",     widget: "string" }
+              ]},
+              { name: "whitepapers", label: "Whitepapers", widget: "object", fields: [
+                { name: "label",    label: "Tab label",          widget: "string" },
+                { name: "ctaLabel", label: "Card CTA label",     widget: "string" }
+              ]},
+              { name: "videocasts",  label: "Videocasts",  widget: "object", fields: [
+                { name: "label",    label: "Tab label",          widget: "string" },
+                { name: "ctaLabel", label: "Card CTA label",     widget: "string" }
+              ]}
+            ] }
+
+          - label: "Items"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.kind}} · {{fields.title}}"
+            fields:
+              - { name: "id",         label: "Slug",          widget: "string", hint: "Lower-case, hyphens. Used as a key. e.g. why-pocs-fail" }
+              - { name: "category",   label: "Category",      widget: "select",  options: ["blogs", "whitepapers", "videocasts"] }
+              - { name: "kind",       label: "Kind label",    widget: "string", default: "ESSAY", hint: "Shown on the card — ESSAY, WHITEPAPER, VIDEOCAST, FIELD NOTE, BRIEF" }
+              - { name: "title",      label: "Title",         widget: "string" }
+              - { name: "excerpt",    label: "Excerpt",       widget: "text",   hint: "1–2 sentence preview shown on the card" }
+              - { name: "domain",     label: "Domain tag",    widget: "select", options: ["industry", "delivery", "platform", "talent", "governance", "culture"] }
+              - { name: "length",     label: "Length",        widget: "string", hint: "e.g. 10 MIN or 32 PAGES" }
+              - { name: "author",     label: "Author / byline", widget: "string", default: "COMING SOON" }
+              - { name: "href",       label: "Link target",   widget: "string", hint: "Where the card links to. e.g. knowledge/your-post.html" }
+              - { name: "thumbStyle", label: "Thumb tint",    widget: "select", options: ["alt-1", "alt-2", "alt-3", "alt-4", "alt-5", "alt-6"], default: "alt-1" }
+              - { name: "icon",       label: "Icon glyph",    widget: "string", required: false, hint: "Symbol shown on the thumb. ✎ ⚙ ◆ ⌘ ⊞ ◐ 📄  (leave blank for videocasts)" }
+              - { name: "runtime",    label: "Runtime (videocasts only)", widget: "string", required: false, hint: "HH:MM e.g. 22:14" }
