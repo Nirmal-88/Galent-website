@@ -62,8 +62,8 @@ collections:
               - { name: "author",     label: "Author / byline", widget: "string", default: "COMING SOON" }
               - { name: "href",       label: "Link target",   widget: "string", hint: "Where the card links to. e.g. knowledge/your-post.html" }
               - { name: "thumbStyle", label: "Thumb tint",    widget: "select", options: ["alt-1", "alt-2", "alt-3", "alt-4", "alt-5", "alt-6"], default: "alt-1", hint: "Used if you don't upload a Card image below." }
-              - { name: "cardImage",   label: "Card image (optional)",   widget: "image", required: false, hint: "Banner image shown on the Hub-listing card. If left blank, a coloured tile is used instead. Recommended ~800×500." }
-              - { name: "bannerImage", label: "Banner image (optional)", widget: "image", required: false, hint: "Hero banner shown at the TOP of the actual blog post when it opens. Recommended ~1600×900. Leave blank for no banner." }
+              - { name: "cardImage",   label: "Card image",      widget: "image", required: false, hint: "Banner image shown on the Hub-listing card. If left blank, a coloured tile is used instead. Recommended ~800×500." }
+              - { name: "bannerImage", label: "Banner image",  widget: "image", required: false, hint: "Hero banner shown at the TOP of the actual blog post when it opens. Recommended ~1600×900. Leave blank for no banner." }
               - { name: "runtime",     label: "Runtime (videocasts only)", widget: "string", required: false, hint: "HH:MM e.g. 22:14" }
 
   # ----------------------------------------------------------------------
