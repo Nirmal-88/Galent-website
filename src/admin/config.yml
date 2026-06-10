@@ -114,3 +114,113 @@ collections:
               - { name: "problem",    label: "Problem statement", widget: "text",   hint: "One sentence describing the client's situation before Galent." }
               - { name: "metricBig",  label: "Big metric",    widget: "string", hint: "The headline number. e.g. 10×, 800%, 99.99%" }
               - { name: "metricDesc", label: "Metric description", widget: "text", hint: "The sentence that follows the big number. e.g. 'faster model deployment. Dev cycles from months to days.'" }
+
+  # ----------------------------------------------------------------------
+  # SERVICE PAGES — Outcomes stats per service. Single file containing all 8.
+  # ----------------------------------------------------------------------
+  - name: "services"
+    label: "Service pages"
+    label_singular: "Service outcomes"
+    description: "Outcomes (stat-strip) shown on each of the 8 service pages. Edit the title and the stats per service. Numbers update quarterly."
+    files:
+      - name: "outcomes"
+        label: "Service outcomes (all 8)"
+        file: "src/content/services.json"
+        description: "One section per service. Edit the title and the 4 stats."
+        fields:
+          - { name: "legacy",     label: "Legacy Modernisation",     widget: "object", collapsed: true, fields: [
+              { name: "label",    label: "Service name (internal)",  widget: "string" },
+              { name: "outcomes", label: "Outcomes",                  widget: "object", fields: [
+                { name: "title", label: "Section title",              widget: "string", hint: "Supports <em class=\"ac-p\">…</em> for accent colour" },
+                { name: "stats", label: "Stats", widget: "list", summary: "{{fields.value}}{{fields.unit}} — {{fields.label}}", fields: [
+                  { name: "value", label: "Number", widget: "string", hint: "e.g. 15 or $9.3" },
+                  { name: "unit",  label: "Unit",   widget: "string", required: false, hint: "e.g. ×, %, %+, M" },
+                  { name: "label", label: "Label",  widget: "string" },
+                  { name: "tint",  label: "Colour", widget: "select", options: ["p", "g", "o"], hint: "p=purple, g=green, o=orange" }
+                ]}
+              ]}
+            ] }
+          - { name: "brownfield", label: "Brownfield & Greenfield",  widget: "object", collapsed: true, fields: [
+              { name: "label",    label: "Service name (internal)",  widget: "string" },
+              { name: "outcomes", label: "Outcomes",                  widget: "object", fields: [
+                { name: "title", label: "Section title", widget: "string" },
+                { name: "stats", label: "Stats", widget: "list", summary: "{{fields.value}}{{fields.unit}} — {{fields.label}}", fields: [
+                  { name: "value", label: "Number", widget: "string" },
+                  { name: "unit",  label: "Unit",   widget: "string", required: false },
+                  { name: "label", label: "Label",  widget: "string" },
+                  { name: "tint",  label: "Colour", widget: "select", options: ["p", "g", "o"] }
+                ]}
+              ]}
+            ] }
+          - { name: "quality",    label: "Quality Engineering",      widget: "object", collapsed: true, fields: [
+              { name: "label",    label: "Service name (internal)",  widget: "string" },
+              { name: "outcomes", label: "Outcomes",                  widget: "object", fields: [
+                { name: "title", label: "Section title", widget: "string" },
+                { name: "stats", label: "Stats", widget: "list", summary: "{{fields.value}}{{fields.unit}} — {{fields.label}}", fields: [
+                  { name: "value", label: "Number", widget: "string" },
+                  { name: "unit",  label: "Unit",   widget: "string", required: false },
+                  { name: "label", label: "Label",  widget: "string" },
+                  { name: "tint",  label: "Colour", widget: "select", options: ["p", "g", "o"] }
+                ]}
+              ]}
+            ] }
+          - { name: "itsm",       label: "ITSM Transformation",      widget: "object", collapsed: true, fields: [
+              { name: "label",    label: "Service name (internal)",  widget: "string" },
+              { name: "outcomes", label: "Outcomes",                  widget: "object", fields: [
+                { name: "title", label: "Section title", widget: "string" },
+                { name: "stats", label: "Stats", widget: "list", summary: "{{fields.value}}{{fields.unit}} — {{fields.label}}", fields: [
+                  { name: "value", label: "Number", widget: "string" },
+                  { name: "unit",  label: "Unit",   widget: "string", required: false },
+                  { name: "label", label: "Label",  widget: "string" },
+                  { name: "tint",  label: "Colour", widget: "select", options: ["p", "g", "o"] }
+                ]}
+              ]}
+            ] }
+          - { name: "sre",        label: "SRE & Observability",      widget: "object", collapsed: true, fields: [
+              { name: "label",    label: "Service name (internal)",  widget: "string" },
+              { name: "outcomes", label: "Outcomes",                  widget: "object", fields: [
+                { name: "title", label: "Section title", widget: "string" },
+                { name: "stats", label: "Stats", widget: "list", summary: "{{fields.value}}{{fields.unit}} — {{fields.label}}", fields: [
+                  { name: "value", label: "Number", widget: "string" },
+                  { name: "unit",  label: "Unit",   widget: "string", required: false },
+                  { name: "label", label: "Label",  widget: "string" },
+                  { name: "tint",  label: "Colour", widget: "select", options: ["p", "g", "o"] }
+                ]}
+              ]}
+            ] }
+          - { name: "ops",        label: "Everything Ops",           widget: "object", collapsed: true, fields: [
+              { name: "label",    label: "Service name (internal)",  widget: "string" },
+              { name: "outcomes", label: "Outcomes",                  widget: "object", fields: [
+                { name: "title", label: "Section title", widget: "string" },
+                { name: "stats", label: "Stats", widget: "list", summary: "{{fields.value}}{{fields.unit}} — {{fields.label}}", fields: [
+                  { name: "value", label: "Number", widget: "string" },
+                  { name: "unit",  label: "Unit",   widget: "string", required: false },
+                  { name: "label", label: "Label",  widget: "string" },
+                  { name: "tint",  label: "Colour", widget: "select", options: ["p", "g", "o"] }
+                ]}
+              ]}
+            ] }
+          - { name: "data",       label: "Data Transformation",      widget: "object", collapsed: true, fields: [
+              { name: "label",    label: "Service name (internal)",  widget: "string" },
+              { name: "outcomes", label: "Outcomes",                  widget: "object", fields: [
+                { name: "title", label: "Section title", widget: "string" },
+                { name: "stats", label: "Stats", widget: "list", summary: "{{fields.value}}{{fields.unit}} — {{fields.label}}", fields: [
+                  { name: "value", label: "Number", widget: "string" },
+                  { name: "unit",  label: "Unit",   widget: "string", required: false },
+                  { name: "label", label: "Label",  widget: "string" },
+                  { name: "tint",  label: "Colour", widget: "select", options: ["p", "g", "o"] }
+                ]}
+              ]}
+            ] }
+          - { name: "platforms",  label: "Enterprise Platforms",     widget: "object", collapsed: true, fields: [
+              { name: "label",    label: "Service name (internal)",  widget: "string" },
+              { name: "outcomes", label: "Outcomes",                  widget: "object", fields: [
+                { name: "title", label: "Section title", widget: "string" },
+                { name: "stats", label: "Stats", widget: "list", summary: "{{fields.value}}{{fields.unit}} — {{fields.label}}", fields: [
+                  { name: "value", label: "Number", widget: "string" },
+                  { name: "unit",  label: "Unit",   widget: "string", required: false },
+                  { name: "label", label: "Label",  widget: "string" },
+                  { name: "tint",  label: "Colour", widget: "select", options: ["p", "g", "o"] }
+                ]}
+              ]}
+            ] }

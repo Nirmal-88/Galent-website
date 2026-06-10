@@ -1,0 +1,104 @@
+{
+  "_about": "Outcomes (stat-strip) for each of the 8 service pages. Edit via /admin/ -> Service pages. Numbers update quarterly.",
+
+  "legacy": {
+    "label": "Legacy Modernisation",
+    "outcomes": {
+      "title": "Numbers from <em class=\"ac-p\">live legacy programmes.</em>",
+      "stats": [
+        { "value": "15", "unit": "×",  "label": "Faster modernisation",     "tint": "p" },
+        { "value": "92", "unit": "%",  "label": "Risk reduction",            "tint": "g" },
+        { "value": "$9.3", "unit": "M","label": "Average value delivered",   "tint": "o" },
+        { "value": "90", "unit": "%",  "label": "Faster code understanding", "tint": "p" }
+      ]
+    }
+  },
+
+  "brownfield": {
+    "label": "Brownfield & Greenfield",
+    "outcomes": {
+      "title": "Faster delivery. <em class=\"ac-p\">Less debt.</em>",
+      "stats": [
+        { "value": "4",  "unit": "×",  "label": "Faster greenfield",  "tint": "p" },
+        { "value": "60", "unit": "%",  "label": "Faster brownfield",  "tint": "g" },
+        { "value": "80", "unit": "%",  "label": "Less tech debt",     "tint": "o" },
+        { "value": "50", "unit": "%",  "label": "Lower maintenance",  "tint": "p" }
+      ]
+    }
+  },
+
+  "quality": {
+    "label": "Quality Engineering",
+    "outcomes": {
+      "title": "Defects, eliminated. <em class=\"ac-g\">Releases, accelerated.</em>",
+      "stats": [
+        { "value": "80",   "unit": "%", "label": "Faster release",              "tint": "p" },
+        { "value": "95",   "unit": "%", "label": "Defect reduction",            "tint": "g" },
+        { "value": "99.9", "unit": "%", "label": "QA in production",            "tint": "o" },
+        { "value": "8",    "unit": "×", "label": "Faster vulnerability detection","tint": "p" }
+      ]
+    }
+  },
+
+  "itsm": {
+    "label": "ITSM Transformation",
+    "outcomes": {
+      "title": "Less noise. <em class=\"ac-g\">Faster resolution.</em>",
+      "stats": [
+        { "value": "70", "unit": "%+", "label": "Autonomous Tier 1",      "tint": "p" },
+        { "value": "60", "unit": "%",  "label": "MTTR reduction",          "tint": "g" },
+        { "value": "85", "unit": "%",  "label": "Satisfaction improvement","tint": "o" }
+      ]
+    }
+  },
+
+  "sre": {
+    "label": "SRE & Observability",
+    "outcomes": {
+      "title": "Predictive. Autonomous. <em class=\"ac-g\">Self-healing.</em>",
+      "stats": [
+        { "value": "99.99", "unit": "%", "label": "Uptime SLO",          "tint": "p" },
+        { "value": "75",    "unit": "%", "label": "Faster MTTR",         "tint": "g" },
+        { "value": "85",    "unit": "%", "label": "Incidents prevented", "tint": "o" },
+        { "value": "60",    "unit": "%", "label": "Ops cost reduction",  "tint": "p" }
+      ]
+    }
+  },
+
+  "ops": {
+    "label": "Everything Ops",
+    "outcomes": {
+      "title": "One model. <em class=\"ac-g\">Compounding results.</em>",
+      "stats": [
+        { "value": "70",    "unit": "%+", "label": "Faster incident resolution", "tint": "p" },
+        { "value": "40–60", "unit": "%",  "label": "Cloud cost savings",         "tint": "g" }
+      ]
+    }
+  },
+
+  "data": {
+    "label": "Data Transformation",
+    "outcomes": {
+      "title": "Pipelines that <em class=\"ac-g\">build themselves.</em>",
+      "stats": [
+        { "value": "75", "unit": "%",  "label": "Complexity reduction",  "tint": "p" },
+        { "value": "95", "unit": "%",  "label": "Automation accuracy",   "tint": "g" },
+        { "value": "80", "unit": "%+", "label": "Faster ML deployment",  "tint": "o" },
+        { "value": "60", "unit": "%",  "label": "Lower infra costs",     "tint": "p" }
+      ]
+    }
+  },
+
+  "platforms": {
+    "label": "Enterprise Platforms",
+    "outcomes": {
+      "title": "CRM as a <em class=\"ac-g\">revenue engine.</em>",
+      "stats": [
+        { "value": "10",       "unit": "×", "label": "CRM efficiency",       "tint": "p" },
+        { "value": "800–1000", "unit": "%", "label": "Faster decisions",     "tint": "g" },
+        { "value": "$7.5",     "unit": "M", "label": "CLV increase",         "tint": "o" },
+        { "value": "95",       "unit": "%", "label": "Manual CRM reduction", "tint": "p" }
+      ]
+    }
+  }
+}
