@@ -1,0 +1,26 @@
+{
+  "_about": "Client outcomes shown in the 'What Gets Delivered' section on the home page. Edit via /admin/.",
+  "items": [
+    {
+      "id": "tech-deployment",
+      "sector": "Technology",
+      "problem": "AI deployment bottlenecked by manual pipeline development.",
+      "metricBig": "10×",
+      "metricDesc": "faster model deployment. Dev cycles from months to days."
+    },
+    {
+      "id": "bfsi-crm",
+      "sector": "Financial Services",
+      "problem": "Legacy CRM blocking sales velocity and compliance.",
+      "metricBig": "800%",
+      "metricDesc": "faster sales decisions. 100% regulatory compliance maintained."
+    },
+    {
+      "id": "healthcare-hipaa",
+      "sector": "Healthcare",
+      "problem": "HIPAA-compliant AI on sensitive patient data at scale.",
+      "metricBig": "90%",
+      "metricDesc": "automation in data operations. Zero compliance breaches."
+    }
+  ]
+}

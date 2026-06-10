@@ -417,32 +417,8 @@
           <span class="badge"><span class="dot">08</span>Client Outcomes</span>
           <h2 id="cases-title" class="t-h1">What Gets <em class="ac-p">Delivered.</em></h2>
         </div>
-        <div class="case-grid" data-stagger>
-          <article class="case-study">
-            <span class="anon">Technology</span>
-            <p class="problem">AI deployment bottlenecked by manual pipeline development.</p>
-            <div class="metric-row">
-              <span class="metric-big">10×</span>
-              <span class="metric-desc">faster model deployment. Dev cycles from months to days.</span>
-            </div>
-          </article>
-          <article class="case-study">
-            <span class="anon">Financial Services</span>
-            <p class="problem">Legacy CRM blocking sales velocity and compliance.</p>
-            <div class="metric-row">
-              <span class="metric-big">800%</span>
-              <span class="metric-desc">faster sales decisions. 100% regulatory compliance maintained.</span>
-            </div>
-          </article>
-          <article class="case-study">
-            <span class="anon">Healthcare</span>
-            <p class="problem">HIPAA-compliant AI on sensitive patient data at scale.</p>
-            <div class="metric-row">
-              <span class="metric-big">90%</span>
-              <span class="metric-desc">automation in data operations. Zero compliance breaches.</span>
-            </div>
-          </article>
-        </div>
+        <!-- CMS-driven case studies — rendered by js/cases-cms.js from content/cases.json -->
+        <div class="case-grid" data-stagger></div>
       </div>
     </section>
 
@@ -553,6 +529,7 @@
   </footer>
 
   <script src="js/animations.js"></script>
+  <script src="js/cases-cms.js?v=cases-1"></script>
   <script>
     Galent.network(document.getElementById('cv-network'));
     Galent.signal(document.getElementById('cv-signal'));
