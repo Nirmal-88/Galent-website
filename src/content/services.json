@@ -1,103 +1,751 @@
 {
   "_about": "Outcomes (stat-strip) for each of the 8 service pages. Edit via /admin/ -> Service pages. Numbers update quarterly.",
-
   "legacy": {
     "label": "Legacy Modernisation",
     "outcomes": {
       "title": "Numbers from <em class=\"ac-p\">live legacy programmes.</em>",
       "stats": [
-        { "value": "15", "unit": "×",  "label": "Faster modernisation",     "tint": "p" },
-        { "value": "92", "unit": "%",  "label": "Risk reduction",            "tint": "g" },
-        { "value": "$9.3", "unit": "M","label": "Average value delivered",   "tint": "o" },
-        { "value": "90", "unit": "%",  "label": "Faster code understanding", "tint": "p" }
+        {
+          "value": "15",
+          "unit": "×",
+          "label": "Faster modernisation",
+          "tint": "p"
+        },
+        {
+          "value": "92",
+          "unit": "%",
+          "label": "Risk reduction",
+          "tint": "g"
+        },
+        {
+          "value": "$9.3",
+          "unit": "M",
+          "label": "Average value delivered",
+          "tint": "o"
+        },
+        {
+          "value": "90",
+          "unit": "%",
+          "label": "Faster code understanding",
+          "tint": "p"
+        }
+      ]
+    },
+    "capabilities": {
+      "title": "Six Capabilities. <em class=\"ac-p\">One closed-loop delivery system.</em>",
+      "items": [
+        {
+          "num": "4.1",
+          "title": "Legacy System Analysis & Transformation Intelligence",
+          "kicker": "Understand before you modernise",
+          "bullets": [
+            "Deep legacy system analysis and dependency mapping",
+            "AI-guided modernisation strategy and pathway design",
+            "Automated transformation and migration execution",
+            "Zero-disruption upgrade orchestration"
+          ]
+        },
+        {
+          "num": "4.2",
+          "title": "Database Migration & Data Intelligence",
+          "kicker": "Move data without losing fidelity",
+          "bullets": [
+            "Automated legacy database migration",
+            "Data model and schema optimisation",
+            "Built-in integrity and validation checks",
+            "Performance tuning for modern data platforms"
+          ]
+        },
+        {
+          "num": "4.3",
+          "title": "Code Modernization & Application Intelligence",
+          "kicker": "COBOL · VB6 → Java · Python · .NET",
+          "bullets": [
+            "Automated legacy code transformation",
+            "Language and framework migration (COBOL, VB6 → Java, Python, .NET)",
+            "Application and architecture optimisation",
+            "Code quality, security, and maintainability enhancement"
+          ]
+        },
+        {
+          "num": "4.4",
+          "title": "Cloud Migration & Infrastructure Intelligence",
+          "kicker": "Cloud-ready by design",
+          "bullets": [
+            "Automated cloud readiness assessment and migration",
+            "Infrastructure modernisation and optimisation",
+            "Cloud-native architecture design",
+            "Performance, cost, and scalability optimisation"
+          ]
+        },
+        {
+          "num": "4.5",
+          "title": "Architecture Modernization",
+          "kicker": "Rebuild for the next decade",
+          "bullets": [
+            "End-to-end architecture redesign",
+            "System performance and resilience optimisation",
+            "Adoption of modern architectural patterns"
+          ]
+        },
+        {
+          "num": "4.6",
+          "title": "Process Automation & Workflow Intelligence",
+          "kicker": "Modernise the work, not just the code",
+          "bullets": [
+            "Business process modernisation",
+            "Intelligent workflow automation",
+            "Efficiency and throughput optimisation"
+          ]
+        }
       ]
     }
   },
-
   "brownfield": {
     "label": "Brownfield & Greenfield",
     "outcomes": {
       "title": "Faster delivery. <em class=\"ac-p\">Less debt.</em>",
       "stats": [
-        { "value": "4",  "unit": "×",  "label": "Faster greenfield",  "tint": "p" },
-        { "value": "60", "unit": "%",  "label": "Faster brownfield",  "tint": "g" },
-        { "value": "80", "unit": "%",  "label": "Less tech debt",     "tint": "o" },
-        { "value": "50", "unit": "%",  "label": "Lower maintenance",  "tint": "p" }
+        {
+          "value": "4",
+          "unit": "×",
+          "label": "Faster greenfield",
+          "tint": "p"
+        },
+        {
+          "value": "60",
+          "unit": "%",
+          "label": "Faster brownfield",
+          "tint": "g"
+        },
+        {
+          "value": "80",
+          "unit": "%",
+          "label": "Less tech debt",
+          "tint": "o"
+        },
+        {
+          "value": "50",
+          "unit": "%",
+          "label": "Lower maintenance",
+          "tint": "p"
+        }
+      ]
+    },
+    "capabilities": {
+      "title": "Six capabilities. <em class=\"ac-p\">One unified build system.</em>",
+      "items": [
+        {
+          "num": "4.1",
+          "title": "Full-Stack Application Generator",
+          "kicker": "Frontend · backend · data — generated by AI",
+          "bullets": [
+            "End-to-end generation of frontend, backend, and data layers",
+            "Architecture scaffolding with enterprise design patterns",
+            "Automated API contracts and documentation"
+          ]
+        },
+        {
+          "num": "4.2",
+          "title": "Code Migration Agent",
+          "kicker": "COBOL · VB6 → Java · Python · .NET",
+          "bullets": [
+            "Automated COBOL / VB6 → Java, Python, .NET conversion",
+            "Semantic preservation with syntax modernisation",
+            "Incremental, backward-compatible migration paths"
+          ]
+        },
+        {
+          "num": "4.3",
+          "title": "Microservices Decomposition Agent",
+          "kicker": "DDD-driven service boundaries",
+          "bullets": [
+            "Domain-Driven Design (DDD) analysis",
+            "Service boundary identification and dependency mapping",
+            "Microservice scaffolding with Spring Boot / Node.js"
+          ]
+        },
+        {
+          "num": "4.4",
+          "title": "Mobile App Development Agent",
+          "kicker": "React Native · Flutter · store-ready",
+          "bullets": [
+            "React Native / Flutter app generation",
+            "Native API integration and state management",
+            "Store compliance and deployment automation"
+          ]
+        },
+        {
+          "num": "4.5",
+          "title": "Database Migration Agent",
+          "kicker": "Flyway · Liquibase · zero loss",
+          "bullets": [
+            "Schema migration with Flyway / Liquibase automation",
+            "Large-scale data partitioning strategies",
+            "Post-migration validation and consistency checks"
+          ]
+        },
+        {
+          "num": "4.6",
+          "title": "Frontend Modernization Agent",
+          "kicker": "JSP · Thymeleaf → React · Vue · PWA",
+          "bullets": [
+            "JSP / Thymeleaf → React / Vue conversion",
+            "Progressive Web App (PWA) enablement",
+            "State management and API client generation"
+          ]
+        }
       ]
     }
   },
-
   "quality": {
     "label": "Quality Engineering",
     "outcomes": {
       "title": "Defects, eliminated. <em class=\"ac-g\">Releases, accelerated.</em>",
       "stats": [
-        { "value": "80",   "unit": "%", "label": "Faster release",              "tint": "p" },
-        { "value": "95",   "unit": "%", "label": "Defect reduction",            "tint": "g" },
-        { "value": "99.9", "unit": "%", "label": "QA in production",            "tint": "o" },
-        { "value": "8",    "unit": "×", "label": "Faster vulnerability detection","tint": "p" }
+        {
+          "value": "80",
+          "unit": "%",
+          "label": "Faster release",
+          "tint": "p"
+        },
+        {
+          "value": "95",
+          "unit": "%",
+          "label": "Defect reduction",
+          "tint": "g"
+        },
+        {
+          "value": "99.9",
+          "unit": "%",
+          "label": "QA in production",
+          "tint": "o"
+        },
+        {
+          "value": "8",
+          "unit": "×",
+          "label": "Faster vulnerability detection",
+          "tint": "p"
+        }
+      ]
+    },
+    "capabilities": {
+      "title": "Four engines. <em class=\"ac-p\">One unified quality system.</em>",
+      "items": [
+        {
+          "num": "4.1",
+          "title": "Galent AI Test Assurance",
+          "kicker": "Autonomous · predictive · self-healing",
+          "bullets": [
+            "AI-powered test automation and self-healing frameworks",
+            "Predictive defect analysis and risk-based testing",
+            "Performance engineering and intelligent load testing",
+            "Cross-platform, IoT, and partner-integrated testing"
+          ]
+        },
+        {
+          "num": "4.2",
+          "title": "Localize.AI",
+          "kicker": "200+ markets · 6× faster international expansion",
+          "bullets": [
+            "Multi-language translation with cultural intelligence",
+            "Content and UX localisation for 200+ markets",
+            "Intelligent test automation for global release readiness",
+            "6× faster international expansion with consistent quality"
+          ]
+        },
+        {
+          "num": "4.3",
+          "title": "Accessibility.AI",
+          "kicker": "Inclusive by design · 7× broader reach",
+          "bullets": [
+            "Accessibility testing and inclusive design validation",
+            "Visual, auditory, motor, and cognitive accessibility coverage",
+            "AI-driven compliance with global accessibility standards",
+            "7× broader market reach through inclusive UX"
+          ]
+        },
+        {
+          "num": "4.4",
+          "title": "SecureTest.AI",
+          "kicker": "Continuous security in CI/CD",
+          "bullets": [
+            "Penetration testing and vulnerability management",
+            "Encryption, authentication, and access control validation",
+            "Threat detection, surveillance, and response intelligence",
+            "Continuous security testing in CI/CD pipelines"
+          ]
+        }
       ]
     }
   },
-
   "itsm": {
     "label": "ITSM Transformation",
     "outcomes": {
       "title": "Less noise. <em class=\"ac-g\">Faster resolution.</em>",
       "stats": [
-        { "value": "70", "unit": "%+", "label": "Autonomous Tier 1",      "tint": "p" },
-        { "value": "60", "unit": "%",  "label": "MTTR reduction",          "tint": "g" },
-        { "value": "85", "unit": "%",  "label": "Satisfaction improvement","tint": "o" }
+        {
+          "value": "70",
+          "unit": "%+",
+          "label": "Autonomous Tier 1",
+          "tint": "p"
+        },
+        {
+          "value": "60",
+          "unit": "%",
+          "label": "MTTR reduction",
+          "tint": "g"
+        },
+        {
+          "value": "85",
+          "unit": "%",
+          "label": "Satisfaction improvement",
+          "tint": "o"
+        }
+      ]
+    },
+    "capabilities": {
+      "title": "Six agents. <em class=\"ac-p\">One self-optimising service desk.</em>",
+      "items": [
+        {
+          "num": "4.1",
+          "title": "Intelligent Ticket Routing Agent",
+          "kicker": "NLP classification · sentiment-driven escalation",
+          "bullets": [
+            "NLP-based ticket classification and priority assignment",
+            "Skill-based routing to the right resolver teams",
+            "Sentiment-driven escalation for critical issues"
+          ]
+        },
+        {
+          "num": "4.2",
+          "title": "Virtual Service Desk Agent",
+          "kicker": "ServiceNow · AD · HR — natively integrated",
+          "bullets": [
+            "Autonomous Tier 1 request resolution",
+            "Conversational AI for natural user interactions",
+            "Native integration with ServiceNow, AD, and HR systems",
+            "Intelligent escalation to human agents"
+          ]
+        },
+        {
+          "num": "4.3",
+          "title": "Knowledge Management Automation Agent",
+          "kicker": "KB writes itself · stays current",
+          "bullets": [
+            "Automatic knowledge article generation from resolved tickets",
+            "Continuous knowledge updates based on resolution patterns",
+            "Contextual KB recommendations during ticket handling"
+          ]
+        },
+        {
+          "num": "4.4",
+          "title": "Change Intelligence & Risk Assessment Agent",
+          "kicker": "Blast-radius before, not after",
+          "bullets": [
+            "AI-driven change risk scoring",
+            "Dependency and blast-radius analysis",
+            "Optimised deployment window recommendations"
+          ]
+        },
+        {
+          "num": "4.5",
+          "title": "IT Analytics & Reporting Agent",
+          "kicker": "Predictive staffing · root-cause intelligence",
+          "bullets": [
+            "Real-time SLA and performance dashboards",
+            "Predictive ticket volume and staffing insights",
+            "Incident trend and root cause analysis"
+          ]
+        },
+        {
+          "num": "4.6",
+          "title": "Workflow Orchestration Agent",
+          "kicker": "Onboarding · approval · compliance — automated",
+          "bullets": [
+            "Automated onboarding and offboarding workflows",
+            "Approval and compliance orchestration",
+            "Deep integration with ServiceNow, CMDB, and cloud platforms"
+          ]
+        }
       ]
     }
   },
-
   "sre": {
     "label": "SRE & Observability",
     "outcomes": {
       "title": "Predictive. Autonomous. <em class=\"ac-g\">Self-healing.</em>",
       "stats": [
-        { "value": "99.99", "unit": "%", "label": "Uptime SLO",          "tint": "p" },
-        { "value": "75",    "unit": "%", "label": "Faster MTTR",         "tint": "g" },
-        { "value": "85",    "unit": "%", "label": "Incidents prevented", "tint": "o" },
-        { "value": "60",    "unit": "%", "label": "Ops cost reduction",  "tint": "p" }
+        {
+          "value": "99.99",
+          "unit": "%",
+          "label": "Uptime SLO",
+          "tint": "p"
+        },
+        {
+          "value": "75",
+          "unit": "%",
+          "label": "Faster MTTR",
+          "tint": "g"
+        },
+        {
+          "value": "85",
+          "unit": "%",
+          "label": "Incidents prevented",
+          "tint": "o"
+        },
+        {
+          "value": "60",
+          "unit": "%",
+          "label": "Ops cost reduction",
+          "tint": "p"
+        }
+      ]
+    },
+    "capabilities": {
+      "title": "Six capabilities. <em class=\"ac-p\">One reliability stack.</em>",
+      "items": [
+        {
+          "num": "4.1",
+          "title": "Proactive SRE with GalentAI Intelligence",
+          "kicker": "Anomaly detection · failure prediction",
+          "bullets": [
+            "AI-powered anomaly detection and signal correlation",
+            "Predictive failure analysis and prevention",
+            "Automated incident avoidance mechanisms",
+            "Intelligent, continuous system monitoring"
+          ]
+        },
+        {
+          "num": "4.2",
+          "title": "Reactive SRE & Incident Intelligence",
+          "kicker": "Less alert noise · faster remediation",
+          "bullets": [
+            "Real-time incident detection and alerting",
+            "Intelligent alert correlation and noise reduction",
+            "Automated remediation workflows",
+            "Native ServiceNow ITSM integration"
+          ]
+        },
+        {
+          "num": "4.3",
+          "title": "Reliability-as-Code Framework",
+          "kicker": "GitOps · SLO/SLA · chaos engineering",
+          "bullets": [
+            "GitOps-integrated reliability templates",
+            "Automated SLO and SLA enforcement",
+            "Chaos engineering and failure injection",
+            "CI/CD pipeline reliability embedding"
+          ]
+        },
+        {
+          "num": "4.4",
+          "title": "AI-Enhanced Observability & Synthetic Monitoring",
+          "kicker": "Multi-cloud · predictive capacity",
+          "bullets": [
+            "Multi-cloud and hybrid observability",
+            "Intelligent synthetic monitoring",
+            "Predictive capacity and demand planning",
+            "Advanced analytics and dashboards"
+          ]
+        },
+        {
+          "num": "4.5",
+          "title": "Runbook Automation & Self-Healing",
+          "kicker": "Infrastructure that fixes itself",
+          "bullets": [
+            "Automated runbook execution",
+            "Self-healing infrastructure orchestration",
+            "Pattern-based runbook optimisation",
+            "Deep ServiceNow integration"
+          ]
+        },
+        {
+          "num": "4.6",
+          "title": "Performance Engineering & Capacity Optimisation",
+          "kicker": "Predict bottlenecks before they bite",
+          "bullets": [
+            "Automated performance and load testing",
+            "Capacity planning and optimisation",
+            "Bottleneck prediction and prevention",
+            "Intelligent resource allocation"
+          ]
+        }
       ]
     }
   },
-
   "ops": {
     "label": "Everything Ops",
     "outcomes": {
       "title": "One model. <em class=\"ac-g\">Compounding results.</em>",
       "stats": [
-        { "value": "70",    "unit": "%+", "label": "Faster incident resolution", "tint": "p" },
-        { "value": "40–60", "unit": "%",  "label": "Cloud cost savings",         "tint": "g" }
+        {
+          "value": "70",
+          "unit": "%+",
+          "label": "Faster incident resolution",
+          "tint": "p"
+        },
+        {
+          "value": "40–60",
+          "unit": "%",
+          "label": "Cloud cost savings",
+          "tint": "g"
+        }
+      ]
+    },
+    "capabilities": {
+      "title": "Four disciplines. <em class=\"ac-p\">One delivery fabric.</em>",
+      "items": [
+        {
+          "num": "4.1",
+          "title": "DevOps",
+          "kicker": "IaC · GitOps · AI-assisted CI/CD",
+          "bullets": [
+            "Infrastructure as Code and GitOps-native delivery",
+            "AI-assisted CI/CD pipeline intelligence",
+            "Release orchestration and deployment automation",
+            "Continuous improvement loops across delivery"
+          ]
+        },
+        {
+          "num": "4.2",
+          "title": "SecOps",
+          "kicker": "Continuous threat monitoring · automated compliance",
+          "bullets": [
+            "Application, cloud, and endpoint security",
+            "Integrated SAST/DAST and vulnerability remediation",
+            "Policy enforcement and compliance automation",
+            "Continuous threat monitoring and response"
+          ]
+        },
+        {
+          "num": "4.3",
+          "title": "FinOps",
+          "kicker": "Multi-cloud visibility · anomaly-driven savings",
+          "bullets": [
+            "Multi-cloud cost visibility and budgeting",
+            "Anomaly detection and spend governance",
+            "Continuous cost optimisation cycles",
+            "FinOps maturity assessment and roadmap"
+          ]
+        },
+        {
+          "num": "4.4",
+          "title": "SRE Ops",
+          "kicker": "Predictive · autonomous · self-healing",
+          "bullets": [
+            "Proactive anomaly detection and failure prevention",
+            "Reactive incident intelligence and MTTR reduction",
+            "Reliability-as-Code embedded into engineering",
+            "Autonomous runbook execution and self-healing"
+          ]
+        }
       ]
     }
   },
-
   "data": {
     "label": "Data Transformation",
     "outcomes": {
       "title": "Pipelines that <em class=\"ac-g\">build themselves.</em>",
       "stats": [
-        { "value": "75", "unit": "%",  "label": "Complexity reduction",  "tint": "p" },
-        { "value": "95", "unit": "%",  "label": "Automation accuracy",   "tint": "g" },
-        { "value": "80", "unit": "%+", "label": "Faster ML deployment",  "tint": "o" },
-        { "value": "60", "unit": "%",  "label": "Lower infra costs",     "tint": "p" }
+        {
+          "value": "75",
+          "unit": "%",
+          "label": "Complexity reduction",
+          "tint": "p"
+        },
+        {
+          "value": "95",
+          "unit": "%",
+          "label": "Automation accuracy",
+          "tint": "g"
+        },
+        {
+          "value": "80",
+          "unit": "%+",
+          "label": "Faster ML deployment",
+          "tint": "o"
+        },
+        {
+          "value": "60",
+          "unit": "%",
+          "label": "Lower infra costs",
+          "tint": "p"
+        }
+      ]
+    },
+    "capabilities": {
+      "title": "Six capabilities. <em class=\"ac-p\">One self-evolving data system.</em>",
+      "items": [
+        {
+          "num": "4.1",
+          "title": "AI-Generated Pipeline Development & Code Synthesis",
+          "kicker": "Natural language → production pipeline",
+          "bullets": [
+            "Natural language → production pipeline generation",
+            "Intelligent code synthesis with best-practice patterns",
+            "Auto-documentation and inline code commenting",
+            "Continuous optimisation based on runtime behaviour"
+          ]
+        },
+        {
+          "num": "4.2",
+          "title": "Intelligent Data Processing & Feature Engineering",
+          "kicker": "Automated · adaptive · ML-ready",
+          "bullets": [
+            "Automated feature engineering for ML workloads",
+            "NLP-powered data processing and transformation",
+            "Smart data cleaning and anomaly handling",
+            "Adaptive transformation pipelines"
+          ]
+        },
+        {
+          "num": "4.3",
+          "title": "Vector Database Integration & Embedding Intelligence",
+          "kicker": "Multi-modal · high-performance similarity",
+          "bullets": [
+            "Vector database design and optimisation",
+            "Embedding generation and lifecycle management",
+            "High-performance similarity search",
+            "Multi-modal vector processing (text, image, signals)"
+          ]
+        },
+        {
+          "num": "4.4",
+          "title": "Autonomous Bot Development & AI Agents",
+          "kicker": "Self-healing data ops",
+          "bullets": [
+            "Autonomous data operation bots",
+            "Intelligent monitoring and alerting agents",
+            "Self-healing pipeline and infrastructure bots",
+            "Decision-making AI assistants for ops teams"
+          ]
+        },
+        {
+          "num": "4.5",
+          "title": "Cloud-Native AI Infrastructure & MLOps Integration",
+          "kicker": "CI/CD for data science · governed at scale",
+          "bullets": [
+            "Cloud-native AI infrastructure design",
+            "Automated MLOps pipelines",
+            "Intelligent model versioning and deployment",
+            "CI/CD for data science and ML workloads"
+          ]
+        },
+        {
+          "num": "4.6",
+          "title": "Workflow Automation & Orchestration Intelligence",
+          "kicker": "Predictive scheduling · conflict-aware recovery",
+          "bullets": [
+            "Intelligent workflow orchestration",
+            "Predictive scheduling and dependency resolution",
+            "Automated conflict detection and recovery",
+            "Execution path optimisation"
+          ]
+        }
       ]
     }
   },
-
   "platforms": {
     "label": "Enterprise Platforms",
     "outcomes": {
       "title": "CRM as a <em class=\"ac-g\">revenue engine.</em>",
       "stats": [
-        { "value": "10",       "unit": "×", "label": "CRM efficiency",       "tint": "p" },
-        { "value": "800–1000", "unit": "%", "label": "Faster decisions",     "tint": "g" },
-        { "value": "$7.5",     "unit": "M", "label": "CLV increase",         "tint": "o" },
-        { "value": "95",       "unit": "%", "label": "Manual CRM reduction", "tint": "p" }
+        {
+          "value": "10",
+          "unit": "×",
+          "label": "CRM efficiency",
+          "tint": "p"
+        },
+        {
+          "value": "800–1000",
+          "unit": "%",
+          "label": "Faster decisions",
+          "tint": "g"
+        },
+        {
+          "value": "$7.5",
+          "unit": "M",
+          "label": "CLV increase",
+          "tint": "o"
+        },
+        {
+          "value": "95",
+          "unit": "%",
+          "label": "Manual CRM reduction",
+          "tint": "p"
+        }
+      ]
+    },
+    "capabilities": {
+      "title": "Six capabilities. <em class=\"ac-p\">One revenue platform.</em>",
+      "items": [
+        {
+          "num": "4.1",
+          "title": "Salesforce Sales & Revenue Cloud Excellence",
+          "kicker": "Einstein-powered pipeline intelligence",
+          "bullets": [
+            "Sales Cloud implementation and optimisation",
+            "Einstein lead scoring and opportunity intelligence",
+            "Revenue Cloud subscription and pricing automation",
+            "AI-powered sales forecasting and pipeline insights"
+          ]
+        },
+        {
+          "num": "4.2",
+          "title": "Service & Experience Cloud Mastery",
+          "kicker": "Unified omnichannel CX",
+          "bullets": [
+            "Service and Experience Cloud transformation",
+            "Einstein Case Classification and smart routing",
+            "Customer communities and self-service portals",
+            "Unified omnichannel CX optimisation"
+          ]
+        },
+        {
+          "num": "4.3",
+          "title": "Salesforce Cloud Portfolio Transformation",
+          "kicker": "Marketing · Commerce · Analytics · Industry",
+          "bullets": [
+            "Marketing Cloud automation and personalisation",
+            "Commerce Cloud intelligence for digital sales",
+            "Analytics Cloud and Einstein Discovery insights",
+            "Industry Clouds for regulated and vertical-specific needs"
+          ]
+        },
+        {
+          "num": "4.4",
+          "title": "AI-Augmented Salesforce Engineering",
+          "kicker": "Lightning · Einstein · AI-assisted dev",
+          "bullets": [
+            "Lightning Platform custom development",
+            "Einstein AI and ML integration",
+            "AI-assisted code generation and optimisation",
+            "Intelligent workflow and automation design"
+          ]
+        },
+        {
+          "num": "4.5",
+          "title": "Integration & Data Services with MuleSoft",
+          "kicker": "API-first · real-time data sync at scale",
+          "bullets": [
+            "MuleSoft Anypoint Platform implementation",
+            "API-first and microservices architecture",
+            "Real-time data sync across ERP and core systems",
+            "Intelligent data orchestration at scale"
+          ]
+        },
+        {
+          "num": "4.6",
+          "title": "FlexiPods™ & Virtual Dev Teams",
+          "kicker": "Pod-based delivery · AI-enhanced velocity",
+          "bullets": [
+            "Dedicated Salesforce architects and engineers",
+            "Pod-based delivery aligned to business priorities",
+            "AI-enhanced development velocity",
+            "Agile delivery with continuous integration"
+          ]
+        }
       ]
     }
   }

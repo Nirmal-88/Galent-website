@@ -137,7 +137,17 @@ collections:
                   { name: "unit",  label: "Unit",   widget: "string", required: false, hint: "e.g. ×, %, %+, M" },
                   { name: "label", label: "Label",  widget: "string" },
                   { name: "tint",  label: "Colour", widget: "select", options: ["p", "g", "o"], hint: "p=purple, g=green, o=orange" }
+                ]},
+
+              { name: "capabilities", label: "Key capabilities", widget: "object", fields: [
+                { name: "title", label: "Section title", widget: "string", hint: "Supports <em class=ac-p>…</em> for accent" },
+                { name: "items", label: "Capability cards", widget: "list", summary: "{{fields.num}} {{fields.title}}", fields: [
+                  { name: "num",     label: "Number",  widget: "string", hint: "e.g. 4.1, 4.2" },
+                  { name: "title",   label: "Title",   widget: "string" },
+                  { name: "kicker",  label: "Kicker",  widget: "string", required: false },
+                  { name: "bullets", label: "Bullets", widget: "list", field: { name: "bullet", label: "Bullet", widget: "string" } }
                 ]}
+              ]}
               ]}
             ] }
           - { name: "brownfield", label: "Brownfield & Greenfield",  widget: "object", collapsed: true, fields: [
@@ -149,7 +159,17 @@ collections:
                   { name: "unit",  label: "Unit",   widget: "string", required: false },
                   { name: "label", label: "Label",  widget: "string" },
                   { name: "tint",  label: "Colour", widget: "select", options: ["p", "g", "o"] }
+                ]},
+
+              { name: "capabilities", label: "Key capabilities", widget: "object", fields: [
+                { name: "title", label: "Section title", widget: "string", hint: "Supports <em class=ac-p>…</em> for accent" },
+                { name: "items", label: "Capability cards", widget: "list", summary: "{{fields.num}} {{fields.title}}", fields: [
+                  { name: "num",     label: "Number",  widget: "string", hint: "e.g. 4.1, 4.2" },
+                  { name: "title",   label: "Title",   widget: "string" },
+                  { name: "kicker",  label: "Kicker",  widget: "string", required: false },
+                  { name: "bullets", label: "Bullets", widget: "list", field: { name: "bullet", label: "Bullet", widget: "string" } }
                 ]}
+              ]}
               ]}
             ] }
           - { name: "quality",    label: "Quality Engineering",      widget: "object", collapsed: true, fields: [
@@ -161,7 +181,17 @@ collections:
                   { name: "unit",  label: "Unit",   widget: "string", required: false },
                   { name: "label", label: "Label",  widget: "string" },
                   { name: "tint",  label: "Colour", widget: "select", options: ["p", "g", "o"] }
+                ]},
+
+              { name: "capabilities", label: "Key capabilities", widget: "object", fields: [
+                { name: "title", label: "Section title", widget: "string", hint: "Supports <em class=ac-p>…</em> for accent" },
+                { name: "items", label: "Capability cards", widget: "list", summary: "{{fields.num}} {{fields.title}}", fields: [
+                  { name: "num",     label: "Number",  widget: "string", hint: "e.g. 4.1, 4.2" },
+                  { name: "title",   label: "Title",   widget: "string" },
+                  { name: "kicker",  label: "Kicker",  widget: "string", required: false },
+                  { name: "bullets", label: "Bullets", widget: "list", field: { name: "bullet", label: "Bullet", widget: "string" } }
                 ]}
+              ]}
               ]}
             ] }
           - { name: "itsm",       label: "ITSM Transformation",      widget: "object", collapsed: true, fields: [
@@ -173,7 +203,17 @@ collections:
                   { name: "unit",  label: "Unit",   widget: "string", required: false },
                   { name: "label", label: "Label",  widget: "string" },
                   { name: "tint",  label: "Colour", widget: "select", options: ["p", "g", "o"] }
+                ]},
+
+              { name: "capabilities", label: "Key capabilities", widget: "object", fields: [
+                { name: "title", label: "Section title", widget: "string", hint: "Supports <em class=ac-p>…</em> for accent" },
+                { name: "items", label: "Capability cards", widget: "list", summary: "{{fields.num}} {{fields.title}}", fields: [
+                  { name: "num",     label: "Number",  widget: "string", hint: "e.g. 4.1, 4.2" },
+                  { name: "title",   label: "Title",   widget: "string" },
+                  { name: "kicker",  label: "Kicker",  widget: "string", required: false },
+                  { name: "bullets", label: "Bullets", widget: "list", field: { name: "bullet", label: "Bullet", widget: "string" } }
                 ]}
+              ]}
               ]}
             ] }
           - { name: "sre",        label: "SRE & Observability",      widget: "object", collapsed: true, fields: [
@@ -185,7 +225,17 @@ collections:
                   { name: "unit",  label: "Unit",   widget: "string", required: false },
                   { name: "label", label: "Label",  widget: "string" },
                   { name: "tint",  label: "Colour", widget: "select", options: ["p", "g", "o"] }
+                ]},
+
+              { name: "capabilities", label: "Key capabilities", widget: "object", fields: [
+                { name: "title", label: "Section title", widget: "string", hint: "Supports <em class=ac-p>…</em> for accent" },
+                { name: "items", label: "Capability cards", widget: "list", summary: "{{fields.num}} {{fields.title}}", fields: [
+                  { name: "num",     label: "Number",  widget: "string", hint: "e.g. 4.1, 4.2" },
+                  { name: "title",   label: "Title",   widget: "string" },
+                  { name: "kicker",  label: "Kicker",  widget: "string", required: false },
+                  { name: "bullets", label: "Bullets", widget: "list", field: { name: "bullet", label: "Bullet", widget: "string" } }
                 ]}
+              ]}
               ]}
             ] }
           - { name: "ops",        label: "Everything Ops",           widget: "object", collapsed: true, fields: [
@@ -197,7 +247,17 @@ collections:
                   { name: "unit",  label: "Unit",   widget: "string", required: false },
                   { name: "label", label: "Label",  widget: "string" },
                   { name: "tint",  label: "Colour", widget: "select", options: ["p", "g", "o"] }
+                ]},
+
+              { name: "capabilities", label: "Key capabilities", widget: "object", fields: [
+                { name: "title", label: "Section title", widget: "string", hint: "Supports <em class=ac-p>…</em> for accent" },
+                { name: "items", label: "Capability cards", widget: "list", summary: "{{fields.num}} {{fields.title}}", fields: [
+                  { name: "num",     label: "Number",  widget: "string", hint: "e.g. 4.1, 4.2" },
+                  { name: "title",   label: "Title",   widget: "string" },
+                  { name: "kicker",  label: "Kicker",  widget: "string", required: false },
+                  { name: "bullets", label: "Bullets", widget: "list", field: { name: "bullet", label: "Bullet", widget: "string" } }
                 ]}
+              ]}
               ]}
             ] }
           - { name: "data",       label: "Data Transformation",      widget: "object", collapsed: true, fields: [
@@ -209,7 +269,17 @@ collections:
                   { name: "unit",  label: "Unit",   widget: "string", required: false },
                   { name: "label", label: "Label",  widget: "string" },
                   { name: "tint",  label: "Colour", widget: "select", options: ["p", "g", "o"] }
+                ]},
+
+              { name: "capabilities", label: "Key capabilities", widget: "object", fields: [
+                { name: "title", label: "Section title", widget: "string", hint: "Supports <em class=ac-p>…</em> for accent" },
+                { name: "items", label: "Capability cards", widget: "list", summary: "{{fields.num}} {{fields.title}}", fields: [
+                  { name: "num",     label: "Number",  widget: "string", hint: "e.g. 4.1, 4.2" },
+                  { name: "title",   label: "Title",   widget: "string" },
+                  { name: "kicker",  label: "Kicker",  widget: "string", required: false },
+                  { name: "bullets", label: "Bullets", widget: "list", field: { name: "bullet", label: "Bullet", widget: "string" } }
                 ]}
+              ]}
               ]}
             ] }
           - { name: "platforms",  label: "Enterprise Platforms",     widget: "object", collapsed: true, fields: [
@@ -221,7 +291,17 @@ collections:
                   { name: "unit",  label: "Unit",   widget: "string", required: false },
                   { name: "label", label: "Label",  widget: "string" },
                   { name: "tint",  label: "Colour", widget: "select", options: ["p", "g", "o"] }
+                ]},
+
+              { name: "capabilities", label: "Key capabilities", widget: "object", fields: [
+                { name: "title", label: "Section title", widget: "string", hint: "Supports <em class=ac-p>…</em> for accent" },
+                { name: "items", label: "Capability cards", widget: "list", summary: "{{fields.num}} {{fields.title}}", fields: [
+                  { name: "num",     label: "Number",  widget: "string", hint: "e.g. 4.1, 4.2" },
+                  { name: "title",   label: "Title",   widget: "string" },
+                  { name: "kicker",  label: "Kicker",  widget: "string", required: false },
+                  { name: "bullets", label: "Bullets", widget: "list", field: { name: "bullet", label: "Bullet", widget: "string" } }
                 ]}
+              ]}
               ]}
             ] }
 
