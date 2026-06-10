@@ -93,13 +93,28 @@
       if (lengthEl) lengthEl.textContent = data.length || '';
       if (authorEl) authorEl.textContent = data.author || '';
 
-      // Cover image — insert as a banner above the title if set.
-      if (data.coverImage) {
+      // Banner image — try the matching Knowledge Hub card first (bannerImage),
+      // fall back to a coverImage on the post front-matter for older posts.
+      let bannerSrc = data.coverImage || '';
+      try {
+        const hubRes = await fetch('content/knowledge.json', { cache: 'no-store' });
+        if (hubRes.ok) {
+          const hub = await hubRes.json();
+          const items = Array.isArray(hub && hub.items) ? hub.items : [];
+          const match = items.find((it) => {
+            const href = String(it.href || '');
+            return href.indexOf('post.html?slug=' + slug) !== -1;
+          });
+          if (match && match.bannerImage) bannerSrc = match.bannerImage;
+        }
+      } catch (_) { /* non-fatal: fall back to coverImage or none */ }
+
+      if (bannerSrc) {
         const header = document.querySelector('.post-header');
         if (header && !header.querySelector('.post-cover')) {
           const cover = document.createElement('div');
           cover.className = 'post-cover';
-          cover.innerHTML = `<img src="${escapeHTML(data.coverImage)}" alt="${escapeHTML(title)}" loading="eager">`;
+          cover.innerHTML = `<img src="${escapeHTML(bannerSrc)}" alt="${escapeHTML(title)}" loading="eager">`;
           header.insertBefore(cover, header.firstChild);
         }
       }
