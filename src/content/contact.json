@@ -1,0 +1,50 @@
+{
+  "_about": "Content for the Contact page. Edit via /admin/ -> Contact page.",
+  "hero": {
+    "badge": "Contact",
+    "title": "Tell us what you're <em class=\"ac-p\">trying to deliver.</em>",
+    "lead": "We don't start with a platform pitch. We start with your programme — the outcome you need, the constraints you're working within, and the timelines you're accountable to.",
+    "cta": "Book a leadership briefing"
+  },
+  "channels": [
+    {
+      "kind": "email",
+      "label": "Email",
+      "value": "hello@galent.com",
+      "href": "mailto:hello@galent.com",
+      "subtext": "We reply within one working day."
+    },
+    {
+      "kind": "leadership",
+      "label": "Leadership briefing",
+      "value": "Schedule a 30-minute call",
+      "href": "#",
+      "subtext": "Direct line to our partners — for VP-Engineering and CIO conversations."
+    },
+    {
+      "kind": "fde",
+      "label": "Talk to an FDE",
+      "value": "Speak with a Forward-Deployed Engineer",
+      "href": "fde.html",
+      "subtext": "For programme-shape questions, technical fit and operating-model fit."
+    }
+  ],
+  "offices": [
+    {
+      "city": "Singapore",
+      "lines": ["1 Wallich Street, #14-01", "Guoco Tower, 078881"],
+      "label": "APAC headquarters"
+    },
+    {
+      "city": "London",
+      "lines": ["20 Fenchurch Street, 34th floor", "London EC3M 3BY, United Kingdom"],
+      "label": "EMEA hub"
+    },
+    {
+      "city": "New York",
+      "lines": ["350 Fifth Avenue, Suite 7600", "New York, NY 10118, USA"],
+      "label": "Americas hub"
+    }
+  ],
+  "footnote": "All conversations covered by mutual NDA on request. We respond to every enquiry — even the ones that aren't a fit, so you know."
+}

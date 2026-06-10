@@ -224,3 +224,39 @@ collections:
                 ]}
               ]}
             ] }
+
+  # ----------------------------------------------------------------------
+  # CONTACT — the dedicated /contact.html page
+  # ----------------------------------------------------------------------
+  - name: "contact"
+    label: "Contact page"
+    label_singular: "Contact"
+    description: "Content for the /contact page — hero copy, contact channels, offices."
+    files:
+      - name: "page"
+        label: "Contact page content"
+        file: "src/content/contact.json"
+        fields:
+          - { name: "hero", label: "Hero", widget: "object", fields: [
+              { name: "badge", label: "Badge text", widget: "string", default: "Contact" },
+              { name: "title", label: "Headline",  widget: "string", hint: "Supports inline <em class=\"ac-p\">…</em> for the accent colour" },
+              { name: "lead",  label: "Intro paragraph", widget: "text" },
+              { name: "cta",   label: "Primary CTA label", widget: "string", default: "Book a leadership briefing" }
+            ] }
+          - { name: "channels", label: "Contact channels", widget: "list", min: 1, max: 4,
+              summary: "{{fields.label}} — {{fields.value}}",
+              fields: [
+                { name: "kind",    label: "Icon style", widget: "select", options: ["email", "leadership", "fde"] },
+                { name: "label",   label: "Label",      widget: "string", hint: "e.g. Email, Leadership briefing, Talk to an FDE" },
+                { name: "value",   label: "Headline value", widget: "string", hint: "What's shown big — e.g. hello@galent.com or 'Schedule a 30-minute call'" },
+                { name: "href",    label: "Link target", widget: "string", hint: "mailto:, https://, or relative URL. Use # for no link." },
+                { name: "subtext", label: "Subtext",    widget: "text",   hint: "One sentence below the headline" }
+              ] }
+          - { name: "offices", label: "Offices", widget: "list",
+              summary: "{{fields.city}}",
+              fields: [
+                { name: "city",  label: "City",         widget: "string" },
+                { name: "label", label: "Region label", widget: "string", hint: "e.g. APAC headquarters, EMEA hub" },
+                { name: "lines", label: "Address lines", widget: "list", field: { name: "line", label: "Line", widget: "string" } }
+              ] }
+          - { name: "footnote", label: "Footer note", widget: "text", required: false, hint: "Small text shown beneath the offices grid." }
