@@ -1,171 +1,190 @@
 {
   "$schema": "https://galent-website.vercel.app/content/knowledge.schema.json",
   "_about": "Galent Knowledge Hub content. Edit this file to add, change or remove items in the Hub. Push the change to GitHub and Vercel will redeploy. See content/README.md for the schema.",
-
   "categories": {
-    "blogs":       { "label": "Blogs",       "ctaLabel": "Read essay" },
-    "whitepapers": { "label": "Whitepapers", "ctaLabel": "Request access" },
-    "videocasts":  { "label": "Videocasts",  "ctaLabel": "Watch" }
+    "blogs": {
+      "label": "Blogs",
+      "ctaLabel": "Read essay"
+    },
+    "whitepapers": {
+      "label": "Whitepapers",
+      "ctaLabel": "Request access"
+    },
+    "videocasts": {
+      "label": "Videocasts",
+      "ctaLabel": "Watch"
+    }
   },
-
   "items": [
     {
-      "id": "ai-didnt-disrupt-tech-services",
-      "category": "blogs",
-      "kind": "ESSAY",
-      "title": "AI Didn't Disrupt Tech Services… It Exposed the Truth.",
       "excerpt": "Notes from the Indiaspora Global AI Summit 2026 panel on the global race for AI and the next tech services revolution.",
       "domain": "industry",
       "length": "10 MIN",
       "author": "BY ASHWIN BHARATH",
       "href": "knowledge/ai-didnt-disrupt-tech-services.html",
+      "kind": "ESSAY",
+      "title": "AI Didn't Disrupt Tech Services… It Exposed the Truth.",
+      "icon": "✎",
+      "id": "ai-didnt-disrupt-tech-services",
       "thumbStyle": "alt-1",
-      "icon": "✎"
+      "category": "blogs"
     },
     {
-      "id": "grand-prix-model-of-ai-delivery",
-      "category": "blogs",
-      "kind": "ESSAY",
-      "title": "The Grand Prix Model of AI Delivery",
       "excerpt": "Why an AI-native delivery stack is an F1 car — and what happens when you hand the keys to the wrong driver.",
       "domain": "delivery",
       "length": "8 MIN",
       "author": "BY ASHWIN BHARATH",
       "href": "knowledge/grand-prix-model-of-ai-delivery.html",
+      "kind": "ESSAY",
+      "title": "The Grand Prix Model of AI Delivery",
+      "icon": "⚙",
+      "id": "grand-prix-model-of-ai-delivery",
       "thumbStyle": "alt-4",
-      "icon": "⚙"
+      "category": "blogs"
     },
     {
-      "id": "why-85-percent-pocs-fail",
-      "category": "blogs",
-      "kind": "ESSAY",
-      "title": "Why 85% of Enterprise AI PoCs Fail",
       "excerpt": "PoCs are easy. Production is hard. A look at why most enterprise AI never ships — and what the AI-native delivery model changes.",
       "domain": "platform",
       "length": "6 MIN",
       "author": "COMING SOON",
       "href": "knowledge/stub-blog-3.html",
+      "kind": "ESSAY",
+      "title": "Why 85% of Enterprise AI PoCs Fail",
+      "icon": "◆",
+      "id": "why-85-percent-pocs-fail",
       "thumbStyle": "alt-2",
-      "icon": "◆"
+      "category": "blogs"
     },
     {
-      "id": "future-of-ai-in-sde",
-      "category": "blogs",
-      "kind": "ESSAY",
-      "title": "The Future of AI in Software Engineering",
       "excerpt": "Where the SDLC is heading when context, code, and policy are addressable on the same graph — and what teams must change to keep up.",
       "domain": "talent",
       "length": "7 MIN",
       "author": "COMING SOON",
       "href": "knowledge/stub-blog-4.html",
+      "kind": "ESSAY",
+      "title": "The Future of AI in Software Engineering",
+      "icon": "⌘",
+      "id": "future-of-ai-in-sde",
       "thumbStyle": "alt-3",
-      "icon": "⌘"
+      "category": "blogs"
     },
     {
-      "id": "legacy-modernisation-chaos-to-intelligence",
-      "category": "blogs",
-      "kind": "ESSAY",
-      "title": "Legacy Modernisation: From Chaos to Intelligence",
       "excerpt": "How AI-native delivery cuts modernisation timelines by 15× while reducing risk by 92%. The method behind the metrics.",
       "domain": "governance",
       "length": "9 MIN",
       "author": "COMING SOON",
       "href": "knowledge/stub-blog-5.html",
+      "kind": "ESSAY",
+      "title": "Legacy Modernisation: From Chaos to Intelligence",
+      "icon": "⊞",
+      "id": "legacy-modernisation-chaos-to-intelligence",
       "thumbStyle": "alt-5",
-      "icon": "⊞"
+      "category": "blogs"
     },
     {
-      "id": "how-fdes-accelerate-delivery",
-      "category": "blogs",
-      "kind": "ESSAY",
-      "title": "How Forward-Deployed Engineers Accelerate Delivery",
       "excerpt": "What FDEs do differently — and why the role only works when paired with a platform that earns its keep.",
       "domain": "culture",
       "length": "5 MIN",
       "author": "COMING SOON",
       "href": "knowledge/stub-blog-6.html",
+      "kind": "ESSAY",
+      "title": "How Forward-Deployed Engineers Accelerate Delivery",
+      "icon": "◐",
+      "id": "how-fdes-accelerate-delivery",
       "thumbStyle": "alt-6",
-      "icon": "◐"
+      "category": "blogs"
     },
-
     {
-      "id": "economics-of-ai-native-delivery",
-      "category": "whitepapers",
-      "kind": "WHITEPAPER",
-      "title": "The Economics of AI-Native Delivery",
       "excerpt": "A model-by-model breakdown of unit economics in headcount-led vs. platform-led delivery — and where the inflection point sits.",
       "domain": "delivery",
       "length": "32 PAGES",
       "author": "COMING SOON",
       "href": "knowledge/stub-wp-1.html",
+      "kind": "WHITEPAPER",
+      "title": "The Economics of AI-Native Delivery",
+      "icon": "📄",
+      "id": "economics-of-ai-native-delivery",
       "thumbStyle": "alt-1",
-      "icon": "📄"
+      "category": "whitepapers"
     },
     {
-      "id": "legacy-modernisation-method",
-      "category": "whitepapers",
-      "kind": "WHITEPAPER",
-      "title": "Legacy Modernisation at 15× — A Method",
       "excerpt": "The repeatable method behind 15× faster, 92% lower-risk modernisation. Six phases, four artefacts, and one platform.",
       "domain": "platform",
       "length": "28 PAGES",
       "author": "COMING SOON",
       "href": "knowledge/stub-wp-2.html",
+      "kind": "WHITEPAPER",
+      "title": "Legacy Modernisation at 15× — A Method",
+      "icon": "📄",
+      "id": "legacy-modernisation-method",
       "thumbStyle": "alt-2",
-      "icon": "📄"
+      "category": "whitepapers"
     },
     {
-      "id": "building-the-fde-pod",
-      "category": "whitepapers",
-      "kind": "WHITEPAPER",
-      "title": "Building the Forward-Deployed Pod",
       "excerpt": "An operating-model guide for engineering leaders building an FDE-led delivery capability — staffing, governance, metrics, ramp.",
       "domain": "talent",
       "length": "40 PAGES",
       "author": "COMING SOON",
       "href": "knowledge/stub-wp-3.html",
+      "kind": "WHITEPAPER",
+      "title": "Building the Forward-Deployed Pod",
+      "icon": "📄",
+      "id": "building-the-fde-pod",
       "thumbStyle": "alt-3",
-      "icon": "📄"
+      "category": "whitepapers"
     },
-
     {
-      "id": "global-race-for-ai-indiaspora",
-      "category": "videocasts",
-      "kind": "VIDEOCAST",
-      "title": "The Global Race for AI · Indiaspora Summit 2026",
       "excerpt": "Ashwin Bharath in conversation with Sudheer Narayan (Bain & Company) on the next tech services revolution.",
       "domain": "industry",
       "length": "22 MIN",
-      "runtime": "22:14",
       "author": "COMING SOON",
       "href": "knowledge/stub-vid-1.html",
-      "thumbStyle": "alt-1"
+      "kind": "VIDEOCAST",
+      "title": "The Global Race for AI · Indiaspora Summit 2026",
+      "runtime": "22:14",
+      "id": "global-race-for-ai-indiaspora",
+      "thumbStyle": "alt-1",
+      "category": "videocasts"
     },
     {
-      "id": "inside-galentai-walkthrough",
-      "category": "videocasts",
-      "kind": "VIDEOCAST",
-      "title": "Inside GalentAI · An Engineering Walk-through",
       "excerpt": "A live walk through the 4 engines — NeuroQL, RCM, Knowledge Graph, Context Graph — and how they fit into one delivery loop.",
       "domain": "platform",
       "length": "19 MIN",
-      "runtime": "18:42",
       "author": "COMING SOON",
       "href": "knowledge/stub-vid-2.html",
-      "thumbStyle": "alt-4"
+      "kind": "VIDEOCAST",
+      "title": "Inside GalentAI · An Engineering Walk-through",
+      "runtime": "18:42",
+      "id": "inside-galentai-walkthrough",
+      "thumbStyle": "alt-4",
+      "category": "videocasts"
     },
     {
-      "id": "fde-office-hours-ep1",
-      "category": "videocasts",
-      "kind": "VIDEOCAST",
-      "title": "FDE Office Hours · Episode 01",
       "excerpt": "A Forward-Deployed Engineer fields live questions from engineering leaders mid-programme.",
       "domain": "talent",
       "length": "26 MIN",
-      "runtime": "26:08",
       "author": "COMING SOON",
       "href": "knowledge/stub-vid-3.html",
-      "thumbStyle": "alt-2"
+      "kind": "VIDEOCAST",
+      "title": "FDE Office Hours · Episode 01",
+      "runtime": "26:08",
+      "id": "fde-office-hours-ep1",
+      "thumbStyle": "alt-2",
+      "category": "videocasts"
+    },
+    {
+      "excerpt": "The Next Great Leap Beyond Classical Artificial Intelligence",
+      "domain": "delivery",
+      "length": "10 MIN",
+      "author": "BY ASHWIN BHARATH",
+      "href": "https://galent-website.vercel.app/admin/#/collections/posts/entries/quantum-ai-explained",
+      "kind": "ESSAY",
+      "title": "Quantum AI Explained",
+      "runtime": "-",
+      "icon": "-",
+      "id": "quantum ai",
+      "thumbStyle": "alt-1",
+      "category": "blogs"
     }
   ]
 }
