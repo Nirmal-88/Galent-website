@@ -43,8 +43,8 @@
     if (item.category === 'videocasts') {
       return `<div class="card-thumb ${style}"><div class="play-btn">▶</div>${runtime}</div>`;
     }
-    const icon = escapeHTML(item.icon || '◆');
-    return `<div class="card-thumb ${style}"><div class="icon">${icon}</div></div>`;
+    // No image → just a clean coloured tile (no glyph).
+    return `<div class="card-thumb ${style}"></div>`;
   }
 
   function renderCard(item, index, ctaLabel) {
