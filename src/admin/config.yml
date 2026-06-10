@@ -66,6 +66,29 @@ collections:
               - { name: "runtime",    label: "Runtime (videocasts only)", widget: "string", required: false, hint: "HH:MM e.g. 22:14" }
 
   # ----------------------------------------------------------------------
+  # POSTS — Markdown blog bodies. Each post is its own .md file in posts/.
+  # New posts show at /post.html?slug=<filename>.
+  # ----------------------------------------------------------------------
+  - name: "posts"
+    label: "Posts (full essays)"
+    label_singular: "Post"
+    description: "Write the body of a blog post or essay here. After publishing, add a corresponding card under 'Knowledge Hub' pointing to post.html?slug=<filename> to surface it on the Hub page."
+    folder: "src/content/posts"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    summary: "{{title}} ({{kind}})"
+    fields:
+      - { name: "title",   label: "Title",   widget: "string" }
+      - { name: "excerpt", label: "Excerpt / one-line preview", widget: "text", hint: "Shown on the card and at the top of the post. 1–2 sentences." }
+      - { name: "kind",    label: "Kind",    widget: "select", options: ["ESSAY", "WHITEPAPER", "FIELD NOTE", "BRIEF"], default: "ESSAY" }
+      - { name: "length",  label: "Length",  widget: "string", hint: "Reading time. e.g. 8 MIN", default: "5 MIN" }
+      - { name: "author",  label: "Author byline", widget: "string", default: "BY THE GALENT TEAM" }
+      - { name: "domain",  label: "Domain",  widget: "select", options: ["industry", "delivery", "platform", "talent", "governance", "culture"], default: "platform" }
+      - { name: "body",    label: "Body",    widget: "markdown", hint: "Write the full essay here. You can use bold, italics, headings, lists, links, quotes and images — toolbar buttons handle the formatting." }
+
+  # ----------------------------------------------------------------------
   # LEADERSHIP — About page founder cards. Lives in content/leadership.json.
   # ----------------------------------------------------------------------
   - name: "leadership"
