@@ -93,6 +93,17 @@
       if (lengthEl) lengthEl.textContent = data.length || '';
       if (authorEl) authorEl.textContent = data.author || '';
 
+      // Cover image — insert as a banner above the title if set.
+      if (data.coverImage) {
+        const header = document.querySelector('.post-header');
+        if (header && !header.querySelector('.post-cover')) {
+          const cover = document.createElement('div');
+          cover.className = 'post-cover';
+          cover.innerHTML = `<img src="${escapeHTML(data.coverImage)}" alt="${escapeHTML(title)}" loading="eager">`;
+          header.insertBefore(cover, header.firstChild);
+        }
+      }
+
       // Render Markdown body via marked.js
       if (bodyEl && window.marked) {
         // Configure marked to be safe-ish — escape raw HTML

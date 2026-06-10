@@ -61,8 +61,9 @@ collections:
               - { name: "length",     label: "Length",        widget: "string", hint: "e.g. 10 MIN or 32 PAGES" }
               - { name: "author",     label: "Author / byline", widget: "string", default: "COMING SOON" }
               - { name: "href",       label: "Link target",   widget: "string", hint: "Where the card links to. e.g. knowledge/your-post.html" }
-              - { name: "thumbStyle", label: "Thumb tint",    widget: "select", options: ["alt-1", "alt-2", "alt-3", "alt-4", "alt-5", "alt-6"], default: "alt-1" }
-              - { name: "icon",       label: "Icon glyph",    widget: "string", required: false, hint: "Symbol shown on the thumb. ✎ ⚙ ◆ ⌘ ⊞ ◐ 📄  (leave blank for videocasts)" }
+              - { name: "thumbStyle", label: "Thumb tint",    widget: "select", options: ["alt-1", "alt-2", "alt-3", "alt-4", "alt-5", "alt-6"], default: "alt-1", hint: "Used if you don't upload a Card image below." }
+              - { name: "cardImage",  label: "Card image (optional)", widget: "image", required: false, hint: "Banner image shown on the card. If left blank, the coloured tile + icon glyph are used instead. Recommended ~800×500." }
+              - { name: "icon",       label: "Icon glyph",    widget: "string", required: false, hint: "Symbol shown on the thumb when no Card image is set. ✎ ⚙ ◆ ⌘ ⊞ ◐ 📄  (leave blank for videocasts)" }
               - { name: "runtime",    label: "Runtime (videocasts only)", widget: "string", required: false, hint: "HH:MM e.g. 22:14" }
 
   # ----------------------------------------------------------------------
@@ -86,6 +87,7 @@ collections:
       - { name: "length",  label: "Length",  widget: "string", hint: "Reading time. e.g. 8 MIN", default: "5 MIN" }
       - { name: "author",  label: "Author byline", widget: "string", default: "BY THE GALENT TEAM" }
       - { name: "domain",  label: "Domain",  widget: "select", options: ["industry", "delivery", "platform", "talent", "governance", "culture"], default: "platform" }
+      - { name: "coverImage", label: "Cover image (optional)", widget: "image", required: false, hint: "Banner shown at the top of the post and on the Hub card. Recommended ~1600×900. Leave blank to use a coloured tile instead." }
       - { name: "body",    label: "Body",    widget: "markdown", hint: "Write the full essay here. You can use bold, italics, headings, lists, links, quotes and images — toolbar buttons handle the formatting." }
 
   # ----------------------------------------------------------------------

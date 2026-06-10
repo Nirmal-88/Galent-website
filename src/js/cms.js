@@ -30,8 +30,17 @@
 
   function renderThumb(item) {
     const style = escapeHTML(item.thumbStyle || 'alt-1');
+    const hasImage = !!(item.cardImage && String(item.cardImage).trim());
+    const runtime = item.runtime ? `<div class="runtime">${escapeHTML(item.runtime)}</div>` : '';
+    if (hasImage) {
+      // When a card image is uploaded, show it edge-to-edge inside the thumb.
+      const img = escapeHTML(item.cardImage);
+      const playOverlay = item.category === 'videocasts'
+        ? `<div class="play-btn">▶</div>${runtime}`
+        : '';
+      return `<div class="card-thumb has-image ${style}"><img src="${img}" alt="" loading="lazy">${playOverlay}</div>`;
+    }
     if (item.category === 'videocasts') {
-      const runtime = item.runtime ? `<div class="runtime">${escapeHTML(item.runtime)}</div>` : '';
       return `<div class="card-thumb ${style}"><div class="play-btn">▶</div>${runtime}</div>`;
     }
     const icon = escapeHTML(item.icon || '◆');
