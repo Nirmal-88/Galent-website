@@ -177,7 +177,7 @@
       "domain": "delivery",
       "length": "10 MIN",
       "author": "BY ASHWIN BHARATH",
-      "href": "https://galent-website.vercel.app/admin/#/collections/posts/entries/quantum-ai-explained",
+      "href": "post.html?slug=quantum-ai-explained",
       "kind": "ESSAY",
       "title": "Quantum AI Explained",
       "runtime": "-",
