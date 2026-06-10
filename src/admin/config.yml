@@ -64,3 +64,29 @@ collections:
               - { name: "thumbStyle", label: "Thumb tint",    widget: "select", options: ["alt-1", "alt-2", "alt-3", "alt-4", "alt-5", "alt-6"], default: "alt-1" }
               - { name: "icon",       label: "Icon glyph",    widget: "string", required: false, hint: "Symbol shown on the thumb. ✎ ⚙ ◆ ⌘ ⊞ ◐ 📄  (leave blank for videocasts)" }
               - { name: "runtime",    label: "Runtime (videocasts only)", widget: "string", required: false, hint: "HH:MM e.g. 22:14" }
+
+  # ----------------------------------------------------------------------
+  # LEADERSHIP — About page founder cards. Lives in content/leadership.json.
+  # ----------------------------------------------------------------------
+  - name: "leadership"
+    label: "Leadership"
+    label_singular: "Leader"
+    description: "The four leaders shown on the About page. Add, edit, reorder or remove."
+    files:
+      - name: "team"
+        label: "Leadership team"
+        file: "src/content/leadership.json"
+        description: "Drag entries to reorder. Order in the list = order on the About page."
+        fields:
+          - label: "Leaders"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.name}} — {{fields.role}}"
+            fields:
+              - { name: "id",         label: "Slug",        widget: "string", hint: "Lower-case, hyphens. Internal key, not shown to users. e.g. jane-smith" }
+              - { name: "name",       label: "Name",        widget: "string" }
+              - { name: "role",       label: "Role",        widget: "string", hint: "e.g. CEO, President & COO, CTO" }
+              - { name: "bio",        label: "Bio",         widget: "text",   hint: "1-2 paragraph description of their background and role at Galent" }
+              - { name: "photo",      label: "Photo",       widget: "image",  media_folder: "/src/assets/images/leadership", public_folder: "assets/images/leadership", hint: "Portrait photo, ideally 4:5 aspect ratio. Will be cropped to face/torso." }
+              - { name: "alt",        label: "Image alt text", widget: "string", required: false, hint: "Description for screen readers, e.g. 'Jane Smith, CEO of Galent'" }
+              - { name: "connectUrl", label: "Connect URL", widget: "string", required: false, hint: "Where the Connect button links to (e.g. LinkedIn profile). Leave as # for no link." }

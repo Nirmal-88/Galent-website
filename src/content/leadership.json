@@ -1,0 +1,41 @@
+{
+  "_about": "Galent leadership team shown on the About page. Edit via the /admin/ panel.",
+  "items": [
+    {
+      "id": "ashwin-bharath",
+      "name": "Ashwin Bharath",
+      "role": "CEO",
+      "bio": "A digital transformation and talent leader, Ashwin has 25 years of experience in workforce strategy, technology training, product development and IT services delivery. At Galent, he personally leads client relationships and talent strategy.",
+      "photo": "assets/images/leadership/ashwin-bharath.png",
+      "alt": "Ashwin Bharath, CEO of Galent",
+      "connectUrl": "#"
+    },
+    {
+      "id": "shankar-iyer",
+      "name": "Shankar Iyer",
+      "role": "President & COO",
+      "bio": "A business builder and value driver, Shankar has nearly 30 years of experience as a management consultant, entrepreneur and transformation agent. At Galent, he drives operational excellence in all customer projects.",
+      "photo": "assets/images/leadership/shankar-iyer.png",
+      "alt": "Shankar Iyer, President & COO of Galent",
+      "connectUrl": "#"
+    },
+    {
+      "id": "sriram-rajagopal",
+      "name": "Sriram Rajagopal",
+      "role": "Founder",
+      "bio": "As a talent development leader and people problem-solver, Sriram's job is to find the right person for the right job. With 30 years in business, he designs and operates the talent supply chain for successful IT services delivery.",
+      "photo": "assets/images/leadership/sriram-rajagopal.png",
+      "alt": "Sriram Rajagopal, Founder of Galent",
+      "connectUrl": "#"
+    },
+    {
+      "id": "ramakrishnan",
+      "name": "Ramakrishnan",
+      "role": "CTO",
+      "bio": "Ram is a technology and business leader with over 25 years of experience in product engineering, large-scale technology transformation and digital innovation. At Galent, Ram leads AI-native transformation for global enterprises.",
+      "photo": "assets/images/leadership/ramakrishnan.png",
+      "alt": "Ramakrishnan, CTO of Galent",
+      "connectUrl": "#"
+    }
+  ]
+}
