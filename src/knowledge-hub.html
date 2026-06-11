@@ -142,28 +142,17 @@
     <section style="padding-top: var(--space-2xl);">
       <div class="container">
         <div class="hub-toolbar" data-reveal>
-          <div class="hub-tabs" role="tablist" aria-label="Knowledge categories">
-            <button class="hub-tab active" data-target="panel-all" role="tab" aria-selected="true" aria-controls="panel-all" tabindex="0">All <span class="count">12</span></button>
-            <button class="hub-tab" data-target="panel-blogs" role="tab" aria-selected="false" aria-controls="panel-blogs" tabindex="0">Blogs <span class="count">6</span></button>
-            <button class="hub-tab" data-target="panel-whitepapers" role="tab" aria-selected="false" aria-controls="panel-whitepapers" tabindex="0">Whitepapers <span class="count">3</span></button>
-            <button class="hub-tab" data-target="panel-videocasts" role="tab" aria-selected="false" aria-controls="panel-videocasts" tabindex="0">Videocasts <span class="count">3</span></button>
-          </div>
+          <!-- Tabs are rendered dynamically from content/knowledge.json -->
+          <div class="hub-tabs" role="tablist" aria-label="Knowledge categories"></div>
           <div class="hub-search">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
             <input type="search" placeholder="Search within active section…" aria-label="Search hub content">
           </div>
         </div>
 
-        <!-- CMS-driven panels — cards rendered by js/cms.js from content/knowledge.json -->
-        <div class="hub-panel" id="panel-blogs" role="tabpanel" aria-hidden="true">
-          <div class="card-grid"></div>
-        </div>
-        <div class="hub-panel" id="panel-whitepapers" role="tabpanel" aria-hidden="true">
-          <div class="card-grid"></div>
-        </div>
-        <div class="hub-panel" id="panel-videocasts" role="tabpanel" aria-hidden="true">
-          <div class="card-grid"></div>
-        </div>
+        <!-- CMS-driven tabs + panels — built by js/cms.js from content/knowledge.json.
+             Add or remove categories via /admin/ -> Knowledge Hub -> Categories. -->
+        <div class="hub-panels"></div>
       </div>
     </section>
 

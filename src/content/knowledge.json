@@ -1,20 +1,23 @@
 {
   "$schema": "https://galent-website.vercel.app/content/knowledge.schema.json",
   "_about": "Galent Knowledge Hub content. Edit this file to add, change or remove items in the Hub. Push the change to GitHub and Vercel will redeploy. See content/README.md for the schema.",
-  "categories": {
-    "blogs": {
+  "categories": [
+    {
+      "id": "blogs",
       "label": "Blogs",
       "ctaLabel": "Read essay"
     },
-    "whitepapers": {
+    {
+      "id": "whitepapers",
       "label": "Whitepapers",
       "ctaLabel": "Request access"
     },
-    "videocasts": {
+    {
+      "id": "videocasts",
       "label": "Videocasts",
       "ctaLabel": "Watch"
     }
-  },
+  ],
   "items": [
     {
       "excerpt": "Notes from the Indiaspora Global AI Summit 2026 panel on the global race for AI and the next tech services revolution.",

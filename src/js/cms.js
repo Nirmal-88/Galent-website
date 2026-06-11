@@ -89,11 +89,63 @@
     if (counter) counter.textContent = String(count);
   }
 
+  // Normalise categories to a list of { id, label, ctaLabel } — supports both
+  // the new array form and the legacy object map.
+  function normaliseCategories(input) {
+    if (Array.isArray(input)) {
+      return input
+        .filter((c) => c && c.id)
+        .map((c) => ({
+          id: String(c.id),
+          label: c.label || c.id,
+          ctaLabel: c.ctaLabel || 'Read',
+        }));
+    }
+    if (input && typeof input === 'object') {
+      return Object.keys(input).map((id) => ({
+        id,
+        label: (input[id] && input[id].label) || id,
+        ctaLabel: (input[id] && input[id].ctaLabel) || 'Read',
+      }));
+    }
+    return [];
+  }
+
+  // Build the tab bar + panel containers from the categories list.
+  // The "All" tab is always present and selected by default.
+  function buildShell(categories) {
+    const tabsHost = document.querySelector('.hub-tabs');
+    const panelsHost = document.querySelector('.hub-panels');
+    if (!tabsHost || !panelsHost) return;
+
+    const totalAll = categories.reduce((sum, c) => sum + (c._count || 0), 0);
+
+    // Tabs — "All" first, then one per category
+    const tabsHTML = [
+      `<button class="hub-tab active" data-target="panel-all" role="tab" aria-selected="true" aria-controls="panel-all" tabindex="0">All <span class="count">${totalAll}</span></button>`,
+    ].concat(
+      categories.map(
+        (c) =>
+          `<button class="hub-tab" data-target="panel-${escapeHTML(c.id)}" role="tab" aria-selected="false" aria-controls="panel-${escapeHTML(c.id)}" tabindex="0">${escapeHTML(c.label)} <span class="count">${c._count || 0}</span></button>`
+      )
+    );
+    tabsHost.innerHTML = tabsHTML.join('');
+
+    // Panels — one per category, each with an empty card-grid the
+    // existing rendering pipeline fills below.
+    panelsHost.innerHTML = categories
+      .map(
+        (c) =>
+          `<div class="hub-panel" id="panel-${escapeHTML(c.id)}" role="tabpanel" aria-hidden="true"><div class="card-grid"></div></div>`
+      )
+      .join('');
+  }
+
   HubCMS.render = function (data) {
-    const categories = (data && data.categories) || {};
+    const categories = normaliseCategories(data && data.categories);
     const items = Array.isArray(data && data.items) ? data.items : [];
 
-    // Group items by category
+    // Group items by category id
     const grouped = {};
     items.forEach((item) => {
       const cat = item.category || 'other';
@@ -101,17 +153,21 @@
       grouped[cat].push(item);
     });
 
-    // Render each known panel
-    Object.keys(categories).forEach((catKey) => {
-      const panel = document.getElementById(`panel-${catKey}`);
-      if (!panel) return;
-      const list = grouped[catKey] || [];
-      renderPanel(panel, list, categories[catKey].ctaLabel || 'Read');
-      updateTabCount(`panel-${catKey}`, list.length);
+    // Decorate categories with their item counts (used by the shell builder)
+    categories.forEach((c) => {
+      c._count = (grouped[c.id] || []).length;
     });
 
-    // Update the "All" tab count
-    updateTabCount('panel-all', items.length);
+    // Build tabs + empty panels (or update counts if shell already there)
+    buildShell(categories);
+
+    // Render each panel's cards
+    categories.forEach((c) => {
+      const panel = document.getElementById(`panel-${c.id}`);
+      if (!panel) return;
+      const list = grouped[c.id] || [];
+      renderPanel(panel, list, c.ctaLabel);
+    });
 
     // Re-trigger reveal animation on freshly inserted cards
     if (window.Galent && typeof window.Galent.persistentReveal === 'function') {
@@ -213,11 +269,12 @@
       HubCMS.render(data);
     } catch (err) {
       console.error('[HubCMS] Failed to load content:', err);
-      const panels = document.querySelectorAll('.hub-panel .card-grid');
-      panels.forEach((g) => {
-        g.innerHTML = `<div class="hub-empty" style="display:block;"><strong>Couldn't load content.</strong>Check <code>content/knowledge.json</code> for syntax errors.</div>`;
-      });
+      const panelsHost = document.querySelector('.hub-panels');
+      if (panelsHost) {
+        panelsHost.innerHTML = `<div class="hub-panel active"><div class="card-grid"><div class="hub-empty" style="display:block;"><strong>Couldn't load content.</strong>Check <code>content/knowledge.json</code> for syntax errors.</div></div></div>`;
+      }
     }
+    // Tabs + search wired AFTER render() builds the shell
     HubCMS.initTabs();
     HubCMS.initSearch();
   };

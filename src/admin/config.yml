@@ -32,20 +32,16 @@ collections:
         file: "src/content/knowledge.json"
         description: "All items shown on the Hub page. Drag to reorder. Click an item to edit."
         fields:
-          - { name: "categories", label: "Categories (do not change unless you know what you're doing)", widget: "object", collapsed: true, fields: [
-              { name: "blogs",       label: "Blogs",       widget: "object", fields: [
-                { name: "label",    label: "Tab label",          widget: "string" },
-                { name: "ctaLabel", label: "Card CTA label",     widget: "string" }
-              ]},
-              { name: "whitepapers", label: "Whitepapers", widget: "object", fields: [
-                { name: "label",    label: "Tab label",          widget: "string" },
-                { name: "ctaLabel", label: "Card CTA label",     widget: "string" }
-              ]},
-              { name: "videocasts",  label: "Videocasts",  widget: "object", fields: [
-                { name: "label",    label: "Tab label",          widget: "string" },
-                { name: "ctaLabel", label: "Card CTA label",     widget: "string" }
-              ]}
-            ] }
+          - label: "Categories"
+            name: "categories"
+            widget: "list"
+            collapsed: true
+            summary: "{{fields.label}} ({{fields.id}})"
+            hint: "Tabs shown on the Knowledge Hub. Add a new entry to introduce a new tab (e.g. Podcasts). Drag to reorder. Each item's 'Category' field must match one of these ids."
+            fields:
+              - { name: "id",       label: "ID (slug)",      widget: "string", hint: "Lower-case, hyphens. Used as a key. e.g. blogs, whitepapers, podcasts" }
+              - { name: "label",    label: "Tab label",      widget: "string", hint: "What's shown on the tab button. e.g. Blogs" }
+              - { name: "ctaLabel", label: "Card CTA label", widget: "string", hint: "Button text on cards in this category. e.g. Read essay, Watch, Listen" }
 
           - label: "Items"
             name: "items"
@@ -53,7 +49,7 @@ collections:
             summary: "{{fields.kind}} · {{fields.title}}"
             fields:
               - { name: "id",         label: "Slug",          widget: "string", hint: "Lower-case, hyphens. Used as a key. e.g. why-pocs-fail" }
-              - { name: "category",   label: "Category",      widget: "select",  options: ["blogs", "whitepapers", "videocasts"] }
+              - { name: "category",   label: "Category",      widget: "string", hint: "Must exactly match an ID from the Categories list above. e.g. blogs, whitepapers, videocasts, or any new ID you added." }
               - { name: "kind",       label: "Kind label",    widget: "string", default: "ESSAY", hint: "Shown on the card — ESSAY, WHITEPAPER, VIDEOCAST, FIELD NOTE, BRIEF" }
               - { name: "title",      label: "Title",         widget: "string" }
               - { name: "excerpt",    label: "Excerpt",       widget: "text",   hint: "1–2 sentence preview shown on the card" }
