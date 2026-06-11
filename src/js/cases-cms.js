@@ -18,11 +18,13 @@
   function renderCard(item) {
     return `
       <article class="case-study">
-        <span class="anon">${escapeHTML(item.sector || '')}</span>
-        <p class="problem">${escapeHTML(item.problem || '')}</p>
-        <div class="metric-row">
+        <div class="case-headline">
           <span class="metric-big">${escapeHTML(item.metricBig || '')}</span>
           <span class="metric-desc">${escapeHTML(item.metricDesc || '')}</span>
+        </div>
+        <div class="case-footer">
+          <span class="anon">${escapeHTML(item.sector || '')}</span>
+          <p class="problem">${escapeHTML(item.problem || '')}</p>
         </div>
       </article>
     `;
