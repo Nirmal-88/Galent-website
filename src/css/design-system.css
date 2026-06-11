@@ -220,11 +220,32 @@ em.ac-o { color: var(--brand-orange); font-style: normal; }
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  transition: background .15s ease;
+  position: relative;
+  transition: color .15s ease;
 }
-.dropdown-toggle:hover { background: var(--surface-container); }
-.dropdown-toggle .caret { font-size: 9px; transition: transform .2s ease; opacity: 0.7; }
-.has-dropdown.open .dropdown-toggle { background: var(--surface-container); }
+/* Match the underline hover effect from .nav .menu a */
+.dropdown-toggle::after {
+  content: '';
+  position: absolute;
+  left: 14px; right: 14px; bottom: 2px;
+  height: 2px;
+  background: var(--page-accent, var(--brand-purple));
+  border-radius: 1px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .2s var(--ease-out);
+}
+.dropdown-toggle:hover::after,
+.has-dropdown.open .dropdown-toggle::after { transform: scaleX(1); }
+.dropdown-toggle:hover { background: transparent; }
+.dropdown-toggle .caret {
+  font-size: 13px;
+  line-height: 1;
+  opacity: 0.85;
+  margin-left: 2px;
+  transition: transform .2s ease;
+}
+.has-dropdown.open .dropdown-toggle { background: transparent; }
 .has-dropdown.open .dropdown-toggle .caret { transform: rotate(180deg); }
 
 .dropdown-panel {
