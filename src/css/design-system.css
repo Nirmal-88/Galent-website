@@ -185,9 +185,22 @@ em.ac-o { color: var(--brand-orange); font-style: normal; }
   font-size: 14.5px;
   font-weight: 500;
   color: var(--on-surface);
-  transition: background .15s ease, color .15s ease;
+  position: relative;
+  transition: color .15s ease;
 }
-.nav .menu a:hover { background: var(--surface-container); color: var(--on-surface); }
+/* Hover state — single effect: a thin underline that animates in from the left */
+.nav .menu a:not(.btn)::after {
+  content: '';
+  position: absolute;
+  left: 14px; right: 14px; bottom: 2px;
+  height: 2px;
+  background: var(--page-accent, var(--brand-purple));
+  border-radius: 1px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .2s var(--ease-out);
+}
+.nav .menu a:not(.btn):hover::after { transform: scaleX(1); }
 .nav .menu a.btn { color: var(--surface); background: var(--on-surface); }
 .nav .menu a.btn:hover { background: var(--grey-1000); color: var(--surface); }
 .nav .menu .sep { width: 1px; height: 18px; background: var(--surface-container-higher); margin: 0 4px; }
@@ -3099,20 +3112,13 @@ body[data-page] .svc li a:hover, body[data-page] .svc li a:hover .meta { color: 
   50%     { transform: translate(-50%, 6px); }
 }
 
-/* NAV — active page state */
+/* NAV — active page state. Same underline as hover, just held visible. */
 .nav .menu a[aria-current="page"] {
   font-weight: 600;
-  background: var(--surface-container);
   color: var(--on-surface);
-  position: relative;
 }
-.nav .menu a[aria-current="page"]::after {
-  content: '';
-  position: absolute;
-  left: 14px; right: 14px; bottom: 2px;
-  height: 2px;
-  background: var(--page-accent, var(--brand-purple));
-  border-radius: 1px;
+.nav .menu a:not(.btn)[aria-current="page"]::after {
+  transform: scaleX(1);
 }
 .nav .menu a.btn[aria-current="page"]::after { display: none; }
 
