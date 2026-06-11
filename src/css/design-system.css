@@ -592,6 +592,7 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   line-height: 1;
   color: var(--f-color);
   margin: 4px 0 0;
+  white-space: nowrap;
 }
 .feature .big .unit {
   font-size: 0.42em;
@@ -678,7 +679,9 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   line-height: 1;
   margin-bottom: var(--space-sm);
   color: var(--on-surface);
+  white-space: nowrap;
 }
+.stat-strip .label { text-wrap: balance; }
 .stat-strip .big .unit { font-size: 0.5em; font-weight: 400; opacity: 0.6; margin-left: 4px; }
 .stat-strip .item.p .big { color: var(--brand-purple); }
 .stat-strip .item.g .big { color: var(--brand-green-deep); }
@@ -2219,6 +2222,7 @@ body[data-page] .svc li a:hover, body[data-page] .svc li a:hover .meta { color: 
   letter-spacing: -1.6px;
   line-height: 0.95;
   color: var(--card-color);
+  white-space: nowrap;
 }
 .case-study .metric-desc {
   font-size: 14.5px;
@@ -3739,7 +3743,9 @@ body[data-page] .svc li a:hover, body[data-page] .svc li a:hover .meta { color: 
   letter-spacing: -1.6px;
   line-height: 1;
   color: #FFFFFF;
+  white-space: nowrap;
 }
+.outcome-stat .label { text-wrap: balance; max-width: 18ch; margin-inline: auto; }
 .outcome-stat .big .unit {
   font-size: 0.5em;
   opacity: 0.6;
