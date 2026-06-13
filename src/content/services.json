@@ -748,5 +748,223 @@
         }
       ]
     }
+  },
+  "knowledge-graph": {
+    "label": "Knowledge Graph",
+    "outcomes": {
+      "title": "Intelligence that <em class=\"ac-p\">compounds.</em>",
+      "stats": [
+        {
+          "value": "900",
+          "unit": "×",
+          "label": "Faster graph construction",
+          "tint": "p"
+        },
+        {
+          "value": "95",
+          "unit": "%",
+          "label": "Estate coverage",
+          "tint": "g"
+        },
+        {
+          "value": "90",
+          "unit": "%",
+          "label": "Cache hit rate",
+          "tint": "o"
+        },
+        {
+          "value": "90",
+          "unit": "%",
+          "label": "Lower inference cost",
+          "tint": "p"
+        }
+      ]
+    },
+    "capabilities": {
+      "title": "Four building blocks. <em class=\"ac-p\">One reasoning backbone.</em>",
+      "items": [
+        {
+          "num": "4.1",
+          "title": "Enterprise Knowledge Graph Spine",
+          "kicker": "A unified system of record for the whole estate",
+          "bullets": [
+            "Unified record across code, services, data, operations and governance",
+            "Relationship-rich modelling of dependencies, ownership and policy",
+            "Real-time updates via Git, service mesh, data catalogs and ITSM",
+            "Batched UNWIND operations — 900× faster graph construction"
+          ]
+        },
+        {
+          "num": "4.2",
+          "title": "Knowledge Fabric",
+          "kicker": "Canonical reference plane for context-aware reasoning",
+          "bullets": [
+            "Fuses graph intelligence, memory-augmented agents and RAG",
+            "Context-aware reasoning grounded in enterprise truth",
+            "Blast-radius, centrality and shortest-path algorithms at scale"
+          ]
+        },
+        {
+          "num": "4.3",
+          "title": "Memory-Augmented Agent Runtime",
+          "kicker": "Stateless execution → organisational intelligence",
+          "bullets": [
+            "Multi-tier memory: short-term, episodic, semantic, long-term",
+            "Auto-promotes successful actions into reusable knowledge",
+            "Compounding learning across every execution"
+          ]
+        },
+        {
+          "num": "4.4",
+          "title": "RAG Fusion Layer",
+          "kicker": "Precision context at enterprise economics",
+          "bullets": [
+            "Hybrid retrieval across graph traversal and vector similarity",
+            "Cache-aware context reuse for high-performance inference",
+            "Minimal token overhead, maximum confidence"
+          ]
+        }
+      ]
+    }
+  },
+  "context-graph": {
+    "label": "Context Graph",
+    "outcomes": {
+      "title": "Autonomy that's <em class=\"ac-g\">accountable.</em>",
+      "stats": [
+        {
+          "value": "45",
+          "unit": "s",
+          "label": "Autonomous incident resolution",
+          "tint": "p"
+        },
+        {
+          "value": "92",
+          "unit": "%",
+          "label": "Automation across workflows",
+          "tint": "g"
+        },
+        {
+          "value": "10",
+          "unit": "×",
+          "label": "Velocity gain",
+          "tint": "o"
+        },
+        {
+          "value": "98",
+          "unit": "%",
+          "label": "Consistency at scale",
+          "tint": "p"
+        }
+      ]
+    },
+    "capabilities": {
+      "title": "Three pillars. <em class=\"ac-g\">One execution-safe intelligence layer.</em>",
+      "items": [
+        {
+          "num": "4.1",
+          "title": "The \"What Should Be\" Layer",
+          "kicker": "Typed, time-versioned graph of enterprise reality",
+          "bullets": [
+            "Models services, data, users, goals, failures, decisions and policies",
+            "Immutable, versioned, time-indexed for full historical traceability",
+            "Neuro-symbolic reasoning from current state to target state",
+            "Risk-assessed execution plans and blast-radius prediction"
+          ]
+        },
+        {
+          "num": "4.2",
+          "title": "Tiered Memory System",
+          "kicker": "Persistent memory that learns, adapts, improves",
+          "bullets": [
+            "Execution Memory: in-flight state, strategies, tool outputs",
+            "Episodic Memory: past runs, failures and root causes",
+            "Semantic Memory: generalised workflows and reusable knowledge",
+            "Principle Memory: policies, invariants and compliance rules"
+          ]
+        },
+        {
+          "num": "4.3",
+          "title": "Provenance-Native Decisioning",
+          "kicker": "Every action linked to its full execution lineage",
+          "bullets": [
+            "Links every decision to context consulted and memory referenced",
+            "Records strategy selected, policy evaluated and outcome observed",
+            "Enables explainability, audits and rollback safety",
+            "Regulatory compliance by default"
+          ]
+        }
+      ]
+    }
+  },
+  "talent": {
+    "label": "Talent Capability Stack",
+    "outcomes": {
+      "title": "Measurable impact on <em class=\"ac-o\">workforce and delivery.</em>",
+      "stats": [
+        {
+          "value": "40–45",
+          "unit": "%",
+          "label": "Faster time-to-hire",
+          "tint": "p"
+        },
+        {
+          "value": "60",
+          "unit": "%",
+          "label": "Higher passive conversion",
+          "tint": "g"
+        },
+        {
+          "value": "35–40",
+          "unit": "%",
+          "label": "Quality-of-hire improvement",
+          "tint": "o"
+        },
+        {
+          "value": "20–30",
+          "unit": "%",
+          "label": "Faster product go-to-market",
+          "tint": "p"
+        }
+      ]
+    },
+    "capabilities": {
+      "title": "Three layers. <em class=\"ac-o\">One operating system for engineering capability.</em>",
+      "items": [
+        {
+          "num": "4.1",
+          "title": "Talent Graph Intelligence™",
+          "kicker": "Decision-grade workforce intelligence before transformation",
+          "bullets": [
+            "Global Capability Mapping — skill concentration and supply hubs",
+            "Skill Adjacency Modelling — realistic workforce transition pathways",
+            "Competitive Talent Intelligence — hiring velocity and leadership movements",
+            "Workforce Build Simulation — time-to-assemble and geographic trade-offs"
+          ]
+        },
+        {
+          "num": "4.2",
+          "title": "Talent Orchestration Engine™",
+          "kicker": "Architecture, governance and control for capability deployment",
+          "bullets": [
+            "Structured Pod Architecture — skill clusters, seniority, governance tiers",
+            "Intelligence-Led Talent Curation — rigorous technical evaluation",
+            "Governance & Oversight Framework — RACI, escalation, milestone delivery",
+            "Continuous Delivery Intelligence — velocity, capacity and gap detection"
+          ]
+        },
+        {
+          "num": "4.3",
+          "title": "AI-Native Engineering Pods",
+          "kicker": "Outcome-driven engineering units for enterprise delivery",
+          "bullets": [
+            "Senior technical lead accountable for delivery ownership",
+            "Milestone-based delivery + sprint governance cadence",
+            "Quality, stability and executive reporting built in",
+            "Built for modernisation, AI integration and platform re-architecture"
+          ]
+        }
+      ]
+    }
   }
 }
