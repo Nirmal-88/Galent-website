@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/design-system.css?v=flagship-1">
+  <link rel="stylesheet" href="css/design-system.css?v=storytelling-1">
   <link rel="icon" href="assets/images/logo.png?v=4" type="image/png">
 
   <meta property="og:type" content="website">
@@ -81,131 +81,25 @@
 
   <main id="top">
 
-    <!-- 01 COMMAND-CENTER HERO — text left, GalentAI live dashboard right -->
-    <section id="hero" class="hero hero--command" aria-labelledby="hero-title">
+    <!-- 01 HERO — kinetic network backdrop -->
+    <section id="hero" class="hero" aria-labelledby="hero-title">
       <div class="hero-network" aria-hidden="true">
         <canvas id="cv-network"></canvas>
       </div>
-      <div class="hero-command-grid">
-        <div class="hero-content hero-content--left">
-          <span class="badge"><span class="dot">01</span>Platform · FDE · AI-native delivery</span>
-          <h1 id="hero-title" class="t-hero">
-            <span style="display:block;white-space:nowrap;">Engineering <em class="ac-p">Outcomes.</em></span>
-            <span style="display:block;">Not Headcount.</span>
-          </h1>
-          <p class="t-body-lg hero-lede">
-            Technology services delivered at <strong style="color:#FFFFFF;font-weight:600;">3–4× the velocity</strong> — every programme powered by <strong style="color:#FFFFFF;font-weight:600;">GalentAI</strong>.
-          </p>
-          <div class="cta-row">
-            <button type="button" data-contact class="btn">Talk to us <span class="arr">→</span></button>
-            <a href="fde.html" class="btn ghost">Talk to an FDE <span class="arr">→</span></a>
-          </div>
+      <div class="hero-content">
+        <span class="badge"><span class="dot">01</span>Galent · Technology Services</span>
+        <h1 id="hero-title" class="t-hero">
+          <span style="display:block;white-space:nowrap;">Engineering <em class="ac-p">Outcomes.</em></span>
+          <span style="display:block;">Not Headcount.</span>
+        </h1>
+        <p class="t-body-lg hero-lede">
+          Technology services delivered at <strong style="color:#FFFFFF;font-weight:600;">3–4× the velocity</strong> — every programme powered by <strong style="color:#FFFFFF;font-weight:600;">GalentAI</strong>.
+        </p>
+        <div class="cta-row">
+          <button type="button" data-contact class="btn">Talk to us <span class="arr">→</span></button>
+          <a href="fde.html" class="btn ghost">Talk to an FDE <span class="arr">→</span></a>
         </div>
-
-        <!-- GalentAI · Live — enterprise dashboard mock. Static SVG/HTML.
-             Purpose: in the first 2 seconds, signal "this is a real platform". -->
-        <aside class="command-deck" aria-hidden="true">
-          <div class="command-deck__chrome">
-            <div class="command-deck__title">
-              <span class="command-deck__brand">GalentAI</span>
-              <span class="command-deck__live"><span class="command-deck__live-dot"></span>Live</span>
-            </div>
-            <div class="command-deck__breadcrumb">Programmes · APAC + EMEA</div>
-          </div>
-
-          <!-- Status row -->
-          <div class="command-deck__status">
-            <div class="status-pill">
-              <span class="status-pill__label">Programmes</span>
-              <span class="status-pill__value">12</span>
-            </div>
-            <div class="status-pill">
-              <span class="status-pill__label">Regions</span>
-              <span class="status-pill__value">4</span>
-            </div>
-            <div class="status-pill status-pill--ok">
-              <span class="status-pill__label">SOC 2</span>
-              <span class="status-pill__value">✓</span>
-            </div>
-            <div class="status-pill status-pill--ok">
-              <span class="status-pill__label">SLOs</span>
-              <span class="status-pill__value">99.9%</span>
-            </div>
-          </div>
-
-          <!-- Mini context-graph viz -->
-          <div class="command-deck__panel">
-            <div class="command-deck__panel-head">
-              <span class="command-deck__panel-title">Context Graph</span>
-              <span class="command-deck__panel-meta">2,147 entities · 8,931 edges</span>
-            </div>
-            <svg class="command-deck__graph" viewBox="0 0 360 140" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Live context graph">
-              <g stroke="rgba(255,255,255,0.22)" stroke-width="1" fill="none">
-                <line x1="40"  y1="40"  x2="120" y2="20"/>
-                <line x1="120" y1="20"  x2="200" y2="50"/>
-                <line x1="40"  y1="40"  x2="80"  y2="100"/>
-                <line x1="80"  y1="100" x2="180" y2="110"/>
-                <line x1="120" y1="20"  x2="180" y2="110"/>
-                <line x1="200" y1="50"  x2="260" y2="30"/>
-                <line x1="200" y1="50"  x2="280" y2="80"/>
-                <line x1="260" y1="30"  x2="320" y2="60"/>
-                <line x1="280" y1="80"  x2="320" y2="60"/>
-                <line x1="180" y1="110" x2="280" y2="80"/>
-                <line x1="320" y1="60"  x2="340" y2="110"/>
-              </g>
-              <g>
-                <circle cx="40"  cy="40"  r="5"  fill="#7B2CBF"/>
-                <circle cx="120" cy="20"  r="4"  fill="#1ED197"/>
-                <circle cx="200" cy="50"  r="5"  fill="#7B2CBF"/>
-                <circle cx="80"  cy="100" r="3.5" fill="#FF5A1F"/>
-                <circle cx="180" cy="110" r="4"  fill="#1ED197"/>
-                <circle cx="260" cy="30"  r="4"  fill="#7B2CBF"/>
-                <circle cx="280" cy="80"  r="3.5" fill="#FF5A1F"/>
-                <circle cx="320" cy="60"  r="5"  fill="#1ED197"/>
-                <circle cx="340" cy="110" r="3"  fill="#4F46E5"/>
-              </g>
-              <!-- traveling signal dot -->
-              <circle r="3" fill="#FFFFFF" class="command-deck__signal">
-                <animateMotion dur="6.5s" repeatCount="indefinite" calcMode="linear">
-                  <mpath href="#cd-path"/>
-                </animateMotion>
-              </circle>
-              <path id="cd-path" d="M40 40 L120 20 L200 50 L260 30 L320 60 L280 80 L180 110 L80 100 L40 40" fill="none" stroke="none"/>
-            </svg>
-          </div>
-
-          <!-- Live KPI row -->
-          <div class="command-deck__kpis">
-            <div class="kpi">
-              <span class="kpi__label">Velocity</span>
-              <span class="kpi__value kpi__value--p">3.4<span class="kpi__unit">×</span></span>
-              <span class="kpi__delta">▲ 0.2 wk</span>
-            </div>
-            <div class="kpi">
-              <span class="kpi__label">PoC pass-through</span>
-              <span class="kpi__value kpi__value--g">89<span class="kpi__unit">%</span></span>
-              <span class="kpi__delta">▲ 3.1 pts</span>
-            </div>
-            <div class="kpi">
-              <span class="kpi__label">MTTR</span>
-              <span class="kpi__value kpi__value--o">45<span class="kpi__unit">s</span></span>
-              <span class="kpi__delta">▼ 64%</span>
-            </div>
-          </div>
-
-          <!-- Footer / mini sparkline -->
-          <div class="command-deck__foot">
-            <span class="command-deck__foot-label">Throughput · last 7d</span>
-            <svg class="command-deck__spark" viewBox="0 0 200 28" preserveAspectRatio="none" aria-hidden="true">
-              <polyline fill="none" stroke="#1ED197" stroke-width="1.5"
-                points="0,22 14,18 28,20 42,14 56,16 70,10 84,12 98,6 112,8 126,4 140,7 154,3 168,5 182,2 200,4"/>
-              <polyline fill="rgba(30,209,151,0.12)" stroke="none"
-                points="0,28 0,22 14,18 28,20 42,14 56,16 70,10 84,12 98,6 112,8 126,4 140,7 154,3 168,5 182,2 200,4 200,28"/>
-            </svg>
-          </div>
-        </aside>
       </div>
-
       <a href="#problem" class="scroll-chevron" aria-label="Scroll to next section">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
       </a>
@@ -291,196 +185,7 @@
       </div>
     </section>
 
-    <!-- FLAGSHIP — GalentAI Operating Model. Scroll-driven 5-layer architecture. -->
-    <section id="operating-model" class="panel-dark opmodel-section" aria-labelledby="opmodel-title">
-      <div class="container">
-        <div class="section-head opmodel-head" data-reveal>
-          <span class="badge"><span class="dot">04</span>The GalentAI Operating Model</span>
-          <h2 id="opmodel-title" class="t-h1" style="color:#fff;">A single execution path. <em style="color:var(--brand-green); font-style:normal;">Signals to outcomes.</em></h2>
-          <p class="t-body-lg" style="color:rgba(255,255,255,0.72);">Every request flows through five layers. Read top to bottom — that's the route a programme takes through GalentAI.</p>
-        </div>
-      </div>
-
-      <!-- The scroll-driven flagship diagram lives inside its own scroll
-           container. The .opmodel-canvas-stage is taller than the viewport
-           so we get scroll runway to animate the path. The .opmodel-canvas
-           is position:sticky so the diagram stays in view as the user
-           scrolls through it. -->
-      <div class="opmodel-stage" aria-hidden="true">
-        <div class="opmodel-sticky">
-          <div class="opmodel-frame">
-            <!-- Left: layer-labels rail that highlights with scroll progress -->
-            <ol class="opmodel-rail">
-              <li data-layer="1"><span class="opmodel-rail__dot"></span><span class="opmodel-rail__num">01</span><span class="opmodel-rail__label">Enterprise Signals</span></li>
-              <li data-layer="2"><span class="opmodel-rail__dot"></span><span class="opmodel-rail__num">02</span><span class="opmodel-rail__label">Context Graph</span></li>
-              <li data-layer="3"><span class="opmodel-rail__dot"></span><span class="opmodel-rail__num">03</span><span class="opmodel-rail__label">Reasoning Layer</span></li>
-              <li data-layer="4"><span class="opmodel-rail__dot"></span><span class="opmodel-rail__num">04</span><span class="opmodel-rail__label">Execution Layer</span></li>
-              <li data-layer="5"><span class="opmodel-rail__dot"></span><span class="opmodel-rail__num">05</span><span class="opmodel-rail__label">Business Outcomes</span></li>
-            </ol>
-
-            <!-- Middle: the SVG flow diagram -->
-            <div class="opmodel-canvas">
-              <svg viewBox="0 0 560 720" preserveAspectRatio="xMidYMid meet" role="img" aria-label="GalentAI five-layer operating model: Enterprise Signals to Business Outcomes">
-                <!-- soft glow under the path -->
-                <defs>
-                  <linearGradient id="opmodel-line" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%"  stop-color="#9CA3AF" stop-opacity="0.35"/>
-                    <stop offset="22%" stop-color="#7B2CBF" stop-opacity="0.7"/>
-                    <stop offset="48%" stop-color="#1ED197" stop-opacity="0.7"/>
-                    <stop offset="74%" stop-color="#FF5A1F" stop-opacity="0.7"/>
-                    <stop offset="100%" stop-color="#4F46E5" stop-opacity="0.7"/>
-                  </linearGradient>
-                  <radialGradient id="opmodel-node-p" cx="0.5" cy="0.5" r="0.6">
-                    <stop offset="0%" stop-color="#7B2CBF" stop-opacity="0.95"/>
-                    <stop offset="100%" stop-color="#4C1D8A" stop-opacity="0.85"/>
-                  </radialGradient>
-                  <radialGradient id="opmodel-node-g" cx="0.5" cy="0.5" r="0.6">
-                    <stop offset="0%" stop-color="#1ED197" stop-opacity="0.95"/>
-                    <stop offset="100%" stop-color="#0FB07F" stop-opacity="0.85"/>
-                  </radialGradient>
-                  <radialGradient id="opmodel-node-o" cx="0.5" cy="0.5" r="0.6">
-                    <stop offset="0%" stop-color="#FF5A1F" stop-opacity="0.95"/>
-                    <stop offset="100%" stop-color="#C73A00" stop-opacity="0.85"/>
-                  </radialGradient>
-                  <radialGradient id="opmodel-node-i" cx="0.5" cy="0.5" r="0.6">
-                    <stop offset="0%" stop-color="#818CF8" stop-opacity="0.95"/>
-                    <stop offset="100%" stop-color="#4F46E5" stop-opacity="0.85"/>
-                  </radialGradient>
-                  <radialGradient id="opmodel-node-n" cx="0.5" cy="0.5" r="0.6">
-                    <stop offset="0%" stop-color="#94A3B8" stop-opacity="0.85"/>
-                    <stop offset="100%" stop-color="#475569" stop-opacity="0.75"/>
-                  </radialGradient>
-                </defs>
-
-                <!-- vertical connecting path (the spine the data flows along) -->
-                <path id="opmodel-spine"
-                      d="M280 60 L280 660"
-                      stroke="url(#opmodel-line)" stroke-width="2" fill="none"
-                      stroke-linecap="round"
-                      stroke-dasharray="2400" stroke-dashoffset="2400"
-                      class="opmodel-spine"/>
-
-                <!-- 3 animated travelling tokens -->
-                <circle class="opmodel-token opmodel-token--1" r="5" fill="#FFFFFF" />
-                <circle class="opmodel-token opmodel-token--2" r="4" fill="#FFFFFF" />
-                <circle class="opmodel-token opmodel-token--3" r="3.5" fill="#FFFFFF" />
-
-                <!-- 5 LAYER NODES (top to bottom) -->
-                <!-- Layer 1 — Enterprise Signals (lots of small input squares feeding in) -->
-                <g class="opmodel-node opmodel-node--1" data-layer="1">
-                  <rect x="80"  y="40" width="60" height="44" rx="8" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)" />
-                  <rect x="160" y="40" width="60" height="44" rx="8" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)" />
-                  <rect x="340" y="40" width="60" height="44" rx="8" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)" />
-                  <rect x="420" y="40" width="60" height="44" rx="8" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)" />
-                  <text x="110" y="65" text-anchor="middle" class="opmodel-chip">Code</text>
-                  <text x="190" y="65" text-anchor="middle" class="opmodel-chip">Data</text>
-                  <text x="370" y="65" text-anchor="middle" class="opmodel-chip">Telemetry</text>
-                  <text x="450" y="65" text-anchor="middle" class="opmodel-chip">Policy</text>
-                  <!-- centre dot on the spine -->
-                  <circle cx="280" cy="62" r="14" fill="url(#opmodel-node-n)" />
-                  <text x="280" y="66" text-anchor="middle" class="opmodel-node-num">01</text>
-                </g>
-
-                <!-- Layer 2 — Context Graph (a small mesh of nodes/edges) -->
-                <g class="opmodel-node opmodel-node--2" data-layer="2">
-                  <g class="opmodel-mesh" transform="translate(140, 170)">
-                    <line x1="20" y1="30" x2="80" y2="10" stroke="rgba(123,44,191,0.55)" stroke-width="1" />
-                    <line x1="80" y1="10" x2="140" y2="30" stroke="rgba(123,44,191,0.55)" stroke-width="1" />
-                    <line x1="20" y1="30" x2="80" y2="60" stroke="rgba(123,44,191,0.55)" stroke-width="1" />
-                    <line x1="80" y1="60" x2="140" y2="30" stroke="rgba(123,44,191,0.55)" stroke-width="1" />
-                    <line x1="80" y1="60" x2="220" y2="60" stroke="rgba(123,44,191,0.55)" stroke-width="1" />
-                    <line x1="140" y1="30" x2="220" y2="10" stroke="rgba(123,44,191,0.55)" stroke-width="1" />
-                    <line x1="220" y1="10" x2="260" y2="40" stroke="rgba(123,44,191,0.55)" stroke-width="1" />
-                    <line x1="220" y1="60" x2="260" y2="40" stroke="rgba(123,44,191,0.55)" stroke-width="1" />
-                    <circle cx="20"  cy="30" r="4" fill="#7B2CBF"/>
-                    <circle cx="80"  cy="10" r="3" fill="#7B2CBF"/>
-                    <circle cx="80"  cy="60" r="3" fill="#7B2CBF"/>
-                    <circle cx="140" cy="30" r="4" fill="#7B2CBF"/>
-                    <circle cx="220" cy="10" r="3" fill="#7B2CBF"/>
-                    <circle cx="220" cy="60" r="3" fill="#7B2CBF"/>
-                    <circle cx="260" cy="40" r="2.5" fill="#7B2CBF"/>
-                  </g>
-                  <circle cx="280" cy="200" r="18" fill="url(#opmodel-node-p)" />
-                  <text x="280" y="205" text-anchor="middle" class="opmodel-node-num">02</text>
-                </g>
-
-                <!-- Layer 3 — Reasoning Layer (a stack of pills representing the engines) -->
-                <g class="opmodel-node opmodel-node--3" data-layer="3">
-                  <rect x="120" y="320" width="100" height="26" rx="13" fill="rgba(30,209,151,0.16)" stroke="rgba(30,209,151,0.45)" />
-                  <rect x="230" y="320" width="100" height="26" rx="13" fill="rgba(30,209,151,0.16)" stroke="rgba(30,209,151,0.45)" />
-                  <rect x="340" y="320" width="100" height="26" rx="13" fill="rgba(30,209,151,0.16)" stroke="rgba(30,209,151,0.45)" />
-                  <text x="170" y="338" text-anchor="middle" class="opmodel-chip">NeuroQL</text>
-                  <text x="280" y="338" text-anchor="middle" class="opmodel-chip">RCM Policy</text>
-                  <text x="390" y="338" text-anchor="middle" class="opmodel-chip">Memory</text>
-                  <circle cx="280" cy="370" r="18" fill="url(#opmodel-node-g)" />
-                  <text x="280" y="375" text-anchor="middle" class="opmodel-node-num">03</text>
-                </g>
-
-                <!-- Layer 4 — Execution Layer (workflow tracks) -->
-                <g class="opmodel-node opmodel-node--4" data-layer="4">
-                  <rect x="110" y="480" width="340" height="36" rx="10" fill="rgba(255,90,31,0.10)" stroke="rgba(255,90,31,0.35)" />
-                  <line x1="110" y1="498" x2="450" y2="498" stroke="rgba(255,90,31,0.55)" stroke-width="1" stroke-dasharray="3,4"/>
-                  <text x="138" y="503" text-anchor="middle" class="opmodel-chip">Plan</text>
-                  <text x="218" y="503" text-anchor="middle" class="opmodel-chip">Generate</text>
-                  <text x="300" y="503" text-anchor="middle" class="opmodel-chip">Review</text>
-                  <text x="378" y="503" text-anchor="middle" class="opmodel-chip">Deploy</text>
-                  <text x="430" y="503" text-anchor="middle" class="opmodel-chip">Verify</text>
-                  <circle cx="280" cy="540" r="18" fill="url(#opmodel-node-o)" />
-                  <text x="280" y="545" text-anchor="middle" class="opmodel-node-num">04</text>
-                </g>
-
-                <!-- Layer 5 — Outcomes -->
-                <g class="opmodel-node opmodel-node--5" data-layer="5">
-                  <rect x="120" y="630" width="80" height="46" rx="10" fill="rgba(79,70,229,0.16)" stroke="rgba(79,70,229,0.45)" />
-                  <rect x="210" y="630" width="80" height="46" rx="10" fill="rgba(79,70,229,0.16)" stroke="rgba(79,70,229,0.45)" />
-                  <rect x="300" y="630" width="80" height="46" rx="10" fill="rgba(79,70,229,0.16)" stroke="rgba(79,70,229,0.45)" />
-                  <rect x="390" y="630" width="80" height="46" rx="10" fill="rgba(79,70,229,0.16)" stroke="rgba(79,70,229,0.45)" />
-                  <text x="160" y="650" text-anchor="middle" class="opmodel-chip">Velocity</text>
-                  <text x="160" y="664" text-anchor="middle" class="opmodel-chip opmodel-chip--small">3–4×</text>
-                  <text x="250" y="650" text-anchor="middle" class="opmodel-chip">Accuracy</text>
-                  <text x="250" y="664" text-anchor="middle" class="opmodel-chip opmodel-chip--small">99%</text>
-                  <text x="340" y="650" text-anchor="middle" class="opmodel-chip">PoCs</text>
-                  <text x="340" y="664" text-anchor="middle" class="opmodel-chip opmodel-chip--small">85% ↓</text>
-                  <text x="430" y="650" text-anchor="middle" class="opmodel-chip">Modernise</text>
-                  <text x="430" y="664" text-anchor="middle" class="opmodel-chip opmodel-chip--small">15×</text>
-                </g>
-              </svg>
-            </div>
-
-            <!-- Right: synchronised description panel — updates with the active layer -->
-            <aside class="opmodel-detail">
-              <div class="opmodel-detail__card" data-detail="1">
-                <span class="opmodel-detail__tag">Layer 01</span>
-                <h3>Enterprise Signals</h3>
-                <p>Code, data, operations, telemetry and governance — read in continuously from where they already live. No retooling, no shadow stack.</p>
-              </div>
-              <div class="opmodel-detail__card" data-detail="2">
-                <span class="opmodel-detail__tag opmodel-detail__tag--p">Layer 02</span>
-                <h3>Context Graph</h3>
-                <p>A typed, time-versioned graph that captures dependencies, ownership, intent and policy applicability. Every entity immutable and traceable.</p>
-              </div>
-              <div class="opmodel-detail__card" data-detail="3">
-                <span class="opmodel-detail__tag opmodel-detail__tag--g">Layer 03</span>
-                <h3>Reasoning Layer</h3>
-                <p>NeuroQL, RCM policy and tiered memory work together — neuro-symbolic reasoning from current state to target state, with safety constraints enforced before action.</p>
-              </div>
-              <div class="opmodel-detail__card" data-detail="4">
-                <span class="opmodel-detail__tag opmodel-detail__tag--o">Layer 04</span>
-                <h3>Execution Layer</h3>
-                <p>Plan → Generate → Review → Deploy → Verify. Forward-Deployed Engineers own every critical decision. AI runs the loop.</p>
-              </div>
-              <div class="opmodel-detail__card" data-detail="5">
-                <span class="opmodel-detail__tag opmodel-detail__tag--i">Layer 05</span>
-                <h3>Business Outcomes</h3>
-                <p>3–4× velocity. 99% code accuracy. 85% fewer PoC failures. 15× faster modernisation. Auditable, production-grade outcomes — not demos.</p>
-              </div>
-            </aside>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 04b GALENT DIFFERENCE — comparison card (dark left / accent right) -->
+    <!-- 04 GALENT DIFFERENCE — comparison card (dark left / accent right) -->
     <section id="how" aria-labelledby="how-title">
       <div class="container">
         <div class="section-head" data-reveal>
@@ -905,7 +610,7 @@
   </footer>
 
   <script src="js/animations.js"></script>
-  <script src="js/cases-cms.js?v=cases-2"></script>
+  <script src="js/cases-cms.js?v=cases-1"></script>
   <script>
     Galent.network(document.getElementById('cv-network'));
     Galent.signal(document.getElementById('cv-signal'));
@@ -915,6 +620,6 @@
     Galent.countUps();
   </script>
 
-  <script src="js/premium.js?v=flagship-1" defer></script>
+  <script src="js/premium.js?v=premium-1" defer></script>
 </body>
 </html>

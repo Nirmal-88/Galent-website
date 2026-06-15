@@ -16,26 +16,12 @@
   }
 
   function renderCard(item) {
-    const ba = (item.before && item.after) ? `
-        <div class="ba-row">
-          <div class="ba-col ba-col--before">
-            <span class="ba-col__label">Before</span>
-            <span class="ba-col__value">${escapeHTML(item.before)}</span>
-          </div>
-          <span class="ba-arrow" aria-hidden="true">→</span>
-          <div class="ba-col ba-col--after">
-            <span class="ba-col__label">After</span>
-            <span class="ba-col__value">${escapeHTML(item.after)}</span>
-          </div>
-        </div>
-    ` : '';
     return `
       <article class="case-study">
         <div class="case-headline">
           <span class="metric-big">${escapeHTML(item.metricBig || '')}</span>
           <span class="metric-desc">${escapeHTML(item.metricDesc || '')}</span>
         </div>
-        ${ba}
         <div class="case-footer">
           <span class="anon">${escapeHTML(item.sector || '')}</span>
           <p class="problem">${escapeHTML(item.problem || '')}</p>

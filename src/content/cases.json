@@ -1,32 +1,26 @@
 {
-  "_about": "Client outcomes shown on the home page. Each entry is a transformation story — before / after.",
+  "_about": "Client outcomes shown in the 'What Gets Delivered' section on the home page. Edit via /admin/.",
   "items": [
     {
       "id": "tech-deployment",
       "sector": "Technology",
-      "metricBig": "10×",
-      "metricDesc": "faster model deployment. Dev cycles from months to days.",
       "problem": "AI deployment bottlenecked by manual pipeline development.",
-      "before": "18 months to ship",
-      "after": "6 weeks to ship"
+      "metricBig": "10×",
+      "metricDesc": "faster model deployment. Dev cycles from months to days."
     },
     {
       "id": "bfsi-crm",
       "sector": "Financial Services",
-      "metricBig": "800%",
-      "metricDesc": "faster sales decisions. 100% regulatory compliance maintained.",
       "problem": "Legacy CRM blocking sales velocity and compliance.",
-      "before": "300 engineers",
-      "after": "90 engineers"
+      "metricBig": "800%",
+      "metricDesc": "faster sales decisions. 100% regulatory compliance maintained."
     },
     {
       "id": "healthcare-hipaa",
       "sector": "Healthcare",
-      "metricBig": "90%",
-      "metricDesc": "automation in data operations. Zero compliance breaches.",
       "problem": "HIPAA-compliant AI on sensitive patient data at scale.",
-      "before": "Manual audits",
-      "after": "Full lineage"
+      "metricBig": "90%",
+      "metricDesc": "automation in data operations. Zero compliance breaches."
     }
   ]
 }
