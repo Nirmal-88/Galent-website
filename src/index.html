@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/design-system.css?v=premium-1">
+  <link rel="stylesheet" href="css/design-system.css?v=storytelling-1">
   <link rel="icon" href="assets/images/logo.png?v=4" type="image/png">
 
   <meta property="og:type" content="website">
@@ -438,7 +438,72 @@
       </div>
     </section>
 
-    <!-- 09 KNOWLEDGE HUB -->
+    <!-- 09 TRUST & PROOF — certifications, patents, awards, testimonial -->
+    <section id="proof" aria-labelledby="proof-title">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="badge"><span class="dot">09</span>Trust &amp; Proof</span>
+          <h2 id="proof-title" class="t-h1">Built for <em class="ac-p">regulated production.</em></h2>
+          <p class="t-body-lg">Independently audited. Patent-protected. Recognised by enterprise risk, security and compliance teams as production-ready.</p>
+        </div>
+
+        <div class="proof-grid" data-stagger>
+          <!-- Certifications -->
+          <article class="proof-card" data-reveal>
+            <span class="proof-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+            </span>
+            <span class="proof-card__category">Certifications</span>
+            <h3 class="proof-card__title">SOC 2 Type II · ISO 27001</h3>
+            <p class="proof-card__detail">Annual third-party audits across security, availability, confidentiality. GDPR, HIPAA and PCI-DSS controls supported.</p>
+          </article>
+
+          <!-- Patents / IP -->
+          <article class="proof-card" data-reveal>
+            <span class="proof-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6 6 1-4.5 4.5L18 20l-6-3-6 3 1.5-6.5L3 9l6-1 3-6z"/></svg>
+            </span>
+            <span class="proof-card__category">Intellectual Property</span>
+            <h3 class="proof-card__title">2 patents pending</h3>
+            <p class="proof-card__detail">NeuroQL context-window management and RCM policy enforcement — the architectural primitives behind production-grade AI.</p>
+          </article>
+
+          <!-- Programmes -->
+          <article class="proof-card" data-reveal>
+            <span class="proof-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0z"/><path d="M12 7v5l3 2"/></svg>
+            </span>
+            <span class="proof-card__category">Programmes</span>
+            <h3 class="proof-card__title">12+ live engagements</h3>
+            <p class="proof-card__detail">From legacy modernisation at Fortune 500 banks to AI-native data platforms at global insurers — every programme audit-ready by default.</p>
+          </article>
+
+          <!-- Coverage -->
+          <article class="proof-card" data-reveal>
+            <span class="proof-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+            </span>
+            <span class="proof-card__category">Coverage</span>
+            <h3 class="proof-card__title">151+ languages · 1,115+ integrations</h3>
+            <p class="proof-card__detail">Cloud, hybrid and on-prem. All major LLMs. Composable on top of your existing tools, frameworks and infrastructure.</p>
+          </article>
+        </div>
+
+        <!-- Anonymised testimonial -->
+        <blockquote class="testimonial" data-reveal>
+          <p class="testimonial__quote">"Galent didn't sell us a platform pitch. They sat inside our programme, mapped the dependencies in days, and shipped against our SLOs — not theirs. That's a different conversation."</p>
+          <footer class="testimonial__attr">
+            <strong>VP Engineering</strong>
+            <span class="testimonial__attr-line">·</span>
+            <span>Global insurer, Tier-1 regulated</span>
+            <span class="testimonial__attr-line">·</span>
+            <span>Legacy modernisation programme</span>
+          </footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- KNOWLEDGE HUB -->
     <section id="hub-home" class="panel-dark" aria-labelledby="hub-title">
       <div class="container">
         <div class="section-head" data-reveal>
@@ -555,7 +620,6 @@
     Galent.countUps();
   </script>
 
-  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
   <script src="js/premium.js?v=premium-1" defer></script>
 </body>
 </html>

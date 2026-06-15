@@ -238,6 +238,106 @@
       </div>
     </section>
 
+    <!-- ARCHITECTURE STACK — enterprise reference diagram -->
+    <section id="architecture-stack" aria-labelledby="arch-stack-title">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="section-num">06b &middot; Reference Architecture</span>
+          <h2 id="arch-stack-title" class="t-h1">Five layers. <em class="ac-p">One execution path.</em></h2>
+          <p class="t-body-lg">From your raw enterprise signals through to auditable, production-grade outcomes — read top to bottom, that's the route a request takes.</p>
+        </div>
+
+        <div class="arch-stack" data-reveal>
+
+          <!-- LAYER 5 — Outcomes -->
+          <div class="arch-layer arch-layer--i" data-layer="5">
+            <div class="arch-layer__meta">
+              <span class="arch-layer__num">05</span>
+              <span class="arch-layer__title">Outcomes</span>
+              <span class="arch-layer__desc">Auditable, production-grade results.</span>
+            </div>
+            <div class="arch-layer__nodes">
+              <span class="arch-node">Ship</span>
+              <span class="arch-node">Resolve</span>
+              <span class="arch-node">Govern</span>
+              <span class="arch-node">Operate</span>
+              <span class="arch-node">Scale</span>
+            </div>
+          </div>
+
+          <!-- LAYER 4 — Workflows -->
+          <div class="arch-layer arch-layer--o" data-layer="4">
+            <div class="arch-layer__meta">
+              <span class="arch-layer__num">04</span>
+              <span class="arch-layer__title">Workflows</span>
+              <span class="arch-layer__desc">Service lines that run on top of the engines.</span>
+            </div>
+            <div class="arch-layer__nodes">
+              <span class="arch-node">Modernisation</span>
+              <span class="arch-node">Quality</span>
+              <span class="arch-node">ITSM</span>
+              <span class="arch-node">SRE</span>
+              <span class="arch-node">Data</span>
+              <span class="arch-node">Talent</span>
+            </div>
+          </div>
+
+          <!-- LAYER 3 — AI Engines -->
+          <div class="arch-layer arch-layer--g" data-layer="3">
+            <div class="arch-layer__meta">
+              <span class="arch-layer__num">03</span>
+              <span class="arch-layer__title">AI Engines</span>
+              <span class="arch-layer__desc">Four engines, one closed-loop execution system.</span>
+            </div>
+            <div class="arch-layer__nodes">
+              <span class="arch-node arch-node--solid">NeuroQL</span>
+              <span class="arch-node arch-node--solid">RCM Policy</span>
+              <span class="arch-node arch-node--solid">Knowledge Graph</span>
+              <span class="arch-node arch-node--solid">Context Graph</span>
+            </div>
+          </div>
+
+          <!-- LAYER 2 — Intelligence Backbone -->
+          <div class="arch-layer arch-layer--p" data-layer="2">
+            <div class="arch-layer__meta">
+              <span class="arch-layer__num">02</span>
+              <span class="arch-layer__title">Intelligence Backbone</span>
+              <span class="arch-layer__desc">Living, provenance-native, time-versioned.</span>
+            </div>
+            <div class="arch-layer__nodes">
+              <span class="arch-node">Entities</span>
+              <span class="arch-node">Relationships</span>
+              <span class="arch-node">Memory</span>
+              <span class="arch-node">Policies</span>
+              <span class="arch-node">Lineage</span>
+            </div>
+          </div>
+
+          <!-- LAYER 1 — Sources -->
+          <div class="arch-layer arch-layer--n" data-layer="1">
+            <div class="arch-layer__meta">
+              <span class="arch-layer__num">01</span>
+              <span class="arch-layer__title">Enterprise Signals</span>
+              <span class="arch-layer__desc">Read in continuously. No retooling required.</span>
+            </div>
+            <div class="arch-layer__nodes">
+              <span class="arch-node">Code (Git)</span>
+              <span class="arch-node">Service mesh</span>
+              <span class="arch-node">Data catalogs</span>
+              <span class="arch-node">ITSM</span>
+              <span class="arch-node">Telemetry</span>
+              <span class="arch-node">Governance</span>
+            </div>
+          </div>
+
+        </div>
+
+        <p class="arch-stack__legend" data-reveal>
+          A request flows up the stack: enterprise signals → reasoned by the intelligence backbone → executed by the engines → realised in workflows → measured as outcomes. Every step traceable. Every decision auditable.
+        </p>
+      </div>
+    </section>
+
     <!-- APPLIED AI AT SCALE — six stats -->
     <section class="panel-dark" style="padding: var(--space-4xl) 0;">
       <div class="container">
@@ -471,7 +571,6 @@
     catch (e) { console.error('enginesDiagram', e); }
   </script>
 
-  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
   <script src="js/premium.js?v=premium-1" defer></script>
 </body>
 </html>
