@@ -5884,8 +5884,9 @@ main > section + section:not(.panel-dark)::before {
   margin: 0 auto;
   position: relative;
   padding: 8px 0;
+  --arch-progress: 1;
 }
-/* Vertical execution path on the left */
+/* Vertical execution path on the left — scales top to bottom via --arch-progress */
 .arch-stack::before {
   content: "";
   position: absolute;
@@ -5893,6 +5894,8 @@ main > section + section:not(.panel-dark)::before {
   top: 18px;
   bottom: 18px;
   width: 2px;
+  transform: scaleY(var(--arch-progress));
+  transform-origin: top center;
   background: linear-gradient(180deg,
               color-mix(in srgb, #4F46E5 30%, transparent),
               color-mix(in srgb, var(--brand-orange) 30%, transparent),

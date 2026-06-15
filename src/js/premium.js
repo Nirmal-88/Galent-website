@@ -97,10 +97,154 @@
     if (chevron) tl.to(chevron, { opacity: 1, y: 0, duration: 0.5 }, 0.95);
   }
 
+  /* ----------------------------------------------------------------
+   * Shared helper — IntersectionObserver that fires once per element.
+   * ---------------------------------------------------------------- */
+  function onceInView(el, threshold, cb) {
+    if (!('IntersectionObserver' in window)) { cb(); return; }
+    let fired = false;
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting || fired) continue;
+        fired = true;
+        cb();
+        io.disconnect();
+      }
+    }, { threshold: threshold });
+    io.observe(el);
+  }
+
+  /* ----------------------------------------------------------------
+   * A. Home Outcomes — choreographed count-up + label reveal.
+   * When the dark "Numbers from live programmes" panel enters the
+   * viewport, the 4 big numbers count up smoothly and each label
+   * fades in 0.2s after its number lands.
+   * ---------------------------------------------------------------- */
+  function initOutcomesGSAP() {
+    if (REDUCED_MOTION) return;
+    if (typeof window.gsap !== 'object' && typeof window.gsap !== 'function') return;
+    if (!document.body || document.body.dataset.page !== 'home') return;
+
+    const section = document.getElementById('outcomes');
+    if (!section) return;
+    const stats = Array.from(section.querySelectorAll('.outcome-stat'));
+    if (!stats.length) return;
+    const gsap = window.gsap;
+
+    // Snapshot original numbers, hide initial state.
+    const cells = stats.map((stat) => {
+      const bigs = Array.from(stat.querySelectorAll('[data-countup]'));
+      const label = stat.querySelector('.label');
+      const targets = bigs.map((b) => parseFloat(b.getAttribute('data-countup')));
+      bigs.forEach((b) => { b.textContent = '0'; });
+      gsap.set(stat,  { opacity: 0, y: 12 });
+      if (label) gsap.set(label, { opacity: 0, y: 6 });
+      return { stat, bigs, label, targets };
+    });
+
+    onceInView(section, 0.3, function () {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      cells.forEach((cell, i) => {
+        const stagger = i * 0.12;
+        tl.to(cell.stat, { opacity: 1, y: 0, duration: 0.5 }, stagger);
+        cell.bigs.forEach((big, j) => {
+          const target = cell.targets[j];
+          if (!isFinite(target)) return;
+          const counter = { v: 0 };
+          tl.to(counter, {
+            v: target,
+            duration: 1.0,
+            ease: 'power3.out',
+            onUpdate: function () { big.textContent = Math.round(counter.v).toString(); },
+            onComplete: function () { big.textContent = String(target); },
+          }, stagger + 0.05);
+        });
+        if (cell.label) tl.to(cell.label, { opacity: 1, y: 0, duration: 0.45 }, stagger + 0.65);
+      });
+    });
+  }
+
+  /* ----------------------------------------------------------------
+   * B. Section narrative timelines.
+   * Sections marked [data-tl] play their reveal as a coordinated
+   * timeline: badge -> headline -> lede -> grid items staggered.
+   * One-shot per section when it enters viewport.
+   * ---------------------------------------------------------------- */
+  function initSectionTimelines() {
+    if (REDUCED_MOTION) return;
+    if (typeof window.gsap !== 'object' && typeof window.gsap !== 'function') return;
+    const gsap = window.gsap;
+
+    document.querySelectorAll('[data-tl]').forEach((section) => {
+      const head = section.querySelector('.section-head');
+      const badge    = head && head.querySelector('.badge');
+      const headline = head && head.querySelector('.t-h1, .t-display-italic, .t-h2');
+      const lede     = head && head.querySelector('.t-body-lg, p');
+      const grid = section.querySelector('[data-stagger]');
+      const items = grid ? Array.from(grid.children) : [];
+
+      // Initial hidden state
+      [badge, headline, lede].forEach((el) => { if (el) gsap.set(el, { opacity: 0, y: 16 }); });
+      if (items.length) gsap.set(items, { opacity: 0, y: 20 });
+
+      onceInView(section, 0.15, function () {
+        const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+        if (badge)    tl.to(badge,    { opacity: 1, y: 0, duration: 0.5 }, 0);
+        if (headline) tl.to(headline, { opacity: 1, y: 0, duration: 0.7 }, 0.15);
+        if (lede)     tl.to(lede,     { opacity: 1, y: 0, duration: 0.6 }, 0.4);
+        if (items.length) {
+          tl.to(items, { opacity: 1, y: 0, duration: 0.55, stagger: 0.07 }, 0.6);
+        }
+      });
+    });
+  }
+
+  /* ----------------------------------------------------------------
+   * C. Architecture diagram — line draw + dot pop + layer fade.
+   * On /platform.html the 5-layer reference stack has a vertical line
+   * down the left. When the stack enters viewport, the line draws
+   * top-to-bottom; each numbered dot appears as the line reaches it;
+   * each layer card fades in just behind its dot. Self-assembling.
+   * ---------------------------------------------------------------- */
+  function initArchitectureDraw() {
+    if (REDUCED_MOTION) return;
+    if (typeof window.gsap !== 'object' && typeof window.gsap !== 'function') return;
+    const gsap = window.gsap;
+
+    const stack = document.querySelector('.arch-stack');
+    if (!stack) return;
+    const layers = Array.from(stack.querySelectorAll('.arch-layer'));
+    if (!layers.length) return;
+
+    // Initial hidden state — CSS reads --arch-progress on the spine.
+    stack.style.setProperty('--arch-progress', '0');
+    gsap.set(layers, { opacity: 0, y: 14 });
+
+    onceInView(stack, 0.2, function () {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      // Vertical spine grows top -> bottom over 0.85s
+      tl.to(stack, {
+        duration: 0.85,
+        ease: 'power2.inOut',
+        onUpdate: function () {
+          stack.style.setProperty('--arch-progress', String(this.progress()));
+        },
+      }, 0);
+      // Layers fade in in sync with the line passing their dots
+      layers.forEach((layer, i) => {
+        const t = 0.15 + (i / layers.length) * 0.7;
+        tl.to(layer, { opacity: 1, y: 0, duration: 0.45 }, t);
+      });
+    });
+  }
+
   function boot() {
     initStaggerReveals();
     initSectionObserver();
     initHeroEntrance();
+    initOutcomesGSAP();
+    initSectionTimelines();
+    initArchitectureDraw();
   }
 
   if (document.readyState === 'loading') {
