@@ -134,6 +134,8 @@ collections:
               - { name: "problem",    label: "Problem statement", widget: "text",   hint: "One sentence describing the client's situation before Galent." }
               - { name: "metricBig",  label: "Big metric",    widget: "string", hint: "The headline number. e.g. 10×, 800%, 99.99%" }
               - { name: "metricDesc", label: "Metric description", widget: "text", hint: "The sentence that follows the big number. e.g. 'faster model deployment. Dev cycles from months to days.'" }
+              - { name: "before",     label: "Before (transformation)", widget: "string", required: false, hint: "Short phrase for the 'before' state. e.g. '18 months to ship', '300 engineers', 'Manual audits'" }
+              - { name: "after",      label: "After (transformation)",  widget: "string", required: false, hint: "Short phrase for the 'after' state. e.g. '6 weeks to ship', '90 engineers', 'Full lineage'" }
 
   # ----------------------------------------------------------------------
   # SERVICE PAGES — Outcomes stats per service. Single file containing all 8.
