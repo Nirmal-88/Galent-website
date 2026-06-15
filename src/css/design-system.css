@@ -6191,3 +6191,205 @@ body main > section#cta { min-height: auto; }
 
 /* Tighten the trust strip — it should sit as a slim band, not 100vh */
 section[aria-label="Recognised by"] { min-height: 0 !important; }
+
+/* ==================================================================
+ * BENTO GRID — "Platform at a glance" on the home page
+ *
+ * 12-column asymmetric grid. Mixed tile sizes (xl / l / m / w) form
+ * a Vercel/Linear-style bento. Each tile carries its own accent
+ * colour via .bento-tile--p / --g / --o / --i / --n.
+ * ================================================================== */
+.bento {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: clamp(12px, 1.2vw, 18px);
+  grid-auto-rows: minmax(150px, auto);
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+/* Tile size variants — controls grid column/row span */
+.bento-tile--xl { grid-column: span 7; grid-row: span 2; }
+.bento-tile--l  { grid-column: span 5; grid-row: span 2; }
+.bento-tile--w  { grid-column: span 7; }
+.bento-tile--m  { grid-column: span 5; }
+
+/* Adjustments so the grid balances cleanly:
+   row 1: xl(7) + m(5)            -> 12 ✓
+   row 2: (xl continues) + m(5)   -> 12 ✓ (xl spans 2 rows)
+   row 3: l(5) + w(7)             -> 12 ✓
+   row 4: l(5) (continues) + m(5) + m(5)... wait this doesn't balance.
+   Re-arranging: see the explicit grid placement below. */
+
+/* Explicit placement so the bento composes as designed */
+.bento > .bento-tile:nth-child(1) { grid-column: 1 / span 7; grid-row: 1 / span 2; }
+.bento > .bento-tile:nth-child(2) { grid-column: 8 / span 5; grid-row: 1 / span 1; }
+.bento > .bento-tile:nth-child(3) { grid-column: 8 / span 5; grid-row: 2 / span 1; }
+.bento > .bento-tile:nth-child(4) { grid-column: 1 / span 5; grid-row: 3 / span 2; }
+.bento > .bento-tile:nth-child(5) { grid-column: 6 / span 7; grid-row: 3 / span 1; }
+.bento > .bento-tile:nth-child(6) { grid-column: 6 / span 4; grid-row: 4 / span 1; }
+.bento > .bento-tile:nth-child(7) { grid-column: 10 / span 3; grid-row: 4 / span 1; }
+
+/* Tile chrome */
+.bento-tile {
+  --tile-color: var(--brand-purple);
+  position: relative;
+  isolation: isolate;
+  background: #FFFFFF;
+  border: 1px solid rgba(18, 19, 23, 0.07);
+  border-radius: 20px;
+  padding: clamp(20px, 1.8vw, 28px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(18, 19, 23, 0.04);
+}
+.bento-tile--p { --tile-color: var(--brand-purple); }
+.bento-tile--g { --tile-color: var(--brand-green-deep); }
+.bento-tile--o { --tile-color: var(--brand-orange); }
+.bento-tile--i { --tile-color: #4F46E5; }
+.bento-tile--n { --tile-color: var(--on-surface-variant); }
+
+/* The featured xl tile gets the dark-on-light treatment with the
+   accent colour wash. */
+.bento-tile--xl {
+  background: linear-gradient(135deg, #121317 0%, #1d1a2e 100%);
+  color: #FFFFFF;
+  border-color: rgba(255,255,255,0.08);
+  padding: clamp(24px, 2.2vw, 36px);
+}
+.bento-tile--xl::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(60% 60% at 100% 0%, color-mix(in srgb, var(--tile-color) 25%, transparent), transparent 60%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Subtle accent wash on all light tiles */
+.bento-tile:not(.bento-tile--xl)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(80% 50% at 100% 0%, color-mix(in srgb, var(--tile-color) 9%, transparent), transparent 55%);
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.85;
+}
+
+/* Tile content typography */
+.bento-tile__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--tile-color);
+}
+.bento-tile--xl .bento-tile__eyebrow { color: color-mix(in srgb, var(--tile-color) 50%, #FFFFFF); }
+
+.bento-tile__title {
+  font-size: clamp(24px, 2.2vw, 32px);
+  font-weight: 600;
+  letter-spacing: -0.6px;
+  line-height: 1.1;
+  margin: 4px 0 0;
+  color: inherit;
+}
+.bento-tile__title-sm {
+  font-size: clamp(17px, 1.5vw, 20px);
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  line-height: 1.25;
+  margin: 4px 0 0;
+  color: var(--on-surface);
+}
+.bento-tile__body {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.7);
+  margin: 6px 0 0;
+  max-width: 38ch;
+}
+.bento-tile__caption {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--on-surface-variant);
+  margin: 0;
+}
+
+.bento-tile__metric {
+  font-size: clamp(40px, 3.6vw, 56px);
+  font-weight: 500;
+  letter-spacing: -1.6px;
+  line-height: 1;
+  color: var(--tile-color);
+  margin-top: auto;
+  white-space: nowrap;
+}
+.bento-tile__metric--md { font-size: clamp(28px, 2.4vw, 36px); letter-spacing: -1px; }
+.bento-tile__metric--lg { font-size: clamp(34px, 3vw, 44px); letter-spacing: -1.2px; }
+.bento-tile__unit { font-size: 0.45em; font-weight: 400; opacity: 0.7; margin-left: 2px; }
+
+.bento-tile__list {
+  list-style: none;
+  padding: 0;
+  margin: 6px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.bento-tile__list li {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--on-surface);
+  padding-left: 18px;
+  position: relative;
+}
+.bento-tile__list li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 6px;
+  width: 9px; height: 6px;
+  border-left: 1.5px solid var(--tile-color);
+  border-bottom: 1.5px solid var(--tile-color);
+  transform: rotate(-45deg);
+  transform-origin: 30% 70%;
+}
+
+.bento-tile__link {
+  margin-top: auto;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--tile-color);
+  text-decoration: none;
+  letter-spacing: -0.1px;
+  align-self: flex-start;
+}
+
+.bento-tile__viz {
+  width: 100%;
+  height: auto;
+  margin-top: auto;
+  max-width: 360px;
+  display: block;
+  opacity: 0.95;
+}
+
+/* Responsive collapse */
+@media (max-width: 1024px) {
+  .bento > .bento-tile:nth-child(1) { grid-column: 1 / span 12; grid-row: auto; }
+  .bento > .bento-tile:nth-child(2),
+  .bento > .bento-tile:nth-child(3) { grid-column: span 6; grid-row: auto; }
+  .bento > .bento-tile:nth-child(4) { grid-column: 1 / span 12; grid-row: auto; }
+  .bento > .bento-tile:nth-child(5) { grid-column: 1 / span 12; grid-row: auto; }
+  .bento > .bento-tile:nth-child(6),
+  .bento > .bento-tile:nth-child(7) { grid-column: span 6; grid-row: auto; }
+}
+@media (max-width: 640px) {
+  .bento > .bento-tile { grid-column: 1 / span 12 !important; grid-row: auto !important; }
+}
