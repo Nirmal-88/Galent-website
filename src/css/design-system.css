@@ -158,7 +158,7 @@ em.ac-o { color: var(--brand-orange); font-style: normal; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px var(--gutter);
+  padding: 14px var(--gutter);
   background: rgba(255,255,255,0.86);
   backdrop-filter: saturate(140%) blur(14px);
   -webkit-backdrop-filter: saturate(140%) blur(14px);
@@ -173,7 +173,7 @@ em.ac-o { color: var(--brand-orange); font-style: normal; }
   padding: 2px 4px 2px 0;
 }
 .nav .brand img,
-.nav .brand svg { height: 36px; width: auto; display: block; }
+.nav .brand svg { height: 56px; width: auto; display: block; }
 .nav .menu {
   display: flex;
   gap: 6px;
