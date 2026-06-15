@@ -23,6 +23,27 @@
   <meta name="twitter:description" content="Technology services at 3–4× velocity, powered by GalentAI.">
   <link rel="canonical" href="https://galent.com/">
   <meta name="robots" content="index, follow">
+
+  <!-- Hero entrance — pre-animation styles + GSAP timeline -->
+  <script>
+    (function(){
+      // Hide initial state ASAP so there's no flash before the timeline runs.
+      // Respect prefers-reduced-motion: skip the whole dance.
+      var rm = matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!rm) document.documentElement.classList.add('hero-entering');
+      // Safety net: if GSAP fails to load within 1.6s, reveal the hero anyway.
+      setTimeout(function(){ document.documentElement.classList.remove('hero-entering'); }, 1600);
+    })();
+  </script>
+  <style>
+    html.hero-entering #hero .badge,
+    html.hero-entering #hero .t-hero,
+    html.hero-entering #hero .hero-lede,
+    html.hero-entering #hero .cta-row,
+    html.hero-entering #hero .scroll-chevron { opacity: 0; }
+    html.hero-entering #hero .hero-network { opacity: 0; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 </head>
 <body data-page="home">
 
