@@ -6136,3 +6136,55 @@ main > section + section:not(.panel-dark)::before {
   color: var(--card-color, var(--brand-purple));
   font-weight: 600;
 }
+
+/* ==================================================================
+ * NUMBERING REMOVED + PAGE-PER-SECTION layout
+ * (added 2026-06-15)
+ * ================================================================== */
+
+/* Numbered dot in badges → small bullet, no number, no divider line */
+.badge .dot {
+  width: 8px !important;
+  height: 8px !important;
+  min-width: 0 !important;
+  flex: 0 0 8px !important;
+  font-size: 0 !important;
+  color: transparent !important;
+  margin-right: 2px;
+}
+.badge .dot::after { display: none !important; }
+.badge { gap: 8px; padding: 6px 14px !important; }
+
+/* Hide now-empty number spans so they don't introduce vertical gaps */
+.section-num:empty,
+.num:empty { display: none !important; }
+.section-head .section-num { display: block; }
+
+/* Each home-page section fills the viewport. Content stays vertically
+   centred so short sections don't feel cropped. Tall sections (grids
+   of many cards) expand past 100vh naturally and scroll, but each
+   section starts at the top of a viewport on the way down. */
+body[data-page="home"] main > section:not(.hero):not([aria-label="Recognised by"]) {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Same treatment for the other deep pages */
+body[data-page="platform"] main > section:not(.platform-hero),
+body[data-page="fde"] main > section:not(.hero),
+body[data-page="about"] main > section:not(.hero),
+body[data-page="hub"] main > section:not(.kh-hero),
+body[data-page^="service-"] main > section:not(.hero) {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* The CTA section is short — let it size to content rather than padding 100vh */
+body main > section#cta { min-height: auto; }
+
+/* Tighten the trust strip — it should sit as a slim band, not 100vh */
+section[aria-label="Recognised by"] { min-height: 0 !important; }
