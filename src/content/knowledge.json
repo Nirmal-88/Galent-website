@@ -21,6 +21,11 @@
       "id": "news-room",
       "label": "News Room",
       "ctaLabel": "Read"
+    },
+    {
+      "id": "case-study",
+      "label": "Case Study",
+      "ctaLabel": "Read"
     }
   ],
   "items": [
