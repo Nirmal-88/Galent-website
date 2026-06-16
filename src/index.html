@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/design-system.css?v=spec-strip">
+  <link rel="stylesheet" href="css/design-system.css?v=spec-sheet">
   <link rel="icon" href="assets/images/logo.png?v=4" type="image/png">
 
   <meta property="og:type" content="website">
@@ -314,28 +314,78 @@
           </div>
         </div>
 
-        <div class="spec-strip" data-reveal>
-          <div class="spec-strip__head">
-            <span class="spec-strip__pulse" aria-hidden="true"></span>
-            <span class="spec-strip__title">GalentAI running behind every engagement</span>
+        <!-- PLATFORM SPEC SHEET — dark, dense, scannable -->
+        <div class="spec-sheet" data-reveal>
+          <div class="spec-sheet__head">
+            <div class="spec-sheet__brand">
+              <span class="spec-sheet__pulse" aria-hidden="true"></span>
+              <span class="spec-sheet__brand-name">GalentAI</span>
+              <span class="spec-sheet__brand-status">Live · running every engagement</span>
+            </div>
+            <div class="spec-sheet__counts">
+              <div class="spec-sheet__count">
+                <span class="spec-sheet__count-num">4</span>
+                <span class="spec-sheet__count-label">Engines</span>
+              </div>
+              <div class="spec-sheet__count">
+                <span class="spec-sheet__count-num">2</span>
+                <span class="spec-sheet__count-label">Patents pending</span>
+              </div>
+              <div class="spec-sheet__count">
+                <span class="spec-sheet__count-num">151<span class="spec-sheet__count-plus">+</span></span>
+                <span class="spec-sheet__count-label">Languages</span>
+              </div>
+              <div class="spec-sheet__count">
+                <span class="spec-sheet__count-num">1,115<span class="spec-sheet__count-plus">+</span></span>
+                <span class="spec-sheet__count-label">Integrations</span>
+              </div>
+            </div>
           </div>
-          <div class="spec-strip__grid">
-            <div class="spec-strip__col">
-              <span class="spec-strip__label">Engines</span>
-              <div class="spec-strip__chips">
-                <span class="spec-chip">NeuroQL<em class="spec-chip__tag">patent pending</em></span>
-                <span class="spec-chip">RCM Policy<em class="spec-chip__tag">patent pending</em></span>
-                <span class="spec-chip">Knowledge Graph</span>
-                <span class="spec-chip">Context Graph</span>
+
+          <div class="spec-sheet__engines">
+            <article class="engine-pill engine-pill--p">
+              <span class="engine-pill__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1l2.1-2.1M17 7l2.1-2.1"/></svg>
+              </span>
+              <div class="engine-pill__body">
+                <span class="engine-pill__name">NeuroQL</span>
+                <span class="engine-pill__desc">Context-window reasoning engine</span>
               </div>
-            </div>
-            <div class="spec-strip__col">
-              <span class="spec-strip__label">Coverage</span>
-              <div class="spec-strip__chips">
-                <span class="spec-chip"><strong>151+</strong>&nbsp;languages</span>
-                <span class="spec-chip"><strong>1,115+</strong>&nbsp;integrations</span>
+              <span class="engine-pill__status">Patent pending</span>
+            </article>
+
+            <article class="engine-pill engine-pill--o">
+              <span class="engine-pill__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+              </span>
+              <div class="engine-pill__body">
+                <span class="engine-pill__name">RCM Policy</span>
+                <span class="engine-pill__desc">Risk · compliance · monitoring</span>
               </div>
-            </div>
+              <span class="engine-pill__status">Patent pending</span>
+            </article>
+
+            <article class="engine-pill engine-pill--g">
+              <span class="engine-pill__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><path d="M8 6h8M8 18h8M7 8l4 3M17 8l-4 3M7 16l4-3M17 16l-4-3"/></svg>
+              </span>
+              <div class="engine-pill__body">
+                <span class="engine-pill__name">Knowledge Graph</span>
+                <span class="engine-pill__desc">Enterprise system of record</span>
+              </div>
+              <span class="engine-pill__status engine-pill__status--quiet">Active</span>
+            </article>
+
+            <article class="engine-pill engine-pill--i">
+              <span class="engine-pill__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0z"/><path d="M12 7v5l3 2"/><path d="M3 12h3M18 12h3"/></svg>
+              </span>
+              <div class="engine-pill__body">
+                <span class="engine-pill__name">Context Graph</span>
+                <span class="engine-pill__desc">Persistent reasoning &amp; memory</span>
+              </div>
+              <span class="engine-pill__status engine-pill__status--quiet">Active</span>
+            </article>
           </div>
         </div>
       </div>
