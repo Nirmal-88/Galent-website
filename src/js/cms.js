@@ -141,16 +141,31 @@
       .join('');
   }
 
+  // Normalise an editor-typed category value to its slug form so
+  // "Case Study", "case study", "Case-Study" all match "case-study".
+  function slugifyCategory(value) {
+    return String(value || '')
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-');
+  }
+
   HubCMS.render = function (data) {
     const categories = normaliseCategories(data && data.categories);
     const items = Array.isArray(data && data.items) ? data.items : [];
+    const knownIds = new Set(categories.map((c) => slugifyCategory(c.id)));
 
-    // Group items by category id
+    // Group items by category id (lenient match)
     const grouped = {};
     items.forEach((item) => {
-      const cat = item.category || 'other';
-      if (!grouped[cat]) grouped[cat] = [];
-      grouped[cat].push(item);
+      const raw = item.category || 'other';
+      const cat = slugifyCategory(raw);
+      // If the slugified value matches a known category, use that.
+      // Otherwise still group under the raw value so unmatched items don't disappear silently.
+      const key = knownIds.has(cat) ? cat : raw;
+      if (!grouped[key]) grouped[key] = [];
+      grouped[key].push(item);
     });
 
     // Decorate categories with their item counts (used by the shell builder)
