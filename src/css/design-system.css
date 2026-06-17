@@ -6445,35 +6445,75 @@ body[data-page^="service-"] .hero .hero-metric .lbl {
 
 /* ---- SUBSCRIBE BANNER (Knowledge Hub) ---- */
 .subscribe-band {
-  background: #0B0C10;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(155,77,224,0.45) 0%, transparent 50%),
+    radial-gradient(circle at 90% 80%, rgba(255,118,52,0.32) 0%, transparent 50%),
+    radial-gradient(circle at 50% 100%, rgba(30,209,151,0.25) 0%, transparent 55%),
+    linear-gradient(135deg, #1A0E2E 0%, #15132A 50%, #1F1108 100%);
   color: #FFFFFF;
-  padding: clamp(40px, 6vw, 64px) clamp(28px, 5vw, 56px);
-  border-radius: var(--radius-lg);
+  padding: clamp(44px, 6.5vw, 72px) clamp(28px, 5vw, 56px);
+  border-radius: 22px;
   text-align: center;
   margin: var(--space-3xl) 0;
   position: relative;
   overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 30px 60px -30px rgba(155,77,224,0.45), 0 4px 12px rgba(0,0,0,0.20);
 }
 .subscribe-band::before {
   content: '';
   position: absolute; inset: 0;
-  background:
-    radial-gradient(circle at 50% 0%, rgba(123,44,191,0.30) 0%, transparent 55%),
-    radial-gradient(circle at 85% 90%, rgba(30,209,151,0.18) 0%, transparent 50%);
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at 50% 50%, #000 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 30%, transparent 80%);
   pointer-events: none;
+  opacity: 0.7;
+  animation: subBandDrift 40s linear infinite;
+}
+.subscribe-band::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 140%;
+  aspect-ratio: 1;
+  margin: -70% 0 0 -70%;
+  background: conic-gradient(from 0deg,
+    rgba(155,77,224,0) 0deg,
+    rgba(155,77,224,0.20) 90deg,
+    rgba(30,209,151,0) 180deg,
+    rgba(255,118,52,0.18) 270deg,
+    rgba(155,77,224,0) 360deg);
+  filter: blur(40px);
+  animation: subBandSweep 24s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+@keyframes subBandDrift {
+  from { background-position: 0 0; }
+  to   { background-position: 56px 56px; }
+}
+@keyframes subBandSweep {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 .subscribe-band > * { position: relative; z-index: 1; }
 .subscribe-band h2 {
-  font-size: clamp(26px, 3.4vw, 34px);
-  font-style: italic;
-  font-weight: 600;
-  letter-spacing: -0.5px;
+  font-size: clamp(28px, 3.6vw, 38px);
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -0.6px;
   margin: 0 0 var(--space-sm);
-  color: #FFFFFF;
+  background: linear-gradient(90deg, #FFFFFF 0%, #C6A8F2 50%, #FFB18C 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .subscribe-band p {
-  font-size: 15px;
-  color: rgba(255,255,255,0.7);
+  font-size: 15.5px;
+  color: rgba(255,255,255,0.78);
   max-width: 56ch;
   margin: 0 auto var(--space-xl);
   line-height: 1.55;
@@ -6481,43 +6521,58 @@ body[data-page^="service-"] .hero .hero-metric .lbl {
 .subscribe-band .sub-form {
   display: inline-flex;
   align-items: stretch;
-  gap: 0;
-  max-width: 480px;
+  gap: 8px;
+  max-width: 520px;
   width: 100%;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 6px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 .subscribe-band .sub-form input {
-  flex: 1 1 280px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-right: 0;
-  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
-  padding: 12px 18px;
+  flex: 1 1 260px;
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 22px;
   color: #FFFFFF;
   font-family: var(--font-sans);
-  font-size: 14px;
+  font-size: 14.5px;
   outline: 0;
 }
 .subscribe-band .sub-form input::placeholder { color: rgba(255,255,255,0.5); }
-.subscribe-band .sub-form input:focus { border-color: var(--brand-green-deep); background: rgba(255,255,255,0.10); }
+.subscribe-band .sub-form input:focus { background: rgba(255,255,255,0.08); }
 .subscribe-band .sub-form button {
-  background: var(--brand-green);
-  color: #0B0C10;
-  border: 1px solid var(--brand-green);
-  padding: 12px 24px;
+  background: linear-gradient(135deg, #B57AE8 0%, #7B2CBF 50%, #FF7634 100%);
+  color: #FFFFFF;
+  border: 0;
+  padding: 12px 26px;
   font-weight: 600;
-  font-size: 14px;
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 14.5px;
+  border-radius: 999px;
   cursor: pointer;
   font-family: var(--font-sans);
-  transition: background .2s ease;
+  box-shadow: 0 6px 18px -6px rgba(155,77,224,0.55);
+  transition: transform .2s ease, box-shadow .25s ease, filter .25s ease;
   display: inline-flex; align-items: center; gap: 8px;
 }
-.subscribe-band .sub-form button:hover { background: var(--brand-green-deep); }
+.subscribe-band .sub-form button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+  box-shadow: 0 12px 26px -8px rgba(155,77,224,0.7);
+}
 @media (max-width: 540px) {
-  .subscribe-band .sub-form input { border-radius: var(--radius-sm); border-right: 1px solid rgba(255,255,255,0.15); margin-bottom: 8px; }
-  .subscribe-band .sub-form button { border-radius: var(--radius-sm); }
+  .subscribe-band .sub-form { border-radius: 16px; padding: 6px; }
+  .subscribe-band .sub-form input { margin-bottom: 6px; }
+  .subscribe-band .sub-form button { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .subscribe-band::before, .subscribe-band::after { animation: none !important; }
 }
 
 /* ---- KNOWLEDGE HUB — TWO-ROW FILTER BAR ---- */
