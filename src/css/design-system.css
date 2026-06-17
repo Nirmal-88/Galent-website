@@ -2368,6 +2368,132 @@ body[data-page] .svc li a:hover, body[data-page] .svc li a:hover .meta { color: 
 .engine-diagram-svg {
   position: absolute; inset: 0; width: 100%; height: 100%;
   pointer-events: none;
+  z-index: 1;
+}
+
+/* ---- Animated effects layer (looks like a live video loop) ---- */
+.engine-fx {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: 50%;
+  mask-image: radial-gradient(circle at 50% 50%, #000 60%, transparent 90%);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 60%, transparent 90%);
+}
+
+/* Pulsing emission rings expanding outward from the hub */
+.engine-ring {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 120px; height: 120px;
+  margin: -60px 0 0 -60px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(155,77,224,0.45);
+  opacity: 0;
+  animation: engineRing 4.2s cubic-bezier(0.16, 0.65, 0.25, 1) infinite;
+}
+.engine-ring--1 { animation-delay: 0s; }
+.engine-ring--2 { animation-delay: 1.4s; border-color: rgba(30,209,151,0.4); }
+.engine-ring--3 { animation-delay: 2.8s; border-color: rgba(255,118,52,0.4); }
+@keyframes engineRing {
+  0%   { transform: scale(0.55); opacity: 0; }
+  15%  { opacity: 1; }
+  100% { transform: scale(3.6);  opacity: 0; }
+}
+
+/* Radar sweep — a soft conic gradient that rotates around the hub */
+.engine-sweep {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 480px; height: 480px;
+  margin: -240px 0 0 -240px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg,
+    rgba(155,77,224,0) 0deg,
+    rgba(155,77,224,0) 320deg,
+    rgba(155,77,224,0.35) 350deg,
+    rgba(155,77,224,0.55) 360deg);
+  mask-image: radial-gradient(circle, transparent 22%, #000 24%, #000 95%, transparent 100%);
+  -webkit-mask-image: radial-gradient(circle, transparent 22%, #000 24%, #000 95%, transparent 100%);
+  opacity: 0.7;
+  animation: engineSweep 5s linear infinite;
+}
+@keyframes engineSweep {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Energy particles travelling from hub outward to each engine node */
+.engine-particle {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 8px; height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+  background: rgba(155,77,224,1);
+  box-shadow: 0 0 16px rgba(155,77,224,0.9), 0 0 28px rgba(155,77,224,0.6);
+}
+.engine-particle--top    { animation: engineParticleTop    2.4s ease-in infinite; }
+.engine-particle--right  { animation: engineParticleRight  2.4s ease-in 0.6s infinite; background: rgba(255,118,52,1); box-shadow: 0 0 16px rgba(255,118,52,0.9), 0 0 28px rgba(255,118,52,0.6); }
+.engine-particle--bottom { animation: engineParticleBottom 2.4s ease-in 1.2s infinite; background: rgba(30,209,151,1); box-shadow: 0 0 16px rgba(30,209,151,0.9), 0 0 28px rgba(30,209,151,0.6); }
+.engine-particle--left   { animation: engineParticleLeft   2.4s ease-in 1.8s infinite; background: rgba(155,77,224,1); box-shadow: 0 0 16px rgba(155,77,224,0.9), 0 0 28px rgba(155,77,224,0.6); }
+@keyframes engineParticleTop {
+  0%   { transform: translate(0, 0)      scale(0.4); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; transform: translate(0, -38%) scale(1); }
+  100% { transform: translate(0, -40%)   scale(0.4); opacity: 0; }
+}
+@keyframes engineParticleRight {
+  0%   { transform: translate(0, 0)     scale(0.4); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; transform: translate(38%, 0) scale(1); }
+  100% { transform: translate(40%, 0)   scale(0.4); opacity: 0; }
+}
+@keyframes engineParticleBottom {
+  0%   { transform: translate(0, 0)     scale(0.4); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; transform: translate(0, 38%) scale(1); }
+  100% { transform: translate(0, 40%)   scale(0.4); opacity: 0; }
+}
+@keyframes engineParticleLeft {
+  0%   { transform: translate(0, 0)      scale(0.4); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; transform: translate(-38%, 0) scale(1); }
+  100% { transform: translate(-40%, 0)   scale(0.4); opacity: 0; }
+}
+
+/* Twinkling stars scattered behind the diagram */
+.engine-stars { position: absolute; inset: 0; }
+.engine-stars span {
+  position: absolute;
+  width: 2px; height: 2px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.7);
+  box-shadow: 0 0 6px rgba(255,255,255,0.5);
+  animation: engineStarTwinkle 3s ease-in-out infinite;
+  opacity: 0;
+}
+.engine-stars span:nth-child(1)  { top: 8%;  left: 22%; animation-delay: 0s;   }
+.engine-stars span:nth-child(2)  { top: 14%; left: 75%; animation-delay: 0.4s; }
+.engine-stars span:nth-child(3)  { top: 28%; left: 12%; animation-delay: 0.8s; }
+.engine-stars span:nth-child(4)  { top: 30%; left: 88%; animation-delay: 1.2s; }
+.engine-stars span:nth-child(5)  { top: 52%; left: 6%;  animation-delay: 1.6s; }
+.engine-stars span:nth-child(6)  { top: 58%; left: 92%; animation-delay: 2s;   }
+.engine-stars span:nth-child(7)  { top: 72%; left: 20%; animation-delay: 2.4s; }
+.engine-stars span:nth-child(8)  { top: 76%; left: 78%; animation-delay: 0.2s; }
+.engine-stars span:nth-child(9)  { top: 38%; left: 35%; animation-delay: 0.6s; }
+.engine-stars span:nth-child(10) { top: 42%; left: 65%; animation-delay: 1s;   }
+.engine-stars span:nth-child(11) { top: 62%; left: 38%; animation-delay: 1.4s; }
+.engine-stars span:nth-child(12) { top: 66%; left: 62%; animation-delay: 1.8s; }
+@keyframes engineStarTwinkle {
+  0%,100% { opacity: 0;   transform: scale(0.6); }
+  50%     { opacity: 0.9; transform: scale(1);   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .engine-ring, .engine-sweep, .engine-particle, .engine-stars span,
+  .engine-hub, .engine-node { animation: none !important; }
 }
 .engine-hub {
   position: absolute;
@@ -2385,6 +2511,48 @@ body[data-page] .svc li a:hover, body[data-page] .svc li a:hover .meta { color: 
   box-shadow: 0 32px 80px -28px rgba(79,70,229,0.55), 0 0 0 8px rgba(79,70,229,0.06), 0 0 0 16px rgba(79,70,229,0.03);
   z-index: 2;
 }
+.engine-hub {
+  animation: engineHubBreath 3.6s ease-in-out infinite;
+}
+@keyframes engineHubBreath {
+  0%,100% {
+    box-shadow:
+      0 32px 80px -28px rgba(79,70,229,0.55),
+      0 0 0 8px rgba(79,70,229,0.06),
+      0 0 0 16px rgba(79,70,229,0.03);
+  }
+  50% {
+    box-shadow:
+      0 32px 80px -22px rgba(155,77,224,0.75),
+      0 0 0 12px rgba(155,77,224,0.10),
+      0 0 0 24px rgba(155,77,224,0.05),
+      0 0 60px 8px rgba(155,77,224,0.25);
+  }
+}
+/* Pulsing halo behind each engine node, tinted to its position */
+.engine-node::before {
+  content: '';
+  position: absolute;
+  inset: -10px;
+  border-radius: inherit;
+  background: radial-gradient(circle, var(--node-glow, rgba(155,77,224,0.35)) 0%, transparent 70%);
+  filter: blur(8px);
+  opacity: 0;
+  z-index: -1;
+  animation: engineNodeHalo 3.2s ease-in-out infinite;
+}
+.engine-node[data-pos="top"]    { --node-glow: rgba(155,77,224,0.45); }
+.engine-node[data-pos="right"]  { --node-glow: rgba(255,118,52,0.45); }
+.engine-node[data-pos="bottom"] { --node-glow: rgba(30,209,151,0.45); }
+.engine-node[data-pos="left"]   { --node-glow: rgba(155,77,224,0.45); }
+.engine-node[data-pos="right"]::before  { animation-delay: 0.8s; }
+.engine-node[data-pos="bottom"]::before { animation-delay: 1.6s; }
+.engine-node[data-pos="left"]::before   { animation-delay: 2.4s; }
+@keyframes engineNodeHalo {
+  0%,100% { opacity: 0.3; transform: scale(0.95); }
+  50%     { opacity: 1;   transform: scale(1.08); }
+}
+
 .engine-hub::after {
   content: 'AI-native SDLC';
   display: block;

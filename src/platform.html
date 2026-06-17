@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/design-system.css?v=stat-strip-panel-1">
+  <link rel="stylesheet" href="css/design-system.css?v=engine-anim-1">
   <link rel="icon" href="assets/images/logo.png?v=4" type="image/png">
 
   <!-- GSAP — used by the architecture-diagram line-draw on this page. -->
@@ -162,6 +162,21 @@
 
         <div id="engine-diagram-root" style="margin-top: var(--space-3xl);" data-reveal>
           <div class="engine-diagram" id="engines">
+            <div class="engine-fx" aria-hidden="true">
+              <div class="engine-stars">
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span>
+              </div>
+              <div class="engine-ring engine-ring--1"></div>
+              <div class="engine-ring engine-ring--2"></div>
+              <div class="engine-ring engine-ring--3"></div>
+              <div class="engine-sweep"></div>
+              <div class="engine-particle engine-particle--top"></div>
+              <div class="engine-particle engine-particle--right"></div>
+              <div class="engine-particle engine-particle--bottom"></div>
+              <div class="engine-particle engine-particle--left"></div>
+            </div>
             <svg class="engine-diagram-svg" aria-hidden="true"></svg>
             <div class="engine-hub">GalentAI</div>
             <button class="engine-node" data-engine="neuroql" data-pos="top" aria-pressed="false">
