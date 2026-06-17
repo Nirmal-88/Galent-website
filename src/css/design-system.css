@@ -4291,29 +4291,51 @@ body[data-page="home"] .scroll-chevron {
  * ANONYMISED PULL QUOTE (Platform page)
  * ================================================================== */
 .pull-quote {
+  position: relative;
   max-width: 880px;
   margin: var(--space-3xl) auto 0;
-  padding: var(--space-2xl);
-  background: var(--surface-container);
+  padding: var(--space-2xl) clamp(28px, 3vw, 44px);
+  background:
+    radial-gradient(circle at 0% 0%,  rgba(155,77,224,0.35) 0%, rgba(155,77,224,0) 55%),
+    radial-gradient(circle at 100% 100%, rgba(30,209,151,0.25) 0%, rgba(30,209,151,0) 55%),
+    linear-gradient(135deg, #161826 0%, #1F1B36 50%, #221733 100%);
+  color: #FFFFFF;
   border-radius: var(--radius-lg);
   border-left: 4px solid var(--page-accent);
+  box-shadow:
+    0 24px 60px -20px rgba(123,44,191,0.4),
+    0 10px 30px -10px rgba(0,0,0,0.25);
   text-align: left;
+  overflow: hidden;
 }
+.pull-quote::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse at 50% 50%, #000 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 30%, transparent 80%);
+  pointer-events: none;
+}
+.pull-quote > * { position: relative; z-index: 1; }
 .pull-quote .mark {
   font-family: Georgia, serif;
-  font-size: 64px;
+  font-size: 80px;
   line-height: 0.5;
-  color: var(--page-accent);
-  opacity: 0.5;
+  color: var(--page-accent, #B57AE8);
+  opacity: 0.85;
   display: block;
   margin-bottom: var(--space-xs);
+  text-shadow: 0 0 24px rgba(155,77,224,0.45);
 }
 .pull-quote blockquote {
   margin: 0;
-  font-size: clamp(19px, 2.2vw, 23px);
-  line-height: 1.4;
+  font-size: clamp(20px, 2.3vw, 24px);
+  line-height: 1.45;
   letter-spacing: -0.2px;
-  color: var(--on-surface);
+  color: #FFFFFF;
   font-style: italic;
   font-weight: 500;
 }
@@ -4323,7 +4345,7 @@ body[data-page="home"] .scroll-chevron {
   font-family: var(--font-mono);
   font-size: 12px;
   letter-spacing: 0.4px;
-  color: var(--page-accent);
+  color: #B57AE8;
   font-style: normal;
   font-weight: 500;
   text-transform: uppercase;
