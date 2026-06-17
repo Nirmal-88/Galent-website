@@ -3941,20 +3941,21 @@ body[data-page] .svc li a:hover, body[data-page] .svc li a:hover .meta { color: 
 .belief:hover::before { transform: scaleX(1); }
 .belief:hover::after  { opacity: 1; transform: scale(1.15); }
 
-/* Numbered badge — gradient circle in the top of the card */
+/* Number marker — clean mono kicker tinted in the card's accent */
 .belief .num {
+  display: inline-block;
   font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.2px;
+  font-size: 11px;
+  letter-spacing: 0.6px;
   font-weight: 600;
-  color: #FFFFFF;
-  display: inline-grid;
-  place-items: center;
-  width: 38px; height: 38px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--card-color) 0%, var(--card-color-2) 100%);
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 8px 20px -6px color-mix(in srgb, var(--card-color-2) 60%, transparent);
-  margin-bottom: 4px;
+  color: var(--card-color);
+  background: none;
+  border: 0;
+  padding: 0;
+  width: auto; height: auto;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0 0 4px;
 }
 .belief h3 {
   font-size: clamp(18px, 1.6vw, 22px);
