@@ -2540,10 +2540,10 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   background: #FFFFFF;
   border: 1px solid rgba(18, 19, 23, 0.07);
   border-radius: 18px;
-  padding: clamp(22px, 1.9vw, 28px);
+  padding: clamp(24px, 2vw, 32px) clamp(24px, 2vw, 30px);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 14px;
   overflow: hidden;
   box-shadow: 0 1px 2px rgba(18, 19, 23, 0.04);
   transition: transform .35s var(--ease-out), border-color .35s ease, box-shadow .35s ease;
@@ -2570,12 +2570,12 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   content: "";
   position: absolute;
   left: 0;
-  top: 22%;
-  bottom: 22%;
+  top: 24px;
+  bottom: 24px;
   width: 3px;
   border-radius: 0 3px 3px 0;
-  background: var(--eng-color);
-  opacity: 0.55;
+  background: linear-gradient(180deg, var(--eng-color) 0%, color-mix(in srgb, var(--eng-color) 40%, transparent) 100%);
+  opacity: 0.7;
   transition: opacity .35s ease, top .35s var(--ease-out), bottom .35s var(--ease-out);
 }
 .engine-card:hover {
@@ -2585,7 +2585,7 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
               0 2px 6px rgba(18, 19, 23, 0.05);
 }
 .engine-card:hover::before { opacity: 1; }
-.engine-card:hover::after { opacity: 1; top: 8%; bottom: 8%; }
+.engine-card:hover::after { opacity: 1; top: 16px; bottom: 16px; }
 
 .engine-card .num {
   display: inline-flex;
@@ -2628,6 +2628,7 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   font-size: 14.5px;
   line-height: 1.55;
   color: var(--on-surface-variant);
+  min-height: calc(1.55em * 3);
 }
 .engine-card p {
   color: var(--on-surface-variant);
@@ -2640,10 +2641,10 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   padding: 14px 0 0;
   margin: 0;
   margin-top: auto;
-  border-top: 1px dashed rgba(18, 19, 23, 0.1);
+  border-top: 1px solid color-mix(in srgb, var(--eng-color) 18%, rgba(18,19,23,0.06));
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 9px;
   width: 100%;
 }
 .engine-card li {
