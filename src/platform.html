@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/design-system.css?v=platform-hero-fx-1">
   <link rel="icon" href="assets/images/logo.png?v=4" type="image/png">
 
   <!-- GSAP — used by the architecture-diagram line-draw on this page. -->
@@ -73,6 +73,17 @@
 
     <!-- HERO — SPLIT LAYOUT: text left, orbital compass right -->
     <section class="platform-hero">
+      <div class="hero-fx" aria-hidden="true">
+        <div class="hero-fx__grid"></div>
+        <div class="hero-fx__orb hero-fx__orb--purple"></div>
+        <div class="hero-fx__orb hero-fx__orb--green"></div>
+        <div class="hero-fx__orb hero-fx__orb--orange"></div>
+        <div class="hero-fx__particles">
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span>
+        </div>
+      </div>
       <div class="split-hero">
         <div class="text">
           <span class="badge"><span class="dot"></span>GalentAI · Platform</span>
@@ -91,6 +102,8 @@
           </div>
         </div>
         <div class="compass-visual" aria-hidden="true">
+          <div class="compass-aura"></div>
+          <div class="compass-aura compass-aura--2"></div>
           <canvas id="cv-compass"></canvas>
         </div>
       </div>
