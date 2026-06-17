@@ -2543,6 +2543,7 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   padding: clamp(24px, 2vw, 32px) clamp(24px, 2vw, 30px);
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 14px;
   overflow: hidden;
   box-shadow: 0 1px 2px rgba(18, 19, 23, 0.04);
@@ -2637,7 +2638,6 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   font-size: 14.5px;
   line-height: 1.55;
   color: var(--on-surface-variant);
-  min-height: calc(1.55em * 4);
 }
 .engine-card p {
   color: var(--on-surface-variant);
@@ -2648,8 +2648,7 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
 .engine-card ul {
   list-style: none;
   padding: 14px 0 0;
-  margin: 8px 0 0;
-  margin-top: auto;
+  margin: 10px 0 0;
   border-top: 1px solid color-mix(in srgb, var(--eng-color) 18%, rgba(18,19,23,0.06));
   display: flex;
   flex-direction: column;
