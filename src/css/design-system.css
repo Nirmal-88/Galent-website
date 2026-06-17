@@ -3728,14 +3728,15 @@ body[data-page] .svc li a:hover, body[data-page] .svc li a:hover .meta { color: 
 /* Home outcomes — 3-column / 2-column centred stat grid */
 .outcomes-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(20px, 3vw, 40px) clamp(24px, 4vw, 64px);
+  grid-template-columns: repeat(5, 1fr);
+  gap: clamp(20px, 3vw, 40px) clamp(20px, 3vw, 48px);
   padding: var(--space-md) 0 var(--space-sm);
   align-items: center;
   justify-items: center;
 }
-@media (max-width: 960px) { .outcomes-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 460px) { .outcomes-grid { grid-template-columns: 1fr; } }
+@media (max-width: 1180px) { .outcomes-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 760px)  { .outcomes-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 460px)  { .outcomes-grid { grid-template-columns: 1fr; } }
 .outcome-stat { text-align: center; }
 .outcome-stat .big {
   font-size: clamp(40px, 5.4vw, 68px);
