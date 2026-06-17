@@ -2508,7 +2508,7 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(16px, 1.6vw, 22px);
-  align-items: start;
+  align-items: stretch;
 }
 /* Adaptive layout — divide evenly based on the actual card count so no row
    ever has empty cells. 4 cards → 2x2 ; 8 cards → 4-up ; otherwise 3-up. */
@@ -2560,7 +2560,9 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: radial-gradient(110% 70% at 100% 0%, color-mix(in srgb, var(--eng-color) 10%, transparent) 0%, transparent 55%);
+  background:
+    radial-gradient(110% 70% at 100% 0%, color-mix(in srgb, var(--eng-color) 14%, transparent) 0%, transparent 55%),
+    radial-gradient(80% 60% at 0% 100%, color-mix(in srgb, var(--eng-color) 8%, transparent) 0%, transparent 65%);
   opacity: 0.85;
   pointer-events: none;
   z-index: -1;
@@ -2588,6 +2590,7 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
 .engine-card:hover::after { opacity: 1; top: 16px; bottom: 16px; }
 
 .engine-card .num {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2603,6 +2606,12 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   background: color-mix(in srgb, var(--eng-color) 13%, #FFFFFF);
   border: 1px solid color-mix(in srgb, var(--eng-color) 26%, transparent);
   margin-bottom: 4px;
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--eng-color) 35%, transparent);
+  transition: box-shadow .35s ease, transform .35s var(--ease-out);
+}
+.engine-card:hover .num {
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--eng-color) 10%, transparent);
 }
 .engine-card .num::before { content: none; }
 
@@ -2628,6 +2637,7 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   font-size: 14.5px;
   line-height: 1.55;
   color: var(--on-surface-variant);
+  min-height: calc(1.55em * 4);
 }
 .engine-card p {
   color: var(--on-surface-variant);
@@ -2639,6 +2649,7 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   list-style: none;
   padding: 14px 0 0;
   margin: 8px 0 0;
+  margin-top: auto;
   border-top: 1px solid color-mix(in srgb, var(--eng-color) 18%, rgba(18,19,23,0.06));
   display: flex;
   flex-direction: column;
