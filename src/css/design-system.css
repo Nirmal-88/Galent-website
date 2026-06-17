@@ -467,6 +467,56 @@ section { padding: clamp(56px, 6.5vw, 96px) 0; }
 .hero-content { position: relative; z-index: 1; max-width: 980px; margin: 0 auto; }
 .hero .badge { margin-bottom: var(--space-xl); }
 .hero .t-hero { margin-bottom: var(--space-xl); text-wrap: balance; }
+
+/* ---- Hero headline treatment: gradient text-fill + animated underline ---- */
+.hero-headline .hero-line { display: block; }
+.hero-headline .hero-line--1 { white-space: nowrap; }
+.hero-highlight {
+  position: relative;
+  font-style: normal;
+  display: inline-block;
+  padding: 0 2px;
+}
+.hero-highlight--primary {
+  background: linear-gradient(90deg, #C6A8F2 0%, #B57AE8 35%, #FF9B5C 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero-highlight--secondary {
+  background: linear-gradient(90deg, #FFFFFF 0%, #C6A8F2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero-highlight::after {
+  content: '';
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  bottom: -4px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #B57AE8 0%, #FF9B5C 100%);
+  transform-origin: left center;
+  transform: scaleX(0);
+  opacity: 0;
+  animation: heroHighlightUnderline 4.2s ease-in-out infinite;
+}
+.hero-highlight--secondary::after {
+  background: linear-gradient(90deg, #FFFFFF 0%, #B57AE8 100%);
+  animation-delay: 1.6s;
+}
+@keyframes heroHighlightUnderline {
+  0%   { transform: scaleX(0); transform-origin: left center;  opacity: 0; }
+  20%  { opacity: 1; }
+  45%  { transform: scaleX(1); transform-origin: left center;  opacity: 1; }
+  55%  { transform: scaleX(1); transform-origin: right center; opacity: 1; }
+  100% { transform: scaleX(0); transform-origin: right center; opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-highlight::after { animation: none !important; transform: scaleX(1); opacity: 1; }
+}
 .hero .t-body-lg { max-width: 56ch; margin: 0 auto var(--space-md); color: var(--on-surface-variant); }
 .hero .t-body-lg + .t-body-lg { margin-top: 0; }   /* inter-paragraph gap handled by the bottom margin above */
 .hero .hero-kicker {
