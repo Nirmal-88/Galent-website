@@ -2117,14 +2117,12 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
 
 .related-tile__num {
   font-family: var(--font-mono);
-  font-size: clamp(36px, 4.2vw, 56px);
-  font-weight: 500;
+  font-size: 11px;
+  font-weight: 600;
   line-height: 1;
-  letter-spacing: -1px;
-  background: linear-gradient(135deg, var(--rt-color) 0%, var(--rt-color-2) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.6px;
+  color: var(--rt-color-2);
+  opacity: 0.7;
   align-self: flex-start;
 }
 
