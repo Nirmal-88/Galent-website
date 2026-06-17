@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/design-system.css?v=shift-cards-1">
+  <link rel="stylesheet" href="css/design-system.css?v=gd-headline-1">
   <link rel="icon" href="assets/images/logo.png?v=4" type="image/png">
 </head>
 <body data-page="fde">
@@ -286,12 +286,19 @@
     </section>
 
     <!-- THE GALENT DIFFERENCE -->
-    <section style="background: var(--surface-container); padding: var(--space-4xl) 0;">
+    <section class="galent-difference" style="background: var(--surface-container); padding: var(--space-4xl) 0;">
+      <div class="gd-bg" aria-hidden="true">
+        <div class="gd-orb gd-orb--a"></div>
+        <div class="gd-orb gd-orb--b"></div>
+      </div>
       <div class="container container-narrow">
-        <div class="section-head" data-reveal style="text-align: left;">
+        <div class="gd-head" data-reveal>
           <span class="section-num">The Galent Difference</span>
-          <h2 class="t-display-italic">From Isolated Builds to Embedded Delivery. <em>From Engineering at a Distance to Engineering in Immersion.</em></h2>
-          <p class="t-body-lg" style="margin-top: var(--space-md);">
+          <h2 class="gd-headline">
+            <span class="gd-line gd-line--1">From <em class="gd-strike">Isolated Builds</em> to <em class="gd-highlight">Embedded Delivery</em>.</span>
+            <span class="gd-line gd-line--2">From <em class="gd-strike">Engineering at a Distance</em> to <em class="gd-highlight gd-highlight--accent">Engineering in Immersion</em>.</span>
+          </h2>
+          <p class="gd-lede">
             As AI becomes woven into every enterprise layer, the most valuable engineers won't just build systems &mdash; they'll understand them. Galent's FDEs represent this shift.
           </p>
         </div>
