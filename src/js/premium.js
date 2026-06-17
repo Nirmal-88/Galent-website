@@ -239,6 +239,39 @@
   }
 
   /* ----------------------------------------------------------------
+   * Universal CTA decorations.
+   * Any .cta-card on any page receives the animated fx layer
+   * (drifting grid, glow orbs, rings, sparks) so the closing CTA
+   * looks alive and consistent site-wide. Only injects if the
+   * decorations aren't already present (the home page index.html
+   * has them inline as a hard guarantee).
+   * ---------------------------------------------------------------- */
+  function initCTADecorations() {
+    const cards = document.querySelectorAll('.cta-card');
+    cards.forEach(function (card) {
+      if (!card.querySelector('.cta-fx')) {
+        const fx = document.createElement('div');
+        fx.className = 'cta-fx';
+        fx.setAttribute('aria-hidden', 'true');
+        fx.innerHTML = ''
+          + '<div class="cta-grid"></div>'
+          + '<div class="cta-orb cta-orb--a"></div>'
+          + '<div class="cta-orb cta-orb--b"></div>'
+          + '<div class="cta-orb cta-orb--c"></div>'
+          + '<div class="cta-rings"><span></span><span></span><span></span></div>'
+          + '<div class="cta-spark cta-spark--1"></div>'
+          + '<div class="cta-spark cta-spark--2"></div>'
+          + '<div class="cta-spark cta-spark--3"></div>'
+          + '<div class="cta-spark cta-spark--4"></div>';
+        card.insertBefore(fx, card.firstChild);
+      }
+      if (!card.hasAttribute('data-cta-parallax')) {
+        card.setAttribute('data-cta-parallax', '');
+      }
+    });
+  }
+
+  /* ----------------------------------------------------------------
    * Final CTA — scroll-driven parallax.
    * As the .cta-card scrolls into and out of the viewport, sets a
    * CSS custom property --cta-shift on the card (range roughly
@@ -248,48 +281,48 @@
    * ---------------------------------------------------------------- */
   function initCTAParallax() {
     if (REDUCED_MOTION) return;
-    const card = document.querySelector('.cta-card[data-cta-parallax]');
-    if (!card) return;
+    const cards = document.querySelectorAll('.cta-card[data-cta-parallax]');
+    if (!cards.length) return;
 
-    let ticking = false;
-    let inView = false;
+    cards.forEach(function (card) {
+      let ticking = false;
+      let inView = false;
 
-    function update() {
-      ticking = false;
-      const rect = card.getBoundingClientRect();
-      const vh = window.innerHeight || document.documentElement.clientHeight;
-      // progress: -1 when card is fully below viewport, 0 when centred, +1 when fully above
-      const center = rect.top + rect.height / 2;
-      const progress = (center - vh / 2) / (vh / 2 + rect.height / 2);
-      const clamped = Math.max(-1, Math.min(1, progress));
-      const shift = clamped * 80; // px
-      const shiftX = clamped * 24; // px (horizontal drift, smaller)
-      card.style.setProperty('--cta-shift', shift.toFixed(2) + 'px');
-      card.style.setProperty('--cta-shift-x', shiftX.toFixed(2) + 'px');
-    }
+      function update() {
+        ticking = false;
+        const rect = card.getBoundingClientRect();
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        const center = rect.top + rect.height / 2;
+        const progress = (center - vh / 2) / (vh / 2 + rect.height / 2);
+        const clamped = Math.max(-1, Math.min(1, progress));
+        const shift = clamped * 80;
+        const shiftX = clamped * 24;
+        card.style.setProperty('--cta-shift', shift.toFixed(2) + 'px');
+        card.style.setProperty('--cta-shift-x', shiftX.toFixed(2) + 'px');
+      }
 
-    function onScroll() {
-      if (!inView) return;
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(update);
-    }
+      function onScroll() {
+        if (!inView || ticking) return;
+        ticking = true;
+        requestAnimationFrame(update);
+      }
 
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          inView = e.isIntersecting;
-          if (inView) update();
-        });
-      }, { rootMargin: '20% 0px 20% 0px' });
-      io.observe(card);
-    } else {
-      inView = true;
-    }
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            inView = e.isIntersecting;
+            if (inView) update();
+          });
+        }, { rootMargin: '20% 0px 20% 0px' });
+        io.observe(card);
+      } else {
+        inView = true;
+      }
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    update();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+      update();
+    });
   }
 
   /* ----------------------------------------------------------------
@@ -347,6 +380,7 @@
     initOutcomesGSAP();
     initSectionTimelines();
     initArchitectureDraw();
+    initCTADecorations();
     initCTAParallax();
     initStatStripCountup();
   }
