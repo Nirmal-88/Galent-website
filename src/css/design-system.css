@@ -8005,35 +8005,82 @@ section[aria-label="Recognised by"] { min-height: 0 !important; }
 }
 .cta-rings span {
   position: absolute; inset: 0;
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1.5px solid rgba(155,77,224,0.45);
   border-radius: 50%;
-  animation: ctaRing 6s ease-out infinite;
+  animation: ctaRing 5s ease-out infinite;
+  box-shadow: 0 0 30px rgba(155,77,224,0.2) inset;
 }
-.cta-rings span:nth-child(2) { animation-delay: 2s; }
-.cta-rings span:nth-child(3) { animation-delay: 4s; }
+.cta-rings span:nth-child(2) { animation-delay: 1.6s; border-color: rgba(30,209,151,0.4); box-shadow: 0 0 30px rgba(30,209,151,0.18) inset; }
+.cta-rings span:nth-child(3) { animation-delay: 3.2s; border-color: rgba(255,118,52,0.4); box-shadow: 0 0 30px rgba(255,118,52,0.18) inset; }
 @keyframes ctaRing {
-  0%   { transform: scale(0.6); opacity: 0; }
-  20%  { opacity: 0.8; }
-  100% { transform: scale(1.4); opacity: 0; }
+  0%   { transform: scale(0.55); opacity: 0; }
+  20%  { opacity: 1; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* Aurora sweep — rotating conic gradient that washes over the panel */
+.cta-fx::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 140%;
+  aspect-ratio: 1;
+  margin: -70% 0 0 -70%;
+  background: conic-gradient(from 0deg,
+    rgba(155,77,224,0) 0deg,
+    rgba(155,77,224,0.18) 60deg,
+    rgba(30,209,151,0) 120deg,
+    rgba(255,118,52,0.16) 180deg,
+    rgba(155,77,224,0) 240deg,
+    rgba(30,209,151,0.18) 300deg,
+    rgba(155,77,224,0) 360deg);
+  filter: blur(40px);
+  animation: ctaAuroraSweep 22s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+@keyframes ctaAuroraSweep {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Horizontal scanline that pulses across the panel */
+.cta-fx::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(155,77,224,0.6) 40%, rgba(30,209,151,0.6) 60%, transparent 100%);
+  filter: blur(1px);
+  animation: ctaScan 7s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes ctaScan {
+  0%   { top: 0%;   opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
 }
 
 /* tiny twinkling sparks scattered across the panel */
 .cta-spark {
   position: absolute;
-  width: 4px; height: 4px;
+  width: 6px; height: 6px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.95);
   box-shadow: 0 0 12px rgba(255,255,255,0.7);
   opacity: 0;
   animation: ctaSpark 5s ease-in-out infinite;
 }
-.cta-spark--1 { top: 22%; left: 14%; animation-delay: 0.4s; }
-.cta-spark--2 { top: 68%; left: 24%; animation-delay: 1.6s; }
-.cta-spark--3 { top: 30%; right: 16%; animation-delay: 2.8s; }
-.cta-spark--4 { bottom: 22%; right: 28%; animation-delay: 3.9s; }
+.cta-spark--1 { top: 22%; left: 14%; animation-delay: 0.4s; box-shadow: 0 0 16px rgba(155,77,224,0.8); }
+.cta-spark--2 { top: 68%; left: 24%; animation-delay: 1.6s; box-shadow: 0 0 16px rgba(30,209,151,0.8); }
+.cta-spark--3 { top: 30%; right: 16%; animation-delay: 2.8s; box-shadow: 0 0 16px rgba(255,118,52,0.8); }
+.cta-spark--4 { bottom: 22%; right: 28%; animation-delay: 3.9s; box-shadow: 0 0 16px rgba(155,77,224,0.8); }
 @keyframes ctaSpark {
-  0%, 100% { opacity: 0; transform: scale(0.6); }
-  50%      { opacity: 1; transform: scale(1);   }
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50%      { opacity: 1; transform: scale(1.4); }
 }
 
 /* keep content above the fx layer */
