@@ -57,8 +57,9 @@
 
       // --- Capabilities (6 engine-card grid) ---
       if (service.capabilities) {
-        const capTitleEl = document.querySelector('#capabilities .section-head .t-h1');
-        const capGrid = document.querySelector('#capabilities .engines-grid');
+        const capGrid = document.querySelector('.engines-grid');
+        const capSection = capGrid ? capGrid.closest('section') : null;
+        const capTitleEl = capSection ? capSection.querySelector('.section-head .t-h1') : null;
         if (capTitleEl && service.capabilities.title) {
           capTitleEl.innerHTML = sanitiseTitle(service.capabilities.title);
         }
@@ -79,14 +80,15 @@
     const delay = i === 0 ? '' : ` style="transition-delay:${(i * 0.06).toFixed(2)}s"`;
     const num = escapeHTML(item.num || '');
     const title = escapeHTML(item.title || '');
-    const kicker = escapeHTML(item.kicker || '');
+    const description = escapeHTML(item.description || item.kicker || '');
     const bullets = Array.isArray(item.bullets) ? item.bullets : [];
     const bulletsHtml = bullets.map((b) => `<li>${escapeHTML(b)}</li>`).join('');
+    const descHtml = description ? `<p class="desc">${description}</p>` : '';
     return `
       <article class="engine-card" data-reveal${delay}>
         <div class="num">${num}</div>
         <h3 class="t-h3">${title}</h3>
-        <div class="kicker">${kicker}</div>
+        ${descHtml}
         <ul>${bulletsHtml}</ul>
       </article>
     `;

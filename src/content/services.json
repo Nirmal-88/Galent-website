@@ -37,7 +37,7 @@
         {
           "num": "4.1",
           "title": "Legacy System Analysis & Transformation Intelligence",
-          "kicker": "Understand before you modernise",
+          "description": "AI maps your entire legacy estate before a single line is changed. Dependency graphs, blast-radius analysis, modernisation pathways — all generated automatically.",
           "bullets": [
             "Deep legacy system analysis and dependency mapping",
             "AI-guided modernisation strategy and pathway design",
@@ -48,7 +48,7 @@
         {
           "num": "4.2",
           "title": "Database Migration & Data Intelligence",
-          "kicker": "Move data without losing fidelity",
+          "description": "Automated database modernisation that preserves data integrity and optimises models for modern platforms.",
           "bullets": [
             "Automated legacy database migration",
             "Data model and schema optimisation",
@@ -59,7 +59,7 @@
         {
           "num": "4.3",
           "title": "Code Modernization & Application Intelligence",
-          "kicker": "COBOL · VB6 → Java · Python · .NET",
+          "description": "Intelligent transformation of legacy codebases — language migration, architecture modernisation, quality elevation.",
           "bullets": [
             "Automated legacy code transformation",
             "Language and framework migration (COBOL, VB6 → Java, Python, .NET)",
@@ -70,7 +70,7 @@
         {
           "num": "4.4",
           "title": "Cloud Migration & Infrastructure Intelligence",
-          "kicker": "Cloud-ready by design",
+          "description": "AI-assisted cloud transformation that modernises infrastructure and ensures performance-ready deployments from day one.",
           "bullets": [
             "Automated cloud readiness assessment and migration",
             "Infrastructure modernisation and optimisation",
@@ -81,7 +81,7 @@
         {
           "num": "4.5",
           "title": "Architecture Modernization",
-          "kicker": "Rebuild for the next decade",
+          "description": "AI-powered system redesign that replaces rigid legacy architectures with scalable, resilient, future-ready platforms.",
           "bullets": [
             "End-to-end architecture redesign",
             "System performance and resilience optimisation",
@@ -91,7 +91,7 @@
         {
           "num": "4.6",
           "title": "Process Automation & Workflow Intelligence",
-          "kicker": "Modernise the work, not just the code",
+          "description": "AI-enabled process modernisation that automates workflows and eliminates the operational debt embedded in legacy systems.",
           "bullets": [
             "Business process modernisation",
             "Intelligent workflow automation",

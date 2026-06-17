@@ -2623,6 +2623,12 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   margin: 0 0 4px;
   font-weight: 500;
 }
+.engine-card .desc {
+  margin: 4px 0 0;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--on-surface-variant);
+}
 .engine-card p {
   color: var(--on-surface-variant);
   margin: 0;
@@ -2641,9 +2647,9 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   width: 100%;
 }
 .engine-card li {
-  font-size: 13px;
+  font-size: 13.5px;
   color: var(--on-surface);
-  line-height: 1.5;
+  line-height: 1.55;
   padding-left: 22px;
   position: relative;
 }
@@ -2651,13 +2657,13 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   content: "";
   position: absolute;
   left: 0;
-  top: 6px;
+  top: 0.7em;
   width: 12px;
-  height: 8px;
-  border-left: 1.5px solid var(--eng-color);
-  border-bottom: 1.5px solid var(--eng-color);
-  transform: rotate(-45deg);
-  transform-origin: 30% 70%;
+  height: 1.5px;
+  background: var(--eng-color);
+  border-radius: 1px;
+  transform: none;
+  opacity: 0.85;
 }
 
 /* Architecture 2x2 (used on Platform page) */
