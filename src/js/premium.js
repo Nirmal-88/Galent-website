@@ -292,6 +292,54 @@
     update();
   }
 
+  /* ----------------------------------------------------------------
+   * Generic stat-strip count-up.
+   * Any .stat-strip--animated with [data-countup] spans inside its
+   * .big numbers will count from 0 to the target value when the
+   * strip enters viewport. Used by the Applied AI at Scale strip
+   * on platform.html and any future strip flagged the same way.
+   * ---------------------------------------------------------------- */
+  function initStatStripCountup() {
+    if (REDUCED_MOTION) return;
+    if (typeof window.gsap !== 'object' && typeof window.gsap !== 'function') return;
+    const gsap = window.gsap;
+    const strips = document.querySelectorAll('.stat-strip--animated');
+    if (!strips.length) return;
+
+    strips.forEach(function (strip) {
+      const items = Array.from(strip.querySelectorAll('.item'));
+      if (!items.length) return;
+
+      const cells = items.map(function (item) {
+        const bigs = Array.from(item.querySelectorAll('[data-countup]'));
+        const targets = bigs.map(function (b) { return parseFloat(b.getAttribute('data-countup')); });
+        bigs.forEach(function (b) { b.textContent = '0'; });
+        gsap.set(item, { opacity: 0, y: 14 });
+        return { item: item, bigs: bigs, targets: targets };
+      });
+
+      onceInView(strip, 0.25, function () {
+        const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+        cells.forEach(function (cell, i) {
+          const stagger = i * 0.10;
+          tl.to(cell.item, { opacity: 1, y: 0, duration: 0.5 }, stagger);
+          cell.bigs.forEach(function (big, j) {
+            const target = cell.targets[j];
+            if (!isFinite(target)) return;
+            const counter = { v: 0 };
+            tl.to(counter, {
+              v: target,
+              duration: 1.1,
+              ease: 'power3.out',
+              onUpdate: function () { big.textContent = Math.round(counter.v).toString(); },
+              onComplete: function () { big.textContent = String(target); },
+            }, stagger + 0.05);
+          });
+        });
+      });
+    });
+  }
+
   function boot() {
     initStaggerReveals();
     initSectionObserver();
@@ -300,6 +348,7 @@
     initSectionTimelines();
     initArchitectureDraw();
     initCTAParallax();
+    initStatStripCountup();
   }
 
   if (document.readyState === 'loading') {

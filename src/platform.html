@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/design-system.css?v=stat-strip-dark-fix-1">
+  <link rel="stylesheet" href="css/design-system.css?v=stat-countup-fx-1">
   <link rel="icon" href="assets/images/logo.png?v=4" type="image/png">
 
   <!-- GSAP — used by the architecture-diagram line-draw on this page. -->
@@ -376,13 +376,13 @@
           <span class="section-num">Applied AI at Scale</span>
           <h2 class="t-display-italic" style="color:#fff;">The Four Engines Are the Foundation. <em>This Is What Runs on Top.</em></h2>
         </div>
-        <div class="stat-strip six" data-reveal style="border-color: rgba(255,255,255,0.10);">
-          <div class="item p" style="border-color: rgba(255,255,255,0.10);"><div class="big" style="color:#fff;">125<span class="unit">+</span></div><div class="label" style="color: rgba(255,255,255,0.65);">Reusable agents</div></div>
-          <div class="item g" style="border-color: rgba(255,255,255,0.10);"><div class="big" style="color:#fff;">70<span class="unit">+</span></div><div class="label" style="color: rgba(255,255,255,0.65);">Validated use cases</div></div>
-          <div class="item p" style="border-color: rgba(255,255,255,0.10);"><div class="big" style="color:#fff;">20<span class="unit">+</span></div><div class="label" style="color: rgba(255,255,255,0.65);">Design patterns</div></div>
-          <div class="item o" style="border-color: rgba(255,255,255,0.10);"><div class="big" style="color:#fff;">15<span class="unit">+</span></div><div class="label" style="color: rgba(255,255,255,0.65);">Agentic AI techniques</div></div>
-          <div class="item p" style="border-color: rgba(255,255,255,0.10);"><div class="big" style="color:#fff;">12</div><div class="label" style="color: rgba(255,255,255,0.65);">Delivery methods</div></div>
-          <div class="item g" style="border-color: rgba(255,255,255,0.10);"><div class="big" style="color:#fff;">9</div><div class="label" style="color: rgba(255,255,255,0.65);">Core engines</div></div>
+        <div class="stat-strip six stat-strip--animated" data-reveal>
+          <div class="item p"><div class="big"><span data-countup="125">0</span><span class="unit">+</span></div><div class="label">Reusable agents</div></div>
+          <div class="item g"><div class="big"><span data-countup="70">0</span><span class="unit">+</span></div><div class="label">Validated use cases</div></div>
+          <div class="item p"><div class="big"><span data-countup="20">0</span><span class="unit">+</span></div><div class="label">Design patterns</div></div>
+          <div class="item o"><div class="big"><span data-countup="15">0</span><span class="unit">+</span></div><div class="label">Agentic AI techniques</div></div>
+          <div class="item p"><div class="big"><span data-countup="12">0</span></div><div class="label">Delivery methods</div></div>
+          <div class="item g"><div class="big"><span data-countup="9">0</span></div><div class="label">Core engines</div></div>
         </div>
         <p data-reveal style="margin-top: var(--space-lg); text-align: center; color: rgba(255,255,255,0.6); font-size: 14px;">
           This library grows with every client engagement &mdash; compounding returns across programmes.
@@ -607,6 +607,6 @@
     catch (e) { console.error('enginesDiagram', e); }
   </script>
 
-  <script src="js/premium.js?v=gsap-2" defer></script>
+  <script src="js/premium.js?v=stat-countup-1" defer></script>
 </body>
 </html>

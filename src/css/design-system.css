@@ -694,6 +694,61 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   .stat-strip .item:not(:last-child):not(:nth-last-child(2)) { border-bottom: 1px solid rgba(123,44,191,0.10); }
 }
 
+/* Animated stat strip — gradient-glow numbers, hover lift, plus
+   sign that pulses once the count lands. Used together with the
+   data-countup JS so values dynamically tick up on viewport entry. */
+.stat-strip--animated .item {
+  position: relative;
+  transition: transform .3s var(--ease-out), background .3s ease;
+}
+.stat-strip--animated .item::before {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 14px;
+  background: radial-gradient(circle at 50% 0%, var(--item-glow, rgba(155,77,224,0.18)) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none;
+}
+.stat-strip--animated .item.p { --item-glow: rgba(155,77,224,0.30); }
+.stat-strip--animated .item.g { --item-glow: rgba(30,209,151,0.28);  }
+.stat-strip--animated .item.o { --item-glow: rgba(255,118,52,0.30);  }
+.stat-strip--animated .item:hover { transform: translateY(-4px); }
+.stat-strip--animated .item:hover::before { opacity: 1; }
+
+.stat-strip--animated .big {
+  position: relative;
+  font-weight: 600;
+  letter-spacing: -1.4px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #E4DCFA 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 28px rgba(255,255,255,0.15);
+}
+.stat-strip--animated .item.p .big { background: linear-gradient(180deg, #FFFFFF 0%, #C6A8F2 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.stat-strip--animated .item.g .big { background: linear-gradient(180deg, #FFFFFF 0%, #7FE7C2 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.stat-strip--animated .item.o .big { background: linear-gradient(180deg, #FFFFFF 0%, #FFB58E 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+
+.stat-strip--animated .big .unit {
+  background: none;
+  -webkit-text-fill-color: initial;
+  color: #B57AE8;
+  font-weight: 500;
+  opacity: 0.9;
+  animation: statUnitPulse 2.4s ease-in-out infinite;
+}
+.stat-strip--animated .item.g .big .unit { color: #1ED197; }
+.stat-strip--animated .item.o .big .unit { color: #FF7634; }
+@keyframes statUnitPulse {
+  0%,100% { opacity: 0.55; text-shadow: 0 0 0 currentColor; }
+  50%     { opacity: 1;    text-shadow: 0 0 14px currentColor; }
+}
+
+.stat-strip--animated .label {
+  color: rgba(255,255,255,0.7);
+}
+
 /* Dark-section variant — the same highlighted panel but tuned for
    sections with a dark background so white numbers stay readable. */
 .panel-dark .stat-strip {
