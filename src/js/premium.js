@@ -238,6 +238,60 @@
     });
   }
 
+  /* ----------------------------------------------------------------
+   * Final CTA — scroll-driven parallax.
+   * As the .cta-card scrolls into and out of the viewport, sets a
+   * CSS custom property --cta-shift on the card (range roughly
+   * -80px..+80px). CSS layers consume that value at different
+   * multipliers so the grid, orbs, rings and content all move at
+   * different rates, producing a subtle parallax effect.
+   * ---------------------------------------------------------------- */
+  function initCTAParallax() {
+    if (REDUCED_MOTION) return;
+    const card = document.querySelector('.cta-card[data-cta-parallax]');
+    if (!card) return;
+
+    let ticking = false;
+    let inView = false;
+
+    function update() {
+      ticking = false;
+      const rect = card.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      // progress: -1 when card is fully below viewport, 0 when centred, +1 when fully above
+      const center = rect.top + rect.height / 2;
+      const progress = (center - vh / 2) / (vh / 2 + rect.height / 2);
+      const clamped = Math.max(-1, Math.min(1, progress));
+      const shift = clamped * 80; // px
+      const shiftX = clamped * 24; // px (horizontal drift, smaller)
+      card.style.setProperty('--cta-shift', shift.toFixed(2) + 'px');
+      card.style.setProperty('--cta-shift-x', shiftX.toFixed(2) + 'px');
+    }
+
+    function onScroll() {
+      if (!inView) return;
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          inView = e.isIntersecting;
+          if (inView) update();
+        });
+      }, { rootMargin: '20% 0px 20% 0px' });
+      io.observe(card);
+    } else {
+      inView = true;
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+  }
+
   function boot() {
     initStaggerReveals();
     initSectionObserver();
@@ -245,6 +299,7 @@
     initOutcomesGSAP();
     initSectionTimelines();
     initArchitectureDraw();
+    initCTAParallax();
   }
 
   if (document.readyState === 'loading') {

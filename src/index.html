@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/design-system.css?v=spec-sheet-2">
+  <link rel="stylesheet" href="css/design-system.css?v=cta-parallax-1">
   <link rel="icon" href="assets/images/logo.png?v=4" type="image/png">
 
   <meta property="og:type" content="website">
@@ -442,11 +442,6 @@
             </div>
             <h4>Full-stack + AI engineers</h4>
             <p class="role-lede">Architecture to production. Outcome owned.</p>
-            <ul class="role-bullets">
-              <li>Production-grade services on your stack</li>
-              <li>AI features integrated into existing systems</li>
-              <li>Performance budgets, SLOs, real telemetry</li>
-            </ul>
           </div>
           <div class="fde-rich">
             <div class="role-head">
@@ -455,11 +450,6 @@
             </div>
             <h4>Data engineers</h4>
             <p class="role-lede">Building AI-ready ecosystems inside your stack.</p>
-            <ul class="role-bullets">
-              <li>Streaming + batch pipelines, lineage-tracked</li>
-              <li>Feature stores and vector indexes</li>
-              <li>Governed access, audit-ready by default</li>
-            </ul>
           </div>
           <div class="fde-rich">
             <div class="role-head">
@@ -468,11 +458,6 @@
             </div>
             <h4>Quality engineers</h4>
             <p class="role-lede">Shifting assurance left — autonomous and predictive.</p>
-            <ul class="role-bullets">
-              <li>Self-authoring test suites tied to user flows</li>
-              <li>Risk-based regression and chaos coverage</li>
-              <li>Eval harnesses for AI behaviour</li>
-            </ul>
           </div>
           <div class="fde-rich">
             <div class="role-head">
@@ -481,11 +466,6 @@
             </div>
             <h4>Reliability engineers</h4>
             <p class="role-lede">Self-healing systems from day one.</p>
-            <ul class="role-bullets">
-              <li>SLOs, error budgets, auto-remediation</li>
-              <li>Incident response with runbook automation</li>
-              <li>Cost and capacity guardrails</li>
-            </ul>
           </div>
         </div>
       </div>
@@ -689,7 +669,20 @@
     <!-- 10 GET STARTED -->
     <section id="cta" aria-labelledby="cta-title">
       <div class="container">
-        <div class="cta-card" data-reveal>
+        <div class="cta-card" data-reveal data-cta-parallax>
+          <div class="cta-fx" aria-hidden="true">
+            <div class="cta-grid"></div>
+            <div class="cta-orb cta-orb--a"></div>
+            <div class="cta-orb cta-orb--b"></div>
+            <div class="cta-orb cta-orb--c"></div>
+            <div class="cta-rings">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="cta-spark cta-spark--1"></div>
+            <div class="cta-spark cta-spark--2"></div>
+            <div class="cta-spark cta-spark--3"></div>
+            <div class="cta-spark cta-spark--4"></div>
+          </div>
           <span class="badge"><span class="dot"></span>Get Started</span>
           <h2 id="cta-title" class="t-h1">You Don't Need Another Platform. <em style="color:#fff;font-style:normal;border-bottom:2px solid var(--brand-purple);padding-bottom:2px;">You Need Delivery That Performs.</em></h2>
           <p class="t-body-lg">Tell us what you're trying to deliver. We'll tell you how we'd approach it — and what to expect.</p>
@@ -769,6 +762,6 @@
     Galent.countUps();
   </script>
 
-  <script src="js/premium.js?v=gsap-2" defer></script>
+  <script src="js/premium.js?v=cta-parallax-1" defer></script>
 </body>
 </html>

@@ -6670,3 +6670,147 @@ section[aria-label="Recognised by"] { min-height: 0 !important; }
   background: color-mix(in srgb, var(--brand-green) 12%, transparent);
   border-color: color-mix(in srgb, var(--brand-green) 30%, transparent);
 }
+
+/* ==================================================================
+ * FINAL CTA — visual layer + scroll parallax
+ * Adds a drifting grid, soft glow orbs, faint concentric rings and
+ * a few "sparks" that pulse. Driven by both CSS animation and JS
+ * scroll parallax (see initCTAParallax in premium.js).
+ * Reduced-motion: orbs and rings stop animating; layout is unchanged.
+ * ================================================================== */
+.cta-fx {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: inherit;
+  z-index: 0;
+}
+
+/* visible grid that drifts on scroll (JS adjusts --cta-shift) */
+.cta-grid {
+  position: absolute; inset: -10% -5%;
+  background-image:
+    linear-gradient(to right,  rgba(255,255,255,0.10) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.10) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at 50% 50%, #000 25%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 25%, transparent 80%);
+  transform: translate3d(0, calc(var(--cta-shift, 0) * 0.35), 0);
+  opacity: 0.9;
+}
+
+/* big colour orbs — float gently, parallax with scroll */
+.cta-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(50px);
+  opacity: 1;
+  will-change: transform;
+}
+.cta-orb--a {
+  width: 620px; height: 620px;
+  top: -220px; left: 50%; transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(155,77,224,0.85) 0%, rgba(123,44,191,0) 60%);
+  animation: ctaOrbDriftA 9s ease-in-out infinite;
+}
+.cta-orb--b {
+  width: 440px; height: 440px;
+  bottom: -160px; left: 4%;
+  background: radial-gradient(circle, rgba(30,209,151,0.65) 0%, rgba(30,209,151,0) 60%);
+  animation: ctaOrbDriftB 11s ease-in-out infinite;
+}
+.cta-orb--c {
+  width: 380px; height: 380px;
+  bottom: -120px; right: 2%;
+  background: radial-gradient(circle, rgba(255,118,52,0.55) 0%, rgba(255,90,31,0) 60%);
+  animation: ctaOrbDriftC 10s ease-in-out infinite;
+}
+.cta-card[data-cta-parallax] .cta-orb--a {
+  transform: translate3d(calc(-50% + var(--cta-shift-x, 0)), calc(var(--cta-shift, 0) * -0.55), 0);
+}
+.cta-card[data-cta-parallax] .cta-orb--b {
+  transform: translate3d(calc(var(--cta-shift-x, 0) * -0.6), calc(var(--cta-shift, 0) * -0.25), 0);
+}
+.cta-card[data-cta-parallax] .cta-orb--c {
+  transform: translate3d(calc(var(--cta-shift-x, 0) * 0.6), calc(var(--cta-shift, 0) * -0.30), 0);
+}
+
+@keyframes ctaOrbDriftA {
+  0%,100% { filter: blur(50px) saturate(1);    opacity: 0.85; }
+  50%     { filter: blur(70px) saturate(1.25); opacity: 1;    }
+}
+@keyframes ctaOrbDriftB {
+  0%,100% { filter: blur(50px) saturate(1);    opacity: 0.7;  }
+  50%     { filter: blur(72px) saturate(1.2);  opacity: 0.95; }
+}
+@keyframes ctaOrbDriftC {
+  0%,100% { filter: blur(50px) saturate(1);    opacity: 0.6;  }
+  50%     { filter: blur(70px) saturate(1.2);  opacity: 0.85; }
+}
+
+/* concentric rings centred on the badge — slow expand */
+.cta-rings {
+  position: absolute;
+  top: 12%; left: 50%;
+  transform: translate3d(-50%, calc(var(--cta-shift, 0) * 0.15), 0);
+  width: 480px; height: 480px;
+}
+.cta-rings span {
+  position: absolute; inset: 0;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 50%;
+  animation: ctaRing 6s ease-out infinite;
+}
+.cta-rings span:nth-child(2) { animation-delay: 2s; }
+.cta-rings span:nth-child(3) { animation-delay: 4s; }
+@keyframes ctaRing {
+  0%   { transform: scale(0.6); opacity: 0; }
+  20%  { opacity: 0.8; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+/* tiny twinkling sparks scattered across the panel */
+.cta-spark {
+  position: absolute;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0 0 12px rgba(255,255,255,0.7);
+  opacity: 0;
+  animation: ctaSpark 5s ease-in-out infinite;
+}
+.cta-spark--1 { top: 22%; left: 14%; animation-delay: 0.4s; }
+.cta-spark--2 { top: 68%; left: 24%; animation-delay: 1.6s; }
+.cta-spark--3 { top: 30%; right: 16%; animation-delay: 2.8s; }
+.cta-spark--4 { bottom: 22%; right: 28%; animation-delay: 3.9s; }
+@keyframes ctaSpark {
+  0%, 100% { opacity: 0; transform: scale(0.6); }
+  50%      { opacity: 1; transform: scale(1);   }
+}
+
+/* keep content above the fx layer */
+.cta-card > .badge,
+.cta-card > h2,
+.cta-card > p,
+.cta-card > div { position: relative; z-index: 2; }
+
+/* parallax content nudge — text rides up slightly faster than the
+ * background as the section settles into view */
+.cta-card[data-cta-parallax] > .badge,
+.cta-card[data-cta-parallax] > h2,
+.cta-card[data-cta-parallax] > p,
+.cta-card[data-cta-parallax] > div {
+  transform: translate3d(0, calc(var(--cta-shift, 0) * -0.08), 0);
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-orb, .cta-rings span, .cta-spark { animation: none !important; }
+  .cta-card[data-cta-parallax] .cta-orb,
+  .cta-card[data-cta-parallax] .cta-grid,
+  .cta-card[data-cta-parallax] .cta-rings,
+  .cta-card[data-cta-parallax] > .badge,
+  .cta-card[data-cta-parallax] > h2,
+  .cta-card[data-cta-parallax] > p,
+  .cta-card[data-cta-parallax] > div { transform: none !important; }
+}
