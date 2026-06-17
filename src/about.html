@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/design-system.css?v=cta-universal-2">
+  <link rel="stylesheet" href="css/design-system.css?v=about-hero-fx-1">
   <link rel="icon" href="assets/images/logo.png?v=4" type="image/png">
 </head>
 <body data-page="about">
@@ -69,12 +69,36 @@
   <main id="top">
 
     <!-- HERO -->
-    <section class="hero" style="background: radial-gradient(ellipse at 50% 20%, rgba(30,209,151,0.10), transparent 55%), radial-gradient(ellipse at 70% 80%, rgba(123,44,191,0.06), transparent 50%);">
+    <section class="hero about-hero">
+      <div class="about-hero__fx" aria-hidden="true">
+        <div class="about-hero__grid"></div>
+        <div class="about-hero__orb about-hero__orb--green"></div>
+        <div class="about-hero__orb about-hero__orb--purple"></div>
+        <div class="about-hero__orb about-hero__orb--orange"></div>
+        <svg class="about-hero__bridge" viewBox="0 0 800 200" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="abBridge" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"  stop-color="#1ED197" stop-opacity="0.7"/>
+              <stop offset="50%" stop-color="#B57AE8" stop-opacity="0.85"/>
+              <stop offset="100%" stop-color="#FF7634" stop-opacity="0.7"/>
+            </linearGradient>
+          </defs>
+          <path d="M 0 100 Q 200 60, 400 100 T 800 100" stroke="url(#abBridge)" stroke-width="1.5" fill="none" stroke-dasharray="6 8"/>
+          <circle cx="40"  cy="100" r="6" fill="#1ED197"/>
+          <circle cx="760" cy="100" r="6" fill="#FF7634"/>
+          <circle cx="400" cy="100" r="4" fill="#B57AE8" class="about-hero__pulse"/>
+        </svg>
+        <div class="about-hero__particles">
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span>
+        </div>
+      </div>
       <div class="hero-content">
         <span class="badge"><span class="dot"></span>About</span>
-        <h1 class="t-hero">
-          <span style="display:block">We Were Built for the Gap</span>
-          <span style="display:block">Between AI's Promise and <em class="ac-p">Enterprise Reality.</em></span>
+        <h1 class="t-hero about-hero__headline">
+          <span class="about-hero__line">We Were Built for the Gap</span>
+          <span class="about-hero__line">Between <em class="about-hero__highlight about-hero__highlight--ai">AI's Promise</em> and <em class="about-hero__highlight about-hero__highlight--ent">Enterprise Reality.</em></span>
         </h1>
         <p class="t-body-lg">
           AI is everywhere except in the P&amp;L. Not because the technology isn't capable &mdash; but because the industry hasn't solved how to deploy it repeatably, at team scale, in regulated production environments.
