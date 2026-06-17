@@ -2070,6 +2070,82 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
 .shift-list li:first-child { border-top: 0; }
 .shift-list li em { color: var(--brand-purple); font-style: normal; }
 
+/* ---- Service categories: icon + text 4-up grid ---- */
+.service-categories {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(14px, 1.4vw, 20px);
+}
+@media (max-width: 720px) { .service-categories { grid-template-columns: 1fr; } }
+.svc-cat {
+  --svc-color: #B57AE8;
+  --svc-color-2: #7B2CBF;
+  --svc-tint:  rgba(155,77,224,0.10);
+  position: relative;
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: clamp(16px, 1.5vw, 22px);
+  align-items: flex-start;
+  padding: clamp(20px, 2vw, 28px) clamp(22px, 2.2vw, 30px);
+  background: #FFFFFF;
+  border: 1px solid rgba(18,19,23,0.07);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px -8px rgba(18,19,23,0.08);
+  transition: transform .35s var(--ease-out), border-color .35s ease, box-shadow .35s ease;
+  overflow: hidden;
+}
+.svc-cat::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--svc-color) 0%, var(--svc-color-2) 100%);
+  transform-origin: top center;
+  transform: scaleY(0.4);
+  opacity: 0.85;
+  transition: transform .4s var(--ease-out), opacity .35s ease;
+}
+.svc-cat:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--svc-color-2) 32%, rgba(18,19,23,0.07));
+  box-shadow: 0 20px 40px -22px color-mix(in srgb, var(--svc-color-2) 55%, transparent), 0 4px 12px -8px rgba(18,19,23,0.08);
+}
+.svc-cat:hover::before { transform: scaleY(1); }
+
+.svc-cat--purple { --svc-color: #B57AE8; --svc-color-2: #7B2CBF; --svc-tint: rgba(155,77,224,0.10); }
+.svc-cat--green  { --svc-color: #6FE3B6; --svc-color-2: #1ED197; --svc-tint: rgba(30,209,151,0.12); }
+.svc-cat--orange { --svc-color: #FFB18C; --svc-color-2: #FF7634; --svc-tint: rgba(255,118,52,0.12); }
+.svc-cat--indigo { --svc-color: #82B4FF; --svc-color-2: #4F46E5; --svc-tint: rgba(79,70,229,0.10); }
+
+.svc-cat__icon {
+  display: grid;
+  place-items: center;
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  background: var(--svc-tint);
+  color: var(--svc-color-2);
+  transition: background .35s ease, color .35s ease, transform .35s var(--ease-out);
+}
+.svc-cat:hover .svc-cat__icon {
+  background: linear-gradient(135deg, var(--svc-color) 0%, var(--svc-color-2) 100%);
+  color: #FFFFFF;
+  transform: rotate(-4deg) scale(1.06);
+}
+
+.svc-cat__body h4 {
+  margin: 0 0 6px;
+  font-size: clamp(17px, 1.4vw, 19px);
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  color: var(--on-surface);
+}
+.svc-cat__body p {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--on-surface-variant);
+}
+
 /* ---- Galent Difference headline block ---- */
 .galent-difference { position: relative; overflow: hidden; }
 .galent-difference > .container { position: relative; z-index: 2; }

@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/design-system.css?v=belief-num-clean-1">
+  <link rel="stylesheet" href="css/design-system.css?v=svc-cat-grid-1">
   <link rel="icon" href="assets/images/logo.png?v=4" type="image/png">
 </head>
 <body data-page="about">
@@ -185,12 +185,67 @@
             Galent delivers one service line &mdash; Tech Services &mdash; across four delivery categories. Every engagement runs on GalentAI. Every team is Forward-Deployed.
           </p>
         </div>
-        <ul class="shift-list" data-reveal style="margin-top: var(--space-xl);">
-          <li><strong style="color: var(--on-surface); font-weight: 600;">App Dev &amp; Modernization</strong> &mdash; Legacy modernisation, greenfield and brownfield development, quality engineering</li>
-          <li><strong style="color: var(--on-surface); font-weight: 600;">Managed Services</strong> &mdash; ITSM transformation, SRE &amp; observability, Everything Ops</li>
-          <li><strong style="color: var(--on-surface); font-weight: 600;">Data &amp; Platforms</strong> &mdash; Data transformation, Salesforce &amp; ERP, context engineering</li>
-          <li><strong style="color: var(--on-surface); font-weight: 600;">Context Engineering</strong> &mdash; Knowledge Graph, Context Graph, institutional intelligence</li>
-        </ul>
+        <div class="service-categories" data-reveal data-stagger style="margin-top: var(--space-xl);">
+          <article class="svc-cat svc-cat--purple">
+            <span class="svc-cat__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"/>
+                <polyline points="8 6 2 12 8 18"/>
+                <line x1="14" y1="4" x2="10" y2="20"/>
+              </svg>
+            </span>
+            <div class="svc-cat__body">
+              <h4>App Dev &amp; Modernization</h4>
+              <p>Legacy modernisation, greenfield and brownfield development, quality engineering.</p>
+            </div>
+          </article>
+          <article class="svc-cat svc-cat--green">
+            <span class="svc-cat__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+              </svg>
+            </span>
+            <div class="svc-cat__body">
+              <h4>Managed Services</h4>
+              <p>ITSM transformation, SRE &amp; observability, Everything Ops.</p>
+            </div>
+          </article>
+          <article class="svc-cat svc-cat--orange">
+            <span class="svc-cat__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                <path d="M3 5v6c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/>
+                <path d="M3 11v6c0 1.66 4.03 3 9 3s9-1.34 9-3v-6"/>
+              </svg>
+            </span>
+            <div class="svc-cat__body">
+              <h4>Data &amp; Platforms</h4>
+              <p>Data transformation, Salesforce &amp; ERP, context engineering.</p>
+            </div>
+          </article>
+          <article class="svc-cat svc-cat--indigo">
+            <span class="svc-cat__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="6" cy="6" r="2"/>
+                <circle cx="18" cy="6" r="2"/>
+                <circle cx="12" cy="12" r="2"/>
+                <circle cx="6" cy="18" r="2"/>
+                <circle cx="18" cy="18" r="2"/>
+                <line x1="8" y1="6" x2="16" y2="6"/>
+                <line x1="8" y1="18" x2="16" y2="18"/>
+                <line x1="7.5" y1="7.5" x2="10.5" y2="10.5"/>
+                <line x1="16.5" y1="7.5" x2="13.5" y2="10.5"/>
+                <line x1="7.5" y1="16.5" x2="10.5" y2="13.5"/>
+                <line x1="16.5" y1="16.5" x2="13.5" y2="13.5"/>
+              </svg>
+            </span>
+            <div class="svc-cat__body">
+              <h4>Context Engineering</h4>
+              <p>Knowledge Graph, Context Graph, institutional intelligence.</p>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
