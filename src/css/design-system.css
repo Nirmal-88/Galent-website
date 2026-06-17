@@ -8183,6 +8183,11 @@ section[aria-label="Recognised by"] { min-height: 0 !important; }
   -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 25%, transparent 80%);
   transform: translate3d(0, calc(var(--cta-shift, 0) * 0.35), 0);
   opacity: 0.9;
+  animation: ctaGridDrift 30s linear infinite;
+}
+@keyframes ctaGridDrift {
+  from { background-position: 0 0; }
+  to   { background-position: 56px 56px; }
 }
 
 /* big colour orbs — float gently, parallax with scroll */
@@ -8222,16 +8227,16 @@ section[aria-label="Recognised by"] { min-height: 0 !important; }
 }
 
 @keyframes ctaOrbDriftA {
-  0%,100% { filter: blur(50px) saturate(1);    opacity: 0.85; }
-  50%     { filter: blur(70px) saturate(1.25); opacity: 1;    }
+  0%,100% { filter: blur(50px) saturate(1.1); opacity: 0.95; }
+  50%     { filter: blur(72px) saturate(1.4); opacity: 1;    }
 }
 @keyframes ctaOrbDriftB {
-  0%,100% { filter: blur(50px) saturate(1);    opacity: 0.7;  }
-  50%     { filter: blur(72px) saturate(1.2);  opacity: 0.95; }
+  0%,100% { filter: blur(50px) saturate(1.1); opacity: 0.9;  }
+  50%     { filter: blur(74px) saturate(1.35); opacity: 1; }
 }
 @keyframes ctaOrbDriftC {
-  0%,100% { filter: blur(50px) saturate(1);    opacity: 0.6;  }
-  50%     { filter: blur(70px) saturate(1.2);  opacity: 0.85; }
+  0%,100% { filter: blur(50px) saturate(1.1); opacity: 0.85;  }
+  50%     { filter: blur(72px) saturate(1.3); opacity: 1; }
 }
 
 /* concentric rings centred on the badge — slow expand */
@@ -8243,17 +8248,17 @@ section[aria-label="Recognised by"] { min-height: 0 !important; }
 }
 .cta-rings span {
   position: absolute; inset: 0;
-  border: 1.5px solid rgba(155,77,224,0.45);
+  border: 2px solid rgba(155,77,224,0.75);
   border-radius: 50%;
-  animation: ctaRing 5s ease-out infinite;
-  box-shadow: 0 0 30px rgba(155,77,224,0.2) inset;
+  animation: ctaRing 4.5s ease-out infinite;
+  box-shadow: 0 0 50px rgba(155,77,224,0.35) inset, 0 0 30px rgba(155,77,224,0.25);
 }
-.cta-rings span:nth-child(2) { animation-delay: 1.6s; border-color: rgba(30,209,151,0.4); box-shadow: 0 0 30px rgba(30,209,151,0.18) inset; }
-.cta-rings span:nth-child(3) { animation-delay: 3.2s; border-color: rgba(255,118,52,0.4); box-shadow: 0 0 30px rgba(255,118,52,0.18) inset; }
+.cta-rings span:nth-child(2) { animation-delay: 1.5s; border-color: rgba(30,209,151,0.70); box-shadow: 0 0 50px rgba(30,209,151,0.30) inset, 0 0 30px rgba(30,209,151,0.20); }
+.cta-rings span:nth-child(3) { animation-delay: 3.0s; border-color: rgba(255,118,52,0.70); box-shadow: 0 0 50px rgba(255,118,52,0.30) inset, 0 0 30px rgba(255,118,52,0.20); }
 @keyframes ctaRing {
-  0%   { transform: scale(0.55); opacity: 0; }
-  20%  { opacity: 1; }
-  100% { transform: scale(1.8); opacity: 0; }
+  0%   { transform: scale(0.45); opacity: 0; }
+  15%  { opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
 }
 
 /* Aurora sweep — rotating conic gradient that washes over the panel */
@@ -8261,19 +8266,21 @@ section[aria-label="Recognised by"] { min-height: 0 !important; }
   content: '';
   position: absolute;
   top: 50%; left: 50%;
-  width: 140%;
+  width: 160%;
   aspect-ratio: 1;
-  margin: -70% 0 0 -70%;
+  margin: -80% 0 0 -80%;
   background: conic-gradient(from 0deg,
     rgba(155,77,224,0) 0deg,
-    rgba(155,77,224,0.18) 60deg,
-    rgba(30,209,151,0) 120deg,
-    rgba(255,118,52,0.16) 180deg,
-    rgba(155,77,224,0) 240deg,
-    rgba(30,209,151,0.18) 300deg,
+    rgba(155,77,224,0.40) 45deg,
+    rgba(155,77,224,0) 90deg,
+    rgba(30,209,151,0.32) 150deg,
+    rgba(30,209,151,0) 195deg,
+    rgba(255,118,52,0.38) 250deg,
+    rgba(255,118,52,0) 295deg,
+    rgba(155,77,224,0.30) 340deg,
     rgba(155,77,224,0) 360deg);
-  filter: blur(40px);
-  animation: ctaAuroraSweep 22s linear infinite;
+  filter: blur(50px);
+  animation: ctaAuroraSweep 14s linear infinite;
   pointer-events: none;
   z-index: 0;
 }
@@ -8289,9 +8296,9 @@ section[aria-label="Recognised by"] { min-height: 0 !important; }
   left: 0; right: 0;
   top: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent 0%, rgba(155,77,224,0.6) 40%, rgba(30,209,151,0.6) 60%, transparent 100%);
-  filter: blur(1px);
-  animation: ctaScan 7s ease-in-out infinite;
+  background: linear-gradient(90deg, transparent 0%, rgba(155,77,224,0.9) 35%, rgba(255,118,52,0.9) 50%, rgba(30,209,151,0.9) 65%, transparent 100%);
+  box-shadow: 0 0 16px rgba(155,77,224,0.5);
+  animation: ctaScan 5s ease-in-out infinite;
   pointer-events: none;
   z-index: 1;
 }
@@ -8305,20 +8312,20 @@ section[aria-label="Recognised by"] { min-height: 0 !important; }
 /* tiny twinkling sparks scattered across the panel */
 .cta-spark {
   position: absolute;
-  width: 6px; height: 6px;
+  width: 8px; height: 8px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.95);
+  background: rgba(255,255,255,1);
   box-shadow: 0 0 12px rgba(255,255,255,0.7);
   opacity: 0;
   animation: ctaSpark 5s ease-in-out infinite;
 }
-.cta-spark--1 { top: 22%; left: 14%; animation-delay: 0.4s; box-shadow: 0 0 16px rgba(155,77,224,0.8); }
-.cta-spark--2 { top: 68%; left: 24%; animation-delay: 1.6s; box-shadow: 0 0 16px rgba(30,209,151,0.8); }
-.cta-spark--3 { top: 30%; right: 16%; animation-delay: 2.8s; box-shadow: 0 0 16px rgba(255,118,52,0.8); }
-.cta-spark--4 { bottom: 22%; right: 28%; animation-delay: 3.9s; box-shadow: 0 0 16px rgba(155,77,224,0.8); }
+.cta-spark--1 { top: 22%; left: 14%; animation-delay: 0.4s; box-shadow: 0 0 24px rgba(155,77,224,1), 0 0 8px rgba(255,255,255,0.8); }
+.cta-spark--2 { top: 68%; left: 24%; animation-delay: 1.6s; box-shadow: 0 0 24px rgba(30,209,151,1), 0 0 8px rgba(255,255,255,0.8); }
+.cta-spark--3 { top: 30%; right: 16%; animation-delay: 2.8s; box-shadow: 0 0 24px rgba(255,118,52,1), 0 0 8px rgba(255,255,255,0.8); }
+.cta-spark--4 { bottom: 22%; right: 28%; animation-delay: 3.9s; box-shadow: 0 0 24px rgba(155,77,224,1), 0 0 8px rgba(255,255,255,0.8); }
 @keyframes ctaSpark {
-  0%, 100% { opacity: 0; transform: scale(0.5); }
-  50%      { opacity: 1; transform: scale(1.4); }
+  0%, 100% { opacity: 0; transform: scale(0.4); }
+  50%      { opacity: 1; transform: scale(1.6); }
 }
 
 /* keep content above the fx layer */
