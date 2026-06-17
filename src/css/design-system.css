@@ -2508,7 +2508,7 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(16px, 1.6vw, 22px);
-  align-items: stretch;
+  align-items: start;
 }
 /* Adaptive layout — divide evenly based on the actual card count so no row
    ever has empty cells. 4 cards → 2x2 ; 8 cards → 4-up ; otherwise 3-up. */
@@ -2628,7 +2628,6 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   font-size: 14.5px;
   line-height: 1.55;
   color: var(--on-surface-variant);
-  min-height: calc(1.55em * 3);
 }
 .engine-card p {
   color: var(--on-surface-variant);
@@ -2639,8 +2638,7 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
 .engine-card ul {
   list-style: none;
   padding: 14px 0 0;
-  margin: 0;
-  margin-top: auto;
+  margin: 8px 0 0;
   border-top: 1px solid color-mix(in srgb, var(--eng-color) 18%, rgba(18,19,23,0.06));
   display: flex;
   flex-direction: column;
