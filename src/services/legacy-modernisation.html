@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/design-system.css?v=eng-card-balanced-1">
+  <link rel="stylesheet" href="../css/design-system.css?v=related-tiles-1">
   <link rel="icon" href="../assets/images/logo.png?v=4" type="image/png">
 </head>
 <body data-page="service-legacy">
@@ -151,26 +151,36 @@
     <!-- RELATED SERVICES -->
     <section id="related">
       <div class="container">
-        <div class="section-head" data-reveal>
-          <span class="badge"><span class="dot"></span>Related Services</span>
-          <h2 class="t-h1">One service line. <em class="ac-g">Four delivery categories.</em></h2>
-        </div>
-
-        <div class="service-related" data-reveal>
-          <a href="brownfield-greenfield.html">
-            <span class="num">01</span>
-            <strong>Brownfield &amp; Greenfield</strong>
-            <span>One platform · one method</span>
+        <div class="related-grid" data-reveal data-stagger>
+          <a href="brownfield-greenfield.html" class="related-tile related-tile--purple">
+            <span class="related-tile__num">01</span>
+            <div class="related-tile__body">
+              <h3 class="related-tile__title">Brownfield &amp; Greenfield</h3>
+              <p class="related-tile__desc">One platform · one method</p>
+            </div>
+            <span class="related-tile__arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6l6 6-6 6"/></svg>
+            </span>
           </a>
-          <a href="quality-engineering.html">
-            <span class="num">02</span>
-            <strong>Quality Engineering</strong>
-            <span>Autonomous QA per sprint</span>
+          <a href="quality-engineering.html" class="related-tile related-tile--green">
+            <span class="related-tile__num">02</span>
+            <div class="related-tile__body">
+              <h3 class="related-tile__title">Quality Engineering</h3>
+              <p class="related-tile__desc">Autonomous QA per sprint</p>
+            </div>
+            <span class="related-tile__arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6l6 6-6 6"/></svg>
+            </span>
           </a>
-          <a href="data-transformation.html">
-            <span class="num">03</span>
-            <strong>Data Transformation</strong>
-            <span>AI-native pipelines</span>
+          <a href="data-transformation.html" class="related-tile related-tile--orange">
+            <span class="related-tile__num">03</span>
+            <div class="related-tile__body">
+              <h3 class="related-tile__title">Data Transformation</h3>
+              <p class="related-tile__desc">AI-native pipelines</p>
+            </div>
+            <span class="related-tile__arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6l6 6-6 6"/></svg>
+            </span>
           </a>
         </div>
       </div>
