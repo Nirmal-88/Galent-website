@@ -3902,24 +3902,28 @@ body[data-page] .svc li a:hover, body[data-page] .svc li a:hover .meta { color: 
 .about-sector:hover::before { opacity: 1; }
 .about-sector:hover::after { opacity: 1; top: 8%; bottom: 8%; }
 
-/* Icon tile — replaces the old numeric circle */
+/* Minimal icon glyph — no tile background, sits in the sector accent
+ * colour. Stroke-only SVGs feel editorial rather than dashboardy. */
 .about-sector .sector-icon {
   display: inline-grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: color-mix(in srgb, var(--sector-color) 12%, transparent);
+  width: 28px;
+  height: 28px;
   color: var(--sector-color);
+  opacity: 0.85;
   flex-shrink: 0;
-  transition: background .35s ease, color .35s ease, transform .35s var(--ease-out);
+  transition: opacity .25s ease, transform .35s var(--ease-out);
 }
 .about-sector:hover .sector-icon {
-  background: var(--sector-color);
-  color: #FFFFFF;
-  transform: rotate(-4deg) scale(1.06);
+  opacity: 1;
+  transform: translateX(-2px);
 }
-.about-sector .sector-icon svg { display: block; }
+.about-sector .sector-icon svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+  stroke-width: 1.25;
+}
 
 /* Numeric kicker above the title */
 .about-sector .sector-kicker {
