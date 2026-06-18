@@ -2070,42 +2070,45 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
 .shift-list li:first-child { border-top: 0; }
 .shift-list li em { color: var(--brand-purple); font-style: normal; }
 
-/* ---- Ecosystem partners — labelled grid of equally-sized chips ---- */
+/* ---- Ecosystem partners — horizontal marquee strip ---- */
 .ecosystem-partners {
-  max-width: 1000px;
-  margin: clamp(32px, 3.5vw, 48px) auto 0;
-  padding: clamp(28px, 3vw, 40px) clamp(26px, 3vw, 40px);
+  margin: clamp(32px, 3.5vw, 48px) 0 0;
+  padding: clamp(24px, 2.6vw, 36px) 0;
   background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFD 100%);
-  border: 1px solid rgba(18,19,23,0.08);
-  border-radius: 16px;
-  text-align: center;
+  border-top: 1px solid rgba(18,19,23,0.08);
+  border-bottom: 1px solid rgba(18,19,23,0.08);
+  overflow: hidden;
 }
 .ecosystem-partners__label {
   display: block;
-  margin: 0 0 clamp(16px, 1.8vw, 22px);
+  margin: 0 0 clamp(18px, 2vw, 24px);
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 1px;
   text-transform: uppercase;
   color: rgba(18,19,23,0.55);
   font-weight: 600;
+  text-align: center;
 }
 .ecosystem-partners__list {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 14px;
+  width: max-content;
+  animation: ecoMarquee 32s linear infinite;
+  mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
 }
-@media (max-width: 880px) { .ecosystem-partners__list { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 520px) { .ecosystem-partners__list { grid-template-columns: repeat(2, 1fr); } }
+.ecosystem-partners:hover .ecosystem-partners__list { animation-play-state: paused; }
 .ecosystem-partners__list li {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 44px;
-  padding: 0 12px;
+  padding: 0 22px;
   border-radius: 10px;
   font-size: 13.5px;
   font-weight: 500;
@@ -2114,12 +2117,20 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   border: 1px solid rgba(18,19,23,0.10);
   text-align: center;
   line-height: 1.2;
-  transition: border-color .2s ease, color .2s ease, transform .2s var(--ease-out);
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: border-color .2s ease, color .2s ease;
 }
 .ecosystem-partners__list li:hover {
   border-color: rgba(18,19,23,0.30);
   color: #121317;
-  transform: translateY(-1px);
+}
+@keyframes ecoMarquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ecosystem-partners__list { animation: none; }
 }
 
 /* ---- Related-service tiles: number-led card with arrow ---- */
