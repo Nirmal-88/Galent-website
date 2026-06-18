@@ -230,12 +230,12 @@
       ]
     },
     "capabilities": {
-      "title": "Four engines. <em class=\"ac-p\">One unified quality system.</em>",
+      "title": "Four AI-native QA engines. <em class=\"ac-p\">Every dimension of quality covered.</em>",
       "items": [
         {
           "num": "4.1",
           "title": "Galent AI Test Assurance",
-          "kicker": "Autonomous · predictive · self-healing",
+          "description": "Autonomous, AI-driven quality engineering that predicts defects, self-heals tests, and ensures zero-defect production readiness.",
           "bullets": [
             "AI-powered test automation and self-healing frameworks",
             "Predictive defect analysis and risk-based testing",
@@ -246,7 +246,7 @@
         {
           "num": "4.2",
           "title": "Localize.AI",
-          "kicker": "200+ markets · 6× faster international expansion",
+          "description": "AI-powered localisation intelligence that enables global releases with cultural, linguistic, and UX precision. 200+ markets. One release cycle.",
           "bullets": [
             "Multi-language translation with cultural intelligence",
             "Content and UX localisation for 200+ markets",
@@ -257,7 +257,7 @@
         {
           "num": "4.3",
           "title": "Accessibility.AI",
-          "kicker": "Inclusive by design · 7× broader reach",
+          "description": "Inclusive design intelligence that embeds accessibility across digital experiences — by default, not as an afterthought.",
           "bullets": [
             "Accessibility testing and inclusive design validation",
             "Visual, auditory, motor, and cognitive accessibility coverage",
@@ -268,7 +268,7 @@
         {
           "num": "4.4",
           "title": "SecureTest.AI",
-          "kicker": "Continuous security in CI/CD",
+          "description": "Security-first QA intelligence that ensures zero-breach confidence through continuous testing and threat detection embedded in CI/CD.",
           "bullets": [
             "Penetration testing and vulnerability management",
             "Encryption, authentication, and access control validation",
