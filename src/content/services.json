@@ -690,12 +690,12 @@
       ]
     },
     "capabilities": {
-      "title": "Six capabilities. <em class=\"ac-p\">One revenue platform.</em>",
+      "title": "Six accelerators. <em class=\"ac-p\">One revenue platform.</em>",
       "items": [
         {
           "num": "4.1",
           "title": "Salesforce Sales & Revenue Cloud Excellence",
-          "kicker": "Einstein-powered pipeline intelligence",
+          "description": "AI-driven sales transformation that maximises pipeline velocity, forecasting accuracy, and revenue realization.",
           "bullets": [
             "Sales Cloud implementation and optimisation",
             "Einstein lead scoring and opportunity intelligence",
@@ -706,7 +706,7 @@
         {
           "num": "4.2",
           "title": "Service & Experience Cloud Mastery",
-          "kicker": "Unified omnichannel CX",
+          "description": "Intelligent, omnichannel customer service built for speed, personalisation, and scale.",
           "bullets": [
             "Service and Experience Cloud transformation",
             "Einstein Case Classification and smart routing",
@@ -717,7 +717,7 @@
         {
           "num": "4.3",
           "title": "Salesforce Cloud Portfolio Transformation",
-          "kicker": "Marketing · Commerce · Analytics · Industry",
+          "description": "Cross-cloud Salesforce orchestration for unified customer journeys across Sales, Service, Marketing, Commerce, and Industry Clouds.",
           "bullets": [
             "Marketing Cloud automation and personalisation",
             "Commerce Cloud intelligence for digital sales",
@@ -728,7 +728,7 @@
         {
           "num": "4.4",
           "title": "AI-Augmented Salesforce Engineering",
-          "kicker": "Lightning · Einstein · AI-assisted dev",
+          "description": "Modern Salesforce engineering accelerated by AI — faster builds, fewer defects, smarter automation.",
           "bullets": [
             "Lightning Platform custom development",
             "Einstein AI and ML integration",
@@ -739,7 +739,7 @@
         {
           "num": "4.5",
           "title": "Integration & Data Services with MuleSoft",
-          "kicker": "API-first · real-time data sync at scale",
+          "description": "API-led connectivity that turns Salesforce into a true system of engagement — connected to ERP, core systems, and data platforms.",
           "bullets": [
             "MuleSoft Anypoint Platform implementation",
             "API-first and microservices architecture",
@@ -750,7 +750,7 @@
         {
           "num": "4.6",
           "title": "FlexiPods™ & Virtual Dev Teams",
-          "kicker": "Pod-based delivery · AI-enhanced velocity",
+          "description": "On-demand Salesforce expertise with outcome ownership. Pod-based delivery aligned to your business priorities.",
           "bullets": [
             "Dedicated Salesforce architects and engineers",
             "Pod-based delivery aligned to business priorities",
