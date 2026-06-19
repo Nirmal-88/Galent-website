@@ -587,12 +587,12 @@
       ]
     },
     "capabilities": {
-      "title": "Six capabilities. <em class=\"ac-p\">One self-evolving data system.</em>",
+      "title": "Six accelerators. <em class=\"ac-p\">One self-evolving data system.</em>",
       "items": [
         {
           "num": "4.1",
           "title": "AI-Generated Pipeline Development & Code Synthesis",
-          "kicker": "Natural language → production pipeline",
+          "description": "Turn plain-language requirements into production-grade data pipelines. AI-generated code that optimises itself over time.",
           "bullets": [
             "Natural language → production pipeline generation",
             "Intelligent code synthesis with best-practice patterns",
@@ -603,7 +603,7 @@
         {
           "num": "4.2",
           "title": "Intelligent Data Processing & Feature Engineering",
-          "kicker": "Automated · adaptive · ML-ready",
+          "description": "Automatically transform raw data into ML-ready features using AI that understands context, intent, and downstream models.",
           "bullets": [
             "Automated feature engineering for ML workloads",
             "NLP-powered data processing and transformation",
@@ -614,7 +614,7 @@
         {
           "num": "4.3",
           "title": "Vector Database Integration & Embedding Intelligence",
-          "kicker": "Multi-modal · high-performance similarity",
+          "description": "High-performance vector data layers purpose-built for semantic search, RAG, and multi-modal AI workloads.",
           "bullets": [
             "Vector database design and optimisation",
             "Embedding generation and lifecycle management",
@@ -625,7 +625,7 @@
         {
           "num": "4.4",
           "title": "Autonomous Bot Development & AI Agents",
-          "kicker": "Self-healing data ops",
+          "description": "AI agents that monitor, optimise, and self-heal data pipelines and infrastructure — without human intervention.",
           "bullets": [
             "Autonomous data operation bots",
             "Intelligent monitoring and alerting agents",
@@ -636,7 +636,7 @@
         {
           "num": "4.5",
           "title": "Cloud-Native AI Infrastructure & MLOps Integration",
-          "kicker": "CI/CD for data science · governed at scale",
+          "description": "Build and operate cloud-native data and ML platforms with fully automated MLOps and AI lifecycle management.",
           "bullets": [
             "Cloud-native AI infrastructure design",
             "Automated MLOps pipelines",
@@ -647,7 +647,7 @@
         {
           "num": "4.6",
           "title": "Workflow Automation & Orchestration Intelligence",
-          "kicker": "Predictive scheduling · conflict-aware recovery",
+          "description": "Complex data workflows orchestrated with predictive scheduling, intelligent dependency resolution, and auto-recovery.",
           "bullets": [
             "Intelligent workflow orchestration",
             "Predictive scheduling and dependency resolution",
