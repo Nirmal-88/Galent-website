@@ -666,25 +666,25 @@
         {
           "value": "10",
           "unit": "×",
-          "label": "CRM efficiency",
+          "label": "CRM efficiency improvement",
           "tint": "p"
         },
         {
           "value": "800–1000",
           "unit": "%",
-          "label": "Faster decisions",
+          "label": "Acceleration in sales and service decisions",
           "tint": "g"
         },
         {
           "value": "$7.5",
           "unit": "M",
-          "label": "CLV increase",
+          "label": "Increase in customer lifetime value",
           "tint": "o"
         },
         {
           "value": "95",
           "unit": "%",
-          "label": "Manual CRM reduction",
+          "label": "Reduction in manual CRM processes",
           "tint": "p"
         }
       ]
