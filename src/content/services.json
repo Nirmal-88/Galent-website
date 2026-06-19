@@ -511,7 +511,7 @@
         {
           "num": "4.1",
           "title": "DevOps",
-          "kicker": "IaC · GitOps · AI-assisted CI/CD",
+          "description": "Infrastructure as Code, low-code/no-code CI/CD, release orchestration, and AI-assisted pipeline intelligence.",
           "bullets": [
             "Infrastructure as Code and GitOps-native delivery",
             "AI-assisted CI/CD pipeline intelligence",
@@ -522,7 +522,7 @@
         {
           "num": "4.2",
           "title": "SecOps",
-          "kicker": "Continuous threat monitoring · automated compliance",
+          "description": "Application, cloud, and endpoint security with integrated SAST/DAST, vulnerability remediation, and policy enforcement.",
           "bullets": [
             "Application, cloud, and endpoint security",
             "Integrated SAST/DAST and vulnerability remediation",
@@ -533,7 +533,7 @@
         {
           "num": "4.3",
           "title": "FinOps",
-          "kicker": "Multi-cloud visibility · anomaly-driven savings",
+          "description": "Budgeting, multi-cloud cost visibility, anomaly detection, and continuous cost optimisation.",
           "bullets": [
             "Multi-cloud cost visibility and budgeting",
             "Anomaly detection and spend governance",
@@ -544,7 +544,7 @@
         {
           "num": "4.4",
           "title": "SRE Ops",
-          "kicker": "Predictive · autonomous · self-healing",
+          "description": "Proactive and reactive reliability engineering for always-on, mission-critical systems.",
           "bullets": [
             "Proactive anomaly detection and failure prevention",
             "Reactive incident intelligence and MTTR reduction",
