@@ -498,7 +498,7 @@
           "tint": "o"
         },
         {
-          "value": "$0",
+          "value": "$9",
           "unit": "K/min",
           "label": "Cost of downtime — eliminated",
           "tint": "p"

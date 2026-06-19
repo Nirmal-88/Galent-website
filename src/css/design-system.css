@@ -886,7 +886,9 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
 .stat-strip:has(> .item:nth-child(3):last-child) {
   grid-template-columns: repeat(3, 1fr);
 }
-@media (max-width: 800px) {
+/* Keep all stats on a single horizontal line down to small tablets;
+ * only collapse to two columns on phones. */
+@media (max-width: 600px) {
   .stat-strip,
   .stat-strip.six,
   .stat-strip:has(> .item:nth-child(3):last-child) {
@@ -899,7 +901,7 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   background: transparent;
 }
 .stat-strip .item:last-child { border-right: 0; }
-@media (max-width: 800px) {
+@media (max-width: 600px) {
   .stat-strip .item { border-right: 0; }
   .stat-strip .item:nth-child(odd) { border-right: 1px solid rgba(123,44,191,0.10); }
   .stat-strip .item:not(:last-child):not(:nth-last-child(2)) { border-bottom: 1px solid rgba(123,44,191,0.10); }
@@ -975,7 +977,7 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   border-right: 1px solid rgba(255,255,255,0.08);
 }
 .panel-dark .stat-strip .item:last-child { border-right: 0; }
-@media (max-width: 800px) {
+@media (max-width: 600px) {
   .panel-dark .stat-strip .item { border-right: 0; }
   .panel-dark .stat-strip .item:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.08); }
   .panel-dark .stat-strip .item:not(:last-child):not(:nth-last-child(2)) { border-bottom: 1px solid rgba(255,255,255,0.08); }
