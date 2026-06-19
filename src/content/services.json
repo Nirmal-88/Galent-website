@@ -403,12 +403,12 @@
       ]
     },
     "capabilities": {
-      "title": "Six capabilities. <em class=\"ac-p\">One reliability stack.</em>",
+      "title": "Six reliability capabilities. <em class=\"ac-p\">Predictive. Autonomous. Self-healing.</em>",
       "items": [
         {
           "num": "4.1",
           "title": "Proactive SRE with GalentAI Intelligence",
-          "kicker": "Anomaly detection · failure prediction",
+          "description": "AI-powered system probing and event correlation that predicts and prevents failures before customer impact.",
           "bullets": [
             "AI-powered anomaly detection and signal correlation",
             "Predictive failure analysis and prevention",
@@ -419,7 +419,7 @@
         {
           "num": "4.2",
           "title": "Reactive SRE & Incident Intelligence",
-          "kicker": "Less alert noise · faster remediation",
+          "description": "Real-time incident intelligence that dramatically reduces MTTR through automated routing, prioritisation, and remediation.",
           "bullets": [
             "Real-time incident detection and alerting",
             "Intelligent alert correlation and noise reduction",
@@ -430,7 +430,7 @@
         {
           "num": "4.3",
           "title": "Reliability-as-Code Framework",
-          "kicker": "GitOps · SLO/SLA · chaos engineering",
+          "description": "Reliability embedded directly into engineering workflows through GitOps, SLO automation, and chaos validation.",
           "bullets": [
             "GitOps-integrated reliability templates",
             "Automated SLO and SLA enforcement",
@@ -441,7 +441,7 @@
         {
           "num": "4.4",
           "title": "AI-Enhanced Observability & Synthetic Monitoring",
-          "kicker": "Multi-cloud · predictive capacity",
+          "description": "Unified observability across cloud, containers, and services — AI-driven insights and predictive analytics.",
           "bullets": [
             "Multi-cloud and hybrid observability",
             "Intelligent synthetic monitoring",
@@ -452,7 +452,7 @@
         {
           "num": "4.5",
           "title": "Runbook Automation & Self-Healing",
-          "kicker": "Infrastructure that fixes itself",
+          "description": "Autonomous remediation through AI-orchestrated runbooks that evolve with your systems and improve over time.",
           "bullets": [
             "Automated runbook execution",
             "Self-healing infrastructure orchestration",
@@ -463,7 +463,7 @@
         {
           "num": "4.6",
           "title": "Performance Engineering & Capacity Optimisation",
-          "kicker": "Predict bottlenecks before they bite",
+          "description": "AI-driven performance intelligence that eliminates bottlenecks before they impact experience or revenue.",
           "bullets": [
             "Automated performance and load testing",
             "Capacity planning and optimisation",
