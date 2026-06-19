@@ -563,25 +563,25 @@
         {
           "value": "75",
           "unit": "%",
-          "label": "Complexity reduction",
+          "label": "Reduction in code and architecture complexity",
           "tint": "p"
         },
         {
           "value": "95",
           "unit": "%",
-          "label": "Automation accuracy",
+          "label": "Automation accuracy across data engineering",
           "tint": "g"
         },
         {
           "value": "80",
           "unit": "%+",
-          "label": "Faster ML deployment",
+          "label": "Faster AI/ML model training and deployment",
           "tint": "o"
         },
         {
           "value": "60",
           "unit": "%",
-          "label": "Lower infra costs",
+          "label": "Lower infrastructure and operational costs",
           "tint": "p"
         }
       ]
