@@ -2072,6 +2072,93 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
 .shift-list li:first-child { border-top: 0; }
 .shift-list li em { color: var(--brand-purple); font-style: normal; }
 
+/* ---- Engagement-model cards: 2x2 grid of numbered tiles ---- */
+.engagement-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(16px, 1.8vw, 24px);
+  max-width: 1080px;
+  margin: 0 auto;
+}
+@media (max-width: 760px) { .engagement-grid { grid-template-columns: 1fr; } }
+
+.engagement-card {
+  --eng-color: #B57AE8;
+  --eng-color-2: #7B2CBF;
+  position: relative;
+  padding: clamp(28px, 2.6vw, 36px) clamp(26px, 2.4vw, 32px);
+  background: #FFFFFF;
+  border: 1px solid rgba(18,19,23,0.07);
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px -8px rgba(18,19,23,0.08);
+  transition: transform .35s var(--ease-out), border-color .35s ease, box-shadow .35s ease;
+}
+.engagement-card--purple { --eng-color: #B57AE8; --eng-color-2: #7B2CBF; }
+.engagement-card--green  { --eng-color: #6FE3B6; --eng-color-2: #1ED197; }
+.engagement-card--orange { --eng-color: #FFB18C; --eng-color-2: #FF7634; }
+.engagement-card--indigo { --eng-color: #82B4FF; --eng-color-2: #4F46E5; }
+
+.engagement-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(110% 70% at 100% 0%, color-mix(in srgb, var(--eng-color-2) 12%, transparent) 0%, transparent 55%);
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity .35s ease;
+}
+.engagement-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--eng-color) 0%, var(--eng-color-2) 100%);
+  transform-origin: left center;
+  transform: scaleX(0.4);
+  opacity: 0.85;
+  transition: transform .5s var(--ease-out);
+  z-index: 1;
+}
+.engagement-card > * { position: relative; z-index: 1; }
+
+.engagement-card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--eng-color-2) 32%, rgba(18,19,23,0.07));
+  box-shadow: 0 20px 44px -22px color-mix(in srgb, var(--eng-color-2) 55%, transparent), 0 4px 12px -8px rgba(18,19,23,0.08);
+}
+.engagement-card:hover::before { opacity: 1; }
+.engagement-card:hover::after  { transform: scaleX(1); }
+
+.engagement-card__num {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.6px;
+  font-weight: 600;
+  color: var(--eng-color-2);
+  opacity: 0.85;
+}
+.engagement-card__title {
+  margin: 0;
+  font-size: clamp(18px, 1.6vw, 22px);
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  line-height: 1.25;
+  color: var(--on-surface);
+}
+.engagement-card__desc {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--on-surface-variant);
+}
+
 /* ---- Ecosystem partners — horizontal marquee strip ---- */
 .ecosystem-partners {
   margin: clamp(32px, 3.5vw, 48px) 0 0;
