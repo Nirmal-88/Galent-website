@@ -305,12 +305,12 @@
       ]
     },
     "capabilities": {
-      "title": "Six agents. <em class=\"ac-p\">One self-optimising service desk.</em>",
+      "title": "Six AI agents. <em class=\"ac-p\">Every ITSM function automated.</em>",
       "items": [
         {
           "num": "4.1",
           "title": "Intelligent Ticket Routing Agent",
-          "kicker": "NLP classification · sentiment-driven escalation",
+          "description": "Auto-classifies, prioritises, and routes incidents using NLP-driven content analysis, sentiment detection, and skill-based assignment.",
           "bullets": [
             "NLP-based ticket classification and priority assignment",
             "Skill-based routing to the right resolver teams",
@@ -320,7 +320,7 @@
         {
           "num": "4.2",
           "title": "Virtual Service Desk Agent",
-          "kicker": "ServiceNow · AD · HR — natively integrated",
+          "description": "Autonomous Tier 1 support. Conversational AI resolves password resets, access provisioning, and status inquiries — escalating complex issues to human agents seamlessly.",
           "bullets": [
             "Autonomous Tier 1 request resolution",
             "Conversational AI for natural user interactions",
@@ -331,7 +331,7 @@
         {
           "num": "4.3",
           "title": "Knowledge Management Automation Agent",
-          "kicker": "KB writes itself · stays current",
+          "description": "Continuously generates, updates, and surfaces knowledge base articles by extracting resolution patterns from closed tickets — turning operational activity into institutional intelligence.",
           "bullets": [
             "Automatic knowledge article generation from resolved tickets",
             "Continuous knowledge updates based on resolution patterns",
@@ -341,7 +341,7 @@
         {
           "num": "4.4",
           "title": "Change Intelligence & Risk Assessment Agent",
-          "kicker": "Blast-radius before, not after",
+          "description": "Analyses historical incident data to predict change risk, identify dependencies, and recommend optimal deployment windows that minimise business impact.",
           "bullets": [
             "AI-driven change risk scoring",
             "Dependency and blast-radius analysis",
@@ -351,7 +351,7 @@
         {
           "num": "4.5",
           "title": "IT Analytics & Reporting Agent",
-          "kicker": "Predictive staffing · root-cause intelligence",
+          "description": "Real-time dashboards and predictive insights across SLAs, ticket volumes, agent performance, and root cause trends.",
           "bullets": [
             "Real-time SLA and performance dashboards",
             "Predictive ticket volume and staffing insights",
@@ -361,7 +361,7 @@
         {
           "num": "4.6",
           "title": "Workflow Orchestration Agent",
-          "kicker": "Onboarding · approval · compliance — automated",
+          "description": "Automates multi-step ITSM workflows across integrated systems — onboarding, offboarding, approvals, compliance checks, ServiceNow-CMDB synchronisation.",
           "bullets": [
             "Automated onboarding and offboarding workflows",
             "Approval and compliance orchestration",
