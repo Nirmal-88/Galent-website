@@ -488,8 +488,20 @@
         {
           "value": "40–60",
           "unit": "%",
-          "label": "Cloud cost savings",
+          "label": "Potential cloud cost savings (FinOps)",
           "tint": "g"
+        },
+        {
+          "value": "24",
+          "unit": "×7",
+          "label": "Operational coverage across all disciplines",
+          "tint": "o"
+        },
+        {
+          "value": "$0",
+          "unit": "K/min",
+          "label": "Cost of downtime — eliminated",
+          "tint": "p"
         }
       ]
     },
