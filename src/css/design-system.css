@@ -2072,6 +2072,92 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
 .shift-list li:first-child { border-top: 0; }
 .shift-list li em { color: var(--brand-purple); font-style: normal; }
 
+/* ---- Engine deep cards: static expanded view of all four engines ---- */
+.engine-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(16px, 1.8vw, 24px);
+  max-width: 1180px;
+  margin: clamp(36px, 4vw, 56px) auto 0;
+}
+@media (max-width: 880px) { .engine-cards { grid-template-columns: 1fr; } }
+
+.engine-deep-card {
+  --ed-color: #B57AE8;
+  --ed-color-2: #7B2CBF;
+  position: relative;
+  padding: clamp(26px, 2.4vw, 34px);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 18px;
+  color: rgba(255,255,255,0.92);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+}
+.engine-deep-card--purple { --ed-color: #B57AE8; --ed-color-2: #7B2CBF; }
+.engine-deep-card--orange { --ed-color: #FFB18C; --ed-color-2: #FF7634; }
+.engine-deep-card--green  { --ed-color: #6FE3B6; --ed-color-2: #1ED197; }
+.engine-deep-card--indigo { --ed-color: #82B4FF; --ed-color-2: #4F46E5; }
+
+.engine-deep-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--ed-color) 0%, var(--ed-color-2) 100%);
+}
+.engine-deep-card__code {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--ed-color);
+  font-weight: 600;
+}
+.engine-deep-card__name {
+  margin: 4px 0 0;
+  font-size: clamp(20px, 1.8vw, 24px);
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  line-height: 1.25;
+  color: #FFFFFF;
+}
+.engine-deep-card__desc {
+  margin: 8px 0 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.72);
+}
+.engine-deep-card__bullets {
+  list-style: none;
+  padding: 14px 0 0;
+  margin: 6px 0 0;
+  border-top: 1px solid color-mix(in srgb, var(--ed-color) 25%, rgba(255,255,255,0.08));
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.engine-deep-card__bullets li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.82);
+}
+.engine-deep-card__bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0.65em;
+  width: 12px;
+  height: 1.5px;
+  background: var(--ed-color);
+  border-radius: 1px;
+  opacity: 0.85;
+}
+
 /* ---- Engagement-model cards: 2x2 grid of numbered tiles ---- */
 .engagement-grid {
   display: grid;
