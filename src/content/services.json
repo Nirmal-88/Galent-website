@@ -287,20 +287,26 @@
         {
           "value": "70",
           "unit": "%+",
-          "label": "Autonomous Tier 1",
+          "label": "Autonomous Tier 1 resolution",
           "tint": "p"
         },
         {
           "value": "60",
           "unit": "%",
-          "label": "MTTR reduction",
+          "label": "Reduction in MTTR",
           "tint": "g"
         },
         {
           "value": "85",
           "unit": "%",
-          "label": "Satisfaction improvement",
+          "label": "Improvement in end-user satisfaction",
           "tint": "o"
+        },
+        {
+          "value": "50",
+          "unit": "%",
+          "label": "Reduction in knowledge management overhead",
+          "tint": "p"
         }
       ]
     },
