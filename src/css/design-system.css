@@ -8335,6 +8335,14 @@ section#cta {
   contain-intrinsic-size: 0 720px;
 }
 
+/* Broad scroll-performance pass: every offscreen section on every
+ * page is skipped during paint/layout until it's near the viewport.
+ * Excludes the first-paint heroes and the sticky nav. */
+main > section:not(.hero):not(.platform-hero):not(.about-hero):not(.kh-hero) {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 600px;
+}
+
 /* visible grid that drifts on scroll (JS adjusts --cta-shift) */
 .cta-grid {
   position: absolute; inset: -10% -5%;
