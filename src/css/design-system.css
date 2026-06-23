@@ -6675,6 +6675,12 @@ body[data-page^="service-"] .hero .btn.ghost:hover { background: rgba(255, 255, 
 body[data-page^="service-"] .hero .btn.ghost .arr { background: rgba(255, 255, 255, 0.14); color: #fff; }
 body[data-page^="service-"] .hero .hero-metric .big { color: #fff; opacity: 0.16; }
 body[data-page^="service-"] .hero .hero-metric .lbl { color: rgba(255, 255, 255, 0.7); }
+body[data-page^="service-"] .hero .powered-by {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 8px 24px -16px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px);
+}
 body[data-page^="service-"] .hero .powered-by .label { color: rgba(255, 255, 255, 0.6); }
 body[data-page^="service-"] .hero .powered-by .pill {
   background: rgba(255, 255, 255, 0.10);
