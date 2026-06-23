@@ -95,9 +95,12 @@
         }
       }
 
+      // Platform GalentAI engine diagram — pinned executive storytelling.
+      var engineCleanup = c.isDesktop ? setupPlatformEngines(gsap, ScrollTrigger) : function () {};
+
       var hoverCleanup = c.isDesktop ? setupHoverSystem(gsap) : function () {};
       ScrollTrigger.refresh();
-      return function () { root.classList.remove('gsap-smooth'); if (smoother) smoother.kill(); hoverCleanup(); };
+      return function () { root.classList.remove('gsap-smooth'); if (smoother) smoother.kill(); engineCleanup(); hoverCleanup(); };
     });
 
     markBooted();
@@ -457,6 +460,130 @@
       ScrollTrigger.create({ trigger: card, start: 'top bottom', end: 'bottom top',
         onToggle: function (self) { card.classList.toggle('gx-active-fx', self.isActive); } });
     });
+  }
+
+  /* ==========================================================================
+   * PLATFORM — GalentAI engine diagram pinned storytelling (executive).
+   * Pins the radial diagram and walks focus through the engines in the order
+   * Knowledge Graph -> Context Graph -> NeuroQL -> RCM, growing the hub->node
+   * connectors as a network and dimming the rest. Content/markup untouched.
+   *
+   * SAFETY: nodes/hub are centered via `transform: translate(-50%,-50%)`, so we
+   * animate ONLY opacity / filter / SVG attributes — never transform. The
+   * connectors are re-applied every frame so the diagram's own ResizeObserver
+   * repaint can't strand them. Desktop-only; reduced-motion/mobile keep the
+   * native interactive diagram. Returns a cleanup fn.
+   * ======================================================================== */
+  function setupPlatformEngines(gsap, ScrollTrigger) {
+    var diagram = document.querySelector('#engine-diagram-root .engine-diagram');
+    if (!diagram) return function () {};
+    var svg = diagram.querySelector('.engine-diagram-svg');
+    var hub = diagram.querySelector('.engine-hub');
+    var n = {
+      neuroql: diagram.querySelector('.engine-node[data-engine="neuroql"]'),
+      rcm:     diagram.querySelector('.engine-node[data-engine="rcm"]'),
+      kg:      diagram.querySelector('.engine-node[data-engine="kg"]'),
+      context: diagram.querySelector('.engine-node[data-engine="context"]')
+    };
+    if (!n.neuroql || !n.rcm || !n.kg || !n.context) return function () {};
+    var all = [n.neuroql, n.rcm, n.kg, n.context];
+    var section = diagram.closest('section');
+    if (section) section.classList.add('cv-visible');
+
+    // Don't let the default-active node fight our focus states.
+    all.forEach(function (node) { node.classList.remove('active'); });
+
+    // Decorative horizontal progress track (aria-hidden) — styled inline so no
+    // CSS/markup change is needed.
+    var track = document.createElement('div');
+    track.setAttribute('aria-hidden', 'true');
+    track.style.cssText = 'position:absolute;left:50%;bottom:6px;transform:translateX(-50%);width:min(280px,56%);height:2px;background:rgba(255,255,255,0.12);border-radius:2px;overflow:hidden;z-index:6;pointer-events:none;';
+    var fill = document.createElement('div');
+    fill.style.cssText = 'position:absolute;inset:0;transform-origin:left center;transform:scaleX(0);background:linear-gradient(90deg,#7C5CDB,#1ED197);border-radius:2px;';
+    track.appendChild(fill);
+    diagram.appendChild(track);
+
+    var GLOW = 'drop-shadow(0 0 14px rgba(124,92,219,0.55))';
+    var DIM = 0.32, SEEN = 0.62;
+
+    // Connector progress (0..1) per engine; applied to the existing <line>s.
+    // Line DOM order matches node order: neuroql, rcm, kg, context.
+    var cp = { neuroql: 0, rcm: 0, kg: 0, context: 0 };
+    function applyConnectors() {
+      if (!svg) return;
+      var lines = svg.querySelectorAll('line');
+      var vals = [cp.neuroql, cp.rcm, cp.kg, cp.context];
+      for (var i = 0; i < lines.length; i++) {
+        var ln = lines[i], v = vals[i] || 0;
+        var x1 = +ln.getAttribute('x1'), y1 = +ln.getAttribute('y1');
+        var x2 = +ln.getAttribute('x2'), y2 = +ln.getAttribute('y2');
+        var len = Math.hypot(x2 - x1, y2 - y1) || 1;
+        ln.setAttribute('stroke', '#7C5CDB');
+        ln.setAttribute('stroke-width', '1.6');
+        ln.setAttribute('stroke-dasharray', len.toFixed(1));
+        ln.setAttribute('stroke-dashoffset', (len * (1 - v)).toFixed(1));
+        ln.setAttribute('stroke-opacity', (0.6 * v).toFixed(3));
+      }
+      fill.style.transform = 'scaleX(' + Math.max(cp.neuroql, cp.rcm, cp.kg, cp.context).toFixed(3) + ')';
+    }
+
+    gsap.set(all, { opacity: 1, filter: 'none' });
+    applyConnectors();
+
+    var tl = gsap.timeline({
+      defaults: { ease: 'power2.inOut' },
+      scrollTrigger: {
+        trigger: diagram, start: 'top 12%', end: '+=2600',
+        pin: true, scrub: 1, anticipatePin: 1, invalidateOnRefresh: true,
+        onUpdate: applyConnectors, onRefresh: applyConnectors
+      }
+    });
+
+    // Phase 1 — pinned in current state (brief hold, nothing changes).
+    tl.to({}, { duration: 0.5 });
+
+    // Phase 2 — Knowledge Graph: focus + first connection grows.
+    tl.addLabel('kg')
+      .to(n.kg, { opacity: 1, filter: GLOW, duration: 0.5 }, 'kg')
+      .to([n.context, n.neuroql, n.rcm], { opacity: DIM, filter: 'none', duration: 0.5 }, 'kg')
+      .to(cp, { kg: 1, duration: 0.8 }, 'kg');
+
+    // Phase 3 — Context Graph: connections animate (second link grows).
+    tl.addLabel('context', '>')
+      .to(n.context, { opacity: 1, filter: GLOW, duration: 0.5 }, 'context')
+      .to(n.kg, { opacity: SEEN, filter: 'none', duration: 0.5 }, 'context')
+      .to([n.neuroql, n.rcm], { opacity: DIM, duration: 0.5 }, 'context')
+      .to(cp, { context: 1, duration: 0.8 }, 'context');
+
+    // Phase 4 — NeuroQL: network expands (third link grows).
+    tl.addLabel('neuroql', '>')
+      .to(n.neuroql, { opacity: 1, filter: GLOW, duration: 0.5 }, 'neuroql')
+      .to([n.kg, n.context], { opacity: SEEN, filter: 'none', duration: 0.5 }, 'neuroql')
+      .to(n.rcm, { opacity: DIM, duration: 0.5 }, 'neuroql')
+      .to(cp, { neuroql: 1, duration: 0.8 }, 'neuroql');
+
+    // Phase 5 — RCM: orchestration becomes visible (full network + hub).
+    tl.addLabel('rcm', '>')
+      .to(n.rcm, { opacity: 1, filter: GLOW, duration: 0.5 }, 'rcm')
+      .to([n.kg, n.context, n.neuroql], { opacity: SEEN, filter: 'none', duration: 0.5 }, 'rcm')
+      .to(cp, { rcm: 1, duration: 0.8 }, 'rcm');
+    if (hub) tl.to(hub, { filter: GLOW, duration: 0.6 }, 'rcm');
+
+    // Phase 6 — all capabilities visible together, then unpin.
+    tl.addLabel('all', '>')
+      .to(all, { opacity: 1, filter: 'none', duration: 0.6 }, 'all')
+      .to(cp, { neuroql: 1, rcm: 1, kg: 1, context: 1, duration: 0.5 }, 'all');
+    if (hub) tl.to(hub, { filter: 'none', duration: 0.5 }, 'all');
+    tl.to({}, { duration: 0.5 }); // hold the finale before releasing the pin
+
+    return function () {
+      if (track.parentNode) track.parentNode.removeChild(track);
+      gsap.set(all, { clearProps: 'opacity,filter' });
+      if (hub) gsap.set(hub, { clearProps: 'filter' });
+      if (svg) svg.querySelectorAll('line').forEach(function (ln) {
+        ln.removeAttribute('stroke-dasharray'); ln.removeAttribute('stroke-dashoffset');
+      });
+    };
   }
 
   /* Hero entrance (home) — reveals hero copy once on load. */
