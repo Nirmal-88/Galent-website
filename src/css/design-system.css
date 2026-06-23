@@ -6618,6 +6618,71 @@ body[data-page^="service-"] .hero-content {
 body[data-page^="service-"] .hero .t-hero,
 body[data-page^="service-"] .hero .t-body-lg { text-align: center; }
 body[data-page^="service-"] .hero .cta-row { justify-content: center; }
+
+/* ================================================================
+   Tech Services hero — banner image fully covers the hero, with the
+   text overlaid on top (kept legible via a dark scrim + light text).
+   Text layout is unchanged; only colours adapt for contrast.
+   ================================================================ */
+body[data-page^="service-"] .hero {
+  isolation: isolate;                       /* contain the cover image */
+  min-height: clamp(560px, 82vh, 860px);
+}
+/* Static so the banner can cover the whole hero, not just the text box. */
+body[data-page^="service-"] .hero-content { position: static; z-index: auto; }
+/* Banner fills the entire hero, sitting behind the text. */
+body[data-page^="service-"] .service-hero-banner {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+  aspect-ratio: auto;
+}
+/* Stronger dark scrim so overlaid text stays readable. */
+body[data-page^="service-"] .service-hero-banner::after {
+  background:
+    linear-gradient(180deg, rgba(6,7,14,0.80) 0%, rgba(6,7,14,0.48) 38%, rgba(6,7,14,0.55) 62%, rgba(6,7,14,0.88) 100%),
+    radial-gradient(120% 90% at 50% 45%, transparent 28%, rgba(6,7,14,0.40) 100%);
+}
+/* The small redundant image caption isn't needed on a full-cover hero. */
+body[data-page^="service-"] .service-hero-banner__caption { display: none; }
+
+/* --- Text + controls turn light for contrast (layout unchanged) --- */
+body[data-page^="service-"] .hero .t-hero,
+body[data-page^="service-"] .hero .t-hero span,
+body[data-page^="service-"] .hero .t-body-lg {
+  color: #fff !important;                   /* overrides per-page inline colours */
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+}
+body[data-page^="service-"] .hero .t-hero .ac-p { color: #C79BF0 !important; }
+body[data-page^="service-"] .hero .badge {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #fff;
+  backdrop-filter: blur(6px);
+}
+body[data-page^="service-"] .hero .badge .dot { background: #fff; }
+body[data-page^="service-"] .hero .btn.ghost {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.32);
+  color: #fff;
+}
+body[data-page^="service-"] .hero .btn.ghost:hover { background: rgba(255, 255, 255, 0.16); }
+body[data-page^="service-"] .hero .btn.ghost .arr { background: rgba(255, 255, 255, 0.14); color: #fff; }
+body[data-page^="service-"] .hero .hero-metric .big { color: #fff; opacity: 0.16; }
+body[data-page^="service-"] .hero .hero-metric .lbl { color: rgba(255, 255, 255, 0.7); }
+body[data-page^="service-"] .hero .powered-by .label { color: rgba(255, 255, 255, 0.6); }
+body[data-page^="service-"] .hero .powered-by .pill {
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+body[data-page^="service-"] .hero .scroll-chevron { color: rgba(255, 255, 255, 0.8); }
 body[data-page^="service-"] .hero::before {
   content: '';
   position: absolute;
