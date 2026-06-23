@@ -6628,9 +6628,8 @@ body[data-page^="service-"] .hero {
   isolation: isolate;                       /* contain the cover image */
   min-height: clamp(560px, 82vh, 860px);
 }
-/* Static so the banner can cover the whole hero, not just the text box. */
-body[data-page^="service-"] .hero-content { position: static; z-index: auto; }
-/* Banner fills the entire hero, sitting behind the text. */
+/* Banner is a direct child of .hero (moved out of .hero-content) and fills
+   the entire section, sitting behind the text. */
 body[data-page^="service-"] .service-hero-banner {
   position: absolute;
   inset: 0;
