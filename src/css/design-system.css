@@ -8773,3 +8773,108 @@ main > section:not(.hero):not(.platform-hero):not(.about-hero):not(.kh-hero) {
   .cta-card[data-cta-parallax] > p,
   .cta-card[data-cta-parallax] > div { transform: none !important; }
 }
+
+/* ==================================================================
+ * MOTION ENGINE (motion.js) — premium GSAP layer.
+ * Smooth scroll scaffold, scroll-driven reveals, hover lighting,
+ * orchestration SVG, and the horizontal industries deck.
+ * ================================================================== */
+
+/* ScrollSmoother scaffold (wrapper/content injected by motion.js). */
+#smooth-content { will-change: transform; }
+html.gsap-smooth { scroll-behavior: auto; }
+
+/* Smooth scroll needs an accurate total height — content-visibility:auto
+ * estimates offscreen sections and would make the scroll length jump.
+ * Disable it only while smoothing is active. Pinned/scrubbed sections opt
+ * out explicitly via .cv-visible regardless of regime. */
+html.gsap-smooth main > section:not(.hero):not(.platform-hero):not(.about-hero):not(.kh-hero) {
+  content-visibility: visible;
+  contain-intrinsic-size: auto;
+}
+.cv-visible {
+  content-visibility: visible !important;
+  contain-intrinsic-size: auto !important;
+}
+
+/* When the engine owns reveals, the GSAP-written inline styles must not also
+ * run the legacy CSS transition (double-animation). The engine sets the
+ * initial hidden state itself. */
+html.gsap-ready [data-reveal],
+html.gsap-ready [data-stagger] > * { transition: none !important; }
+
+/* SplitText line reveals — masked wrappers clip the rising lines. */
+.section-head .gx-line { will-change: transform; }
+
+/* FEATURE 8 — hover system: magnetic lean + soft cursor lighting.
+ * The light uses soft-light so it lifts dark cards and barely touches light
+ * ones; pointer-events:none keeps it inert. */
+.gx-magnetic { position: relative; will-change: transform; }
+.gx-magnetic::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%),
+              rgba(255, 255, 255, 0.55), transparent 60%);
+  mix-blend-mode: soft-light;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 3;
+}
+.gx-magnetic:hover::after { opacity: 1; }
+
+/* FEATURE 5 — orchestration network behind "The Galent Difference". */
+.home-galent-difference .gd-bg .gx-netlines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.55;
+  z-index: 0;
+}
+.gx-netline {
+  fill: none;
+  stroke: rgba(123, 44, 191, 0.5);
+  stroke-width: 1.1;
+  stroke-linecap: round;
+}
+.gx-netnode { fill: rgba(123, 44, 191, 0.85); }
+.gx-netnode.is-hub { fill: var(--brand-green); }
+
+/* FEATURE 3 — horizontal executive deck (Industries). Desktop only; the
+ * engine adds .is-horizontal and pins the section while the track moves x. */
+#industries.is-horizontal { overflow: hidden; }
+#industries.is-horizontal .home-sector-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  grid-template-columns: none;
+  align-items: stretch;
+  will-change: transform;
+}
+#industries.is-horizontal .home-sector-card {
+  flex: 0 0 clamp(300px, 30vw, 380px);
+  min-height: clamp(280px, 34vh, 340px);
+}
+
+/* Perf — under smooth scroll (content-visibility disabled), pause the CTA's
+ * continuous effects while its card is offscreen. The engine toggles
+ * .gx-active-fx when the card is in view. */
+html.gsap-smooth .cta-card:not(.gx-active-fx) .cta-orb,
+html.gsap-smooth .cta-card:not(.gx-active-fx) .cta-rings span,
+html.gsap-smooth .cta-card:not(.gx-active-fx) .cta-spark {
+  animation-play-state: paused;
+}
+
+/* The engine handles reduced-motion by simply revealing content; make sure
+ * nothing it adds leaves residue under reduced-motion. */
+@media (prefers-reduced-motion: reduce) {
+  .gx-magnetic::after { display: none; }
+  .gx-netlines { opacity: 0.4; }
+  #industries.is-horizontal .home-sector-grid {
+    flex-wrap: wrap;
+    width: auto;
+  }
+}

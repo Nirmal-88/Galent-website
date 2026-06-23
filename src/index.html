@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/design-system.css?v=home-sections-v3">
+  <link rel="stylesheet" href="css/design-system.css?v=motion-1">
   <link rel="icon" href="assets/images/logo.png?v=4" type="image/png">
 
   <meta property="og:type" content="website">
@@ -43,7 +43,13 @@
     html.hero-entering #hero .scroll-chevron { opacity: 0; }
     html.hero-entering #hero .hero-network { opacity: 0; }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+
+  <!-- Motion engine bootstrap: stand down legacy reveals; safety-net reveal -->
+  <script>window.GALENT_MOTION=1;setTimeout(function(){if(!window.__galentMotionBooted){document.querySelectorAll('[data-reveal],[data-stagger]').forEach(function(e){e.classList.add('in');});}},3000);</script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
 </head>
 <body data-page="home">
 
@@ -664,6 +670,6 @@
     Galent.countUps();
   </script>
 
-  <script src="js/premium.js?v=cta-universal-1" defer></script>
+  <script src="js/motion.js?v=engine-1" defer></script>
 </body>
 </html>

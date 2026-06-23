@@ -15,6 +15,13 @@
   };
   Galent.BRAND = BRAND;
 
+  // Scroll progress (0..1) fed by motion.js's hero ScrollTrigger. Drives the
+  // network's Feature-10 phases (float → transform → connect → stabilise).
+  Galent._networkProg = 0;
+  Galent.setNetworkProgress = function (p) {
+    Galent._networkProg = Math.max(0, Math.min(1, p || 0));
+  };
+
   function fit(canvas, host) {
     const r = (host || canvas.parentElement).getBoundingClientRect();
     const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
@@ -97,6 +104,17 @@
         c:  [BRAND.purple, BRAND.green, BRAND.orange, BRAND.indigo][i % 4],
       });
     }
+    // Structured "stabilised" layout targets. As the hero is scrolled, the
+    // scattered drift resolves into an ordered concentric lattice — the
+    // network organising itself (Feature 10: float → transform → stabilise).
+    // Golden-angle placement keeps the rings evenly distributed.
+    for (let i = 0; i < nodes.length; i++) {
+      const ang = i * 2.39996323;
+      const ring = i % 3;
+      const rad = 0.13 + ring * 0.15;
+      nodes[i].tx = 0.5 + Math.cos(ang) * rad;
+      nodes[i].ty = 0.5 + Math.sin(ang) * rad * 0.8;
+    }
     // Edges: connect each node to its 2 nearest neighbours
     const edges = [];
     for (let i = 0; i < nodes.length; i++) {
@@ -157,6 +175,18 @@
           ny += dy * pull;
         }
       }
+
+      // Scroll-driven convergence (Feature 10). Galent._networkProg is fed by
+      // the hero ScrollTrigger; 0 keeps the original free drift, →1 resolves
+      // the graph into its ordered lattice.
+      const prog = Galent._networkProg || 0;
+      if (prog > 0.001) {
+        let conv = (prog - 0.12) / 0.6;
+        conv = conv < 0 ? 0 : conv > 1 ? 1 : conv;
+        conv = conv * conv * (3 - 2 * conv); // smoothstep
+        nx += (n.tx - nx) * conv;
+        ny += (n.ty - ny) * conv;
+      }
       return { x: nx * W, y: ny * H };
     }
 
@@ -172,12 +202,21 @@
 
       ctx.clearRect(0, 0, W, H);
 
-      // Edges
-      ctx.lineWidth = scale;
+      const prog = Galent._networkProg || 0;
+
+      // Edges — brighten and take on brand colour as connections "emerge".
+      ctx.lineWidth = scale * (1 + prog * 0.6);
+      const eAlpha = 0.06 + prog * 0.16;
+      const k = Math.max(0, Math.min(1, (prog - 0.35) / 0.4));
+      const edgeCol = [
+        Math.round(18 + (123 - 18) * k),
+        Math.round(19 + (44 - 19) * k),
+        Math.round(23 + (191 - 23) * k)
+      ];
       for (const e of edges) {
         const A = pos(nodes[e.a], t);
         const B = pos(nodes[e.b], t);
-        ctx.strokeStyle = rgbA(BRAND.ink, 0.06);
+        ctx.strokeStyle = rgbA(edgeCol, eAlpha);
         ctx.beginPath();
         ctx.moveTo(A.x, A.y);
         ctx.lineTo(B.x, B.y);
@@ -200,9 +239,9 @@
         const x = A.x + (B.x - A.x) * p;
         const y = A.y + (B.y - A.y) * p;
         const alpha = Math.sin(p * Math.PI);
-        ctx.fillStyle = rgbA(nodes[e.a].c, 0.7 * alpha);
+        ctx.fillStyle = rgbA(nodes[e.a].c, (0.7 + prog * 0.3) * alpha);
         ctx.beginPath();
-        ctx.arc(x, y, (2 + near * mouseStrength) * scale, 0, Math.PI * 2);
+        ctx.arc(x, y, (2 + near * mouseStrength + prog * 1.4) * scale, 0, Math.PI * 2);
         ctx.fill();
       }
 
@@ -530,6 +569,9 @@
   // [data-stagger] containers add 80ms cascade to their direct children.
   // ============================================================
   Galent.persistentReveal = function () {
+    // The motion engine (motion.js) owns reveals when present — stand down so
+    // we don't double-animate. The engine guarantees a visible fallback.
+    if (window.GALENT_MOTION) return;
     const els = document.querySelectorAll('[data-reveal], [data-stagger]');
     if (!('IntersectionObserver' in window)) {
       els.forEach(el => el.classList.add('in'));
@@ -596,6 +638,8 @@
 
   // Count-up — animates [data-countup] integers when revealed.
   Galent.countUps = function () {
+    // motion.js drives count-ups via scroll-scrub when present.
+    if (window.GALENT_MOTION) return;
     const els = document.querySelectorAll('[data-countup]');
     if (!('IntersectionObserver' in window)) return;
     const io = new IntersectionObserver((entries) => {
