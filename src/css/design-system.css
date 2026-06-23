@@ -8798,8 +8798,23 @@ html.gsap-smooth main > section:not(.hero):not(.platform-hero):not(.about-hero):
 }
 
 /* Reveals use the proven CSS `.in` transition system (see [data-reveal] /
- * [data-stagger] above) toggled by IntersectionObserver in motion.js. GSAP
- * never hides content, so no transition override is needed here. */
+ * [data-stagger] above) toggled by IntersectionObserver + a transform-aware
+ * scroll backstop in motion.js. GSAP never hides content. */
+
+/* FEATURE 9 — headline line reveal. SplitText (motion.js) splits the section
+ * headline into masked lines; the section head's `.in` slides them up with a
+ * per-line delay. Rides the reliable `.in` system, so headlines are never left
+ * hidden — if SplitText doesn't run, the headline simply shows normally. */
+.section-head h2.gx-split .gx-line {
+  transform: translateY(110%);
+  transition: transform 0.85s var(--ease-out);
+  transition-delay: calc(var(--line, 0) * 0.09s);
+  will-change: transform;
+}
+.section-head.in h2.gx-split .gx-line { transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .section-head h2.gx-split .gx-line { transform: none; transition: none; }
+}
 
 /* FEATURE 8 — hover system: magnetic lean + soft cursor lighting.
  * The light uses soft-light so it lifts dark cards and barely touches light
