@@ -97,10 +97,12 @@
 
       // Platform GalentAI engine diagram — pinned executive storytelling.
       var engineCleanup = c.isDesktop ? setupPlatformEngines(gsap, ScrollTrigger) : function () {};
+      // Platform — SVG enterprise intelligence-flow network (desktop + tablet).
+      var inetCleanup = setupIntelligenceNetwork(gsap, ScrollTrigger);
 
       var hoverCleanup = c.isDesktop ? setupHoverSystem(gsap) : function () {};
       ScrollTrigger.refresh();
-      return function () { root.classList.remove('gsap-smooth'); if (smoother) smoother.kill(); engineCleanup(); hoverCleanup(); };
+      return function () { root.classList.remove('gsap-smooth'); if (smoother) smoother.kill(); engineCleanup(); inetCleanup(); hoverCleanup(); };
     });
 
     markBooted();
@@ -583,6 +585,131 @@
       if (svg) svg.querySelectorAll('line').forEach(function (ln) {
         ln.removeAttribute('stroke-dasharray'); ln.removeAttribute('stroke-dashoffset');
       });
+    };
+  }
+
+  /* ==========================================================================
+   * SVG INTELLIGENCE NETWORK — the GalentAI enterprise data flow as a clean
+   * architecture diagram (NOT a generic web). Injected aria-hidden behind the
+   * platform "Applied AI at Scale" dark panel:
+   *   Enterprise Data Sources -> Knowledge Graph -> Context Graph -> NeuroQL
+   *   -> RCM -> Business Outcomes, with a relationship mesh.
+   * Phases: draw paths -> reveal nodes -> data pulses -> expand relationships
+   * -> stabilise. SVG + GSAP + ScrollTrigger only. Returns a cleanup fn.
+   * ======================================================================== */
+  function setupIntelligenceNetwork(gsap, ScrollTrigger) {
+    var strip = document.querySelector('.stat-strip--animated');
+    var host = strip ? strip.closest('section') : null;
+    if (!host || host.querySelector('.gx-inet')) return function () {};
+    if (window.innerWidth < 760) return function () {}; // phones: keep it clean/light
+
+    var NS = 'http://www.w3.org/2000/svg';
+    function s(tag, attrs) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); return e; }
+
+    var layer = document.createElement('div');
+    layer.className = 'gx-inet';
+    layer.setAttribute('aria-hidden', 'true');
+    // Anchor to the bottom of the panel so the labelled rail sits in the clear
+    // bottom padding (a "foundation" beneath the stats); arcs rise faintly
+    // behind the numbers. Keeps the stat strip fully legible.
+    layer.style.cssText = 'position:absolute;left:0;right:0;bottom:0;z-index:0;pointer-events:none;overflow:hidden;display:flex;align-items:flex-end;justify-content:center;';
+    var svg = s('svg', { viewBox: '0 0 1200 460', preserveAspectRatio: 'xMidYMax meet', fill: 'none' });
+    svg.style.cssText = 'width:100%;height:auto;opacity:0.85;display:block;';
+    layer.appendChild(svg);
+
+    var RAIL = 300;
+    var nodes = [
+      { id: 'src', x: 105,  c: 'rgba(226,232,240,0.85)', label: ['Enterprise', 'Data Sources'] },
+      { id: 'kg',  x: 305,  c: '#1ED197', label: ['Knowledge', 'Graph'] },
+      { id: 'ctx', x: 505,  c: '#6366F1', label: ['Context', 'Graph'] },
+      { id: 'nq',  x: 705,  c: '#9B5DE0', label: ['NeuroQL'] },
+      { id: 'rcm', x: 905,  c: '#FF7634', label: ['RCM'] },
+      { id: 'out', x: 1095, c: '#1ED197', label: ['Business', 'Outcomes'] }
+    ];
+    var STROKE = 'rgba(255,255,255,0.22)';
+
+    // Primary rail (drawn left -> right).
+    var primary = s('path', { d: 'M' + nodes[0].x + ',' + RAIL + ' L' + nodes[5].x + ',' + RAIL, stroke: STROKE, 'stroke-width': '1.5' });
+    svg.appendChild(primary);
+
+    // Relationship mesh arcs (revealed when relationships "expand").
+    var arcDefs = [
+      'M305,' + RAIL + ' Q505,150 705,' + RAIL,   // Knowledge Graph -> NeuroQL
+      'M505,' + RAIL + ' Q705,420 905,' + RAIL,   // Context Graph -> RCM
+      'M905,' + RAIL + ' Q805,170 705,' + RAIL    // RCM -> NeuroQL (closed loop)
+    ];
+    var arcs = arcDefs.map(function (d) {
+      var p = s('path', { d: d, stroke: 'rgba(255,255,255,0.16)', 'stroke-width': '1', 'stroke-dasharray': '3 5' });
+      svg.appendChild(p); return p;
+    });
+
+    // Feeder signals into the first node + fan-out from the last.
+    var feeders = [];
+    [-34, 0, 34].forEach(function (dy) {
+      feeders.push(svg.appendChild(s('line', { x1: 28, y1: RAIL + dy, x2: nodes[0].x, y2: RAIL, stroke: STROKE, 'stroke-width': '1' })));
+      feeders.push(svg.appendChild(s('line', { x1: nodes[5].x, y1: RAIL, x2: 1172, y2: RAIL + dy, stroke: STROKE, 'stroke-width': '1' })));
+    });
+
+    // Nodes (reveal by growing radius) + labels.
+    var circles = [], labels = [];
+    nodes.forEach(function (nd) {
+      var halo = s('circle', { cx: nd.x, cy: RAIL, r: 0, fill: 'none', stroke: nd.c, 'stroke-width': '1', opacity: '0.0' });
+      svg.appendChild(halo);
+      var dot = s('circle', { cx: nd.x, cy: RAIL, r: 0, fill: '#0b0d12', stroke: nd.c, 'stroke-width': '1.8' });
+      svg.appendChild(dot);
+      circles.push({ dot: dot, halo: halo });
+      var g = s('text', { x: nd.x, y: RAIL + 34, 'text-anchor': 'middle', fill: 'rgba(255,255,255,0.55)', 'font-family': 'JetBrains Mono, monospace', 'font-size': '12.5', opacity: '0' });
+      nd.label.forEach(function (line, i) {
+        var t = s('tspan', { x: nd.x, dy: i === 0 ? 0 : 16 }); t.textContent = line; g.appendChild(t);
+      });
+      svg.appendChild(g); labels.push(g);
+    });
+
+    // Data pulses traveling the rail.
+    var pulses = [0, 1, 2].map(function () {
+      return svg.appendChild(s('circle', { cx: nodes[0].x, cy: RAIL, r: 3, fill: '#9B5DE0', opacity: '0' }));
+    });
+
+    host.style.position = host.style.position || 'relative';
+    var container = host.querySelector('.container');
+    if (container) { container.style.position = 'relative'; container.style.zIndex = '1'; }
+    host.insertBefore(layer, host.firstChild);
+
+    // initial hidden state
+    var primLen = primary.getTotalLength();
+    gsap.set(primary, { strokeDasharray: primLen, strokeDashoffset: primLen });
+    arcs.forEach(function (a) { var L = a.getTotalLength(); gsap.set(a, { strokeDasharray: L, strokeDashoffset: L, opacity: 0 }); });
+    gsap.set(feeders, { opacity: 0 });
+
+    var tl = gsap.timeline({ scrollTrigger: { trigger: host, start: 'top 72%', toggleActions: 'play none none none' } });
+    // Phase 1 — draw the primary path.
+    tl.to(primary, { strokeDashoffset: 0, duration: 1.0, ease: 'power2.inOut' }, 0);
+    tl.to(feeders, { opacity: 1, duration: 0.6 }, 0.5);
+    // Phase 2 — reveal nodes (grow radius) + labels.
+    tl.to(circles.map(function (c) { return c.dot; }), { attr: { r: 6 }, duration: 0.5, ease: 'back.out(1.7)', stagger: 0.08 }, 0.55);
+    tl.to(circles.map(function (c) { return c.halo; }), { attr: { r: 13 }, opacity: 0.5, duration: 0.5, stagger: 0.08 }, 0.6);
+    tl.to(labels, { opacity: 1, duration: 0.45, stagger: 0.08 }, 0.7);
+    // Phase 4 — expand relationships (mesh arcs draw in).
+    tl.to(arcs, { strokeDashoffset: 0, opacity: 1, duration: 0.8, ease: 'power2.inOut', stagger: 0.14 }, 1.45);
+    // Phase 5 — stabilise (gentle settle of the halos).
+    tl.to(circles.map(function (c) { return c.halo; }), { opacity: 0.32, duration: 0.6 }, 2.3);
+
+    // Phase 3 — data pulses (continuous, subtle; paused offscreen for perf).
+    var pulseTl = gsap.timeline({ repeat: -1, paused: true });
+    pulses.forEach(function (p, i) {
+      var at = i * 1.25;
+      pulseTl.fromTo(p, { attr: { cx: nodes[0].x }, opacity: 0 }, { attr: { cx: nodes[5].x }, duration: 3.6, ease: 'none' }, at)
+        .to(p, { opacity: 0.9, duration: 0.5 }, at)
+        .to(p, { opacity: 0, duration: 0.6 }, at + 3.0);
+    });
+    var pulseTrig = ScrollTrigger.create({
+      trigger: host, start: 'top bottom', end: 'bottom top',
+      onToggle: function (self) { if (self.isActive) pulseTl.play(); else pulseTl.pause(); }
+    });
+
+    return function () {
+      pulseTl.kill(); pulseTrig.kill();
+      if (layer.parentNode) layer.parentNode.removeChild(layer);
     };
   }
 
