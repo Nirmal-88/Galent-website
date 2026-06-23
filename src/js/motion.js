@@ -89,7 +89,6 @@
       if (isHome) {
         setupHeroEntrance(gsap);
         setupHeroScrub(gsap, ScrollTrigger);
-        setupSvgNetworkGrowth(gsap, ScrollTrigger);
         if (c.isDesktop) {
           setupPinnedComparison(gsap, ScrollTrigger);
           setupHorizontalIndustries(gsap, ScrollTrigger);
