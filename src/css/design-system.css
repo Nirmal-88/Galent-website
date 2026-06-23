@@ -8797,14 +8797,9 @@ html.gsap-smooth main > section:not(.hero):not(.platform-hero):not(.about-hero):
   contain-intrinsic-size: auto !important;
 }
 
-/* When the engine owns reveals, the GSAP-written inline styles must not also
- * run the legacy CSS transition (double-animation). The engine sets the
- * initial hidden state itself. */
-html.gsap-ready [data-reveal],
-html.gsap-ready [data-stagger] > * { transition: none !important; }
-
-/* SplitText line reveals — masked wrappers clip the rising lines. */
-.section-head .gx-line { will-change: transform; }
+/* Reveals use the proven CSS `.in` transition system (see [data-reveal] /
+ * [data-stagger] above) toggled by IntersectionObserver in motion.js. GSAP
+ * never hides content, so no transition override is needed here. */
 
 /* FEATURE 8 — hover system: magnetic lean + soft cursor lighting.
  * The light uses soft-light so it lifts dark cards and barely touches light
