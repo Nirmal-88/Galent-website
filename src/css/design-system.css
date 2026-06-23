@@ -4900,6 +4900,106 @@ body[data-page] .svc li a:hover, body[data-page] .svc li a:hover .meta { color: 
 .compare-card .pane.right li .ic { background: var(--brand-green-soft); color: var(--brand-green-deep); }
 
 /* ==================================================================
+   HOME — refreshed visuals for the comparison card + service cards.
+   Scoped to body[data-page="home"] so other pages keep their styles.
+   Visual only — markup/content unchanged.
+   ================================================================== */
+
+/* --- Comparison card: one dark card, red (conventional) vs green (Galent) --- */
+body[data-page="home"] .compare-card {
+  background: linear-gradient(165deg, #17141F 0%, #100D17 60%, #0C0A12 100%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 30px 70px -34px rgba(0, 0, 0, 0.7);
+}
+body[data-page="home"] .compare-card .pane.left,
+body[data-page="home"] .compare-card .pane.right {
+  background: transparent;
+  border: 0;
+  color: rgba(255, 255, 255, 0.76);
+}
+body[data-page="home"] .compare-card .pane.right { border-left: 1px solid rgba(255, 255, 255, 0.09); }
+@media (max-width: 880px) {
+  body[data-page="home"] .compare-card .pane.right {
+    border-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.09);
+  }
+}
+body[data-page="home"] .compare-card .pane.left h3 { color: #FF6B72; }
+body[data-page="home"] .compare-card .pane.right h3 { color: #2DD4A7; }
+body[data-page="home"] .compare-card .pane.left h3 .pip {
+  background: #FF6B72;
+  box-shadow: 0 0 10px rgba(255, 107, 114, 0.6);
+}
+body[data-page="home"] .compare-card .pane.right h3 .pip {
+  background: #2DD4A7;
+  box-shadow: 0 0 10px rgba(45, 212, 167, 0.6);
+}
+body[data-page="home"] .compare-card li,
+body[data-page="home"] .compare-card .pane.right li {
+  border-top: 0;
+  padding: 10px 0;
+  color: rgba(255, 255, 255, 0.78);
+}
+body[data-page="home"] .compare-card li .ic {
+  flex: 0 0 22px;
+  height: 22px;
+  font-weight: 700;
+  color: #fff;
+}
+body[data-page="home"] .compare-card .pane.left li .ic {
+  background: #F2545B;
+  box-shadow: 0 0 0 1px rgba(242, 84, 91, 0.4);
+}
+body[data-page="home"] .compare-card .pane.right li .ic {
+  background: #1FB890;
+  box-shadow: 0 0 0 1px rgba(31, 184, 144, 0.4);
+}
+
+/* --- Service cards: purple gradient with nested item pills --- */
+body[data-page="home"] #services .svc {
+  background: linear-gradient(165deg, #8A3FD8 0%, #6627B4 52%, #4E1C92 100%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 22px;
+  box-shadow: 0 26px 60px -30px rgba(91, 36, 166, 0.85),
+              inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+body[data-page="home"] #services .svc::before { display: none; }
+body[data-page="home"] #services .svc:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 34px 72px -28px rgba(91, 36, 166, 0.95),
+              inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+/* Card title */
+body[data-page="home"] #services .svc .badge { color: #fff; }
+body[data-page="home"] #services .svc .badge .dot { display: none; }
+
+/* Item rows → translucent pills */
+body[data-page="home"] #services .svc ul { gap: 10px; margin-top: 6px; }
+body[data-page="home"] #services .svc li { border-top: 0; }
+body[data-page="home"] #services .svc li a {
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 13px;
+  padding: 13px 15px;
+  grid-template-columns: 1fr auto;
+  color: #fff;
+}
+body[data-page="home"] #services .svc li a > span:first-child { color: #fff; }
+body[data-page="home"] #services .svc li .meta { color: rgba(255, 255, 255, 0.72); }
+body[data-page="home"] #services .svc li a::after { display: none; }
+body[data-page="home"] #services .svc li a:hover {
+  background: rgba(255, 255, 255, 0.17);
+  border-color: rgba(255, 255, 255, 0.3);
+  padding: 13px 15px;
+  color: #fff;
+}
+body[data-page="home"] #services .svc li a:hover > span:first-child { color: #fff; }
+body[data-page="home"] #services .svc li a:hover .meta { color: rgba(255, 255, 255, 0.88); }
+
+/* ==================================================================
  * ENRICHED FDE ARCHETYPE TILES (home page section 06)
  * Large badge + title + 2-3 day-one specifics + outcome metric
  * ================================================================== */
