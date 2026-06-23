@@ -4941,18 +4941,44 @@ body[data-page="home"] .compare-card .pane.right li {
   color: rgba(255, 255, 255, 0.78);
 }
 body[data-page="home"] .compare-card li .ic {
-  flex: 0 0 22px;
-  height: 22px;
-  font-weight: 700;
-  color: #fff;
+  position: relative;
+  flex: 0 0 24px;
+  height: 24px;
+  font-size: 0;            /* hide the thin unicode glyph */
+  color: transparent;
 }
 body[data-page="home"] .compare-card .pane.left li .ic {
   background: #F2545B;
-  box-shadow: 0 0 0 1px rgba(242, 84, 91, 0.4);
+  box-shadow: 0 1px 6px rgba(242, 84, 91, 0.45);
 }
 body[data-page="home"] .compare-card .pane.right li .ic {
   background: #1FB890;
-  box-shadow: 0 0 0 1px rgba(31, 184, 144, 0.4);
+  box-shadow: 0 1px 6px rgba(31, 184, 144, 0.45);
+}
+/* Crisp CSS-drawn marks (the ✕/✓ glyphs render too thin on the discs). */
+body[data-page="home"] .compare-card .pane.left li .ic::before,
+body[data-page="home"] .compare-card .pane.left li .ic::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 11px;
+  height: 2.6px;
+  border-radius: 2px;
+  background: #fff;
+}
+body[data-page="home"] .compare-card .pane.left li .ic::before { transform: translate(-50%, -50%) rotate(45deg); }
+body[data-page="home"] .compare-card .pane.left li .ic::after { transform: translate(-50%, -50%) rotate(-45deg); }
+body[data-page="home"] .compare-card .pane.right li .ic::before {
+  content: "";
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  width: 6px;
+  height: 11px;
+  border: solid #fff;
+  border-width: 0 2.6px 2.6px 0;
+  transform: translate(-50%, -55%) rotate(45deg);
 }
 
 /* --- Service cards: purple gradient with nested item pills --- */
