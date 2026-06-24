@@ -7814,6 +7814,7 @@ main > section + section:not(.panel-dark)::before {
               color-mix(in srgb, var(--on-surface-variant) 30%, transparent));
   border-radius: 2px;
   z-index: 0;
+  will-change: transform;
 }
 
 .arch-layer {
@@ -7828,6 +7829,11 @@ main > section + section:not(.panel-dark)::before {
   border: 1px solid rgba(18, 19, 23, 0.07);
   border-radius: 16px;
   box-shadow: 0 1px 2px rgba(18, 19, 23, 0.04);
+  /* Smooth opacity transitions for progressive activation */
+  opacity: 1;
+  transform: translateY(0);
+  will-change: opacity, transform;
+  transition: opacity 0s, transform 0s; /* GSAP handles transitions; CSS is fallback */
 }
 .arch-layer--p { --layer-color: var(--brand-purple); }
 .arch-layer--g { --layer-color: var(--brand-green-deep); }
@@ -7849,6 +7855,7 @@ main > section + section:not(.panel-dark)::before {
   border: 4px solid #FFFFFF;
   box-shadow: 0 0 0 1px color-mix(in srgb, var(--layer-color) 25%, transparent);
   z-index: 1;
+  will-change: opacity;
 }
 
 .arch-layer__meta { display: flex; flex-direction: column; gap: 4px; }

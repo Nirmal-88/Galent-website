@@ -519,24 +519,158 @@
     });
   }
 
-  /* Platform architecture spine — visible by default; draws + lifts on enter. */
+  /* =========================================================================
+   * PLATFORM FIVE LAYERS ARCHITECTURE STACK — Premium ScrollTrigger Storytelling
+   * 
+   * Enterprise narrative experience: progressive activation of architecture
+   * layers (Signals → Backbone → Engines → Workflows → Outcomes) with
+   * scrubbed timeline, pinned section, and smooth 60fps animation.
+   * 
+   * Phases:
+   *   1. Section enters — pin, all layers neutral
+   *   2. Enterprise Signals activates (emphasis, others dim)
+   *   3. Intelligence Backbone activates + connection animates
+   *   4. AI Engines activate (progressive)
+   *   5. Workflows activates
+   *   6. Outcomes activates
+   *   7. Full architecture connected + execution path drawn
+   *   8. Unpin, resume normal scroll
+   * 
+   * Mobile: Reduced pinning, normal scroll flow.
+   * Reduced motion: All layers visible, minimal animations.
+   * No GSAP: All content visible by default (CSS --arch-progress: 1).
+   * ======================================================================== */
   function setupArchitectureDraw(gsap, ScrollTrigger) {
     var stack = document.querySelector('.arch-stack');
     if (!stack) return;
     var layers = Array.prototype.slice.call(stack.querySelectorAll('.arch-layer'));
     if (!layers.length) return;
-    stack.style.setProperty('--arch-progress', '1');
-    ScrollTrigger.create({
-      trigger: stack, start: 'top 75%', once: true,
-      onEnter: function () {
-        stack.style.setProperty('--arch-progress', '0');
-        var tl = gsap.timeline();
-        tl.to(stack, { duration: 0.9, ease: 'power2.inOut',
-          onUpdate: function () { stack.style.setProperty('--arch-progress', String(this.progress())); },
-          onComplete: function () { stack.style.setProperty('--arch-progress', '1'); } }, 0);
-        tl.from(layers, { autoAlpha: 0, y: 16, duration: 0.5, ease: 'power2.out', stagger: 0.16 }, 0.1);
+
+    var isDesktop = window.innerWidth >= 1025;
+    var isReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Map layers by order (top to bottom): 5 → 1
+    var layerMap = {
+      5: layers.find(function (l) { return l.getAttribute('data-layer') === '5'; }),
+      4: layers.find(function (l) { return l.getAttribute('data-layer') === '4'; }),
+      3: layers.find(function (l) { return l.getAttribute('data-layer') === '3'; }),
+      2: layers.find(function (l) { return l.getAttribute('data-layer') === '2'; }),
+      1: layers.find(function (l) { return l.getAttribute('data-layer') === '1'; })
+    };
+
+    // Fallback: all layers visible if GSAP disabled or reduced motion
+    if (!gsap || isReduced) {
+      stack.style.setProperty('--arch-progress', '1');
+      layers.forEach(function (l) { gsap.set(l, { autoAlpha: 1, y: 0 }); });
+      return;
+    }
+
+    // Desktop — premium pinned storytelling experience
+    if (isDesktop) {
+      // Initial state: all layers muted (reduced opacity)
+      gsap.set(layers, { autoAlpha: 0.3, y: 8 });
+      stack.style.setProperty('--arch-progress', '0');
+
+      var tl = gsap.timeline({
+        defaults: { ease: 'power2.inOut' },
+        scrollTrigger: {
+          trigger: stack,
+          start: 'top 60%',
+          end: '+=1600',
+          pin: true,
+          scrub: 1,
+          anticipatePin: 1,
+          invalidateOnRefresh: true
+        }
+      });
+
+      // PHASE 1 — Section pinned, everything neutral (hold 0-8%)
+      tl.to({}, { duration: 0.1 });
+      
+      // PHASE 2 — Enterprise Signals (Layer 1) activates (8-22%)
+      // Emphasis on Signals, dim others
+      if (layerMap[1]) {
+        tl.to(layerMap[1], { autoAlpha: 1, y: 0, duration: 0.3 }, 0.08);
+        tl.to([layerMap[5], layerMap[4], layerMap[3], layerMap[2]], 
+          { autoAlpha: 0.2, duration: 0.3 }, 0.08);
       }
-    });
+
+      // PHASE 3 — Intelligence Backbone (Layer 2) activates, connection (22-36%)
+      // Backbone becomes prominent, Signals visible but reduced focus
+      if (layerMap[2]) {
+        tl.to(layerMap[2], { autoAlpha: 1, y: 0, duration: 0.3 }, 0.22);
+        tl.to(layerMap[1], { autoAlpha: 0.55, duration: 0.3 }, 0.22);
+        tl.to([layerMap[5], layerMap[4], layerMap[3]], 
+          { autoAlpha: 0.2, duration: 0.3 }, 0.22);
+        // Animate execution path 0→40%
+        tl.to(stack, { '--arch-progress': 0.4, duration: 0.4 }, 0.22);
+      }
+
+      // PHASE 4 — AI Engines (Layer 3) activate (36-52%)
+      // Engines highlighted, Signals+Backbone visible, Workflows+Outcomes dim
+      if (layerMap[3]) {
+        tl.to(layerMap[3], { autoAlpha: 1, y: 0, duration: 0.3 }, 0.36);
+        tl.to([layerMap[1], layerMap[2]], { autoAlpha: 0.55, duration: 0.3 }, 0.36);
+        tl.to([layerMap[5], layerMap[4]], { autoAlpha: 0.2, duration: 0.3 }, 0.36);
+        // Execution path 40→60%
+        tl.to(stack, { '--arch-progress': 0.6, duration: 0.4 }, 0.36);
+      }
+
+      // PHASE 5 — Workflows (Layer 4) activates (52-66%)
+      // Workflows highlighted, Signals+Backbone+Engines visible, Outcomes dim
+      if (layerMap[4]) {
+        tl.to(layerMap[4], { autoAlpha: 1, y: 0, duration: 0.3 }, 0.52);
+        tl.to([layerMap[1], layerMap[2], layerMap[3]], { autoAlpha: 0.55, duration: 0.3 }, 0.52);
+        tl.to(layerMap[5], { autoAlpha: 0.2, duration: 0.3 }, 0.52);
+        // Execution path 60→76%
+        tl.to(stack, { '--arch-progress': 0.76, duration: 0.4 }, 0.52);
+      }
+
+      // PHASE 6 — Outcomes (Layer 5) activates (66-80%)
+      // Outcomes highlighted, all other layers visible
+      if (layerMap[5]) {
+        tl.to(layerMap[5], { autoAlpha: 1, y: 0, duration: 0.3 }, 0.66);
+        tl.to([layerMap[1], layerMap[2], layerMap[3], layerMap[4]], 
+          { autoAlpha: 0.55, duration: 0.3 }, 0.66);
+        // Execution path 76→88%
+        tl.to(stack, { '--arch-progress': 0.88, duration: 0.4 }, 0.66);
+      }
+
+      // PHASE 7 — Full architecture connected + execution path complete (80-92%)
+      // All layers visible, full connection
+      tl.to(layers, { autoAlpha: 1, duration: 0.3 }, 0.80);
+      tl.to(stack, { '--arch-progress': 1, duration: 0.3 }, 0.80);
+
+      // PHASE 8 — Hold finale, then release pin (92-100%)
+      tl.to({}, { duration: 0.08 });
+
+      return;
+    }
+
+    // Mobile fallback — reduced animation, normal scroll behavior
+    if (window.matchMedia && window.matchMedia('(max-width: 1024px)').matches) {
+      stack.style.setProperty('--arch-progress', '1');
+      ScrollTrigger.create({
+        trigger: stack,
+        start: 'top 75%',
+        once: true,
+        onEnter: function () {
+          gsap.set(layers, { autoAlpha: 0 });
+          gsap.to(layers, {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.4,
+            ease: 'power2.out',
+            stagger: 0.08
+          });
+        }
+      });
+      return;
+    }
+
+    // Fallback — content visible by default
+    stack.style.setProperty('--arch-progress', '1');
+    layers.forEach(function (l) { gsap.set(l, { autoAlpha: 1, y: 0 }); });
   }
 
   /* Generic stat strips — count up on enter (items visible by default). */
