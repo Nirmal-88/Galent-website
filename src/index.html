@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/design-system.css?v=motion-2">
+  <link rel="stylesheet" href="css/design-system.css?v=hero-logo-1">
   <link rel="icon" href="assets/images/logo.png?v=4" type="image/png">
 
   <meta property="og:type" content="website">
@@ -111,7 +111,9 @@
     <!-- 01 HERO — kinetic network backdrop -->
     <section id="hero" class="hero" aria-labelledby="hero-title">
       <div class="hero-network" aria-hidden="true">
-        <canvas id="cv-network"></canvas>
+        <div class="hero-logo-wrap">
+          <img class="hero-logo" src="assets/images/galent-mark.png" alt="" width="320" height="395" decoding="async">
+        </div>
       </div>
       <div class="hero-content">
         <span class="badge"><span class="dot"></span>Galent · Technology Services</span>
@@ -662,7 +664,6 @@
   <script src="js/animations.js"></script>
   <script src="js/cases-cms.js?v=cases-1"></script>
   <script>
-    Galent.network(document.getElementById('cv-network'));
     Galent.signal(document.getElementById('cv-signal'));
     Galent.persistentReveal();
     Galent.stickyNav('site-nav');

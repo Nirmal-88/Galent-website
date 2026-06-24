@@ -86,9 +86,10 @@
       setupCtaSystem(gsap, ScrollTrigger);
       setupOffscreenPause(ScrollTrigger);
 
+      var heroCleanup = function () {};
       if (isHome) {
         setupHeroEntrance(gsap);
-        setupHeroScrub(gsap, ScrollTrigger);
+        heroCleanup = setupHeroLogo(gsap, ScrollTrigger);
         if (c.isDesktop) {
           setupPinnedComparison(gsap, ScrollTrigger);
           setupHorizontalIndustries(gsap, ScrollTrigger);
@@ -100,7 +101,7 @@
 
       var hoverCleanup = c.isDesktop ? setupHoverSystem(gsap) : function () {};
       ScrollTrigger.refresh();
-      return function () { root.classList.remove('gsap-smooth'); if (smoother) smoother.kill(); engineCleanup(); hoverCleanup(); };
+      return function () { root.classList.remove('gsap-smooth'); if (smoother) smoother.kill(); engineCleanup(); heroCleanup(); hoverCleanup(); };
     });
 
     markBooted();
@@ -237,19 +238,119 @@
   }
 
   /* ==========================================================================
-   * FEATURE 10 — hero network scrub. Hero copy shown by the entrance; scrub
-   * only adds motion as you leave.
+   * HERO LOGO SYSTEM (home). The Galent mark IMAGE is the centerpiece — only
+   * transforms / filters animate it; the geometry is never recreated. It
+   * floats at rest, then on scroll it scales + lights up while an intelligence
+   * network radiates OUT FROM the mark (paths drawn from its centre, nodes
+   * resolve, pulses travel) — the logo "evolving" into the platform. The hero
+   * copy lifts away as you leave. Returns a cleanup fn.
    * ======================================================================== */
-  function setupHeroScrub(gsap, ScrollTrigger) {
+  function setupHeroLogo(gsap, ScrollTrigger) {
     var hero = document.getElementById('hero');
-    if (!hero) return;
+    if (!hero) return function () {};
+    var stage = hero.querySelector('.hero-network');
+    var wrap = hero.querySelector('.hero-logo-wrap');
+    var logo = hero.querySelector('.hero-logo');
     var content = hero.querySelector('.hero-content');
-    ScrollTrigger.create({
-      trigger: hero, start: 'top top', end: 'bottom top', scrub: true,
-      onUpdate: function (self) { if (window.Galent && window.Galent.setNetworkProgress) window.Galent.setNetworkProgress(self.progress); }
+    if (!stage || !wrap || !logo) return function () {};
+
+    var NS = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('class', 'hero-net'); svg.setAttribute('aria-hidden', 'true');
+    stage.insertBefore(svg, stage.firstChild);
+
+    // Connection directions radiating from the mark (angle°, distance factor).
+    var defs = [
+      { a: -116, d: 0.96 }, { a: -64, d: 1.18 }, { a: -20, d: 0.9 }, { a: 26, d: 1.22 },
+      { a: 74, d: 0.98 }, { a: 124, d: 1.2 }, { a: 162, d: 0.92 }, { a: 214, d: 1.12 }
+    ];
+    var lines = [], nodes = [], pulses = [];
+    defs.forEach(function () {
+      var ln = document.createElementNS(NS, 'path'); ln.setAttribute('class', 'hero-net-line'); svg.appendChild(ln); lines.push(ln);
+      var nd = document.createElementNS(NS, 'circle'); nd.setAttribute('class', 'hero-net-node'); nd.setAttribute('r', '0'); svg.appendChild(nd); nodes.push(nd);
+      var ps = document.createElementNS(NS, 'circle'); ps.setAttribute('class', 'hero-net-pulse'); ps.setAttribute('r', '2.6'); ps.setAttribute('opacity', '0'); svg.appendChild(ps); pulses.push(ps);
     });
-    if (content) gsap.to(content, { yPercent: -16, autoAlpha: 0, ease: 'power1.in',
-      scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: 1 } });
+
+    var net = { p: 0 };
+    function applyNet() {
+      lines.forEach(function (ln, i) {
+        var len = defs[i]._len || 1;
+        ln.style.strokeDashoffset = (len * (1 - net.p)).toFixed(1);
+      });
+      var k = Math.min(1, net.p * 1.4);
+      nodes.forEach(function (nd) { nd.setAttribute('r', (3.2 * k).toFixed(2)); nd.style.opacity = k.toFixed(2); });
+    }
+    function layout() {
+      var r = stage.getBoundingClientRect();
+      var lr = logo.getBoundingClientRect();
+      if (!r.width || !lr.width) return;
+      var cx = lr.left - r.left + lr.width / 2;
+      var cy = lr.top - r.top + lr.height / 2;
+      svg.setAttribute('viewBox', '0 0 ' + r.width + ' ' + r.height);
+      var reach = Math.min(r.width, r.height) * 0.46;
+      defs.forEach(function (def, i) {
+        var rad = def.a * Math.PI / 180;
+        var ex = cx + Math.cos(rad) * reach * def.d;
+        var ey = cy + Math.sin(rad) * reach * def.d;
+        def._cx = cx; def._cy = cy; def._ex = ex; def._ey = ey;
+        def._len = Math.hypot(ex - cx, ey - cy) || 1;
+        lines[i].setAttribute('d', 'M' + cx.toFixed(1) + ',' + cy.toFixed(1) + ' L' + ex.toFixed(1) + ',' + ey.toFixed(1));
+        lines[i].style.strokeDasharray = def._len;
+        nodes[i].setAttribute('cx', ex.toFixed(1)); nodes[i].setAttribute('cy', ey.toFixed(1));
+      });
+      applyNet();
+    }
+    layout();
+    ScrollTrigger.addEventListener('refresh', layout);
+    var onResize = function () { layout(); };
+    window.addEventListener('load', onResize);
+
+    // Draw the network IN at rest (after the mark settles) so it's a persistent
+    // intelligence network radiating from the logo — replacing the old particles.
+    var drawIn = gsap.to(net, { p: 1, duration: 1.4, ease: 'power2.out', delay: 0.7, onUpdate: applyNet });
+
+    // Idle float — gentle, on the IMAGE (the wrap handles scroll transforms,
+    // so the two never fight).
+    var fy = gsap.to(logo, { y: -16, duration: 3.6, ease: 'sine.inOut', repeat: -1, yoyo: true });
+    var fr = gsap.to(logo, { rotation: 2.2, duration: 5.4, ease: 'sine.inOut', repeat: -1, yoyo: true });
+
+    // Scroll evolution: mark scales + lights up, network radiates, copy lifts.
+    var tl = gsap.timeline({ scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: 1 } });
+    tl.to(wrap, { scale: 1.16, yPercent: -16, ease: 'none' }, 0);
+    tl.to(logo, { filter: 'drop-shadow(0 34px 80px rgba(123,44,191,0.62)) drop-shadow(0 12px 34px rgba(30,209,151,0.38))', ease: 'none' }, 0);
+    // Fade the readability scrim so the full mark resolves as the copy leaves.
+    var scrim = { v: 1 };
+    tl.to(scrim, { v: 0, ease: 'none', onUpdate: function () { stage.style.setProperty('--hero-scrim', scrim.v.toFixed(3)); } }, 0);
+    if (content) tl.to(content, { yPercent: -16, autoAlpha: 0, ease: 'power1.in' }, 0);
+
+    // Data pulses radiating along the connections (gated by network presence,
+    // paused offscreen).
+    var pulseTl = gsap.timeline({ repeat: -1, paused: true });
+    pulses.forEach(function (ps, i) {
+      var st = { t: 0 };
+      pulseTl.fromTo(st, { t: 0 }, {
+        t: 1, duration: 2.0, ease: 'power1.in',
+        onUpdate: function () {
+          var d = defs[i]; if (!d || d._cx == null) return;
+          ps.setAttribute('cx', (d._cx + (d._ex - d._cx) * st.t).toFixed(1));
+          ps.setAttribute('cy', (d._cy + (d._ey - d._cy) * st.t).toFixed(1));
+          ps.style.opacity = (Math.sin(st.t * Math.PI) * 0.85 * net.p).toFixed(2);
+        }
+      }, (i % 4) * 0.5);
+    });
+    var pulseTrig = ScrollTrigger.create({
+      trigger: hero, start: 'top bottom', end: 'bottom top',
+      onToggle: function (self) { self.isActive ? pulseTl.play() : pulseTl.pause(); }
+    });
+
+    return function () {
+      fy.kill(); fr.kill(); drawIn.kill(); pulseTl.kill(); pulseTrig.kill();
+      ScrollTrigger.removeEventListener('refresh', layout);
+      window.removeEventListener('load', onResize);
+      if (svg.parentNode) svg.parentNode.removeChild(svg);
+      gsap.set(logo, { clearProps: 'transform,filter' });
+      gsap.set(wrap, { clearProps: 'transform' });
+    };
   }
 
   /* ==========================================================================
