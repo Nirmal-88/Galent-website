@@ -1272,12 +1272,20 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
 /* CTA */
 .cta-card {
   position: relative;
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: clamp(60px, 9vw, 110px) clamp(28px, 6vw, 60px);
+  /* Full-bleed: the dark panel spans the whole viewport width (no white side
+     gutters); inner content stays centred to a readable ~1080px column. */
+  width: 100vw;
+  max-width: 100vw;
+  left: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding-top: clamp(60px, 9vw, 110px);
+  padding-bottom: clamp(60px, 9vw, 110px);
+  padding-left: max(var(--gutter), calc((100vw - 1080px) / 2));
+  padding-right: max(var(--gutter), calc((100vw - 1080px) / 2));
   background: var(--on-surface);
   color: var(--surface);
-  border-radius: var(--radius-lg);
+  border-radius: 0;
   overflow: hidden;
   text-align: center;
 }
