@@ -8816,6 +8816,11 @@ html.gsap-smooth main > section:not(.hero):not(.platform-hero):not(.about-hero):
   .section-head h2.gx-split .gx-line { transform: none; transition: none; }
 }
 
+/* Architecture storyline (motion.js, desktop pin): draw the execution-path
+ * spine bottom -> top to follow the flow (signals -> outcomes). Scoped to the
+ * story class so with GSAP off the spine behaves exactly as before. */
+.arch-stack.gx-arch-story::before { transform-origin: bottom center; }
+
 /* FEATURE 8 — hover system: magnetic lean + soft cursor lighting.
  * The light uses soft-light so it lifts dark cards and barely touches light
  * ones; pointer-events:none keeps it inert. */

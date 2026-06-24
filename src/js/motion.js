@@ -82,7 +82,10 @@
       setupParallaxLayers(gsap, ScrollTrigger);
       setupOutcomes(gsap, ScrollTrigger);
       setupStatStrips(gsap, ScrollTrigger);
-      setupArchitectureDraw(gsap, ScrollTrigger);
+      // Architecture stack: pinned storyline on desktop, simple reveal otherwise.
+      var archCleanup = function () {};
+      if (c.isDesktop) archCleanup = setupArchStoryline(gsap, ScrollTrigger);
+      else setupArchitectureDraw(gsap, ScrollTrigger);
       setupCtaSystem(gsap, ScrollTrigger);
       setupOffscreenPause(ScrollTrigger);
 
@@ -100,7 +103,7 @@
 
       var hoverCleanup = c.isDesktop ? setupHoverSystem(gsap) : function () {};
       ScrollTrigger.refresh();
-      return function () { root.classList.remove('gsap-smooth'); if (smoother) smoother.kill(); engineCleanup(); hoverCleanup(); };
+      return function () { root.classList.remove('gsap-smooth'); if (smoother) smoother.kill(); engineCleanup(); archCleanup(); hoverCleanup(); };
     });
 
     markBooted();
@@ -389,6 +392,138 @@
         });
       }
     });
+  }
+
+  /* ==========================================================================
+   * ARCHITECTURE STORYLINE (platform "Five layers. One execution path.").
+   * Pins the existing stack and walks focus along the flow:
+   *   Enterprise Signals -> Knowledge Graph -> Context Graph -> NeuroQL -> RCM
+   *   -> Outcomes  (engines are chips inside the AI Engines layer).
+   * Draws the spine bottom->top, travels subtle pulses, dims the rest, then
+   * illuminates the whole chain and unpins. Content/labels/order/layout are
+   * untouched — only opacity / transform-scale / box-shadow + the existing
+   * --arch-progress spine animate. Desktop only. Returns a cleanup fn.
+   * ======================================================================== */
+  function setupArchStoryline(gsap, ScrollTrigger) {
+    var stack = document.querySelector('.arch-stack');
+    if (!stack) return function () {};
+    var section = document.getElementById('architecture-stack');
+    var byMod = function (m) { return stack.querySelector('.arch-layer--' + m); };
+    var L = { out: byMod('i'), wf: byMod('o'), eng: byMod('g'), bb: byMod('p'), src: byMod('n') };
+    if (!L.src || !L.eng || !L.out) return function () {};
+    var allLayers = Array.prototype.slice.call(stack.querySelectorAll('.arch-layer'));
+
+    // Engine chips, matched by their (locked) label text.
+    var chips = {};
+    L.eng.querySelectorAll('.arch-node').forEach(function (ch) {
+      var t = ch.textContent.trim();
+      if (/Knowledge Graph/i.test(t)) chips.kg = ch;
+      else if (/Context Graph/i.test(t)) chips.ctx = ch;
+      else if (/NeuroQL/i.test(t)) chips.nq = ch;
+      else if (/RCM/i.test(t)) chips.rcm = ch;
+    });
+    var engineChips = [chips.kg, chips.ctx, chips.nq, chips.rcm].filter(Boolean);
+
+    if (section) section.classList.add('cv-visible');
+    stack.classList.add('gx-arch-story'); // CSS flips spine to draw bottom->top
+
+    var COL = { i: '79,70,229', o: '255,90,31', g: '15,176,127', p: '123,44,191', n: '69,71,77' };
+    function modOf(layer) { var c = layer.className.match(/arch-layer--(\w)/); return c ? c[1] : 'p'; }
+    function glow(layer) { var rgb = COL[modOf(layer)]; return '0 0 0 1.5px rgba(' + rgb + ',0.32), 0 26px 60px -26px rgba(' + rgb + ',0.5)'; }
+    var REST_SHADOW = '0 1px 2px rgba(18,19,23,0.04)';
+    var chipGlow = { kg: COL.g, ctx: COL.i, nq: COL.p, rcm: COL.o };
+
+    // Resting state: everything visible but subdued; spine undrawn.
+    var prog = { v: 0 };
+    function setSpine() { stack.style.setProperty('--arch-progress', prog.v.toFixed(3)); }
+    setSpine();
+    gsap.set(allLayers, { opacity: 0.5, boxShadow: REST_SHADOW });
+    if (engineChips.length) gsap.set(engineChips, { opacity: 1, scale: 1 });
+
+    // Traveling pulses along the spine (continuous, subtle, paused offscreen).
+    var travel = Math.max(120, stack.offsetHeight - 40);
+    var pulses = [0, 1].map(function () {
+      var d = document.createElement('span');
+      d.setAttribute('aria-hidden', 'true');
+      d.style.cssText = 'position:absolute;left:24px;top:0;width:9px;height:9px;border-radius:50%;background:#7B2CBF;box-shadow:0 0 10px rgba(123,44,191,0.55);opacity:0;z-index:2;pointer-events:none;';
+      stack.appendChild(d); return d;
+    });
+    var pulseTl = gsap.timeline({ repeat: -1, paused: true });
+    pulses.forEach(function (d, i) {
+      var at = i * 1.7;
+      pulseTl.fromTo(d, { y: travel, opacity: 0 }, { y: 18, duration: 3.2, ease: 'none' }, at)
+        .to(d, { opacity: 0.85, duration: 0.4 }, at)
+        .to(d, { opacity: 0, duration: 0.5 }, at + 2.7);
+    });
+    var pulseTrig = ScrollTrigger.create({
+      trigger: stack, start: 'top bottom', end: 'bottom top',
+      onToggle: function (self) { self.isActive ? pulseTl.play() : pulseTl.pause(); }
+    });
+
+    var REST = 0.4, SEEN = 0.78, FOCUS = 1;
+    function focusLayer(layer, at) {
+      tl.to(layer, { opacity: FOCUS, scale: 1.022, boxShadow: glow(layer), duration: 0.45 }, at);
+    }
+    function chip(key, at) {
+      if (!chips[key]) return;
+      tl.to(chips[key], { scale: 1.07, opacity: 1, boxShadow: '0 0 0 1.5px rgba(' + chipGlow[key] + ',0.6), 0 12px 26px -10px rgba(' + chipGlow[key] + ',0.5)', duration: 0.4 }, at);
+      var others = engineChips.filter(function (c) { return c !== chips[key]; });
+      tl.to(others, { scale: 1, opacity: 0.5, boxShadow: 'none', duration: 0.4 }, at);
+    }
+
+    var tl = gsap.timeline({
+      defaults: { ease: 'power2.inOut' },
+      scrollTrigger: { trigger: stack, start: 'top 14%', end: '+=2800', pin: true, scrub: 1, anticipatePin: 1, invalidateOnRefresh: true }
+    });
+
+    // P1 — pinned resting hold.
+    tl.to({}, { duration: 0.45 });
+
+    // P2 — Enterprise Signals.
+    tl.addLabel('p2');
+    focusLayer(L.src, 'p2');
+    tl.to([L.bb, L.eng, L.wf, L.out], { opacity: REST, boxShadow: REST_SHADOW, duration: 0.45 }, 'p2');
+    tl.to(prog, { v: 0.16, duration: 0.6, onUpdate: setSpine }, 'p2');
+
+    // P3 — Knowledge Graph (engines layer steps forward).
+    tl.addLabel('p3', '>');
+    focusLayer(L.eng, 'p3');
+    tl.to(L.src, { opacity: SEEN, boxShadow: REST_SHADOW, scale: 1, duration: 0.45 }, 'p3');
+    if (L.bb) tl.to(L.bb, { opacity: SEEN, duration: 0.45 }, 'p3');
+    chip('kg', 'p3');
+    tl.to(prog, { v: 0.42, duration: 0.6, onUpdate: setSpine }, 'p3');
+
+    // P4 — Context Graph.
+    tl.addLabel('p4', '>'); chip('ctx', 'p4');
+    tl.to(prog, { v: 0.56, duration: 0.5, onUpdate: setSpine }, 'p4');
+
+    // P5 — NeuroQL.
+    tl.addLabel('p5', '>'); chip('nq', 'p5');
+    tl.to(prog, { v: 0.7, duration: 0.5, onUpdate: setSpine }, 'p5');
+
+    // P6 — RCM (workflows bridge forward).
+    tl.addLabel('p6', '>'); chip('rcm', 'p6');
+    if (L.wf) tl.to(L.wf, { opacity: SEEN, duration: 0.45 }, 'p6');
+    tl.to(prog, { v: 0.84, duration: 0.5, onUpdate: setSpine }, 'p6');
+
+    // P7 — Outcomes + full chain illuminated.
+    tl.addLabel('p7', '>');
+    focusLayer(L.out, 'p7');
+    tl.to(allLayers, { opacity: FOCUS, duration: 0.5 }, 'p7');
+    if (engineChips.length) tl.to(engineChips, { opacity: 1, scale: 1, boxShadow: 'none', duration: 0.45 }, 'p7');
+    tl.to(prog, { v: 1, duration: 0.6, onUpdate: setSpine }, 'p7');
+
+    // P8 — hold the full chain, then release (unpin at timeline end).
+    tl.to({}, { duration: 0.5 });
+
+    return function () {
+      pulseTl.kill(); pulseTrig.kill();
+      pulses.forEach(function (d) { if (d.parentNode) d.parentNode.removeChild(d); });
+      stack.classList.remove('gx-arch-story');
+      gsap.set(allLayers, { clearProps: 'opacity,transform,boxShadow' });
+      if (engineChips.length) gsap.set(engineChips, { clearProps: 'opacity,transform,boxShadow' });
+      stack.style.setProperty('--arch-progress', '1');
+    };
   }
 
   /* Platform architecture spine — visible by default; draws + lifts on enter. */
