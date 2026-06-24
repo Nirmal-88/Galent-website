@@ -254,6 +254,14 @@
     var content = hero.querySelector('.hero-content');
     if (!stage || !wrap || !logo) return function () {};
 
+    // 3D tilt layer between the wrap and the image (so float / tilt / scroll
+    // transforms live on separate elements and never fight).
+    var tilt = wrap.querySelector('.hero-logo-tilt');
+    if (!tilt) {
+      tilt = document.createElement('div'); tilt.className = 'hero-logo-tilt';
+      wrap.insertBefore(tilt, logo); tilt.appendChild(logo);
+    }
+
     var NS = 'http://www.w3.org/2000/svg';
     var svg = document.createElementNS(NS, 'svg');
     svg.setAttribute('class', 'hero-net'); svg.setAttribute('aria-hidden', 'true');
@@ -309,10 +317,28 @@
     // intelligence network radiating from the logo — replacing the old particles.
     var drawIn = gsap.to(net, { p: 1, duration: 1.4, ease: 'power2.out', delay: 0.7, onUpdate: applyNet });
 
-    // Idle float — gentle, on the IMAGE (the wrap handles scroll transforms,
-    // so the two never fight).
-    var fy = gsap.to(logo, { y: -16, duration: 3.6, ease: 'sine.inOut', repeat: -1, yoyo: true });
-    var fr = gsap.to(logo, { rotation: 2.2, duration: 5.4, ease: 'sine.inOut', repeat: -1, yoyo: true });
+    // Organic, multi-axis idle float on the IMAGE — the mark drifts like a
+    // living object (overlapping sine loops at different periods).
+    var f1 = gsap.to(logo, { y: -18, duration: 3.8, ease: 'sine.inOut', repeat: -1, yoyo: true });
+    var f2 = gsap.to(logo, { rotation: 2.6, duration: 6.2, ease: 'sine.inOut', repeat: -1, yoyo: true });
+    var f3 = gsap.to(logo, { scale: 1.045, duration: 4.8, ease: 'sine.inOut', repeat: -1, yoyo: true });
+
+    // Cursor-driven 3D tilt — the mark behaves like a floating object in space
+    // (Ciklum-style depth/immersion). Fine pointers only; smooth via quickTo.
+    var tiltCleanup = function () {};
+    if (window.matchMedia && window.matchMedia('(pointer: fine)').matches) {
+      var rx = gsap.quickTo(tilt, 'rotationX', { duration: 0.7, ease: 'power3' });
+      var ry = gsap.quickTo(tilt, 'rotationY', { duration: 0.7, ease: 'power3' });
+      var onMove = function (e) {
+        var r = hero.getBoundingClientRect();
+        ry(((e.clientX - r.left) / r.width - 0.5) * 18);
+        rx((0.5 - (e.clientY - r.top) / r.height) * 15);
+      };
+      var onLeave = function () { rx(0); ry(0); };
+      hero.addEventListener('pointermove', onMove);
+      hero.addEventListener('pointerleave', onLeave);
+      tiltCleanup = function () { hero.removeEventListener('pointermove', onMove); hero.removeEventListener('pointerleave', onLeave); };
+    }
 
     // Scroll evolution: mark scales + lights up, network radiates, copy lifts.
     var tl = gsap.timeline({ scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: 1 } });
@@ -344,11 +370,12 @@
     });
 
     return function () {
-      fy.kill(); fr.kill(); drawIn.kill(); pulseTl.kill(); pulseTrig.kill();
+      f1.kill(); f2.kill(); f3.kill(); tiltCleanup(); drawIn.kill(); pulseTl.kill(); pulseTrig.kill();
       ScrollTrigger.removeEventListener('refresh', layout);
       window.removeEventListener('load', onResize);
       if (svg.parentNode) svg.parentNode.removeChild(svg);
       gsap.set(logo, { clearProps: 'transform,filter' });
+      gsap.set(tilt, { clearProps: 'transform' });
       gsap.set(wrap, { clearProps: 'transform' });
     };
   }

@@ -8911,6 +8911,14 @@ html.gsap-smooth .cta-card:not(.gx-active-fx) .cta-spark {
   width: clamp(190px, 25vw, 320px);
   z-index: 1;
   pointer-events: none;
+  perspective: 1100px; /* depth for the cursor-driven 3D tilt */
+  will-change: transform;
+}
+/* Tilt layer (3D, cursor-reactive) — wraps the mark so float (image) and
+   tilt (this layer) and scroll-scale (the outer wrap) never fight. */
+.hero-logo-tilt {
+  width: 100%;
+  transform-style: preserve-3d;
   will-change: transform;
 }
 /* Readability scrim: darkens the upper (copy) area over the mark while leaving
