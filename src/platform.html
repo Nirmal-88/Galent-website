@@ -185,10 +185,6 @@
             </div>
             <svg class="engine-diagram-svg" aria-hidden="true"></svg>
             <div class="engine-hub">GalentAI</div>
-            <button class="engine-node" data-engine="neuroql" data-pos="top" aria-pressed="false">
-              <span class="code">3.1</span>
-              <span class="name">NeuroQL</span>
-            </button>
             <button class="engine-node" data-engine="rcm" data-pos="right" aria-pressed="false">
               <span class="code">3.2</span>
               <span class="name">RCM</span>
@@ -213,20 +209,6 @@
         </div>
 
         <div class="engine-cards" data-reveal data-stagger>
-          <article class="engine-deep-card engine-deep-card--purple">
-            <span class="engine-deep-card__code">3.1 · Natural Language → Code · Patent Pending</span>
-            <h3 class="engine-deep-card__name">NeuroQL Engine</h3>
-            <p class="engine-deep-card__desc">The deterministic execution engine. AmbientAI monitors the execution environment in real time — knowing what data is relevant, when, and why. It feeds a MicroPrompt architecture that breaks complex tasks into sequential queries under 2,000 tokens each. The output is TONIC — a compact, schema-driven language that encodes AI's operating contract: token-efficient, versioned, deterministically compiled across teams, runs, and clients.</p>
-            <ul class="engine-deep-card__bullets">
-              <li>AmbientAI: phase, persona, dependencies, business rules — loaded precisely</li>
-              <li>MicroPrompts: sequential, each under 2,000 tokens</li>
-              <li>TONIC: schema-driven, versioned, compiled</li>
-              <li>70% fewer context window failures</li>
-              <li>Full chain-of-reasoning audit trail</li>
-              <li>4-tier memory: execution, episodic, semantic, principle</li>
-            </ul>
-          </article>
-
           <article class="engine-deep-card engine-deep-card--orange">
             <span class="engine-deep-card__code">3.2 · Runtime Governance · Patent Pending</span>
             <h3 class="engine-deep-card__name">RCM Engine — Reasoning &amp; Compliance Management</h3>
@@ -549,36 +531,6 @@
 
     // Engine data — populates the detail panel when a node is clicked.
     const ENGINES = {
-      neuroql: {
-        code: '3.1 &middot; Natural Language &rarr; Code &middot; Patent Pending',
-        name: 'NeuroQL Engine',
-        description: "The deterministic execution engine. AmbientAI monitors the execution environment in real time — knowing what data is relevant, when, and why. It feeds a MicroPrompt architecture that breaks complex tasks into sequential queries under 2,000 tokens each. The output is TONIC — a compact, schema-driven language that encodes AI's operating contract: token-efficient, versioned, deterministically compiled across teams, runs, and clients.",
-        bullets: [
-          'AmbientAI: phase, persona, dependencies, business rules — loaded precisely',
-          'MicroPrompts: sequential, each under 2,000 tokens',
-          'TONIC: schema-driven, versioned, compiled',
-          '70% fewer context window failures',
-          'Full chain-of-reasoning audit trail',
-          '4-tier memory: execution, episodic, semantic, principle'
-        ],
-        mockup: `
-          <div class="mockup-window">
-            <div class="titlebar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label">neuroql · plan.run</span></div>
-            <div class="content" style="padding: 0;">
-              <div style="padding: var(--space-md) var(--space-md) 0;">
-                <span class="mock-pill">PLAN</span><span class="mock-pill" style="background:var(--brand-green-soft);color:var(--brand-green-deep);">RUNNING</span>
-              </div>
-              <div class="signal-wrap">
-                <canvas data-galent-anim="signal" aria-hidden="true"></canvas>
-              </div>
-              <div style="padding: 6px var(--space-md) var(--space-md);">
-                <div class="mock-line"></div>
-                <div class="mock-line medium"></div>
-                <div class="mock-line short"></div>
-              </div>
-            </div>
-          </div>`
-      },
       rcm: {
         code: '3.2 &middot; Runtime Governance &middot; Patent Pending',
         name: 'RCM Engine — Reasoning &amp; Compliance Management',

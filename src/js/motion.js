@@ -742,13 +742,12 @@
     var svg = diagram.querySelector('.engine-diagram-svg');
     var hub = diagram.querySelector('.engine-hub');
     var n = {
-      neuroql: diagram.querySelector('.engine-node[data-engine="neuroql"]'),
       rcm:     diagram.querySelector('.engine-node[data-engine="rcm"]'),
       kg:      diagram.querySelector('.engine-node[data-engine="kg"]'),
       context: diagram.querySelector('.engine-node[data-engine="context"]')
     };
-    if (!n.neuroql || !n.rcm || !n.kg || !n.context) return function () {};
-    var all = [n.neuroql, n.rcm, n.kg, n.context];
+    if (!n.rcm || !n.kg || !n.context) return function () {};
+    var all = [n.rcm, n.kg, n.context];
     var section = diagram.closest('section');
     if (section) section.classList.add('cv-visible');
 
@@ -769,12 +768,12 @@
     var DIM = 0.32, SEEN = 0.62;
 
     // Connector progress (0..1) per engine; applied to the existing <line>s.
-    // Line DOM order matches node order: neuroql, rcm, kg, context.
-    var cp = { neuroql: 0, rcm: 0, kg: 0, context: 0 };
+    // Line DOM order matches node order: rcm, kg, context.
+    var cp = { rcm: 0, kg: 0, context: 0 };
     function applyConnectors() {
       if (!svg) return;
       var lines = svg.querySelectorAll('line');
-      var vals = [cp.neuroql, cp.rcm, cp.kg, cp.context];
+      var vals = [cp.rcm, cp.kg, cp.context];
       for (var i = 0; i < lines.length; i++) {
         var ln = lines[i], v = vals[i] || 0;
         var x1 = +ln.getAttribute('x1'), y1 = +ln.getAttribute('y1');
@@ -786,7 +785,7 @@
         ln.setAttribute('stroke-dashoffset', (len * (1 - v)).toFixed(1));
         ln.setAttribute('stroke-opacity', (0.6 * v).toFixed(3));
       }
-      fill.style.transform = 'scaleX(' + Math.max(cp.neuroql, cp.rcm, cp.kg, cp.context).toFixed(3) + ')';
+      fill.style.transform = 'scaleX(' + Math.max(cp.rcm, cp.kg, cp.context).toFixed(3) + ')';
     }
 
     gsap.set(all, { opacity: 1, filter: 'none' });
@@ -807,34 +806,27 @@
     // Phase 2 — Knowledge Graph: focus + first connection grows.
     tl.addLabel('kg')
       .to(n.kg, { opacity: 1, filter: GLOW, duration: 0.5 }, 'kg')
-      .to([n.context, n.neuroql, n.rcm], { opacity: DIM, filter: 'none', duration: 0.5 }, 'kg')
+      .to([n.context, n.rcm], { opacity: DIM, filter: 'none', duration: 0.5 }, 'kg')
       .to(cp, { kg: 1, duration: 0.8 }, 'kg');
 
     // Phase 3 — Context Graph: connections animate (second link grows).
     tl.addLabel('context', '>')
       .to(n.context, { opacity: 1, filter: GLOW, duration: 0.5 }, 'context')
       .to(n.kg, { opacity: SEEN, filter: 'none', duration: 0.5 }, 'context')
-      .to([n.neuroql, n.rcm], { opacity: DIM, duration: 0.5 }, 'context')
+      .to(n.rcm, { opacity: DIM, duration: 0.5 }, 'context')
       .to(cp, { context: 1, duration: 0.8 }, 'context');
 
-    // Phase 4 — NeuroQL: network expands (third link grows).
-    tl.addLabel('neuroql', '>')
-      .to(n.neuroql, { opacity: 1, filter: GLOW, duration: 0.5 }, 'neuroql')
-      .to([n.kg, n.context], { opacity: SEEN, filter: 'none', duration: 0.5 }, 'neuroql')
-      .to(n.rcm, { opacity: DIM, duration: 0.5 }, 'neuroql')
-      .to(cp, { neuroql: 1, duration: 0.8 }, 'neuroql');
-
-    // Phase 5 — RCM: orchestration becomes visible (full network + hub).
+    // Phase 4 — RCM: orchestration becomes visible (full network + hub).
     tl.addLabel('rcm', '>')
       .to(n.rcm, { opacity: 1, filter: GLOW, duration: 0.5 }, 'rcm')
-      .to([n.kg, n.context, n.neuroql], { opacity: SEEN, filter: 'none', duration: 0.5 }, 'rcm')
+      .to([n.kg, n.context], { opacity: SEEN, filter: 'none', duration: 0.5 }, 'rcm')
       .to(cp, { rcm: 1, duration: 0.8 }, 'rcm');
     if (hub) tl.to(hub, { filter: GLOW, duration: 0.6 }, 'rcm');
 
-    // Phase 6 — all capabilities visible together, then unpin.
+    // Phase 5 — all capabilities visible together, then unpin.
     tl.addLabel('all', '>')
       .to(all, { opacity: 1, filter: 'none', duration: 0.6 }, 'all')
-      .to(cp, { neuroql: 1, rcm: 1, kg: 1, context: 1, duration: 0.5 }, 'all');
+      .to(cp, { rcm: 1, kg: 1, context: 1, duration: 0.5 }, 'all');
     if (hub) tl.to(hub, { filter: 'none', duration: 0.5 }, 'all');
     tl.to({}, { duration: 0.5 }); // hold the finale before releasing the pin
 
