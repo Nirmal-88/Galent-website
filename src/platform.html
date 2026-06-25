@@ -166,7 +166,45 @@
           Each engine solves a specific failure mode in conventional AI-assisted delivery. Together they are deterministic, compliant, and persistent across the full programme lifecycle.
         </p>
 
-        <div class="engine-cards" data-reveal data-stagger style="margin-top: var(--space-3xl);">
+        <div id="engine-diagram-root" style="margin-top: var(--space-3xl);" data-reveal>
+          <div class="engine-diagram">
+            <div class="engine-fx" aria-hidden="true">
+              <div class="engine-stars">
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span>
+              </div>
+              <div class="engine-ring engine-ring--1"></div>
+              <div class="engine-ring engine-ring--2"></div>
+              <div class="engine-ring engine-ring--3"></div>
+              <div class="engine-sweep"></div>
+              <div class="engine-particle engine-particle--top"></div>
+              <div class="engine-particle engine-particle--right"></div>
+              <div class="engine-particle engine-particle--bottom"></div>
+              <div class="engine-particle engine-particle--left"></div>
+            </div>
+            <svg class="engine-diagram-svg" aria-hidden="true"></svg>
+            <div class="engine-hub">GalentAI</div>
+            <button class="engine-node" data-engine="neuroql" data-pos="top" aria-pressed="false">
+              <span class="code">3.1</span>
+              <span class="name">NeuroQL</span>
+            </button>
+            <button class="engine-node" data-engine="rcm" data-pos="right" aria-pressed="false">
+              <span class="code">3.2</span>
+              <span class="name">RCM</span>
+            </button>
+            <button class="engine-node" data-engine="kg" data-pos="bottom" aria-pressed="false">
+              <span class="code">3.3</span>
+              <span class="name">Knowledge Graph</span>
+            </button>
+            <button class="engine-node" data-engine="context" data-pos="left" aria-pressed="false">
+              <span class="code">3.4</span>
+              <span class="name">Context Graph</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="engine-cards" data-reveal data-stagger>
           <article class="engine-deep-card engine-deep-card--purple">
             <span class="engine-deep-card__code">3.1 · Natural Language → Code · Patent Pending</span>
             <h3 class="engine-deep-card__name">NeuroQL Engine</h3>
@@ -501,6 +539,11 @@
     try { Galent.compass(document.getElementById('cv-compass')); } catch (e) { console.error('compass', e); }
     try { Galent.knowledgeGraph(document.getElementById('cv-knowledge-graph')); } catch (e) { console.error('knowledgeGraph', e); }
 
+    // Engine diagram — paints the hub→node connectors; motion.js animates them
+    // on scroll. The click-to-explore detail panel was removed, so no data map
+    // is needed (node clicks simply toggle their active state).
+    try { Galent.enginesDiagram(document.getElementById('engine-diagram-root'), {}); }
+    catch (e) { console.error('enginesDiagram', e); }
   </script>
 
   <script src="js/motion.js?v=engine-1" defer></script>
