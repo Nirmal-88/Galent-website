@@ -2417,18 +2417,20 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
 }
 
 /* ---- Sector photo tiles: full-bleed image + dark overlay + name ---- */
-.sector-tiles {
+/* ---- Industries bento (about page) — photo tiles in a varied grid.
+   Namespaced as .bento-* so it is fully isolated from the .sector-tile
+   editorial/bento rules used on the industries/home pages. ---- */
+.bento-industries {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(14px, 1.4vw, 20px);
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: clamp(150px, 15vw, 188px);
+  gap: clamp(12px, 1.1vw, 16px);
 }
-@media (max-width: 980px) { .sector-tiles { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 560px) { .sector-tiles { grid-template-columns: 1fr; } }
-
-.sector-tile {
+.bento-cell {
   position: relative;
   display: block;
-  aspect-ratio: 1 / 1;
+  grid-column: span 1;
+  grid-row: span 1;
   border-radius: 16px;
   overflow: hidden;
   text-decoration: none;
@@ -2437,14 +2439,14 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   box-shadow: 0 6px 18px -10px rgba(18,19,23,0.30);
   transition: transform .35s var(--ease-out), box-shadow .35s ease;
 }
-.sector-tile--wide {
-  grid-column: span 3;
-  aspect-ratio: 3 / 1;
-}
-@media (max-width: 980px) { .sector-tile--wide { grid-column: span 2; aspect-ratio: 2.4 / 1; } }
-@media (max-width: 560px) { .sector-tile--wide { grid-column: span 1; aspect-ratio: 1.6 / 1; } }
+/* Bento sizing — feature tile (Tech) leads, GCC spans the full closing row. */
+.bento-cell:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+.bento-cell:nth-child(2) { grid-column: span 2; }
+.bento-cell:nth-child(5) { grid-column: span 2; }
+.bento-cell:nth-child(6) { grid-column: span 2; }
+.bento-cell--wide { grid-column: 1 / -1; }
 
-.sector-tile__img {
+.bento-cell__img {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -2452,38 +2454,56 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   object-fit: cover;
   transition: transform .9s var(--ease-out);
 }
-.sector-tile__overlay {
+.bento-cell__veil {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(18,19,23,0) 0%, rgba(18,19,23,0) 35%, rgba(18,19,23,0.55) 60%, rgba(18,19,23,0.95) 100%);
+    linear-gradient(180deg, rgba(18,19,23,0) 0%, rgba(18,19,23,0) 38%, rgba(18,19,23,0.50) 62%, rgba(18,19,23,0.92) 100%);
   transition: background .35s ease;
 }
-.sector-tile__caption {
+.bento-cell__label {
   position: absolute;
   left: 0; right: 0; bottom: 0;
-  padding: clamp(20px, 2.2vw, 28px) clamp(22px, 2.4vw, 30px);
+  padding: clamp(16px, 1.6vw, 24px) clamp(18px, 1.8vw, 26px);
   z-index: 2;
 }
-.sector-tile__caption h4 {
+.bento-cell__label h4 {
   margin: 0;
-  font-size: clamp(20px, 1.8vw, 24px);
+  font-size: clamp(17px, 1.5vw, 22px);
   font-weight: 700;
   letter-spacing: -0.3px;
   color: #FFFFFF;
   line-height: 1.2;
   text-shadow: 0 2px 12px rgba(0,0,0,0.85), 0 1px 2px rgba(0,0,0,0.7);
 }
-.sector-tile:hover {
+.bento-cell:hover {
   transform: translateY(-3px);
   box-shadow: 0 24px 50px -22px rgba(18,19,23,0.45);
 }
-.sector-tile:hover .sector-tile__img {
-  transform: scale(1.06);
-}
-.sector-tile:hover .sector-tile__overlay {
+.bento-cell:hover .bento-cell__img { transform: scale(1.06); }
+.bento-cell:hover .bento-cell__veil {
   background:
-    linear-gradient(180deg, rgba(18,19,23,0) 0%, rgba(18,19,23,0) 30%, rgba(18,19,23,0.65) 55%, rgba(18,19,23,1) 100%);
+    linear-gradient(180deg, rgba(18,19,23,0) 0%, rgba(18,19,23,0) 30%, rgba(18,19,23,0.62) 55%, rgba(18,19,23,1) 100%);
+}
+
+/* Tablet — feature + wide go full width; the rest pair up two-per-row. */
+@media (max-width: 860px) {
+  .bento-industries { grid-template-columns: repeat(2, 1fr); grid-auto-rows: clamp(140px, 27vw, 180px); }
+  .bento-cell:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+  .bento-cell:nth-child(2),
+  .bento-cell:nth-child(5) { grid-column: span 1; }
+  .bento-cell:nth-child(6) { grid-column: span 2; }
+  .bento-cell--wide { grid-column: 1 / -1; }
+}
+/* Mobile — single column stack. */
+@media (max-width: 520px) {
+  .bento-industries { grid-template-columns: 1fr; grid-auto-rows: clamp(150px, 42vw, 200px); }
+  .bento-cell,
+  .bento-cell:nth-child(1),
+  .bento-cell:nth-child(2),
+  .bento-cell:nth-child(5),
+  .bento-cell:nth-child(6),
+  .bento-cell--wide { grid-column: 1 / -1; grid-row: span 1; }
 }
 
 /* ---- Service categories: icon + text 4-up grid ---- */
