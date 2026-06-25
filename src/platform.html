@@ -155,8 +155,8 @@
       </div>
     </section>
 
-    <!-- DARK BAND — How It Works / 4 engines (interactive) -->
-    <section class="panel-dark" style="padding: var(--space-4xl) 0;">
+    <!-- DARK BAND — How It Works / 4 engines -->
+    <section class="panel-dark" id="engines" style="padding: var(--space-4xl) 0;">
       <div class="container">
         <div class="section-divider" data-reveal>
           <span class="num">HOW IT WORKS</span>
@@ -166,49 +166,21 @@
           Each engine solves a specific failure mode in conventional AI-assisted delivery. Together they are deterministic, compliant, and persistent across the full programme lifecycle.
         </p>
 
-        <div id="engine-diagram-root" style="margin-top: var(--space-3xl);" data-reveal>
-          <div class="engine-diagram" id="engines">
-            <div class="engine-fx" aria-hidden="true">
-              <div class="engine-stars">
-                <span></span><span></span><span></span><span></span><span></span>
-                <span></span><span></span><span></span><span></span><span></span>
-                <span></span><span></span>
-              </div>
-              <div class="engine-ring engine-ring--1"></div>
-              <div class="engine-ring engine-ring--2"></div>
-              <div class="engine-ring engine-ring--3"></div>
-              <div class="engine-sweep"></div>
-              <div class="engine-particle engine-particle--top"></div>
-              <div class="engine-particle engine-particle--right"></div>
-              <div class="engine-particle engine-particle--bottom"></div>
-              <div class="engine-particle engine-particle--left"></div>
-            </div>
-            <svg class="engine-diagram-svg" aria-hidden="true"></svg>
-            <div class="engine-hub">GalentAI</div>
-            <button class="engine-node" data-engine="rcm" data-pos="right" aria-pressed="false">
-              <span class="code">3.2</span>
-              <span class="name">RCM</span>
-            </button>
-            <button class="engine-node" data-engine="kg" data-pos="bottom" aria-pressed="false">
-              <span class="code">3.3</span>
-              <span class="name">Knowledge Graph</span>
-            </button>
-            <button class="engine-node" data-engine="context" data-pos="left" aria-pressed="false">
-              <span class="code">3.4</span>
-              <span class="name">Context Graph</span>
-            </button>
-          </div>
+        <div class="engine-cards" data-reveal data-stagger style="margin-top: var(--space-3xl);">
+          <article class="engine-deep-card engine-deep-card--purple">
+            <span class="engine-deep-card__code">3.1 · Natural Language → Code · Patent Pending</span>
+            <h3 class="engine-deep-card__name">NeuroQL Engine</h3>
+            <p class="engine-deep-card__desc">The deterministic execution engine. AmbientAI monitors the execution environment in real time — knowing what data is relevant, when, and why. It feeds a MicroPrompt architecture that breaks complex tasks into sequential queries under 2,000 tokens each. The output is TONIC — a compact, schema-driven language that encodes AI's operating contract: token-efficient, versioned, deterministically compiled across teams, runs, and clients.</p>
+            <ul class="engine-deep-card__bullets">
+              <li>AmbientAI: phase, persona, dependencies, business rules — loaded precisely</li>
+              <li>MicroPrompts: sequential, each under 2,000 tokens</li>
+              <li>TONIC: schema-driven, versioned, compiled</li>
+              <li>70% fewer context window failures</li>
+              <li>Full chain-of-reasoning audit trail</li>
+              <li>4-tier memory: execution, episodic, semantic, principle</li>
+            </ul>
+          </article>
 
-          <div class="engine-detail" id="engine-detail" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); color: rgba(255,255,255,0.92);">
-            <!-- populated by JS -->
-          </div>
-
-          <p style="margin: var(--space-lg) auto 0; max-width: 60ch; text-align: center; color: rgba(255,255,255,0.55); font-size: 14px; font-family: var(--font-mono); letter-spacing: 0.4px;">
-            CLICK ANY ENGINE NODE TO EXPLORE
-          </p>
-        </div>
-
-        <div class="engine-cards" data-reveal data-stagger>
           <article class="engine-deep-card engine-deep-card--orange">
             <span class="engine-deep-card__code">3.2 · Runtime Governance · Patent Pending</span>
             <h3 class="engine-deep-card__name">RCM Engine — Reasoning &amp; Compliance Management</h3>
@@ -529,95 +501,6 @@
     try { Galent.compass(document.getElementById('cv-compass')); } catch (e) { console.error('compass', e); }
     try { Galent.knowledgeGraph(document.getElementById('cv-knowledge-graph')); } catch (e) { console.error('knowledgeGraph', e); }
 
-    // Engine data — populates the detail panel when a node is clicked.
-    const ENGINES = {
-      rcm: {
-        code: '3.2 &middot; Runtime Governance &middot; Patent Pending',
-        name: 'RCM Engine — Reasoning &amp; Compliance Management',
-        description: 'Neurosymbolic AI: neural understanding combined with symbolic rule enforcement. When a model proposes an action, the symbolic layer validates it against your business rules, compliance requirements, and architectural constraints — before execution. Not after incident review.',
-        bullets: [
-          'Closed loop: Sense → Propose → Validate → Execute → Learn → Adapt',
-          'Neural proposes — symbolic validates — output is deterministic',
-          '99%+ code accuracy via neurosymbolic validation',
-          'Compliance automation with full auditable proof',
-          'Zero hallucination-led deployment risk',
-          'Dual explainability: neural + symbolic, separately traceable'
-        ],
-        mockup: `
-          <div class="mockup-window">
-            <div class="titlebar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label">rcm · gates</span></div>
-            <div class="content">
-              <div style="display:flex;flex-direction:column;gap:6px;font-family:var(--font-mono);font-size:11px;">
-                <div style="display:flex;justify-content:space-between;padding:6px 8px;background:var(--brand-green-soft);border-radius:4px;color:var(--brand-green-deep);"><span>✓ security.posture</span><span>passed</span></div>
-                <div style="display:flex;justify-content:space-between;padding:6px 8px;background:var(--brand-green-soft);border-radius:4px;color:var(--brand-green-deep);"><span>✓ licence.compat</span><span>passed</span></div>
-                <div style="display:flex;justify-content:space-between;padding:6px 8px;background:var(--brand-green-soft);border-radius:4px;color:var(--brand-green-deep);"><span>✓ perf.budget</span><span>+2.1%</span></div>
-                <div style="display:flex;justify-content:space-between;padding:6px 8px;background:var(--brand-orange-soft);border-radius:4px;color:var(--brand-orange);"><span>! arch.constraint</span><span>review</span></div>
-                <div style="display:flex;justify-content:space-between;padding:6px 8px;background:var(--brand-green-soft);border-radius:4px;color:var(--brand-green-deep);"><span>✓ data.contract</span><span>passed</span></div>
-              </div>
-            </div>
-          </div>`
-      },
-      kg: {
-        code: '3.3 &middot; Organisational Intelligence',
-        name: 'Enterprise Knowledge Graph',
-        description: "Before any engagement executes, GalentAI builds the Knowledge Graph — a living, queryable map of your entire system ecosystem. Code, logs, data schemas, infrastructure, tickets, runbooks — ingested, continuously updated, always current. 'What breaks if we change this?' becomes a seconds-long query — not weeks of manual analysis.",
-        bullets: [
-          'Source code (AST), logs, data schemas, tickets, runbooks — all ingested',
-          'Functional map, architecture diagrams, deployment topology — generated',
-          '90% faster legacy code understanding',
-          'Blast-radius and impact analysis in seconds',
-          'Living documentation — eliminates SME dependency',
-          'Full temporal versioning and lineage tracking'
-        ],
-        mockup: `
-          <div class="mockup-window">
-            <div class="titlebar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label">kg · entities</span></div>
-            <div class="content">
-              <div class="mock-node-grid">
-                <div class="mock-node">service.payments</div>
-                <div class="mock-node">owner.team-α</div>
-                <div class="mock-node">data.pii</div>
-                <div class="mock-node">policy.pci-dss</div>
-                <div class="mock-node">contract.v3</div>
-                <div class="mock-node">runbook.failover</div>
-                <div class="mock-node">incident.2025-q4</div>
-                <div class="mock-node">decision.adr-042</div>
-                <div class="mock-node">budget.lat-p99</div>
-              </div>
-            </div>
-          </div>`
-      },
-      context: {
-        code: '3.4 &middot; Dependency Mapping &amp; Governance',
-        name: 'Context Graph',
-        description: 'The Knowledge Graph captures what exists. The Context Graph captures what should happen — the governing framework for every SDLC phase. Business rules buried in code, scattered across docs, or locked in tribal knowledge are extracted into structured epics. Every decision is recorded as a Decision Trace: what, why, who, when. Institutional memory that compounds across every sprint.',
-        bullets: [
-          'Governs all SDLC phases: architecture → design → dev → test → deploy → SRE',
-          'Business logic syndication from code, docs, tribal knowledge',
-          'Decision trace: what, why, who, when — full provenance',
-          '45ms context retrieval at the 95th percentile',
-          'Institutional memory compounding across every sprint',
-          'Knowledge Graph + Context Graph = context-driven SDLC'
-        ],
-        mockup: `
-          <div class="mockup-window">
-            <div class="titlebar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="label">context · trace</span></div>
-            <div class="content">
-              <div style="font-family:var(--font-mono);font-size:11px;line-height:1.7;color:var(--on-surface);">
-                <div><span style="color:var(--page-accent)">→</span> constraint: latency &lt; 80ms p99</div>
-                <div><span style="color:var(--page-accent)">→</span> decision: cache layer = redis-cluster</div>
-                <div><span style="color:var(--page-accent)">→</span> dep: existing-svc/auth-v2</div>
-                <div><span style="color:var(--page-accent)">→</span> policy: pii-encrypted-at-rest</div>
-                <div><span style="color:var(--page-accent)">→</span> rationale: ADR-042 (budget)</div>
-                <div><span style="color:var(--brand-green-deep)">✓</span> coherence: 1.00</div>
-              </div>
-            </div>
-          </div>`
-      }
-    };
-
-    try { Galent.enginesDiagram(document.getElementById('engine-diagram-root'), ENGINES); }
-    catch (e) { console.error('enginesDiagram', e); }
   </script>
 
   <script src="js/motion.js?v=engine-1" defer></script>
