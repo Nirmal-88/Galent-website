@@ -2622,31 +2622,20 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   width: 3px;
   border-radius: 2px;
   background: linear-gradient(180deg, var(--brand-orange) 0%, var(--brand-purple) 100%);
-  box-shadow: 0 0 18px rgba(255, 90, 31, 0.35);
-  transform: scaleY(1);
-  transform-origin: top center;
-}
-.galent-difference .gd-head.in::before {
-  animation: gdBarGrow 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-@keyframes gdBarGrow {
-  from { transform: scaleY(0); }
-  to   { transform: scaleY(1); }
 }
 .galent-difference .gd-head .section-num {
   display: inline-block;
   margin-bottom: clamp(16px, 1.8vw, 24px);
   color: var(--brand-orange);
-  letter-spacing: 0.18em;
 }
 .galent-difference .gd-headline {
   margin: 0;
   font-family: inherit;
   font-style: normal;
   font-weight: 600;
-  font-size: clamp(28px, 3.2vw, 44px);
-  line-height: 1.14;
-  letter-spacing: -0.8px;
+  font-size: clamp(26px, 2.8vw, 38px);
+  line-height: 1.18;
+  letter-spacing: -0.6px;
   color: var(--on-surface);
   text-wrap: balance;
 }
@@ -2655,37 +2644,18 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   margin: 0;
 }
 .galent-difference .gd-line--2 {
-  margin-top: clamp(10px, 0.9vw, 16px);
-  color: rgba(18,19,23,0.82);
+  margin-top: clamp(8px, 0.8vw, 12px);
+  color: rgba(18,19,23,0.78);
 }
-/* Obsolete terms — dimmed, with a gradient strike-through that draws in
-   when the head reveals (reads as "moving away from this"). */
 .galent-difference .gd-strike {
-  position: relative;
   font-style: normal;
   font-weight: 500;
-  color: rgba(18,19,23,0.42);
+  color: rgba(18,19,23,0.55);
   white-space: nowrap;
 }
-.galent-difference .gd-strike::after {
-  content: '';
-  position: absolute;
-  left: -2px; right: -2px;
-  top: 56%;
-  height: 2px;
-  border-radius: 2px;
-  background: linear-gradient(90deg, rgba(255,90,31,0.85) 0%, rgba(155,77,224,0.85) 100%);
-  transform: scaleX(1);
-  transform-origin: left center;
-}
-.galent-difference .gd-head.in .gd-strike::after {
-  animation: gdDrawIn 0.55s cubic-bezier(0.4, 0, 0.2, 1) 0.15s both;
-}
-/* Destination terms — gradient text with a soft glow and an underline that
-   draws in once on reveal and then stays put. */
 .galent-difference .gd-highlight {
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   background: linear-gradient(90deg, var(--brand-orange) 0%, #FF9B5C 100%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -2693,45 +2663,35 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   position: relative;
   white-space: nowrap;
   padding: 0 2px;
-  filter: drop-shadow(0 2px 10px rgba(255, 90, 31, 0.16));
 }
 .galent-difference .gd-highlight::after {
   content: '';
   position: absolute;
-  left: 0; right: 0; bottom: -3px;
-  height: 3px;
-  background: linear-gradient(90deg, var(--brand-orange) 0%, #FF9B5C 100%);
-  border-radius: 2px;
-  transform: scaleX(1);
+  left: 0; right: 0; bottom: -2px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--brand-orange) 0%, transparent 100%);
+  border-radius: 1px;
   transform-origin: left center;
-}
-.galent-difference .gd-head.in .gd-highlight::after {
-  animation: gdDrawIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
+  animation: gdUnderline 3.4s ease-in-out infinite;
 }
 .galent-difference .gd-highlight--accent {
   background: linear-gradient(90deg, #FF7634 0%, #C44BD8 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 2px 10px rgba(196, 75, 216, 0.18));
 }
 .galent-difference .gd-highlight--accent::after {
   background: linear-gradient(90deg, #FF7634 0%, #C44BD8 100%);
+  animation-delay: 1.2s;
 }
-.galent-difference .gd-head.in .gd-highlight--accent::after { animation-delay: 0.55s; }
 .galent-difference .gd-highlight--green {
   background: linear-gradient(90deg, #1ED197 0%, #6FE3B6 50%, #1ED197 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 2px 10px rgba(30, 209, 151, 0.18));
 }
 .galent-difference .gd-highlight--green::after {
   background: linear-gradient(90deg, #1ED197 0%, #6FE3B6 100%);
-}
-@keyframes gdDrawIn {
-  from { transform: scaleX(0); }
-  to   { transform: scaleX(1); }
 }
 
 /* Home-page variant of the Galent Difference head — no background panel,
@@ -2764,12 +2724,40 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   color: var(--on-surface-variant);
 }
 
+/* Centered variant of the Galent Difference head — no left accent bar;
+   kicker, headline and lede are balanced in the column. */
+.galent-difference.gd-center .gd-head {
+  padding-left: 0;
+  max-width: 64ch;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.galent-difference.gd-center .gd-head::before { display: none; }
+.galent-difference.gd-center .gd-head .section-num {
+  justify-content: center;
+  margin-bottom: clamp(18px, 2vw, 28px);
+}
+.galent-difference.gd-center .gd-head .section-num::after {
+  content: '';
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: var(--brand-orange);
+  opacity: 0.6;
+}
+.galent-difference.gd-center .gd-headline { line-height: 1.22; }
+.galent-difference.gd-center .gd-line--2 { margin-top: clamp(10px, 1vw, 16px); }
+.galent-difference.gd-center .gd-lede {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: clamp(20px, 2.2vw, 32px);
+  text-align: center;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .galent-difference .gd-orb,
-  .galent-difference .gd-head.in::before,
-  .galent-difference .gd-head.in .gd-strike::after,
-  .galent-difference .gd-head.in .gd-highlight::after { animation: none !important; }
-  .galent-difference .gd-strike::after,
+  .galent-difference .gd-highlight::after { animation: none !important; }
   .galent-difference .gd-highlight::after { transform: scaleX(1); opacity: 1; }
 }
 
