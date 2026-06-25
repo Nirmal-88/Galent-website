@@ -6690,7 +6690,20 @@ body[data-page^="service-"] .hero .cta-row { justify-content: center; }
    ================================================================ */
 body[data-page^="service-"] .hero {
   isolation: isolate;                       /* contain the cover image */
-  min-height: clamp(560px, 82vh, 860px);
+  min-height: clamp(520px, 76vh, 780px);
+  /* Center the overlaid content as one balanced block, with enough top
+     padding to clear the fixed nav so the headline is never crowded. */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: clamp(116px, 14vh, 176px);
+  padding-bottom: clamp(80px, 10vh, 132px);
+}
+body[data-page^="service-"] .hero-content {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
 }
 /* Banner is a direct child of .hero (moved out of .hero-content) and fills
    the entire section, sitting behind the text. */
