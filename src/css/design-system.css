@@ -2423,8 +2423,8 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
 .bento-industries {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: clamp(150px, 15vw, 188px);
-  gap: clamp(12px, 1.1vw, 16px);
+  grid-auto-rows: clamp(160px, 15vw, 212px);
+  gap: clamp(14px, 1.2vw, 20px);
 }
 .bento-cell {
   position: relative;
