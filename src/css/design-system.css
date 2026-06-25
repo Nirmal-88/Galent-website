@@ -5995,7 +5995,7 @@ body[data-page="home"] .scroll-chevron {
     radial-gradient(circle at 15% 95%,  rgba(30,209,151,0.22) 0%, transparent 60%),
     radial-gradient(circle at 88% 85%,  rgba(255,90,31,0.14) 0%, transparent 55%);
 }
-section#cta { padding-top: var(--space-4xl); padding-bottom: var(--space-4xl); }
+section#cta { padding-top: 0; padding-bottom: 0; }
 
 /* ---- PULSE + FLOW on the Platform engine diagram ---- */
 .engine-diagram-svg line {
@@ -7386,7 +7386,7 @@ body[data-page="home"] .scroll-chevron:hover {
  * ================================================================== */
 body[data-page^="service-"] main > section:not(.hero) { padding: clamp(32px, 3.6vw, 56px) 0; }
 body[data-page^="service-"] section#outcomes { padding-bottom: clamp(32px, 3.6vw, 56px) !important; }
-body[data-page^="service-"] section#cta { padding: clamp(40px, 4.2vw, 64px) 0; }
+body[data-page^="service-"] section#cta { padding: 0; }
 body[data-page^="service-"] .section-head { margin: 0 auto clamp(20px, 2.4vw, 36px); }
 /* The stat-strip below "Outcomes" doesn't need a giant top gap after the head */
 body[data-page^="service-"] .stat-strip { margin-top: 0; }
