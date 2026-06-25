@@ -5174,18 +5174,34 @@ body[data-page="home"] #services .svc li a:hover .meta { color: rgba(255, 255, 2
   background: #FFFFFF;
   border: 1px solid rgba(18, 19, 23, 0.07);
   border-radius: 18px;
-  padding: clamp(22px, 2vw, 28px);
   text-decoration: none;
   color: inherit;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  grid-template-areas: "chip . chev" "body body body";
-  column-gap: 14px;
-  row-gap: clamp(18px, 2vw, 26px);
+  display: flex;
+  flex-direction: column;
   min-height: 220px;
   overflow: hidden;
   transition: transform .35s var(--ease-out), border-color .35s ease, box-shadow .35s ease;
   box-shadow: 0 1px 2px rgba(18, 19, 23, 0.04);
+}
+/* Image banner across the card top (the existing photo asset; replaces the
+   icon chip). object-fit cover keeps it crisp at any card width. */
+.home-sector-card .sector-media {
+  position: relative;
+  display: block;
+  height: clamp(134px, 13.5vw, 172px);
+  overflow: hidden;
+  background: color-mix(in srgb, var(--sector-color) 16%, #0b0c10);
+}
+.home-sector-card .sector-media img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform .55s var(--ease-out);
+}
+.home-sector-card:hover .sector-media img { transform: scale(1.06); }
+.home-sector-card .sector-media::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--sector-color) 22%, transparent) 0%, transparent 42%);
+  border-bottom: 2px solid color-mix(in srgb, var(--sector-color) 60%, transparent);
 }
 /* Soft inner gradient wash — barely-there tint of the sector colour */
 .home-sector-card::before {
@@ -5201,17 +5217,9 @@ body[data-page="home"] #services .svc li a:hover .meta { color: rgba(255, 255, 2
   z-index: -1;
   transition: opacity .35s ease;
 }
-/* Sector-coloured hairline on the left edge — quiet, not a stripe */
-.home-sector-card::after {
-  content: "";
-  position: absolute;
-  left: 0; top: 18%; bottom: 18%;
-  width: 3px;
-  border-radius: 0 3px 3px 0;
-  background: var(--sector-color, var(--brand-purple));
-  opacity: 0.55;
-  transition: opacity .35s ease, top .35s var(--ease-out), bottom .35s var(--ease-out);
-}
+/* Left hairline removed — the image banner + its sector-coloured bottom border
+   now carry the sector accent. */
+.home-sector-card::after { display: none; }
 .home-sector-card:hover {
   transform: translateY(-4px);
   border-color: color-mix(in srgb, var(--sector-color) 35%, rgba(18,19,23,0.08));
@@ -5238,18 +5246,24 @@ body[data-page="home"] #services .svc li a:hover .meta { color: rgba(255, 255, 2
 }
 .home-sector-card .num-chip svg { width: 19px; height: 19px; display: block; }
 
-/* Chevron — circular, sits in the top-right, slides on hover */
+/* Chevron — floats over the image banner, top-right (frosted so it reads on
+   the photo); slides on hover. */
 .home-sector-card .card-chev {
-  grid-area: chev;
-  align-self: start;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   border-radius: 999px;
-  color: var(--on-surface);
-  background: rgba(18, 19, 23, 0.04);
+  color: #FFFFFF;
+  background: rgba(10, 11, 16, 0.42);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   transition: background .25s ease, color .25s ease, transform .35s var(--ease-out);
 }
 .home-sector-card:hover .card-chev {
@@ -5259,7 +5273,10 @@ body[data-page="home"] #services .svc li a:hover .meta { color: rgba(255, 255, 2
 }
 
 /* Body */
-.home-sector-card .sector-body { grid-area: body; display: flex; flex-direction: column; gap: 8px; }
+.home-sector-card .sector-body {
+  display: flex; flex-direction: column; gap: 8px; flex: 1;
+  padding: clamp(18px, 1.7vw, 24px) clamp(20px, 1.8vw, 26px) clamp(20px, 1.9vw, 26px);
+}
 .home-sector-card h4 {
   margin: 0;
   font-size: clamp(19px, 1.5vw, 22px);
@@ -5279,13 +5296,7 @@ body[data-page="home"] #services .svc li a:hover .meta { color: rgba(255, 255, 2
 /* Featured tile — GCC #07 spans the full row as a wider banner */
 .home-sector-card--feature {
   grid-column: 1 / -1;
-  min-height: 200px;
-  padding: clamp(26px, 2.2vw, 34px) clamp(28px, 2.4vw, 40px);
-  grid-template-areas: "chip body chev";
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  row-gap: 0;
-  column-gap: clamp(20px, 2vw, 32px);
+  min-height: 240px;
 }
 .home-sector-card--feature .sector-body { gap: 6px; }
 .home-sector-card--feature h4 { font-size: clamp(22px, 1.9vw, 28px); }
@@ -5298,9 +5309,6 @@ body[data-page="home"] #services .svc li a:hover .meta { color: rgba(255, 255, 2
   color: var(--sector-color, var(--brand-purple));
   margin-bottom: 4px;
   display: inline-block;
-}
-@media (max-width: 620px) {
-  .home-sector-card--feature { grid-template-areas: "chip . chev" "body body body"; row-gap: 22px; }
 }
 
 /* Outcomes section signal background container */
