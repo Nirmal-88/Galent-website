@@ -571,16 +571,15 @@
       gsap.set(layers, { autoAlpha: 0.3, y: 8 });
       stack.style.setProperty('--arch-progress', '0');
 
+      // No pin / no scrub — the section scrolls naturally like every other
+      // one; the layers simply colour in (top→bottom) once, on enter. This
+      // removes the scroll-jacking "wait" while keeping the staged reveal.
       var tl = gsap.timeline({
         defaults: { ease: 'power2.inOut' },
         scrollTrigger: {
           trigger: stack,
-          start: 'top 60%',
-          end: '+=1600',
-          pin: true,
-          scrub: 1,
-          anticipatePin: 1,
-          invalidateOnRefresh: true
+          start: 'top 72%',
+          toggleActions: 'play none none none'
         }
       });
 
