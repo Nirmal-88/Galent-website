@@ -1304,6 +1304,19 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   pointer-events: none;
 }
 .cta-card > * { position: relative; z-index: 1; }
+/* Balanced, centred content block; lede constrained to a readable width so it
+   doesn't sprawl across the full panel. */
+.cta-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.cta-card .t-body-lg {
+  max-width: 56ch;
+  margin-left: auto;
+  margin-right: auto;
+}
 .cta-card .badge { background: rgba(255,255,255,0.10); color: rgba(255,255,255,0.86); margin-bottom: var(--space-lg); }
 .cta-card .badge .dot { background: var(--brand-purple); }
 .cta-card .t-h1 { color: var(--surface); max-width: 18ch; margin: 0 auto var(--space-lg); }
