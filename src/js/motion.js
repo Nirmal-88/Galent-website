@@ -423,12 +423,15 @@
     if (!left || !right) return;
     section.classList.add('cv-visible');
     var leftItems = left.querySelectorAll('li');
-    gsap.set(left,  { xPercent: -4 });
-    gsap.set(right, { xPercent: 4 });
-    gsap.timeline({ scrollTrigger: { trigger: section, start: 'top top', end: '+=110%', pin: true, scrub: 1, anticipatePin: 1 } })
-      .to(left,  { xPercent: 0, ease: 'power2.out' }, 0)
-      .to(right, { xPercent: 0, ease: 'power2.out' }, 0)
-      .to(leftItems, { opacity: 0.5, duration: 0.4, stagger: 0.06 }, 0.5);
+    // No pin / no scrub — a one-time, non-blocking entrance as the card comes
+    // into view, so scrolling stays smooth. The conventional (left) column
+    // settles dimmed to contrast with how Galent delivers.
+    gsap.set([left, right], { xPercent: 0 });
+    var trigger = section.querySelector('.compare-card') || section;
+    gsap.timeline({ scrollTrigger: { trigger: trigger, start: 'top 82%', toggleActions: 'play none none none' } })
+      .from(left,  { xPercent: -3, autoAlpha: 0.4, duration: 0.5, ease: 'power2.out' }, 0)
+      .from(right, { xPercent: 3, autoAlpha: 0.4, duration: 0.5, ease: 'power2.out' }, 0.05)
+      .to(leftItems, { opacity: 0.5, duration: 0.4, stagger: 0.05 }, 0.3);
   }
 
   /* ==========================================================================
