@@ -452,7 +452,7 @@ section { padding: clamp(56px, 6.5vw, 96px) 0; }
   position: relative;
   /* Generous top padding clears the sticky nav and gives the headline room
      to breathe; content stays vertically centred in the remaining space. */
-  padding: clamp(104px, 12vh, 156px) var(--gutter) clamp(56px, 8vw, 100px);
+  padding: clamp(152px, 18vh, 232px) var(--gutter) clamp(56px, 8vw, 100px);
   text-align: center;
   overflow: hidden;
   /* Compact hero — clamps between 460px (small screens), 68vh (preferred),
@@ -5779,7 +5779,7 @@ body[data-page="home"] .hero {
   /* Centred content with clear nav headroom (the badge that used to sit
      under the nav has been removed, so the headline must not crowd the top). */
   min-height: clamp(520px, 74vh, 760px);
-  padding-top: clamp(104px, 12vh, 156px);
+  padding-top: clamp(152px, 18vh, 232px);
   align-items: center;
   padding-bottom: clamp(56px, 8vw, 100px);
 }
