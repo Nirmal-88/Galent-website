@@ -1287,8 +1287,8 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   margin-right: -50vw;
   padding-top: clamp(60px, 9vw, 110px);
   padding-bottom: clamp(60px, 9vw, 110px);
-  padding-left: max(var(--gutter), calc((100vw - 1080px) / 2));
-  padding-right: max(var(--gutter), calc((100vw - 1080px) / 2));
+  padding-left: max(var(--gutter), calc((100vw - 1280px) / 2));
+  padding-right: max(var(--gutter), calc((100vw - 1280px) / 2));
   background: var(--on-surface);
   color: var(--surface);
   border-radius: 0;
@@ -1304,16 +1304,9 @@ body[data-page="home"] .hero .hero-kicker { color: #FFFFFF; }
   pointer-events: none;
 }
 .cta-card > * { position: relative; z-index: 1; }
-/* Balanced, centred content block; lede constrained to a readable width so it
-   doesn't sprawl across the full panel. */
-.cta-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+/* Heading spans the full content column (no shrink-wrap); lede stays readable. */
 .cta-card .t-body-lg {
-  max-width: 56ch;
+  max-width: 60ch;
   margin-left: auto;
   margin-right: auto;
 }
