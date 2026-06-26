@@ -86,7 +86,7 @@ img, svg, canvas { display: block; max-width: 100%; }
   font-size: clamp(48px, 7.4vw, 72px);
   font-weight: 500;
   letter-spacing: -1.44px;
-  line-height: 1.0;
+  line-height: 1.07;
   color: var(--on-surface);
   margin: 0;
 }
@@ -94,7 +94,7 @@ img, svg, canvas { display: block; max-width: 100%; }
   font-size: clamp(38px, 5.4vw, 54px);
   font-weight: 500;
   letter-spacing: -0.95px;
-  line-height: 1.04;
+  line-height: 1.12;
   color: var(--on-surface);
   margin: 0;
 }
@@ -443,6 +443,10 @@ em.ac-o { color: var(--brand-orange); font-style: normal; }
 /* SECTION */
 section { padding: clamp(56px, 6.5vw, 96px) 0; }
 .section-head { max-width: 780px; margin: 0 auto clamp(28px, 3.5vw, 56px); text-align: center; }
+/* Section headlines are split into overflow-masked lines (SplitText) for the
+   reveal; a touch more line-height keeps descenders (g, y, p) from being
+   clipped by the mask. */
+.section-head h2 { line-height: 1.16; }
 .section-head .badge { margin-bottom: var(--space-lg); }
 .section-head .t-h1 { margin-bottom: var(--space-lg); text-wrap: balance; }
 .section-head .t-body-lg { max-width: 56ch; margin: 0 auto; }
@@ -3336,7 +3340,7 @@ body[data-page] .svc li a:hover, body[data-page] .svc li a:hover .meta { color: 
   font-weight: 600;
   font-size: clamp(44px, 6.6vw, 64px);
   letter-spacing: -1.4px;
-  line-height: 1.02;
+  line-height: 1.1;
   color: var(--on-surface);
   margin: 0;
 }
