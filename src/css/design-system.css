@@ -5814,21 +5814,22 @@ body[data-page="home"] .hero-network { display: none; }
   z-index: 9999;
   display: grid; place-items: center;
   background: #0A0B12;
-  animation: preloaderOut 0.7s ease 1.15s forwards;
+  animation: preloaderOut 0.6s ease 1.2s forwards;
 }
 #preloader .preloader-mark {
-  width: clamp(120px, 18vw, 200px);
-  animation: preloaderSpin 6s linear infinite;
+  width: clamp(108px, 13vw, 156px);
+  opacity: 0;
+  animation: preloaderIn 0.5s ease 0.05s forwards, preloaderSpin 9s linear infinite;
 }
 #preloader .preloader-mark img {
   display: block; width: 100%; height: auto;
-  filter: drop-shadow(0 0 40px rgba(30,209,151,0.45)) drop-shadow(0 0 80px rgba(123,44,191,0.3));
 }
+@keyframes preloaderIn  { from { opacity: 0; } to { opacity: 1; } }
 @keyframes preloaderSpin { to { transform: rotate(360deg); } }
-@keyframes preloaderOut { to { opacity: 0; visibility: hidden; } }
+@keyframes preloaderOut  { to { opacity: 0; visibility: hidden; } }
 @media (prefers-reduced-motion: reduce) {
-  #preloader { animation: preloaderOut 0.3s ease 0.4s forwards; }
-  #preloader .preloader-mark { animation: none; }
+  #preloader { animation: preloaderOut 0.3s ease 0.5s forwards; }
+  #preloader .preloader-mark { animation: preloaderIn 0.4s ease forwards; }
 }
 
 /* ====================================================================

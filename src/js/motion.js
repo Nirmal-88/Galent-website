@@ -249,16 +249,18 @@
     var main = document.getElementById('top');
     var hero = document.getElementById('hero');
     var mark = document.querySelector('.travel-mark');
+    var img = mark && mark.querySelector('img');
     var headline = document.querySelector('#problem .section-head h2') ||
                    document.querySelector('#problem .section-head');
-    if (!main || !hero || !mark) return function () {};
+    if (!main || !hero || !mark || !img) return function () {};
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    var TARGET_SMALL = 168;   // docked mark width (px)
-    var GAP = 26;             // gap to the left of the headline
-    var START = 1.15;         // entrance begins as the loading screen fades
+    var GAP = 22;             // gap to the left of the headline
+    var START = 1.05;         // entrance begins as the loading screen fades
+    var ASPECT = 320 / 395;   // mark width / height
 
-    // Geometry relative to <main>; recomputed on refresh / resize.
+    // Geometry relative to <main>; recomputed on refresh / resize. The docked
+    // mark is sized to the headline's height so it matches "The Delivery Model…".
     var geo = { heroCX: 0, heroCY: 0, dockCX: 0, dockCY: 0, smallScale: 1 };
     function layout() {
       var m = main.getBoundingClientRect();
@@ -266,12 +268,15 @@
       var mw = mark.offsetWidth || 1;
       geo.heroCX = (h.left - m.left) + h.width / 2;
       geo.heroCY = (h.top - m.top) + h.height / 2;
-      geo.smallScale = TARGET_SMALL / mw;
       if (headline) {
         var hl = headline.getBoundingClientRect();
-        geo.dockCX = (hl.left - m.left) - GAP - TARGET_SMALL / 2;
+        var targetH = Math.max(96, Math.min(240, hl.height));
+        var targetW = targetH * ASPECT;
+        geo.smallScale = targetW / mw;
+        geo.dockCX = (hl.left - m.left) - GAP - targetW / 2;
         geo.dockCY = (hl.top - m.top) + hl.height / 2;
       } else {
+        geo.smallScale = 150 / mw;
         geo.dockCX = geo.heroCX;
         geo.dockCY = geo.heroCY + 900;
       }
@@ -282,16 +287,13 @@
     layout();
     ScrollTrigger.addEventListener('refresh', layout);
 
-    // The mark spins constantly.
-    var spin = reduce ? null : gsap.to(mark, { rotation: 360, duration: 40, ease: 'none', repeat: -1 });
-
-    // Entrance: hand off from the loading screen — start compact + fairly sharp,
-    // then (as the subtext fades in) expand into the dim, blurred aurora.
+    // Entrance: hand off from the loading screen — start compact, then (as the
+    // subtext fades in) expand into the dim, blurred aurora.
     gsap.set(mark, { scale: geo.smallScale, filter: 'blur(7px)' });
     var entrance = gsap.timeline();
     entrance.to(mark, { opacity: 1, duration: 0.45, ease: 'power1.out' }, START - 0.15);
-    entrance.to(mark, { scale: 1, filter: 'blur(60px)', duration: 1.3, ease: 'power2.inOut' }, START + 0.1);
-    entrance.to(mark, { opacity: 0.5, duration: 1.3, ease: 'power2.inOut' }, START + 0.1);
+    entrance.to(mark, { scale: 1, filter: 'blur(64px)', duration: 1.2, ease: 'power2.inOut' }, START + 0.1);
+    entrance.to(mark, { opacity: 0.38, duration: 1.2, ease: 'power2.inOut' }, START + 0.1);
 
     // Travel: on scroll the aurora shrinks, sharpens and flies to dock just left
     // of the second section's headline. immediateRender:false so it doesn't fight
@@ -304,26 +306,61 @@
       }
     });
     travel.fromTo(mark,
-      { x: 0, y: 0, scale: 1, opacity: 0.5, filter: 'blur(60px)' },
+      { x: 0, y: 0, scale: 1, opacity: 0.38, filter: 'blur(64px)' },
       {
         x: function () { return geo.dockCX - geo.heroCX; },
         y: function () { return geo.dockCY - geo.heroCY; },
         scale: function () { return geo.smallScale; },
-        opacity: 0.95, filter: 'blur(3px)', ease: 'power1.inOut',
+        opacity: 0.96, filter: 'blur(2px)', ease: 'power1.inOut',
         immediateRender: false
       }, 0);
+
+    // Constant fast rotation + cursor parallax in the hero, both easing to a stop
+    // as the mark docks — so in section 2 it sits still and upright. Rotation +
+    // parallax live on the IMG (screen-aligned translate), independent of the
+    // wrapper's travel/scale transform.
+    var DEG_PER_SEC = 60;            // ~6s per turn (much faster than before)
+    var cur = { x: 0, y: 0 };         // cursor target offset
+    var off = { x: 0, y: 0 };         // smoothed offset
+    var rot = 0;
+    var tick = null;
+    if (!reduce) {
+      tick = function (time, dt) {
+        var p = (travel.scrollTrigger && travel.scrollTrigger.progress) || 0;
+        if (p < 0.8) {
+          rot += DEG_PER_SEC * (dt / 1000) * (1 - p / 0.8);   // spin, slowing
+        } else {
+          rot += (Math.round(rot / 360) * 360 - rot) * 0.12;  // settle upright, stop
+        }
+        var k = Math.max(0, 1 - p / 0.8);                     // parallax fades out by dock
+        off.x += (cur.x * k - off.x) * 0.08;
+        off.y += (cur.y * k - off.y) * 0.08;
+        gsap.set(img, { rotation: rot, x: off.x, y: off.y });
+      };
+      gsap.ticker.add(tick);
+    }
+
+    var onMove = null;
+    if (!reduce && window.matchMedia && window.matchMedia('(pointer: fine)').matches) {
+      onMove = function (e) {
+        cur.x = ((e.clientX / window.innerWidth) - 0.5) * 80;
+        cur.y = ((e.clientY / window.innerHeight) - 0.5) * 80;
+      };
+      window.addEventListener('pointermove', onMove);
+    }
 
     var onResize = function () { layout(); };
     window.addEventListener('resize', onResize);
 
     return function () {
-      if (spin) spin.kill();
+      if (tick) gsap.ticker.remove(tick);
+      if (onMove) window.removeEventListener('pointermove', onMove);
       entrance.kill();
       if (travel.scrollTrigger) travel.scrollTrigger.kill();
       travel.kill();
       ScrollTrigger.removeEventListener('refresh', layout);
       window.removeEventListener('resize', onResize);
-      gsap.set(mark, { clearProps: 'all' });
+      gsap.set([mark, img], { clearProps: 'all' });
     };
   }
 
