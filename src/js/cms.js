@@ -151,52 +151,41 @@
       .replace(/-+/g, '-');
   }
 
-  /* Hero "running slides" — fills the angled .kh-stack tiles from the newest
-   * knowledge items and cycles through all of them. Driven by the same
-   * knowledge.json as the grid, so it auto-updates on add/edit/delete.
-   * The hero visual is aria-hidden, so this is purely decorative. */
+  /* Hero "running slides" — a clickable, cross-fading slideshow of the latest
+   * posts' card images. Driven by the same knowledge.json as the grid, so it
+   * auto-updates on add/edit/delete. Only items that have a card image and a
+   * link are shown; falls back to the static markup if there are none. */
   let heroTimer = null;
   HubCMS.renderHeroStack = function (items) {
-    const stack = document.querySelector('.kh-hero-visual .kh-stack');
-    if (!stack) return;
-    const tiles = Array.prototype.slice.call(stack.querySelectorAll('.kh-tile'));
-    if (!tiles.length) return;
-    const list = (Array.isArray(items) ? items : []).filter((it) => it && it.title);
+    const host = document.querySelector('[data-kh-slides]');
+    if (!host) return;
+    const list = (Array.isArray(items) ? items : []).filter((it) => it && it.cardImage && it.href);
     if (!list.length) return; // keep the static fallback markup
 
     const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const kindOf = (it) => {
-      const k = String(it.kind || '').trim();
-      const len = String(it.length || '').trim();
-      return len ? `${k} · ${len}` : k;
-    };
-    const metaOf = (it) => String(it.author || '').replace(/^by\s+/i, '').trim();
-    const fill = (offset) => {
-      tiles.forEach((tile, i) => {
-        const it = list[(offset + i) % list.length];
-        const kindEl = tile.querySelector('.kh-tile-kind');
-        const titleEl = tile.querySelector('h4');
-        const metaEl = tile.querySelector('.kh-tile-meta');
-        if (kindEl) kindEl.textContent = kindOf(it);
-        if (titleEl) titleEl.textContent = it.title;
-        if (metaEl) metaEl.textContent = metaOf(it);
-      });
-    };
+    const slides = list.slice(0, 8); // newest first (array order)
 
-    fill(0);
+    host.innerHTML = slides.map((it, i) => {
+      const img = escapeHTML(it.cardImage);
+      const kind = escapeHTML(it.kind || '');
+      const title = escapeHTML(it.title || '');
+      const href = escapeHTML(it.href);
+      return `<a class="kh-slide${i === 0 ? ' is-active' : ''}" href="${href}" aria-label="${title}">`
+        + `<img src="${img}" alt="" loading="${i === 0 ? 'eager' : 'lazy'}">`
+        + `<span class="kh-slide__veil" aria-hidden="true"></span>`
+        + `<span class="kh-slide__cap"><b class="kh-slide__kind">${kind}</b>${title}</span>`
+        + `</a>`;
+    }).join('');
+
+    const els = Array.prototype.slice.call(host.querySelectorAll('.kh-slide'));
     if (heroTimer) { clearInterval(heroTimer); heroTimer = null; }
-    // Only "run" through the catalogue when there's more than fits the stack.
-    if (!reduce && list.length > tiles.length) {
-      let offset = 0;
-      tiles.forEach((t) => { t.style.transition = 'opacity 0.5s ease'; });
+    if (!reduce && els.length > 1) {
+      let active = 0;
       heroTimer = setInterval(() => {
-        offset = (offset + 1) % list.length;
-        tiles.forEach((t) => { t.style.opacity = '0'; });
-        setTimeout(() => {
-          fill(offset);
-          tiles.forEach((t) => { t.style.opacity = '1'; });
-        }, 450);
-      }, 4200);
+        els[active].classList.remove('is-active');
+        active = (active + 1) % els.length;
+        els[active].classList.add('is-active');
+      }, 4500);
     }
   };
 

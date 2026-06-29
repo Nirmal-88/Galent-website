@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/design-system.css?v=cta-fill-2">
+  <link rel="stylesheet" href="css/design-system.css?v=kh-slides-1">
   <link rel="icon" href="assets/images/logo.png?v=4" type="image/png">
 
   <!-- Motion engine bootstrap: stand down legacy reveals; safety-net reveal -->
@@ -85,29 +85,10 @@
           </p>
         </div>
 
-        <div class="kh-hero-visual" aria-hidden="true">
-          <div class="kh-stack">
-            <article class="kh-tile kh-tile--p" style="--delay: 0s;">
-              <span class="kh-tile-kind">ESSAY &middot; 12 MIN</span>
-              <h4>AI Didn't Disrupt Tech Services. It Replaced the Operating Model.</h4>
-              <span class="kh-tile-meta">Ashwin Bharath · Apr 2026</span>
-            </article>
-            <article class="kh-tile kh-tile--g" style="--delay: -2s;">
-              <span class="kh-tile-kind">ESSAY &middot; 9 MIN</span>
-              <h4>The Grand Prix Model of AI Delivery</h4>
-              <span class="kh-tile-meta">Ashwin Bharath · May 2026</span>
-            </article>
-            <article class="kh-tile kh-tile--o" style="--delay: -4s;">
-              <span class="kh-tile-kind">WHITEPAPER &middot; 22 PG</span>
-              <h4>Forward-Deployed Engineering: A Reference Architecture</h4>
-              <span class="kh-tile-meta">Galent · Q2 2026</span>
-            </article>
-            <article class="kh-tile kh-tile--i" style="--delay: -6s;">
-              <span class="kh-tile-kind">VIDEOCAST &middot; 28 MIN</span>
-              <h4>What Breaks at Enterprise Scale &mdash; And What Doesn't</h4>
-              <span class="kh-tile-meta">Galent Field Notes · Vol. 03</span>
-            </article>
-          </div>
+        <div class="kh-hero-visual">
+          <!-- Clickable, cross-fading slideshow of the latest posts' card
+               images — populated by js/cms.js from content/knowledge.json. -->
+          <div class="kh-slideshow" data-kh-slides aria-label="Latest from the Knowledge Hub"></div>
           <div class="kh-stream" aria-hidden="true">
             <div class="kh-stream-track">
               <span>ESSAY</span><span>WHITEPAPER</span><span>VIDEOCAST</span><span>FIELD NOTE</span><span>BRIEF</span><span>PRESS</span><span>TALK</span>
@@ -231,7 +212,7 @@
   </footer>
 
   <script src="js/animations.js"></script>
-  <script src="js/cms.js?v=cms-4"></script>
+  <script src="js/cms.js?v=cms-5"></script>
   <script>
     Galent.persistentReveal();
     Galent.stickyNav('site-nav');
