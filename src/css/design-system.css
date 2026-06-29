@@ -5812,53 +5812,42 @@ body[data-page="home"] .hero::after {
   z-index: 0;
 }
 
-/* ---- Cinematic hero backdrop layers (inside .hero-network) ---- */
-body[data-page="home"] .hero-network { overflow: hidden; }
-/* Soft green glow that breathes behind the headline */
-.hero-glow {
+/* ---- Blurred Galent mark, rotating behind the headline (motion.js spins it) ---- */
+body[data-page="home"] .hero-network { overflow: visible; }
+/* The mark reads as a soft, out-of-focus presence behind the copy. The green
+   drop-shadow gives the faint bloom seen in the reference. */
+body[data-page="home"] .hero .hero-logo {
+  filter: blur(13px)
+          drop-shadow(0 0 60px rgba(30,209,151,0.42))
+          drop-shadow(0 0 120px rgba(30,209,151,0.22));
+  opacity: 0.92;
+}
+/* Readability scrim no longer needed — the mark is blurred and the headline
+   sits above it. Drop it so the green bloom stays clean. */
+body[data-page="home"] .hero .hero-network::after { display: none; }
+
+/* ---- Docked mark: the logo "lands" behind the second section's headline ---- */
+#problem { position: relative; overflow: hidden; }
+.problem-mark {
   position: absolute;
-  left: 50%; top: 48%;
-  width: min(760px, 86vw);
-  height: min(420px, 50vh);
-  transform: translate(-50%, -50%);
-  background: radial-gradient(ellipse at center, rgba(30,209,151,0.30), rgba(30,209,151,0.08) 45%, transparent 72%);
-  filter: blur(36px);
-  animation: heroGlowBreathe 7s ease-in-out infinite;
+  left: 50%;
+  top: clamp(40px, 9vw, 132px);
+  transform: translateX(-50%);
+  width: clamp(150px, 22vw, 280px);
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;            /* revealed on scroll by motion.js as the hero mark arrives */
+  will-change: transform, opacity, filter;
 }
-@keyframes heroGlowBreathe {
-  0%, 100% { opacity: 0.65; transform: translate(-50%, -50%) scale(1); }
-  50%      { opacity: 1;    transform: translate(-50%, -50%) scale(1.08); }
+.problem-mark img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 18px 48px rgba(123,44,191,0.20));
 }
-/* Slow horizontal light sweep across the stage */
-.hero-sweep {
-  position: absolute; inset: 0;
-  background: linear-gradient(100deg, transparent 38%, rgba(255,255,255,0.07) 50%, transparent 62%);
-  transform: translateX(-100%);
-  animation: heroSweep 9s ease-in-out infinite;
-}
-@keyframes heroSweep {
-  0%   { transform: translateX(-100%); }
-  55%  { transform: translateX(100%); }
-  100% { transform: translateX(100%); }
-}
-/* Fine film grain — animated SVG noise, very subtle */
-.hero-grain {
-  position: absolute; inset: -50%;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: 0.06;
-  mix-blend-mode: overlay;
-  animation: heroGrain 0.6s steps(2) infinite;
-}
-@keyframes heroGrain {
-  0%   { transform: translate(0, 0); }
-  25%  { transform: translate(-3%, 2%); }
-  50%  { transform: translate(2%, -3%); }
-  75%  { transform: translate(-2%, -2%); }
-  100% { transform: translate(0, 0); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero-glow, .hero-grain { animation: none !important; }
-  .hero-sweep { display: none; }
+#problem .container { position: relative; z-index: 1; }
+@media (max-width: 700px) {
+  .problem-mark { top: clamp(28px, 12vw, 80px); width: clamp(120px, 38vw, 200px); }
 }
 
 /* Headline accents — green, glowing (matches the reference) */
@@ -9144,20 +9133,9 @@ html.gsap-smooth .cta-card:not(.gx-active-fx) .cta-spark {
   transform-style: preserve-3d;
   will-change: transform;
 }
-/* Readability scrim: darkens the upper (copy) area over the mark while leaving
-   its lower mass bright. Sits above the mark, below the content. */
-body[data-page="home"] .hero .hero-network::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  opacity: var(--hero-scrim, 1); /* faded out on scroll by motion.js so the full mark resolves */
-  background: linear-gradient(180deg,
-              rgba(10, 11, 16, 0.82) 0%,
-              rgba(10, 11, 16, 0.45) 30%,
-              rgba(10, 11, 16, 0) 54%);
-}
+/* Readability scrim retired — the mark is now blurred/faint and the headline
+   sits above it, so the heavy top gradient is no longer needed. */
+body[data-page="home"] .hero .hero-network::after { display: none; }
 .hero-logo {
   display: block;
   width: 100%;
