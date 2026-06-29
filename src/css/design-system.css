@@ -9107,14 +9107,11 @@ html.gsap-smooth main > section:not(.hero):not(.platform-hero):not(.about-hero):
   min-height: clamp(280px, 34vh, 340px);
 }
 
-/* Perf — under smooth scroll (content-visibility disabled), pause the CTA's
- * continuous effects while its card is offscreen. The engine toggles
- * .gx-active-fx when the card is in view. */
-html.gsap-smooth .cta-card:not(.gx-active-fx) .cta-orb,
-html.gsap-smooth .cta-card:not(.gx-active-fx) .cta-rings span,
-html.gsap-smooth .cta-card:not(.gx-active-fx) .cta-spark {
-  animation-play-state: paused;
-}
+/* NOTE: this used to pause the CTA's orbs/rings/sparks until motion.js added
+ * .gx-active-fx when the card scrolled into view. That toggle didn't fire
+ * reliably (stale JS / smooth-scroll timing), leaving the effects frozen on
+ * subpages. Removed so the effects always animate — the cost of a few blurred
+ * divs compositing offscreen is negligible. */
 
 /* The engine handles reduced-motion by simply revealing content; make sure
  * nothing it adds leaves residue under reduced-motion. */
