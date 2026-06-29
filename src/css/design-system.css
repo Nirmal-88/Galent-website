@@ -6363,6 +6363,7 @@ section#cta { padding-top: 0; padding-bottom: 0; }
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
+  object-position: top center;   /* keep the top of the banner visible */
   transition: transform 1.2s var(--ease-out);
 }
 .kh-slide.is-active:hover img { transform: scale(1.05); }
