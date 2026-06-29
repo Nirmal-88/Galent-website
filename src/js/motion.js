@@ -302,7 +302,11 @@
       scrollTrigger: {
         trigger: hero, start: 'top top',
         endTrigger: '#problem', end: 'top 45%',
-        scrub: 1, invalidateOnRefresh: true
+        scrub: 1, invalidateOnRefresh: true,
+        // In the hero the mark is the aurora (behind copy, under the opaque
+        // section 2). Once it has set off it lifts above section 2 so it shows
+        // when docked — but stays below the nav.
+        onUpdate: function (self) { mark.style.zIndex = self.progress < 0.4 ? '1' : '30'; }
       }
     });
     travel.fromTo(mark,

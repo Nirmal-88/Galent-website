@@ -5861,7 +5861,18 @@ body[data-page="home"] .hero .hero-content::before {
   background: radial-gradient(ellipse at center, rgba(8,9,15,0.4), transparent 66%);
   z-index: -1; pointer-events: none;
 }
-/* Headline above the mark when it docks in section 2. */
+/* Keep the big aurora from bleeding past the hero:
+   - the home nav is solid (translucent white let the colours show through);
+   - section 2 is opaque and sits above the aurora so the glow can't leak onto
+     the white (motion.js lifts the small docked mark above it on scroll);
+   - clip any horizontal overflow from the oversized, centred mark. */
+body[data-page="home"] { overflow-x: clip; }
+body[data-page="home"] .nav { background: var(--surface); }
+body[data-page="home"] #problem {
+  position: relative;
+  z-index: 2;
+  background: var(--surface);
+}
 #problem .container { position: relative; z-index: 1; }
 
 /* Headline accents — green, glowing (matches the reference) */
