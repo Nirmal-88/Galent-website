@@ -5799,51 +5799,69 @@ body[data-page="home"] .hero::before { display: none; }
 body[data-page="home"] .hero::after {
   content: '';
   position: absolute; inset: 0;
-  background: radial-gradient(125% 95% at 50% 50%, transparent 42%, rgba(8,9,15,0.78) 100%);
+  background: radial-gradient(125% 95% at 50% 50%, transparent 40%, rgba(8,9,15,0.82) 100%);
   pointer-events: none;
   z-index: 0;
 }
+body[data-page="home"] .hero-network { display: none; }
 
-/* ---- The Galent mark, large + heavily blurred, spins behind the headline.
-   At this scale the green/purple/orange mark reads as a rotating aurora;
-   motion.js drives the constant rotation and the scroll fall. ---- */
-body[data-page="home"] .hero-network { overflow: visible; }
-body[data-page="home"] .hero-logo-wrap {
-  width: clamp(480px, 70vw, 1000px);
-  top: 50%;
+/* ====================================================================
+ * LOADING SCREEN — the Galent mark appears here first, then fades to
+ * reveal the hero (pure-CSS auto-hide so it can never get stuck).
+ * ==================================================================== */
+#preloader {
+  position: fixed; inset: 0;
+  z-index: 9999;
+  display: grid; place-items: center;
+  background: #0A0B12;
+  animation: preloaderOut 0.7s ease 1.15s forwards;
 }
-body[data-page="home"] .hero .hero-logo {
-  filter: blur(72px) saturate(1.18);
-  opacity: 0.95;
+#preloader .preloader-mark {
+  width: clamp(120px, 18vw, 200px);
+  animation: preloaderSpin 6s linear infinite;
 }
-/* Readability scrim no longer needed — the mark is blurred and the headline
-   sits above it. */
-body[data-page="home"] .hero .hero-network::after { display: none; }
+#preloader .preloader-mark img {
+  display: block; width: 100%; height: auto;
+  filter: drop-shadow(0 0 40px rgba(30,209,151,0.45)) drop-shadow(0 0 80px rgba(123,44,191,0.3));
+}
+@keyframes preloaderSpin { to { transform: rotate(360deg); } }
+@keyframes preloaderOut { to { opacity: 0; visibility: hidden; } }
+@media (prefers-reduced-motion: reduce) {
+  #preloader { animation: preloaderOut 0.3s ease 0.4s forwards; }
+  #preloader .preloader-mark { animation: none; }
+}
 
-/* ---- Docked mark: the logo "lands" to the LEFT of the second section's
-   headline (matches the reference frames). ---- */
-#problem { position: relative; overflow: hidden; }
-#problem .container { position: relative; z-index: 1; }
-#problem .section-head { position: relative; }
-.problem-mark {
+/* ====================================================================
+ * TRAVELLING GALENT MARK — one element that is the hero aurora, then
+ * travels on scroll to dock left of the second section's headline.
+ * Lives in <main>; layered behind the hero copy but above the page so
+ * it stays visible when it docks in section 2 (motion.js drives it).
+ * ==================================================================== */
+body[data-page="home"] #top { position: relative; }
+.travel-mark {
   position: absolute;
-  top: -38px;
-  left: clamp(-64px, -4vw, -16px);
-  width: clamp(120px, 14vw, 188px);
-  z-index: 0;            /* sits beside / just behind the headline */
+  top: 0; left: 0;
+  width: clamp(420px, 56vw, 780px);
+  z-index: 1;
   pointer-events: none;
-  opacity: 0;            /* revealed on scroll by motion.js as the hero mark arrives */
+  opacity: 0;                 /* motion.js fades/positions it on boot */
   will-change: transform, opacity, filter;
 }
-.problem-mark img {
-  display: block;
-  width: 100%;
-  height: auto;
-  filter: drop-shadow(0 14px 44px rgba(123,44,191,0.28));
+.travel-mark img {
+  display: block; width: 100%; height: auto;
 }
-@media (max-width: 700px) {
-  .problem-mark { left: 50%; margin-left: -62px; top: -14px; width: 124px; }
+/* Hero copy sits above the aurora; keep it readable. */
+body[data-page="home"] .hero .hero-content { position: relative; z-index: 2; }
+body[data-page="home"] .hero .hero-content::before {
+  content: '';
+  position: absolute; left: 50%; top: 50%;
+  width: 150%; height: 150%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center, rgba(8,9,15,0.4), transparent 66%);
+  z-index: -1; pointer-events: none;
 }
+/* Headline above the mark when it docks in section 2. */
+#problem .container { position: relative; z-index: 1; }
 
 /* Headline accents — green, glowing (matches the reference) */
 body[data-page="home"] .hero .hero-highlight--primary,

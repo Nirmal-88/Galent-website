@@ -246,39 +246,84 @@
    * copy lifts away as you leave. Returns a cleanup fn.
    * ======================================================================== */
   function setupHeroLogo(gsap, ScrollTrigger) {
+    var main = document.getElementById('top');
     var hero = document.getElementById('hero');
-    if (!hero) return function () {};
-    var wrap = hero.querySelector('.hero-logo-wrap');
-    var logo = hero.querySelector('.hero-logo');
-    if (!wrap || !logo) return function () {};
+    var mark = document.querySelector('.travel-mark');
+    var headline = document.querySelector('#problem .section-head h2') ||
+                   document.querySelector('#problem .section-head');
+    if (!main || !hero || !mark) return function () {};
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var dock = document.querySelector('#problem .problem-mark');
 
-    // The blurred mark rotates constantly behind the headline, with a gentle
-    // idle float so it reads as a living, out-of-focus presence.
-    var spin  = reduce ? null : gsap.to(wrap, { rotation: 360, duration: 34, ease: 'none', repeat: -1 });
-    var float = reduce ? null : gsap.to(logo, { y: -16, duration: 4.2, ease: 'sine.inOut', repeat: -1, yoyo: true });
+    var TARGET_SMALL = 168;   // docked mark width (px)
+    var GAP = 26;             // gap to the left of the headline
+    var START = 1.15;         // entrance begins as the loading screen fades
 
-    // On scroll, the giant aurora-mark shrinks and falls away as the hero leaves...
-    var fallTl = gsap.timeline({ scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: 1 } });
-    fallTl.to(wrap, { yPercent: 60, scale: 0.28, autoAlpha: 0, ease: 'power1.in' }, 0);
-
-    // ...and is "placed" to the left of the second section's headline as it scrolls in.
-    var dockTl = null;
-    if (dock) {
-      gsap.set(dock, { autoAlpha: 0, y: -64, scale: 0.7, filter: 'blur(14px)' });
-      dockTl = gsap.timeline({ scrollTrigger: { trigger: '#problem', start: 'top 88%', end: 'top 46%', scrub: 1 } });
-      dockTl.to(dock, { autoAlpha: 0.92, y: 0, scale: 1, filter: 'blur(2px)', ease: 'power2.out' }, 0);
+    // Geometry relative to <main>; recomputed on refresh / resize.
+    var geo = { heroCX: 0, heroCY: 0, dockCX: 0, dockCY: 0, smallScale: 1 };
+    function layout() {
+      var m = main.getBoundingClientRect();
+      var h = hero.getBoundingClientRect();
+      var mw = mark.offsetWidth || 1;
+      geo.heroCX = (h.left - m.left) + h.width / 2;
+      geo.heroCY = (h.top - m.top) + h.height / 2;
+      geo.smallScale = TARGET_SMALL / mw;
+      if (headline) {
+        var hl = headline.getBoundingClientRect();
+        geo.dockCX = (hl.left - m.left) - GAP - TARGET_SMALL / 2;
+        geo.dockCY = (hl.top - m.top) + hl.height / 2;
+      } else {
+        geo.dockCX = geo.heroCX;
+        geo.dockCY = geo.heroCY + 900;
+      }
+      gsap.set(mark, { left: geo.heroCX, top: geo.heroCY });
     }
+
+    gsap.set(mark, { xPercent: -50, yPercent: -50, opacity: 0, scale: 1, transformOrigin: '50% 50%' });
+    layout();
+    ScrollTrigger.addEventListener('refresh', layout);
+
+    // The mark spins constantly.
+    var spin = reduce ? null : gsap.to(mark, { rotation: 360, duration: 40, ease: 'none', repeat: -1 });
+
+    // Entrance: hand off from the loading screen — start compact + fairly sharp,
+    // then (as the subtext fades in) expand into the dim, blurred aurora.
+    gsap.set(mark, { scale: geo.smallScale, filter: 'blur(7px)' });
+    var entrance = gsap.timeline();
+    entrance.to(mark, { opacity: 1, duration: 0.45, ease: 'power1.out' }, START - 0.15);
+    entrance.to(mark, { scale: 1, filter: 'blur(60px)', duration: 1.3, ease: 'power2.inOut' }, START + 0.1);
+    entrance.to(mark, { opacity: 0.5, duration: 1.3, ease: 'power2.inOut' }, START + 0.1);
+
+    // Travel: on scroll the aurora shrinks, sharpens and flies to dock just left
+    // of the second section's headline. immediateRender:false so it doesn't fight
+    // the entrance at rest; function values survive refresh/resize.
+    var travel = gsap.timeline({
+      scrollTrigger: {
+        trigger: hero, start: 'top top',
+        endTrigger: '#problem', end: 'top 45%',
+        scrub: 1, invalidateOnRefresh: true
+      }
+    });
+    travel.fromTo(mark,
+      { x: 0, y: 0, scale: 1, opacity: 0.5, filter: 'blur(60px)' },
+      {
+        x: function () { return geo.dockCX - geo.heroCX; },
+        y: function () { return geo.dockCY - geo.heroCY; },
+        scale: function () { return geo.smallScale; },
+        opacity: 0.95, filter: 'blur(3px)', ease: 'power1.inOut',
+        immediateRender: false
+      }, 0);
+
+    var onResize = function () { layout(); };
+    window.addEventListener('resize', onResize);
 
     return function () {
       if (spin) spin.kill();
-      if (float) float.kill();
-      if (fallTl.scrollTrigger) fallTl.scrollTrigger.kill();
-      fallTl.kill();
-      if (dockTl) { if (dockTl.scrollTrigger) dockTl.scrollTrigger.kill(); dockTl.kill(); }
-      gsap.set([wrap, logo], { clearProps: 'transform,opacity' });
-      if (dock) gsap.set(dock, { clearProps: 'all' });
+      entrance.kill();
+      if (travel.scrollTrigger) travel.scrollTrigger.kill();
+      travel.kill();
+      ScrollTrigger.removeEventListener('refresh', layout);
+      window.removeEventListener('resize', onResize);
+      gsap.set(mark, { clearProps: 'all' });
     };
   }
 
@@ -670,19 +715,20 @@
     };
   }
 
-  /* Hero entrance (home) — reveals hero copy once on load. */
+  /* Hero entrance (home) — headline first, then the subtext + CTAs come in with
+     a delay (synced to the loading-screen fade), per the reference frames. */
   function setupHeroEntrance(gsap) {
     var hero = document.getElementById('hero');
     if (!hero) { root.classList.remove('hero-entering'); return; }
-    var network = hero.querySelector('.hero-network');
-    var fg = [hero.querySelector('.badge'), hero.querySelector('.t-hero'), hero.querySelector('.hero-lede'),
-      hero.querySelector('.cta-row'), hero.querySelector('.scroll-chevron')].filter(Boolean);
-    gsap.set(fg, { autoAlpha: 0, y: 18 });
-    if (network) gsap.set(network, { autoAlpha: 0 });
+    var headline = hero.querySelector('.t-hero');
+    var rest = [hero.querySelector('.hero-lede'), hero.querySelector('.cta-row'),
+      hero.querySelector('.scroll-chevron')].filter(Boolean);
+    gsap.set([headline].filter(Boolean).concat(rest), { autoAlpha: 0, y: 20 });
     root.classList.remove('hero-entering');
+    var START = 1.15;   // matches the mark entrance / loading-screen fade
     var tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-    if (network) tl.to(network, { autoAlpha: 1, duration: 1.2 }, 0);
-    tl.to(fg, { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.13 }, 0.1);
+    if (headline) tl.to(headline, { autoAlpha: 1, y: 0, duration: 0.8 }, START);
+    if (rest.length) tl.to(rest, { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.14 }, START + 0.7);
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);

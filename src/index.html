@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/design-system.css?v=hero-cine-3">
+  <link rel="stylesheet" href="css/design-system.css?v=hero-cine-4">
   <link rel="icon" href="assets/images/logo.png?v=4" type="image/png">
 
   <meta property="og:type" content="website">
@@ -52,6 +52,13 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
 </head>
 <body data-page="home">
+
+  <!-- Loading screen — the Galent mark appears here first, then hands off to the hero. -->
+  <div id="preloader" aria-hidden="true">
+    <div class="preloader-mark">
+      <img src="assets/images/galent-mark.png" alt="" width="320" height="395" decoding="async">
+    </div>
+  </div>
 
   <a href="#hero" class="skip-link">Skip to main content</a>
 
@@ -108,13 +115,16 @@
 
   <main id="top">
 
-    <!-- 01 HERO — kinetic network backdrop -->
+    <!-- The single Galent mark: spins as the hero aurora, then travels on scroll
+         and docks to the left of the second section's headline. Lives in <main>
+         (not inside the hero) so it can cross the section boundary. -->
+    <div class="travel-mark" aria-hidden="true">
+      <img src="assets/images/galent-mark.png" alt="" width="320" height="395" decoding="async">
+    </div>
+
+    <!-- 01 HERO -->
     <section id="hero" class="hero" aria-labelledby="hero-title">
-      <div class="hero-network" aria-hidden="true">
-        <div class="hero-logo-wrap">
-          <img class="hero-logo" src="assets/images/galent-mark.png" alt="" width="320" height="395" decoding="async">
-        </div>
-      </div>
+      <div class="hero-network" aria-hidden="true"></div>
       <div class="hero-content">
         <h1 id="hero-title" class="t-hero hero-headline">
           <span class="hero-line hero-line--1">Engineering <em class="hero-highlight hero-highlight--primary">Outcomes.</em></span>
@@ -137,9 +147,6 @@
     <section id="problem" aria-labelledby="problem-title">
       <div class="container">
         <div class="section-head" data-reveal>
-          <div class="problem-mark" aria-hidden="true">
-            <img src="assets/images/galent-mark.png" alt="" width="320" height="395" decoding="async">
-          </div>
           <h2 id="problem-title" class="t-h1">The Delivery Model Is <em class="ac-p">Broken.</em></h2>
           <p class="t-body-lg">
             Not the models. Not the ambition. The model of delivery itself — fragmented teams, generic tooling, AI bolted onto unchanged workflows.
@@ -656,6 +663,6 @@
     Galent.countUps();
   </script>
 
-  <script src="js/motion.js?v=engine-8" defer></script>
+  <script src="js/motion.js?v=engine-9" defer></script>
 </body>
 </html>
