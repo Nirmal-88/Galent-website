@@ -459,9 +459,10 @@ section { padding: clamp(56px, 6.5vw, 96px) 0; }
   padding: clamp(152px, 18vh, 232px) var(--gutter) clamp(56px, 8vw, 100px);
   text-align: center;
   overflow: hidden;
-  /* Compact hero — clamps between 460px (small screens), 68vh (preferred),
-     and 720px (large screens) so it never dominates the viewport. */
-  min-height: clamp(460px, 68vh, 720px);
+  /* Fill the viewport so the next section never peeks in below the fold.
+     svh keeps it correct when mobile browser chrome shows/hides. */
+  min-height: 100vh;
+  min-height: 100svh;
   display: grid;
   place-items: center;
 }
@@ -5425,7 +5426,8 @@ body[data-page="home"] #services .svc li a:hover .meta { color: rgba(255, 255, 2
   position: relative;
   padding: clamp(40px, 6vw, 72px) var(--gutter);
   overflow: hidden;
-  min-height: clamp(480px, 70vh, 760px);
+  min-height: 100vh;
+  min-height: 100svh;
   display: grid;
   align-items: center;
 }
@@ -5786,10 +5788,10 @@ body[data-page] .nav-group-label { color: var(--page-accent); }
 body[data-page="home"] .hero {
   background: #0A0B12;
   color: #FFFFFF;
-  /* Centred content with clear nav headroom (the badge that used to sit
-     under the nav has been removed, so the headline must not crowd the top). */
-  min-height: clamp(520px, 74vh, 760px);
-  padding-top: clamp(152px, 18vh, 232px);
+  /* Fill the viewport — no white space below the fold. */
+  min-height: 100vh;
+  min-height: 100svh;
+  padding-top: clamp(120px, 14vh, 200px);
   align-items: center;
   padding-bottom: clamp(56px, 8vw, 100px);
 }
