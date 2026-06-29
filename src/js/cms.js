@@ -178,6 +178,21 @@
     }).join('');
 
     const els = Array.prototype.slice.call(host.querySelectorAll('.kh-slide'));
+
+    // Size the card to the active image's own aspect ratio — fills exactly,
+    // so the banner is never cropped and there's no empty letterbox space.
+    const sizeTo = (el) => {
+      const img = el && el.querySelector('img');
+      if (!img) return;
+      const apply = () => {
+        if (img.naturalWidth && img.naturalHeight) {
+          host.style.aspectRatio = img.naturalWidth + ' / ' + img.naturalHeight;
+        }
+      };
+      if (img.complete) apply(); else img.addEventListener('load', apply, { once: true });
+    };
+    sizeTo(els[0]);
+
     if (heroTimer) { clearInterval(heroTimer); heroTimer = null; }
     if (!reduce && els.length > 1) {
       let active = 0;
@@ -185,6 +200,7 @@
         els[active].classList.remove('is-active');
         active = (active + 1) % els.length;
         els[active].classList.add('is-active');
+        sizeTo(els[active]);
       }, 4500);
     }
   };

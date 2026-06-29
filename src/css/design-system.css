@@ -6339,11 +6339,12 @@ section#cta { padding-top: 0; padding-bottom: 0; }
 .kh-slideshow {
   position: relative;
   width: 100%;
-  max-width: 520px;
-  height: 380px;
+  max-width: 560px;
+  aspect-ratio: 16 / 10;   /* fallback; JS matches each image's real ratio */
   margin: 0 auto;
+  transition: aspect-ratio 0.5s ease;
 }
-@media (max-width: 980px) { .kh-slideshow { height: 300px; max-width: 460px; } }
+@media (max-width: 980px) { .kh-slideshow { max-width: 480px; } }
 .kh-slide {
   position: absolute;
   inset: 0;
@@ -6362,8 +6363,8 @@ section#cta { padding-top: 0; padding-bottom: 0; }
 .kh-slide img {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
-  object-fit: contain;           /* show the whole banner, never crop */
-  object-position: top center;
+  object-fit: cover;             /* card matches image ratio, so this never crops */
+  object-position: center;
   transition: transform 1.2s var(--ease-out);
 }
 .kh-slide.is-active:hover img { transform: scale(1.05); }
