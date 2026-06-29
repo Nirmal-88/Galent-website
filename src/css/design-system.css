@@ -8846,21 +8846,12 @@ section[aria-label="Recognised by"] { min-height: 0 !important; }
  * animated fx and washed out the orbs / rings / sparks. */
 .cta-card::before { display: none !important; }
 
-/* Skip paint + layout for the CTA section while it's offscreen.
- * Saves the constant compositing cost of the orbs, rings and sparks
- * when the user is scrolling through the page above the CTA. */
-section#cta {
-  content-visibility: auto;
-  contain-intrinsic-size: 0 720px;
-}
-
-/* Broad scroll-performance pass: every offscreen section on every
- * page is skipped during paint/layout until it's near the viewport.
- * Excludes the first-paint heroes and the sticky nav. */
-main > section:not(.hero):not(.platform-hero):not(.about-hero):not(.kh-hero) {
-  content-visibility: auto;
-  contain-intrinsic-size: 0 600px;
-}
+/* NOTE: a previous build set `content-visibility: auto` on the CTA and on every
+ * offscreen section for scroll performance. Under ScrollSmoother (which scrolls
+ * by transforming the content) the browser misjudges which sections are on
+ * screen, so it kept sections "skipped" — that PAUSED their CSS animations (the
+ * orbs/rings stopped moving) and reserved a fixed-height placeholder (layout
+ * gaps). It's removed so section animations run and sections size naturally. */
 
 /* visible grid that drifts on scroll (JS adjusts --cta-shift) */
 .cta-grid {
