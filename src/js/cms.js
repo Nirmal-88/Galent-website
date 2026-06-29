@@ -151,6 +151,55 @@
       .replace(/-+/g, '-');
   }
 
+  /* Hero "running slides" — fills the angled .kh-stack tiles from the newest
+   * knowledge items and cycles through all of them. Driven by the same
+   * knowledge.json as the grid, so it auto-updates on add/edit/delete.
+   * The hero visual is aria-hidden, so this is purely decorative. */
+  let heroTimer = null;
+  HubCMS.renderHeroStack = function (items) {
+    const stack = document.querySelector('.kh-hero-visual .kh-stack');
+    if (!stack) return;
+    const tiles = Array.prototype.slice.call(stack.querySelectorAll('.kh-tile'));
+    if (!tiles.length) return;
+    const list = (Array.isArray(items) ? items : []).filter((it) => it && it.title);
+    if (!list.length) return; // keep the static fallback markup
+
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const kindOf = (it) => {
+      const k = String(it.kind || '').trim();
+      const len = String(it.length || '').trim();
+      return len ? `${k} · ${len}` : k;
+    };
+    const metaOf = (it) => String(it.author || '').replace(/^by\s+/i, '').trim();
+    const fill = (offset) => {
+      tiles.forEach((tile, i) => {
+        const it = list[(offset + i) % list.length];
+        const kindEl = tile.querySelector('.kh-tile-kind');
+        const titleEl = tile.querySelector('h4');
+        const metaEl = tile.querySelector('.kh-tile-meta');
+        if (kindEl) kindEl.textContent = kindOf(it);
+        if (titleEl) titleEl.textContent = it.title;
+        if (metaEl) metaEl.textContent = metaOf(it);
+      });
+    };
+
+    fill(0);
+    if (heroTimer) { clearInterval(heroTimer); heroTimer = null; }
+    // Only "run" through the catalogue when there's more than fits the stack.
+    if (!reduce && list.length > tiles.length) {
+      let offset = 0;
+      tiles.forEach((t) => { t.style.transition = 'opacity 0.5s ease'; });
+      heroTimer = setInterval(() => {
+        offset = (offset + 1) % list.length;
+        tiles.forEach((t) => { t.style.opacity = '0'; });
+        setTimeout(() => {
+          fill(offset);
+          tiles.forEach((t) => { t.style.opacity = '1'; });
+        }, 450);
+      }, 4200);
+    }
+  };
+
   HubCMS.render = function (data) {
     const categories = normaliseCategories(data && data.categories);
     const items = Array.isArray(data && data.items) ? data.items : [];
@@ -183,6 +232,9 @@
       const list = grouped[c.id] || [];
       renderPanel(panel, list, c.ctaLabel);
     });
+
+    // Hero "running slides" — newest items into the angled stack, auto-cycled.
+    HubCMS.renderHeroStack(items);
 
     // Re-trigger reveal animation on freshly inserted cards
     if (window.Galent && typeof window.Galent.persistentReveal === 'function') {
