@@ -259,16 +259,16 @@
     var spin  = reduce ? null : gsap.to(wrap, { rotation: 360, duration: 34, ease: 'none', repeat: -1 });
     var float = reduce ? null : gsap.to(logo, { y: -16, duration: 4.2, ease: 'sine.inOut', repeat: -1, yoyo: true });
 
-    // On scroll, the mark falls away as the hero leaves the viewport...
+    // On scroll, the giant aurora-mark shrinks and falls away as the hero leaves...
     var fallTl = gsap.timeline({ scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: 1 } });
-    fallTl.to(wrap, { yPercent: 75, scale: 0.7, autoAlpha: 0, ease: 'power1.in' }, 0);
+    fallTl.to(wrap, { yPercent: 60, scale: 0.28, autoAlpha: 0, ease: 'power1.in' }, 0);
 
-    // ...and is "placed" behind the second section's headline as it scrolls in.
+    // ...and is "placed" to the left of the second section's headline as it scrolls in.
     var dockTl = null;
     if (dock) {
-      gsap.set(dock, { autoAlpha: 0, y: -48, scale: 0.82, filter: 'blur(10px)' });
-      dockTl = gsap.timeline({ scrollTrigger: { trigger: '#problem', start: 'top 88%', end: 'top 42%', scrub: 1 } });
-      dockTl.to(dock, { autoAlpha: 0.22, y: 0, scale: 1, filter: 'blur(0px)', ease: 'power2.out' }, 0);
+      gsap.set(dock, { autoAlpha: 0, y: -64, scale: 0.7, filter: 'blur(14px)' });
+      dockTl = gsap.timeline({ scrollTrigger: { trigger: '#problem', start: 'top 88%', end: 'top 46%', scrub: 1 } });
+      dockTl.to(dock, { autoAlpha: 0.92, y: 0, scale: 1, filter: 'blur(2px)', ease: 'power2.out' }, 0);
     }
 
     return function () {

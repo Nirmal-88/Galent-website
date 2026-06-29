@@ -5784,7 +5784,7 @@ body[data-page] .nav-group-label { color: var(--page-accent); }
  * HOME DARK HERO VARIANT
  * ================================================================== */
 body[data-page="home"] .hero {
-  background: #050609;
+  background: #0A0B12;
   color: #FFFFFF;
   /* Centred content with clear nav headroom (the badge that used to sit
      under the nav has been removed, so the headline must not crowd the top). */
@@ -5793,48 +5793,44 @@ body[data-page="home"] .hero {
   align-items: center;
   padding-bottom: clamp(56px, 8vw, 100px);
 }
-/* Centred green bloom + faint top light — the headline reads as lit from within. */
-body[data-page="home"] .hero::before {
-  content: '';
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(60% 50% at 50% 46%, rgba(30,209,151,0.16), transparent 70%),
-    radial-gradient(120% 80% at 50% 0%, rgba(255,255,255,0.05), transparent 60%);
-  pointer-events: none;
-  z-index: 0;
-}
-/* Vignette — sink the frame edges into black for a cinematic stage. */
+body[data-page="home"] .hero::before { display: none; }
+/* Vignette — sink the frame edges into black so the rotating colour reads as a
+   bloom in the centre (the spinning blurred mark IS the aurora). */
 body[data-page="home"] .hero::after {
   content: '';
   position: absolute; inset: 0;
-  background: radial-gradient(120% 90% at 50% 50%, transparent 55%, rgba(0,0,0,0.55) 100%);
+  background: radial-gradient(125% 95% at 50% 50%, transparent 42%, rgba(8,9,15,0.78) 100%);
   pointer-events: none;
   z-index: 0;
 }
 
-/* ---- Blurred Galent mark, rotating behind the headline (motion.js spins it) ---- */
+/* ---- The Galent mark, large + heavily blurred, spins behind the headline.
+   At this scale the green/purple/orange mark reads as a rotating aurora;
+   motion.js drives the constant rotation and the scroll fall. ---- */
 body[data-page="home"] .hero-network { overflow: visible; }
-/* The mark reads as a soft, out-of-focus presence behind the copy. The green
-   drop-shadow gives the faint bloom seen in the reference. */
+body[data-page="home"] .hero-logo-wrap {
+  width: clamp(480px, 70vw, 1000px);
+  top: 50%;
+}
 body[data-page="home"] .hero .hero-logo {
-  filter: blur(13px)
-          drop-shadow(0 0 60px rgba(30,209,151,0.42))
-          drop-shadow(0 0 120px rgba(30,209,151,0.22));
-  opacity: 0.92;
+  filter: blur(72px) saturate(1.18);
+  opacity: 0.95;
 }
 /* Readability scrim no longer needed — the mark is blurred and the headline
-   sits above it. Drop it so the green bloom stays clean. */
+   sits above it. */
 body[data-page="home"] .hero .hero-network::after { display: none; }
 
-/* ---- Docked mark: the logo "lands" behind the second section's headline ---- */
+/* ---- Docked mark: the logo "lands" to the LEFT of the second section's
+   headline (matches the reference frames). ---- */
 #problem { position: relative; overflow: hidden; }
+#problem .container { position: relative; z-index: 1; }
+#problem .section-head { position: relative; }
 .problem-mark {
   position: absolute;
-  left: 50%;
-  top: clamp(40px, 9vw, 132px);
-  transform: translateX(-50%);
-  width: clamp(150px, 22vw, 280px);
-  z-index: 0;
+  top: -38px;
+  left: clamp(-64px, -4vw, -16px);
+  width: clamp(120px, 14vw, 188px);
+  z-index: 0;            /* sits beside / just behind the headline */
   pointer-events: none;
   opacity: 0;            /* revealed on scroll by motion.js as the hero mark arrives */
   will-change: transform, opacity, filter;
@@ -5843,11 +5839,10 @@ body[data-page="home"] .hero .hero-network::after { display: none; }
   display: block;
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 18px 48px rgba(123,44,191,0.20));
+  filter: drop-shadow(0 14px 44px rgba(123,44,191,0.28));
 }
-#problem .container { position: relative; z-index: 1; }
 @media (max-width: 700px) {
-  .problem-mark { top: clamp(28px, 12vw, 80px); width: clamp(120px, 38vw, 200px); }
+  .problem-mark { left: 50%; margin-left: -62px; top: -14px; width: 124px; }
 }
 
 /* Headline accents — green, glowing (matches the reference) */
