@@ -5802,10 +5802,9 @@ body[data-page] .nav-group-label { color: var(--page-accent); }
 /* ==================================================================
  * HOME DARK HERO VARIANT
  * ================================================================== */
-/* LIGHT Lumora hero — near-white, ink copy, single violet accent. */
 body[data-page="home"] .hero {
-  background: linear-gradient(180deg, #ffffff 0%, #f4f3f1 100%);
-  color: var(--on-surface);
+  background: #0A0B12;
+  color: #FFFFFF;
   /* Fill the viewport — no white space below the fold. */
   min-height: 100vh;
   min-height: 100svh;
@@ -5814,11 +5813,12 @@ body[data-page="home"] .hero {
   padding-bottom: clamp(56px, 8vw, 100px);
 }
 body[data-page="home"] .hero::before { display: none; }
-/* Soft light vignette so the aurora fades into the near-white edges. */
+/* Vignette — moderate edge darkening so the dimmed aurora reads as deep tones
+   that fade toward the corners (matches the reference: muted, not neon). */
 body[data-page="home"] .hero::after {
   content: '';
   position: absolute; inset: 0;
-  background: radial-gradient(135% 115% at 50% 42%, transparent 40%, rgba(255,255,255,0.55) 100%);
+  background: radial-gradient(135% 115% at 50% 42%, transparent 30%, rgba(8,9,15,0.55) 68%, rgba(5,6,10,0.9) 100%);
   pointer-events: none;
   z-index: 0;
 }
@@ -5881,7 +5881,14 @@ body[data-page="home"] #top { position: relative; }
 }
 /* Hero copy sits above the aurora; keep it readable. */
 body[data-page="home"] .hero .hero-content { position: relative; z-index: 2; }
-body[data-page="home"] .hero .hero-content::before { display: none; }
+body[data-page="home"] .hero .hero-content::before {
+  content: '';
+  position: absolute; left: 50%; top: 50%;
+  width: 150%; height: 150%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center, rgba(8,9,15,0.58), rgba(8,9,15,0.28) 45%, transparent 72%);
+  z-index: -1; pointer-events: none;
+}
 /* Keep the big aurora from bleeding past the hero:
    - the home nav is solid (translucent white let the colours show through);
    - section 2 is opaque and sits above the aurora so the glow can't leak onto
@@ -5896,12 +5903,13 @@ body[data-page="home"] #problem {
 }
 #problem .container { position: relative; z-index: 1; }
 
-/* Headline accents — single restrained violet accent (no glow, no underline). */
+/* Headline accents — a single soft, flat green (no glow, no underline) so the
+   copy reads calm and clean like the reference. */
 body[data-page="home"] .hero .hero-highlight--primary,
 body[data-page="home"] .hero .hero-highlight--secondary {
   background: none;
-  -webkit-text-fill-color: var(--brand-purple);
-  color: var(--brand-purple);
+  -webkit-text-fill-color: #36C98A;
+  color: #36C98A;
   filter: none;
 }
 /* No animated underline on the home hero accents. */
@@ -5909,35 +5917,34 @@ body[data-page="home"] .hero .hero-highlight::after,
 body[data-page="home"] .hero .hero-highlight--secondary::after {
   display: none;
 }
-body[data-page="home"] .hero .hero-content { color: var(--on-surface); }
-body[data-page="home"] .hero .t-hero { color: var(--on-surface); }
-body[data-page="home"] .hero em.ac-p { color: var(--brand-purple); }
-body[data-page="home"] .hero .t-body-lg { color: rgba(17,17,17,0.62); }
+body[data-page="home"] .hero .hero-content { color: #FFFFFF; }
+body[data-page="home"] .hero .t-hero { color: #FFFFFF; }
+body[data-page="home"] .hero em.ac-p { color: #1ED197; }
+body[data-page="home"] .hero .t-body-lg { color: rgba(255,255,255,0.72); }
 body[data-page="home"] .hero .badge {
-  background: var(--surface-container);
-  color: rgba(17,17,17,0.72);
-  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.92);
 }
-body[data-page="home"] .hero .badge .dot { background: var(--brand-purple); }
-body[data-page="home"] .hero .badge .dot::after { background: rgba(17,17,17,0.35); opacity: 0.45; }
-body[data-page="home"] .hero strong { color: var(--on-surface) !important; }
-/* Primary CTA — ink pill (Lumora dark); secondary — hairline outline. */
+body[data-page="home"] .hero .badge .dot { background: #1ED197; }
+body[data-page="home"] .hero .badge .dot::after { background: rgba(255,255,255,0.4); opacity: 0.45; }
+body[data-page="home"] .hero strong { color: #FFFFFF !important; }
+/* Primary CTA — solid violet; secondary — solid white (matches the reference). */
 body[data-page="home"] .hero .btn:not(.ghost) {
-  background: var(--ink);
+  background: #7E63E6;
   color: #FFFFFF;
-  border-color: var(--ink);
+  border-color: #7E63E6;
 }
-body[data-page="home"] .hero .btn:not(.ghost):hover { background: #000000; color: #FFFFFF; }
+body[data-page="home"] .hero .btn:not(.ghost):hover { background: #6B4FDB; color: #FFFFFF; }
 body[data-page="home"] .hero .btn.ghost {
-  background: transparent;
-  color: var(--on-surface);
-  border-color: var(--line);
+  background: #FFFFFF;
+  color: #14121F;
+  border-color: #FFFFFF;
 }
-body[data-page="home"] .hero .btn.ghost:hover { background: var(--surface-container); color: var(--on-surface); }
+body[data-page="home"] .hero .btn.ghost:hover { background: #ECE9F7; color: #14121F; }
 body[data-page="home"] .scroll-chevron {
-  background: rgba(17,17,17,0.04);
-  color: rgba(17,17,17,0.55);
-  border-color: var(--line);
+  background: rgba(255,255,255,0.08);
+  color: #FFFFFF;
+  border-color: rgba(255,255,255,0.18);
 }
 
 /* ==================================================================
