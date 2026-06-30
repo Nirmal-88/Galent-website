@@ -9224,3 +9224,108 @@ body[data-page="home"] .hero .hero-content { position: relative; z-index: 2; }
 @media (prefers-reduced-motion: reduce) {
   .hero-logo { filter: drop-shadow(0 16px 40px rgba(123, 44, 191, 0.32)); }
 }
+
+/* ==================================================================
+ * GLOBAL DARK THEME  (appended override layer — delete this whole
+ * block to revert to the light theme. Loaded on every page.)
+ * Matches the reference "live programmes" band: #0B0C10 base with a
+ * soft violet glow top-left and green glow bottom-right.
+ * ================================================================== */
+:root {
+  /* Dark surface scale */
+  --surface:                 #14151C;
+  --on-surface:              #F3F4F7;
+  --on-surface-variant:      #A7A9B4;
+  --surface-container:       #1A1C24;
+  --surface-container-high:  #22242E;
+  --surface-container-higher:#2A2C37;
+  --grey-400:                #9A9CA6;
+  --line:                    rgba(255,255,255,0.12);
+  --muted:                   #90929C;
+  --subtle:                  #6E707A;
+}
+/* hub page accent reads better light on dark */
+body[data-page="hub"] { --page-accent: #B79CFF; --page-accent-deep: #9B7CF0; --page-accent-soft: rgba(155,124,240,0.16); }
+
+html { background: #0B0C10; }
+body {
+  background:
+    radial-gradient(circle at 12% 16%, rgba(79,70,229,0.20) 0%, transparent 42%),
+    radial-gradient(circle at 88% 84%, rgba(30,209,151,0.10) 0%, transparent 48%),
+    #0B0C10;
+  background-attachment: fixed;
+  color: var(--on-surface);
+}
+
+/* Sticky nav → translucent dark */
+.nav { background: rgba(11,12,16,0.72); }
+.nav.scrolled { border-bottom-color: rgba(255,255,255,0.10); }
+
+/* Footer hairline */
+.footer { border-top-color: rgba(255,255,255,0.10); }
+
+/* ---- White card surfaces → elevated dark with hairline ---- */
+.feature, .svc, .card-item, .service-related a, .delivery-step, .diff-list li,
+.cap, .engagement-card, .ecosystem-partners__list li, .related-tile, .svc-cat,
+.engine-card, .case-study, .archetype-card, .leader-card, .about-sector,
+.sector-tile, .fde-rich, .home-sector-card, .kh-tile, .contact-card, .arch-layer,
+.proof-card, .testimonial, .bento-tile, .spec-strip {
+  background: var(--surface);
+  border-color: rgba(255,255,255,0.10);
+}
+/* shadows tuned for dark */
+.card-item, .case-study, .leader-card, .engine-card, .archetype-card,
+.contact-card, .proof-card, .testimonial, .bento-tile, .feature, .cap,
+.engagement-card, .related-tile, .home-sector-card, .about-sector, .sector-tile, .kh-tile {
+  box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset, 0 18px 40px -28px rgba(0,0,0,0.8);
+}
+
+/* Light section gradients → let the page gradient show through */
+.about-hero, .ecosystem-partners, .kh-hero { background: transparent; }
+
+/* Accent "chip" tints (were mixed with white) → subtle translucent on dark */
+.service-related .num, .delivery-step .df-step, .diff-list li strong::before,
+.cap .cap-icon, .related-tile__arrow, .engine-card .num, .case-study .sector,
+.archetype-body .skill, .about-sector .sector-num, .home-sector-card .num-chip,
+.kh-live, .contact-card__icon, .arch-node, .proof-card__icon, .sector-tile .sector-num {
+  background: rgba(255,255,255,0.07);
+}
+
+/* Badges + form fields */
+.badge { background: rgba(255,255,255,0.07); color: var(--on-surface); }
+input[type="email"], input[type="text"], input[type="search"], input[type="tel"],
+textarea, select, .hub-search input, .sub-form input {
+  background: var(--surface-container);
+  color: var(--on-surface);
+  border-color: var(--line);
+}
+input::placeholder, textarea::placeholder { color: var(--subtle); }
+
+/* Dropdown mega-menu panel */
+.dropdown-panel { background: rgba(16,17,23,0.96); border-color: rgba(255,255,255,0.10); }
+
+/* Ghost / white buttons → transparent with hairline */
+.btn.ghost,
+body[data-page="home"] .hero .btn.ghost,
+body[data-page^="service-"] .hero .btn.ghost {
+  background: transparent;
+  color: var(--on-surface);
+  border: 1px solid rgba(255,255,255,0.28);
+}
+
+/* Post body: code, pre, blockquote, hr — flip dark-on-light tints to light-on-dark */
+.post-body code { background: rgba(255,255,255,0.08); }
+.post-body pre { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.10); }
+.post-body hr { border-top-color: rgba(255,255,255,0.12); }
+.post-cover { background: var(--surface-container); }
+
+/* Special cases that broke under the token flip */
+.engine-node.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.ecosystem-partners__list li:hover { color: var(--on-surface); }
+.how-you-get-it .steps::after { background: rgba(255,255,255,0.12); }
+
+/* .svc cards that sit inside .panel-dark were force-darkened text; re-light them */
+.panel-dark .svc, .panel-dark .svc h2, .panel-dark .svc h3, .panel-dark .svc h4,
+.panel-dark .svc p, .panel-dark .svc li, .panel-dark .svc li a,
+.panel-dark .svc li a > span:first-child { color: var(--on-surface); }
+.panel-dark .svc li { border-top-color: rgba(255,255,255,0.10); }
