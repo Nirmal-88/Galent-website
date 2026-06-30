@@ -115,33 +115,16 @@
 
   <main id="top">
 
+    <!-- The single Galent mark: spins as the hero aurora, then travels on scroll
+         and docks to the left of the second section's headline. Lives in <main>
+         (not inside the hero) so it can cross the section boundary. -->
+    <div class="travel-mark" aria-hidden="true">
+      <img src="assets/images/galent-mark.png" alt="" width="320" height="395" decoding="async">
+    </div>
+
     <!-- 01 HERO -->
     <section id="hero" class="hero" aria-labelledby="hero-title">
       <div class="hero-network" aria-hidden="true"></div>
-
-      <!-- The Galent mark as a dim, slowly-spinning ambient aurora behind the
-           hero copy (motion.js positions + animates it). -->
-      <div class="travel-mark" aria-hidden="true">
-        <img src="assets/images/galent-mark.png" alt="" width="320" height="395" decoding="async">
-      </div>
-
-      <!-- Orbital compass: rings + brand tokens revolve around the hero copy,
-           with the Galent mark as the lead orbiter. Cursor tilts the whole
-           assembly; it fades/scales on scroll. Driven by motion.js. -->
-      <div class="hero-orbit" aria-hidden="true">
-        <div class="hero-orbit__stage">
-          <div class="orbit-ring orbit-ring--outer"></div>
-          <div class="orbit-ring orbit-ring--mid"></div>
-          <div class="orbit-ring orbit-ring--inner"></div>
-          <div class="orbit-arm orbit-arm--green"><span class="orbit-token orbit-token--green"></span></div>
-          <div class="orbit-arm orbit-arm--violet"><span class="orbit-token orbit-token--violet"></span></div>
-          <div class="orbit-arm orbit-arm--orange"><span class="orbit-token orbit-token--orange"></span></div>
-          <div class="orbit-arm orbit-arm--mark">
-            <span class="orbit-mark"><img src="assets/images/galent-mark-crisp.png" alt="" width="325" height="390" decoding="async"></span>
-          </div>
-        </div>
-      </div>
-
       <div class="hero-content">
         <h1 id="hero-title" class="t-hero hero-headline">
           <span class="hero-line hero-line--1">Engineering <em class="hero-highlight hero-highlight--primary">Outcomes.</em></span>

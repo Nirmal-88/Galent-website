@@ -246,138 +246,125 @@
    * copy lifts away as you leave. Returns a cleanup fn.
    * ======================================================================== */
   function setupHeroLogo(gsap, ScrollTrigger) {
+    var main = document.getElementById('top');
     var hero = document.getElementById('hero');
-    var mark = document.querySelector('.travel-mark');   // the dim ambient aurora
+    var mark = document.querySelector('.travel-mark');
     var img = mark && mark.querySelector('img');
-    var orbit = document.querySelector('.hero-orbit');
-    var stage = orbit && orbit.querySelector('.hero-orbit__stage');
-    if (!hero || !mark || !img || !orbit || !stage) return function () {};
+    var headline = document.querySelector('#problem .section-head h2') ||
+                   document.querySelector('#problem .section-head');
+    if (!main || !hero || !mark || !img) return function () {};
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    var GAP = 22;             // gap to the left of the headline
     var START = 1.05;         // entrance begins as the loading screen fades
+    var ASPECT = 320 / 395;   // mark width / height
 
-    // The aurora sits centred behind the copy as ambient glow — no travel/dock.
-    gsap.set(mark, { left: '50%', top: '50%', xPercent: -50, yPercent: -50, opacity: 0, scale: 1, transformOrigin: '50% 50%' });
-
-    // Entrance: hand off from the loading screen — bloom the aurora to a dim
-    // full-bleed glow, and ease the orbital compass in over it.
-    gsap.set(mark, { filter: 'blur(72px)' });
-    var entrance = gsap.timeline();
-    entrance.to(mark, { opacity: 0.24, duration: 1.3, ease: 'power2.out' }, START - 0.1);
-    if (!reduce) {
-      entrance.fromTo(orbit, { opacity: 0, scale: 0.92 },
-        { opacity: 1, scale: 1, duration: 1.4, ease: 'power3.out' }, START + 0.05);
-    } else {
-      gsap.set(orbit, { opacity: 1 });
+    // Geometry relative to <main>; recomputed on refresh / resize. The docked
+    // mark is sized to the headline's height so it matches "The Delivery Model…".
+    var geo = { heroCX: 0, heroCY: 0, dockCX: 0, dockCY: 0, smallScale: 1 };
+    function layout() {
+      var m = main.getBoundingClientRect();
+      var h = hero.getBoundingClientRect();
+      var mw = mark.offsetWidth || 1;
+      geo.heroCX = (h.left - m.left) + h.width / 2;
+      geo.heroCY = (h.top - m.top) + h.height / 2;
+      if (headline) {
+        var hl = headline.getBoundingClientRect();
+        var targetH = Math.max(96, Math.min(240, hl.height));
+        var targetW = targetH * ASPECT;
+        geo.smallScale = targetW / mw;
+        geo.dockCX = (hl.left - m.left) - GAP - targetW / 2;
+        geo.dockCY = (hl.top - m.top) + hl.height / 2;
+      } else {
+        geo.smallScale = 150 / mw;
+        geo.dockCX = geo.heroCX;
+        geo.dockCY = geo.heroCY + 900;
+      }
+      gsap.set(mark, { left: geo.heroCX, top: geo.heroCY });
     }
 
-    // --- Orbital compass ---------------------------------------------------
-    // Continuous revolution of rings + brand tokens around the copy, with the
-    // Galent mark leading the outer orbit. Driven from a single ticker so the
-    // cursor can speed it up and tilt the whole assembly in 3D (premium feel).
-    var rings = {
-      outer: orbit.querySelector('.orbit-ring--outer'),
-      mid:   orbit.querySelector('.orbit-ring--mid'),
-      inner: orbit.querySelector('.orbit-ring--inner')
-    };
-    var arms = {
-      green:  orbit.querySelector('.orbit-arm--green'),
-      violet: orbit.querySelector('.orbit-arm--violet'),
-      orange: orbit.querySelector('.orbit-arm--orange'),
-      mk:     orbit.querySelector('.orbit-arm--mark')
-    };
-    var markSat = orbit.querySelector('.orbit-mark');
+    gsap.set(mark, { xPercent: -50, yPercent: -50, opacity: 0, scale: 1, transformOrigin: '50% 50%' });
+    layout();
+    ScrollTrigger.addEventListener('refresh', layout);
 
-    // Centre every rotating element and let GSAP own its transform.
-    var centred = [rings.outer, rings.mid, rings.inner, arms.green, arms.violet, arms.orange, arms.mk];
-    centred.forEach(function (el) { if (el) gsap.set(el, { xPercent: -50, yPercent: -50, transformOrigin: '50% 50%' }); });
-    if (markSat) gsap.set(markSat, { xPercent: -50, yPercent: -50, transformOrigin: '50% 50%' });
+    // Entrance: hand off from the loading screen — start compact, then (as the
+    // subtext fades in) expand into the full-bleed, blurred aurora.
+    gsap.set(mark, { scale: geo.smallScale, filter: 'blur(7px)' });
+    var entrance = gsap.timeline();
+    entrance.to(mark, { opacity: 1, duration: 0.45, ease: 'power1.out' }, START - 0.15);
+    entrance.to(mark, { scale: 1, filter: 'blur(72px)', duration: 1.2, ease: 'power2.inOut' }, START + 0.1);
+    entrance.to(mark, { opacity: 0.24, duration: 1.2, ease: 'power2.inOut' }, START + 0.1);
 
-    // Per-element angular speed (deg/sec) + starting offset (deg).
-    var A = {
-      ringO: { v: 5,   a: 0   }, ringM: { v: -7, a: 0   }, ringI: { v: 9,  a: 0   },
-      green: { v: 16,  a: 140 }, violet:{ v: 22, a: 60  }, orange:{ v: 28, a: 220 },
-      mk:    { v: 12,  a: 0   }
-    };
-    // Cursor engagement (speed) + smoothed tilt of the whole stage.
-    var engage = 0, engageTarget = 0;
-    var tiltX = 0, tiltY = 0, tiltTX = 0, tiltTY = 0;
-    var auroraRot = 0, auroraOff = { x: 0, y: 0 }, auroraCur = { x: 0, y: 0 };
+    // Travel: on scroll the aurora shrinks, sharpens and flies to dock just left
+    // of the second section's headline. immediateRender:false so it doesn't fight
+    // the entrance at rest; function values survive refresh/resize.
+    var travel = gsap.timeline({
+      scrollTrigger: {
+        trigger: hero, start: 'top top',
+        endTrigger: '#problem', end: 'top 45%',
+        scrub: 1, invalidateOnRefresh: true,
+        // In the hero the mark is the aurora (behind copy, under the opaque
+        // section 2). Once it has set off it lifts above section 2 so it shows
+        // when docked — but stays below the nav.
+        onUpdate: function (self) { mark.style.zIndex = self.progress < 0.4 ? '1' : '30'; }
+      }
+    });
+    travel.fromTo(mark,
+      { x: 0, y: 0, scale: 1, opacity: 0.24, filter: 'blur(72px)' },
+      {
+        x: function () { return geo.dockCX - geo.heroCX; },
+        y: function () { return geo.dockCY - geo.heroCY; },
+        scale: function () { return geo.smallScale; },
+        opacity: 0.96, filter: 'blur(2px)', ease: 'power1.inOut',
+        immediateRender: false
+      }, 0);
 
+    // Constant fast rotation + cursor parallax in the hero, both easing to a stop
+    // as the mark docks — so in section 2 it sits still and upright. Rotation +
+    // parallax live on the IMG (screen-aligned translate), independent of the
+    // wrapper's travel/scale transform.
+    var DEG_PER_SEC = 60;            // ~6s per turn (much faster than before)
+    var cur = { x: 0, y: 0 };         // cursor target offset
+    var off = { x: 0, y: 0 };         // smoothed offset
+    var rot = 0;
     var tick = null;
     if (!reduce) {
-      tick = function (time, dtMs) {
-        var dt = Math.min(dtMs, 50) / 1000;   // clamp big frame gaps
-        engage += (engageTarget - engage) * 0.05;
-        var spd = 1 + engage * 0.9;           // cursor near → orbit speeds up
-
-        A.ringO.a += A.ringO.v * dt * spd; A.ringM.a += A.ringM.v * dt * spd; A.ringI.a += A.ringI.v * dt * spd;
-        A.green.a += A.green.v * dt * spd; A.violet.a += A.violet.v * dt * spd; A.orange.a += A.orange.v * dt * spd;
-        A.mk.a    += A.mk.v    * dt * spd;
-
-        if (rings.outer) gsap.set(rings.outer, { rotation: A.ringO.a });
-        if (rings.mid)   gsap.set(rings.mid,   { rotation: A.ringM.a });
-        if (rings.inner) gsap.set(rings.inner, { rotation: A.ringI.a });
-        gsap.set(arms.green,  { rotation: A.green.a });
-        gsap.set(arms.violet, { rotation: A.violet.a });
-        gsap.set(arms.orange, { rotation: A.orange.a });
-        gsap.set(arms.mk,     { rotation: A.mk.a });
-        if (markSat) gsap.set(markSat, { rotation: -A.mk.a });   // keep the mark upright as it revolves
-
-        // 3D tilt of the whole assembly toward the cursor.
-        tiltX += (tiltTX - tiltX) * 0.06;
-        tiltY += (tiltTY - tiltY) * 0.06;
-        gsap.set(stage, { rotationX: tiltX, rotationY: tiltY });
-
-        // Ambient aurora: gentle spin + faint parallax drift.
-        auroraRot += 6 * dt;
-        auroraOff.x += (auroraCur.x - auroraOff.x) * 0.05;
-        auroraOff.y += (auroraCur.y - auroraOff.y) * 0.05;
-        gsap.set(img, { rotation: auroraRot, x: auroraOff.x, y: auroraOff.y });
-
-        engageTarget *= 0.96;   // engagement decays unless the cursor keeps moving
+      tick = function (time, dt) {
+        var p = (travel.scrollTrigger && travel.scrollTrigger.progress) || 0;
+        if (p < 0.8) {
+          rot += DEG_PER_SEC * (dt / 1000) * (1 - p / 0.8);   // spin, slowing
+        } else {
+          rot += (Math.round(rot / 360) * 360 - rot) * 0.12;  // settle upright, stop
+        }
+        var k = Math.max(0, 1 - p / 0.8);                     // parallax fades out by dock
+        off.x += (cur.x * k - off.x) * 0.08;
+        off.y += (cur.y * k - off.y) * 0.08;
+        gsap.set(img, { rotation: rot, x: off.x, y: off.y });
       };
       gsap.ticker.add(tick);
-    } else {
-      // Static premium poster — rings + tokens at rest, mark upright.
-      gsap.set(arms.green,  { rotation: A.green.a });
-      gsap.set(arms.violet, { rotation: A.violet.a });
-      gsap.set(arms.orange, { rotation: A.orange.a });
     }
 
     var onMove = null;
     if (!reduce && window.matchMedia && window.matchMedia('(pointer: fine)').matches) {
       onMove = function (e) {
-        var nx = (e.clientX / window.innerWidth) - 0.5;   // -0.5..0.5
-        var ny = (e.clientY / window.innerHeight) - 0.5;
-        tiltTY = nx * 18;          // rotateY follows horizontal cursor
-        tiltTX = -ny * 12;         // rotateX follows vertical cursor
-        auroraCur.x = nx * 60; auroraCur.y = ny * 60;
-        engageTarget = 1;
+        cur.x = ((e.clientX / window.innerWidth) - 0.5) * 80;
+        cur.y = ((e.clientY / window.innerHeight) - 0.5) * 80;
       };
       window.addEventListener('pointermove', onMove);
     }
 
-    // Scroll: the orbit gracefully scales down + fades, and the aurora dims,
-    // so section two arrives clean — no docking mark.
-    var scrollST = ScrollTrigger.create({
-      trigger: hero, start: 'top top', end: 'bottom top',
-      onUpdate: function (self) {
-        var p = self.progress;
-        gsap.set(stage, { scale: 1 - p * 0.16, y: -p * 50 });
-        if (p > 0.001) {   // at the very top, leave the entrance fade in control
-          gsap.set(orbit, { opacity: Math.max(0, 1 - p / 0.55) });
-          gsap.set(mark, { opacity: 0.24 * Math.max(0, 1 - p / 0.7) });
-        }
-      }
-    });
+    var onResize = function () { layout(); };
+    window.addEventListener('resize', onResize);
 
     return function () {
       if (tick) gsap.ticker.remove(tick);
       if (onMove) window.removeEventListener('pointermove', onMove);
       entrance.kill();
-      if (scrollST) scrollST.kill();
-      gsap.set([mark, img, orbit, stage], { clearProps: 'all' });
+      if (travel.scrollTrigger) travel.scrollTrigger.kill();
+      travel.kill();
+      ScrollTrigger.removeEventListener('refresh', layout);
+      window.removeEventListener('resize', onResize);
+      gsap.set([mark, img], { clearProps: 'all' });
     };
   }
 
