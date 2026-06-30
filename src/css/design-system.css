@@ -4,16 +4,26 @@
  * Tokens, typography, components shared across all pages.
  * ================================================================== */
 
+/* Lumora visual language — Onest typeface (loaded here so every page inherits
+   it without touching 21 <head>s). */
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700&display=swap');
+
 :root {
-  /* Surface scale */
+  /* Surface scale — warm near-white (Lumora). Page stays #fff; fills warm. */
   --surface:                #ffffff;
-  --on-surface:             #121317;
-  --on-surface-variant:     #45474d;
-  --surface-container:      #f8f9fc;
-  --surface-container-high: #eff2f7;
-  --surface-container-higher:#e6eaf0;
-  --grey-1000:              #212226;
-  --grey-400:               #b7bfd9;
+  --on-surface:             #111111;
+  --on-surface-variant:     #5a5a57;
+  --surface-container:      #f1f0ee;   /* warm light fill */
+  --surface-container-high: #e3e2df;
+  --surface-container-higher:#e3e2df;
+  --grey-1000:              #0a0a0a;
+  --grey-400:               #b6b6b6;
+
+  /* Lumora language tokens */
+  --ink:                    #0a0a0a;   /* deep ink cards / panels */
+  --line:                   #e6e5e2;   /* hairline borders */
+  --muted:                  #8d8d8d;
+  --subtle:                 #b6b6b6;
 
   /* Galent brand */
   --brand-green:        #1ED197;
@@ -28,6 +38,11 @@
   --primary:            var(--brand-purple);
   --primary-deep:       var(--brand-purple-deep);
   --primary-soft:       var(--brand-purple-soft);
+
+  /* Single restrained accent (violet primary) for the Lumora language */
+  --accent:             var(--brand-purple);
+  --accent-from:        #8E5BD8;
+  --accent-to:          #5E1FA0;
 
   /* Spacing — 4px base */
   --space-xs:  4px;
@@ -44,8 +59,10 @@
   --radius-md: 16px;
   --radius-lg: 36px;
   --radius-full: 9999px;
+  --radius-card: 32px;       /* Lumora 2rem cards */
+  --radius-control: 14px;    /* Lumora .875rem controls */
 
-  --font-sans: "Plus Jakarta Sans", "Inter", system-ui, -apple-system, sans-serif;
+  --font-sans: "Onest", "Plus Jakarta Sans", "Inter", system-ui, -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
   --container: 1240px;
@@ -384,11 +401,11 @@ em.ac-o { color: var(--brand-orange); font-style: normal; }
 }
 .btn:hover .arr { transform: translateX(3px); }
 .btn.ghost {
-  background: var(--surface-container);
+  background: transparent;
   color: var(--on-surface);
-  border-color: var(--surface-container);
+  border-color: var(--line);
 }
-.btn.ghost:hover { background: var(--surface-container-high); box-shadow: none; }
+.btn.ghost:hover { background: var(--surface-container); box-shadow: none; }
 .btn.ghost .arr { background: rgba(18,19,23,0.06); }
 .btn.purple {
   background: var(--brand-purple);
