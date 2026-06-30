@@ -293,7 +293,7 @@
     var entrance = gsap.timeline();
     entrance.to(mark, { opacity: 1, duration: 0.45, ease: 'power1.out' }, START - 0.15);
     entrance.to(mark, { scale: 1, filter: 'blur(72px)', duration: 1.2, ease: 'power2.inOut' }, START + 0.1);
-    entrance.to(mark, { opacity: 0.45, duration: 1.2, ease: 'power2.inOut' }, START + 0.1);
+    entrance.to(mark, { opacity: 0.24, duration: 1.2, ease: 'power2.inOut' }, START + 0.1);
 
     // Travel: on scroll the aurora shrinks, sharpens and flies to dock just left
     // of the second section's headline. immediateRender:false so it doesn't fight
@@ -310,7 +310,7 @@
       }
     });
     travel.fromTo(mark,
-      { x: 0, y: 0, scale: 1, opacity: 0.45, filter: 'blur(72px)' },
+      { x: 0, y: 0, scale: 1, opacity: 0.24, filter: 'blur(72px)' },
       {
         x: function () { return geo.dockCX - geo.heroCX; },
         y: function () { return geo.dockCY - geo.heroCY; },

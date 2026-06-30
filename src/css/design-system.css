@@ -5801,37 +5801,15 @@ body[data-page="home"] .hero::before { display: none; }
 body[data-page="home"] .hero::after {
   content: '';
   position: absolute; inset: 0;
-  background: radial-gradient(150% 120% at 50% 45%, transparent 50%, rgba(8,9,15,0.62) 100%);
+  background: radial-gradient(135% 115% at 50% 42%, transparent 30%, rgba(8,9,15,0.55) 68%, rgba(5,6,10,0.9) 100%);
   pointer-events: none;
   z-index: 0;
 }
 
-/* Faint flowing grid ("magnetic spectral lines") drifting across the hero,
-   layered above the aurora but below the copy. */
-body[data-page="home"] .hero-network {
-  display: block;
-  position: absolute; inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  overflow: hidden;
-  background-image:
-    linear-gradient(to right,  rgba(255,255,255,0.055) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px);
-  background-size: 54px 54px;
-  /* Confine the grid to the bright aurora glow in the centre so the lines read
-     as being INSIDE the aurora, fading out into the dark edges (not across the
-     whole hero). */
-  mask-image: radial-gradient(ellipse 58% 56% at 50% 42%, #000 0%, rgba(0,0,0,0.55) 42%, transparent 72%);
-  -webkit-mask-image: radial-gradient(ellipse 58% 56% at 50% 42%, #000 0%, rgba(0,0,0,0.55) 42%, transparent 72%);
-  animation: heroGridDrift 26s linear infinite;
-}
-@keyframes heroGridDrift {
-  from { background-position: 0 0, 0 0; }
-  to   { background-position: 54px 54px, 54px 54px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  body[data-page="home"] .hero-network { animation: none; }
-}
+/* The hero background is a single smooth, dim aurora (the slowly-rotating,
+   heavily-blurred Galent mark). No grid or line overlay — keep it clean so the
+   copy reads clearly, matching the reference. */
+body[data-page="home"] .hero-network { display: none; }
 
 /* ====================================================================
  * LOADING SCREEN — the Galent mark appears here first, then fades to
@@ -5881,6 +5859,8 @@ body[data-page="home"] #top { position: relative; }
 }
 .travel-mark img {
   display: block; width: 100%; height: auto;
+  /* Mute the aurora so it reads as a deep, dim glow rather than vivid neon. */
+  filter: saturate(0.82) brightness(0.88);
 }
 /* Hero copy sits above the aurora; keep it readable. */
 body[data-page="home"] .hero .hero-content { position: relative; z-index: 2; }
@@ -5889,7 +5869,7 @@ body[data-page="home"] .hero .hero-content::before {
   position: absolute; left: 50%; top: 50%;
   width: 150%; height: 150%;
   transform: translate(-50%, -50%);
-  background: radial-gradient(ellipse at center, rgba(8,9,15,0.42), transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(8,9,15,0.58), rgba(8,9,15,0.28) 45%, transparent 72%);
   z-index: -1; pointer-events: none;
 }
 /* Keep the big aurora from bleeding past the hero:
@@ -5906,18 +5886,19 @@ body[data-page="home"] #problem {
 }
 #problem .container { position: relative; z-index: 1; }
 
-/* Headline accents — green, glowing (matches the reference) */
+/* Headline accents — a single soft, flat green (no glow, no underline) so the
+   copy reads calm and clean like the reference. */
 body[data-page="home"] .hero .hero-highlight--primary,
 body[data-page="home"] .hero .hero-highlight--secondary {
-  background: linear-gradient(90deg, #1ED197 0%, #6FE3B6 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 18px rgba(30,209,151,0.45));
+  background: none;
+  -webkit-text-fill-color: #36C98A;
+  color: #36C98A;
+  filter: none;
 }
+/* No animated underline on the home hero accents. */
 body[data-page="home"] .hero .hero-highlight::after,
 body[data-page="home"] .hero .hero-highlight--secondary::after {
-  background: linear-gradient(90deg, #1ED197 0%, #6FE3B6 100%);
+  display: none;
 }
 body[data-page="home"] .hero .hero-content { color: #FFFFFF; }
 body[data-page="home"] .hero .t-hero { color: #FFFFFF; }
@@ -5930,18 +5911,19 @@ body[data-page="home"] .hero .badge {
 body[data-page="home"] .hero .badge .dot { background: #1ED197; }
 body[data-page="home"] .hero .badge .dot::after { background: rgba(255,255,255,0.4); opacity: 0.45; }
 body[data-page="home"] .hero strong { color: #FFFFFF !important; }
+/* Primary CTA — solid violet; secondary — solid white (matches the reference). */
 body[data-page="home"] .hero .btn:not(.ghost) {
-  background: #1ED197;
-  color: #0A0B10;
-  border-color: #1ED197;
-}
-body[data-page="home"] .hero .btn:not(.ghost):hover { background: #0FB07F; color: #0A0B10; }
-body[data-page="home"] .hero .btn.ghost {
-  background: rgba(255,255,255,0.08);
+  background: #7E63E6;
   color: #FFFFFF;
-  border-color: rgba(255,255,255,0.15);
+  border-color: #7E63E6;
 }
-body[data-page="home"] .hero .btn.ghost:hover { background: rgba(255,255,255,0.12); }
+body[data-page="home"] .hero .btn:not(.ghost):hover { background: #6B4FDB; color: #FFFFFF; }
+body[data-page="home"] .hero .btn.ghost {
+  background: #FFFFFF;
+  color: #14121F;
+  border-color: #FFFFFF;
+}
+body[data-page="home"] .hero .btn.ghost:hover { background: #ECE9F7; color: #14121F; }
 body[data-page="home"] .scroll-chevron {
   background: rgba(255,255,255,0.08);
   color: #FFFFFF;
