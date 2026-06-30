@@ -114,7 +114,9 @@
         if (header && !header.querySelector('.post-cover')) {
           const cover = document.createElement('div');
           cover.className = 'post-cover';
-          cover.innerHTML = `<img src="${escapeHTML(bannerSrc)}" alt="${escapeHTML(title)}" loading="eager">`;
+          // Blurred backdrop fills the banner area; the real image sits on top
+          // shown in full (object-fit: contain) so it is never cropped.
+          cover.innerHTML = `<img class="cover-fill" src="${escapeHTML(bannerSrc)}" alt="" aria-hidden="true" loading="eager"><img class="cover-img" src="${escapeHTML(bannerSrc)}" alt="${escapeHTML(title)}" loading="eager">`;
           header.insertBefore(cover, header.firstChild);
         }
       }

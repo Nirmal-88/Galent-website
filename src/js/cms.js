@@ -38,7 +38,9 @@
       const playOverlay = item.category === 'videocasts'
         ? `<div class="play-btn">▶</div>${runtime}`
         : '';
-      return `<div class="card-thumb has-image ${style}"><img src="${img}" alt="" loading="lazy">${playOverlay}</div>`;
+      // Two layers: a blurred backdrop that fills the box, plus the real
+      // image shown in full (object-fit: contain) so nothing is cropped.
+      return `<div class="card-thumb has-image ${style}"><img class="thumb-fill" src="${img}" alt="" aria-hidden="true" loading="lazy"><img class="thumb-img" src="${img}" alt="" loading="lazy">${playOverlay}</div>`;
     }
     if (item.category === 'videocasts') {
       return `<div class="card-thumb ${style}"><div class="play-btn">▶</div>${runtime}</div>`;

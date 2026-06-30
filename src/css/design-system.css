@@ -5802,9 +5802,10 @@ body[data-page] .nav-group-label { color: var(--page-accent); }
 /* ==================================================================
  * HOME DARK HERO VARIANT
  * ================================================================== */
+/* LIGHT Lumora hero — near-white, ink copy, single violet accent. */
 body[data-page="home"] .hero {
-  background: #0A0B12;
-  color: #FFFFFF;
+  background: linear-gradient(180deg, #ffffff 0%, #f4f3f1 100%);
+  color: var(--on-surface);
   /* Fill the viewport — no white space below the fold. */
   min-height: 100vh;
   min-height: 100svh;
@@ -5813,12 +5814,11 @@ body[data-page="home"] .hero {
   padding-bottom: clamp(56px, 8vw, 100px);
 }
 body[data-page="home"] .hero::before { display: none; }
-/* Vignette — moderate edge darkening so the dimmed aurora reads as deep tones
-   that fade toward the corners (matches the reference: muted, not neon). */
+/* Soft light vignette so the aurora fades into the near-white edges. */
 body[data-page="home"] .hero::after {
   content: '';
   position: absolute; inset: 0;
-  background: radial-gradient(135% 115% at 50% 42%, transparent 30%, rgba(8,9,15,0.55) 68%, rgba(5,6,10,0.9) 100%);
+  background: radial-gradient(135% 115% at 50% 42%, transparent 40%, rgba(255,255,255,0.55) 100%);
   pointer-events: none;
   z-index: 0;
 }
@@ -5881,14 +5881,7 @@ body[data-page="home"] #top { position: relative; }
 }
 /* Hero copy sits above the aurora; keep it readable. */
 body[data-page="home"] .hero .hero-content { position: relative; z-index: 2; }
-body[data-page="home"] .hero .hero-content::before {
-  content: '';
-  position: absolute; left: 50%; top: 50%;
-  width: 150%; height: 150%;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(ellipse at center, rgba(8,9,15,0.58), rgba(8,9,15,0.28) 45%, transparent 72%);
-  z-index: -1; pointer-events: none;
-}
+body[data-page="home"] .hero .hero-content::before { display: none; }
 /* Keep the big aurora from bleeding past the hero:
    - the home nav is solid (translucent white let the colours show through);
    - section 2 is opaque and sits above the aurora so the glow can't leak onto
@@ -5903,13 +5896,12 @@ body[data-page="home"] #problem {
 }
 #problem .container { position: relative; z-index: 1; }
 
-/* Headline accents — a single soft, flat green (no glow, no underline) so the
-   copy reads calm and clean like the reference. */
+/* Headline accents — single restrained violet accent (no glow, no underline). */
 body[data-page="home"] .hero .hero-highlight--primary,
 body[data-page="home"] .hero .hero-highlight--secondary {
   background: none;
-  -webkit-text-fill-color: #36C98A;
-  color: #36C98A;
+  -webkit-text-fill-color: var(--brand-purple);
+  color: var(--brand-purple);
   filter: none;
 }
 /* No animated underline on the home hero accents. */
@@ -5917,34 +5909,35 @@ body[data-page="home"] .hero .hero-highlight::after,
 body[data-page="home"] .hero .hero-highlight--secondary::after {
   display: none;
 }
-body[data-page="home"] .hero .hero-content { color: #FFFFFF; }
-body[data-page="home"] .hero .t-hero { color: #FFFFFF; }
-body[data-page="home"] .hero em.ac-p { color: #1ED197; }
-body[data-page="home"] .hero .t-body-lg { color: rgba(255,255,255,0.72); }
+body[data-page="home"] .hero .hero-content { color: var(--on-surface); }
+body[data-page="home"] .hero .t-hero { color: var(--on-surface); }
+body[data-page="home"] .hero em.ac-p { color: var(--brand-purple); }
+body[data-page="home"] .hero .t-body-lg { color: rgba(17,17,17,0.62); }
 body[data-page="home"] .hero .badge {
-  background: rgba(255,255,255,0.08);
-  color: rgba(255,255,255,0.92);
+  background: var(--surface-container);
+  color: rgba(17,17,17,0.72);
+  border: 1px solid var(--line);
 }
-body[data-page="home"] .hero .badge .dot { background: #1ED197; }
-body[data-page="home"] .hero .badge .dot::after { background: rgba(255,255,255,0.4); opacity: 0.45; }
-body[data-page="home"] .hero strong { color: #FFFFFF !important; }
-/* Primary CTA — solid violet; secondary — solid white (matches the reference). */
+body[data-page="home"] .hero .badge .dot { background: var(--brand-purple); }
+body[data-page="home"] .hero .badge .dot::after { background: rgba(17,17,17,0.35); opacity: 0.45; }
+body[data-page="home"] .hero strong { color: var(--on-surface) !important; }
+/* Primary CTA — ink pill (Lumora dark); secondary — hairline outline. */
 body[data-page="home"] .hero .btn:not(.ghost) {
-  background: #7E63E6;
+  background: var(--ink);
   color: #FFFFFF;
-  border-color: #7E63E6;
+  border-color: var(--ink);
 }
-body[data-page="home"] .hero .btn:not(.ghost):hover { background: #6B4FDB; color: #FFFFFF; }
+body[data-page="home"] .hero .btn:not(.ghost):hover { background: #000000; color: #FFFFFF; }
 body[data-page="home"] .hero .btn.ghost {
-  background: #FFFFFF;
-  color: #14121F;
-  border-color: #FFFFFF;
+  background: transparent;
+  color: var(--on-surface);
+  border-color: var(--line);
 }
-body[data-page="home"] .hero .btn.ghost:hover { background: #ECE9F7; color: #14121F; }
+body[data-page="home"] .hero .btn.ghost:hover { background: var(--surface-container); color: var(--on-surface); }
 body[data-page="home"] .scroll-chevron {
-  background: rgba(255,255,255,0.08);
-  color: #FFFFFF;
-  border-color: rgba(255,255,255,0.18);
+  background: rgba(17,17,17,0.04);
+  color: rgba(17,17,17,0.55);
+  border-color: var(--line);
 }
 
 /* ==================================================================
@@ -7883,8 +7876,18 @@ blockquote,
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
   display: block;
+}
+/* Blurred backdrop fills the box edge-to-edge (no empty bars)… */
+.card-thumb.has-image .thumb-fill {
+  object-fit: cover;
+  transform: scale(1.18);
+  filter: blur(22px) saturate(1.15) brightness(0.92);
+}
+/* …while the real image is shown in full, never cropped. */
+.card-thumb.has-image .thumb-img {
+  object-fit: contain;
+  z-index: 1;
 }
 /* Keep the play overlay readable on top of imagery */
 .card-thumb.has-image .play-btn,
@@ -7896,6 +7899,7 @@ blockquote,
 
 /* Post cover banner */
 .post-cover {
+  position: relative;
   width: 100%;
   margin: 0 0 clamp(28px, 3.4vw, 48px);
   border-radius: 18px;
@@ -7904,10 +7908,22 @@ blockquote,
   background: var(--surface-container);
 }
 .post-cover img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
   display: block;
+}
+/* Blurred backdrop fills the banner area edge-to-edge… */
+.post-cover .cover-fill {
+  object-fit: cover;
+  transform: scale(1.15);
+  filter: blur(28px) saturate(1.12) brightness(0.9);
+}
+/* …the real banner sits on top, shown in full with no cropping. */
+.post-cover .cover-img {
+  object-fit: contain;
+  z-index: 1;
 }
 @media (max-width: 720px) { .post-cover { aspect-ratio: 4 / 3; border-radius: 14px; } }
 
