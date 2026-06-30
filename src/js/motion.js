@@ -288,12 +288,12 @@
     ScrollTrigger.addEventListener('refresh', layout);
 
     // Entrance: hand off from the loading screen — start compact, then (as the
-    // subtext fades in) expand into the dim, blurred aurora.
+    // subtext fades in) expand into the full-bleed, blurred aurora.
     gsap.set(mark, { scale: geo.smallScale, filter: 'blur(7px)' });
     var entrance = gsap.timeline();
     entrance.to(mark, { opacity: 1, duration: 0.45, ease: 'power1.out' }, START - 0.15);
-    entrance.to(mark, { scale: 1, filter: 'blur(64px)', duration: 1.2, ease: 'power2.inOut' }, START + 0.1);
-    entrance.to(mark, { opacity: 0.38, duration: 1.2, ease: 'power2.inOut' }, START + 0.1);
+    entrance.to(mark, { scale: 1, filter: 'blur(70px)', duration: 1.2, ease: 'power2.inOut' }, START + 0.1);
+    entrance.to(mark, { opacity: 0.85, duration: 1.2, ease: 'power2.inOut' }, START + 0.1);
 
     // Travel: on scroll the aurora shrinks, sharpens and flies to dock just left
     // of the second section's headline. immediateRender:false so it doesn't fight
@@ -310,7 +310,7 @@
       }
     });
     travel.fromTo(mark,
-      { x: 0, y: 0, scale: 1, opacity: 0.38, filter: 'blur(64px)' },
+      { x: 0, y: 0, scale: 1, opacity: 0.85, filter: 'blur(70px)' },
       {
         x: function () { return geo.dockCX - geo.heroCX; },
         y: function () { return geo.dockCY - geo.heroCY; },

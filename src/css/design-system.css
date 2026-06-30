@@ -5796,12 +5796,12 @@ body[data-page="home"] .hero {
   padding-bottom: clamp(56px, 8vw, 100px);
 }
 body[data-page="home"] .hero::before { display: none; }
-/* Vignette — sink the frame edges into black so the rotating colour reads as a
-   bloom in the centre (the spinning blurred mark IS the aurora). */
+/* Light vignette only — the aurora should fill the whole hero edge-to-edge,
+   so just a soft darkening at the very corners for depth (no black frame). */
 body[data-page="home"] .hero::after {
   content: '';
   position: absolute; inset: 0;
-  background: radial-gradient(125% 95% at 50% 50%, transparent 40%, rgba(8,9,15,0.82) 100%);
+  background: radial-gradient(150% 120% at 50% 45%, transparent 70%, rgba(8,9,15,0.4) 100%);
   pointer-events: none;
   z-index: 0;
 }
@@ -5844,7 +5844,10 @@ body[data-page="home"] #top { position: relative; }
 .travel-mark {
   position: absolute;
   top: 0; left: 0;
-  width: clamp(420px, 56vw, 780px);
+  /* Big enough to FILL the hero edge-to-edge on any aspect ratio (vmax covers
+     both wide and tall viewports). The heavy blur turns it into a full-bleed
+     aurora. It shrinks + travels to dock in section 2 (motion.js). */
+  width: clamp(720px, 150vmax, 2400px);
   z-index: 1;
   pointer-events: none;
   opacity: 0;                 /* motion.js fades/positions it on boot */
@@ -5860,7 +5863,7 @@ body[data-page="home"] .hero .hero-content::before {
   position: absolute; left: 50%; top: 50%;
   width: 150%; height: 150%;
   transform: translate(-50%, -50%);
-  background: radial-gradient(ellipse at center, rgba(8,9,15,0.4), transparent 66%);
+  background: radial-gradient(ellipse at center, rgba(8,9,15,0.5), transparent 70%);
   z-index: -1; pointer-events: none;
 }
 /* Keep the big aurora from bleeding past the hero:
