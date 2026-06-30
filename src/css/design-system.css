@@ -5818,8 +5818,11 @@ body[data-page="home"] .hero-network {
     linear-gradient(to right,  rgba(255,255,255,0.055) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px);
   background-size: 54px 54px;
-  mask-image: radial-gradient(ellipse 85% 80% at 50% 45%, #000 30%, transparent 92%);
-  -webkit-mask-image: radial-gradient(ellipse 85% 80% at 50% 45%, #000 30%, transparent 92%);
+  /* Confine the grid to the bright aurora glow in the centre so the lines read
+     as being INSIDE the aurora, fading out into the dark edges (not across the
+     whole hero). */
+  mask-image: radial-gradient(ellipse 58% 56% at 50% 42%, #000 0%, rgba(0,0,0,0.55) 42%, transparent 72%);
+  -webkit-mask-image: radial-gradient(ellipse 58% 56% at 50% 42%, #000 0%, rgba(0,0,0,0.55) 42%, transparent 72%);
   animation: heroGridDrift 26s linear infinite;
 }
 @keyframes heroGridDrift {
