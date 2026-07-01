@@ -905,6 +905,18 @@
       ctx.font = `500 ${9 * dpr}px Inter, "Plus Jakarta Sans", sans-serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
+      // Dynamic per-node brand palette + a mix helper (light tint keeps the
+      // dark label readable on every colour).
+      const NODE_PALETTE = [
+        BRAND.purple, BRAND.green, BRAND.orange,
+        [79,70,229], [236,72,153], [14,165,233], [245,158,11], [20,184,166]
+      ];
+      const mix = (a, b, tt) => [
+        Math.round(a[0] + (b[0]-a[0])*tt),
+        Math.round(a[1] + (b[1]-a[1])*tt),
+        Math.round(a[2] + (b[2]-a[2])*tt)
+      ];
+      const WHITE = [255,255,255];
       for (let i = 0; i < NODES.length; i++) {
         const n = NODES[i];
         const breathe = 1 + 0.08 * Math.sin(t * 0.9 + n.phase);
@@ -925,23 +937,31 @@
           ctx.fill();
         }
 
-        // Node body
-        let fill = '#FFFFFF';
-        if (isSignalActive) fill = `rgba(241,232,251, 1)`;
-        ctx.fillStyle = fill;
+        // Node body — a glossy, lightly-tinted orb in this node's brand colour,
+        // with a soft coloured glow. Kept light enough that the dark label reads.
+        const col = NODE_PALETTE[i % NODE_PALETTE.length];
+        const lift = (isHover || isActive || isSignalActive) ? 0.62 : 0.80; // lower = more saturated
+        const grd = ctx.createRadialGradient(cx, cy - r * 0.28, r * 0.15, cx, cy, r);
+        grd.addColorStop(0, rgbA(mix(col, WHITE, Math.min(0.95, lift + 0.14)), 1));
+        grd.addColorStop(1, rgbA(mix(col, WHITE, lift), 1));
+        ctx.save();
+        ctx.shadowColor = rgbA(col, (isHover || isActive) ? 0.6 : 0.34);
+        ctx.shadowBlur = ((isHover || isActive) ? 24 : 13) * dpr;
+        ctx.fillStyle = grd;
         ctx.beginPath();
         ctx.arc(cx, cy, r, 0, Math.PI * 2);
         ctx.fill();
+        ctx.restore();
 
-        // Node stroke
-        ctx.lineWidth = (isHover || isActive ? 2 : 1.5) * dpr;
-        ctx.strokeStyle = (isHover || isActive)
-          ? rgbA(BRAND.purple, 1)
-          : rgbA(BRAND.ink, 0.18);
+        // Node stroke — the node's own colour
+        ctx.lineWidth = (isHover || isActive ? 2.2 : 1.5) * dpr;
+        ctx.strokeStyle = rgbA(col, (isHover || isActive) ? 1 : 0.55);
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
         ctx.stroke();
 
-        // Label
-        ctx.fillStyle = rgbA(BRAND.ink, isHover || isActive ? 1 : 0.78);
+        // Label — dark ink reads on the light-tinted orb
+        ctx.fillStyle = rgbA(BRAND.ink, isHover || isActive ? 1 : 0.82);
         ctx.fillText(n.short, cx, cy);
       }
 
