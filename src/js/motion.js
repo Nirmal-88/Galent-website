@@ -46,9 +46,17 @@
 
     root.classList.add('gsap-ready');
 
+    // Global motion language — one premium decel curve as the default so every
+    // un-eased tween shares the same feel (individual tweens still override).
+    gsap.defaults({ ease: 'power3.out', duration: 0.8 });
+
     if (REDUCED) { revealAll(); markBooted(); return; }
 
     var isHome = document.body && document.body.dataset && document.body.dataset.page === 'home';
+
+    // Hero intro (home): logo → contour lines → settle → hero primary. Runs
+    // immediately against the preloader so it never delays the real content.
+    if (isHome) setupHeroIntro(gsap);
 
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
     window.addEventListener('load', function () { ScrollTrigger.refresh(); });
@@ -83,6 +91,7 @@
       setupOutcomes(gsap, ScrollTrigger);
       setupStatStrips(gsap, ScrollTrigger);
       setupArchitectureDraw(gsap, ScrollTrigger);
+      setupSectionContinuity(gsap, ScrollTrigger);
       setupCtaSystem(gsap, ScrollTrigger);
       setupOffscreenPause(ScrollTrigger);
 
@@ -464,7 +473,7 @@
   function setupHoverSystem(gsap) {
     var cardSel = '.svc, .home-sector-card, .proof-card, .fde-rich, .case-study, .engine-deep-card, .feature, .cta-card, .kh-tile, .leader-card, .bento-tile';
     var bound = [];
-    var MAX_TILT = 7;   // deg — subtle, premium (not a novelty flip)
+    var MAX_TILT = 5;   // deg — capped low; expensive/intentional, never a flip
 
     document.querySelectorAll(cardSel).forEach(function (el) {
       if (el.closest('.is-horizontal')) return;
@@ -473,10 +482,12 @@
       // (a CSS transform) isn't overwritten by an inline transform at boot.
       var rxTo, ryTo, zTo, inited = false;
       function init() {
-        gsap.set(el, { transformPerspective: 900, transformStyle: 'preserve-3d' });
-        rxTo = gsap.quickTo(el, 'rotationX', { duration: 0.5, ease: 'power3' });
-        ryTo = gsap.quickTo(el, 'rotationY', { duration: 0.5, ease: 'power3' });
-        zTo  = gsap.quickTo(el, 'z',         { duration: 0.5, ease: 'power3' });
+        gsap.set(el, { transformPerspective: 1000, transformStyle: 'preserve-3d' });
+        // Longer glide = weighty, expensive feel; a touch of back-ease gives a
+        // spring-like settle without the jitter of easing a live pointer stream.
+        rxTo = gsap.quickTo(el, 'rotationX', { duration: 0.7, ease: 'power2.out' });
+        ryTo = gsap.quickTo(el, 'rotationY', { duration: 0.7, ease: 'power2.out' });
+        zTo  = gsap.quickTo(el, 'z',         { duration: 0.7, ease: 'back.out(1.4)' });
         inited = true;
       }
       function enter() { if (!inited) init(); el.classList.add('gx-tilting'); }
@@ -487,18 +498,23 @@
         var py = (e.clientY - r.top) / r.height;   // 0..1
         ryTo((px - 0.5) * 2 * MAX_TILT);           // left/right → rotateY
         rxTo((0.5 - py) * 2 * MAX_TILT);           // up/down    → rotateX
-        zTo(24);                                   // lift toward viewer
+        zTo(18);                                   // lift toward viewer
         // Cursor light (::after) + soft shadow that drifts opposite the tilt.
         el.style.setProperty('--mx', (px * 100) + '%');
         el.style.setProperty('--my', (py * 100) + '%');
-        el.style.setProperty('--sx', ((0.5 - px) * 26).toFixed(1) + 'px');
-        el.style.setProperty('--sy', ((py - 0.5) * 26 + 18).toFixed(1) + 'px');
+        el.style.setProperty('--sx', ((0.5 - px) * 22).toFixed(1) + 'px');
+        el.style.setProperty('--sy', ((py - 0.5) * 22 + 16).toFixed(1) + 'px');
+        // Subtle inner parallax — foreground elements drift with the cursor.
+        el.style.setProperty('--gpx', ((px - 0.5) * 10).toFixed(1) + 'px');
+        el.style.setProperty('--gpy', ((py - 0.5) * 8).toFixed(1) + 'px');
       }
       function leave() {
         if (inited) { rxTo(0); ryTo(0); zTo(0); }
         el.classList.remove('gx-tilting');
         el.style.setProperty('--sx', '0px');
-        el.style.setProperty('--sy', '18px');
+        el.style.setProperty('--sy', '16px');
+        el.style.setProperty('--gpx', '0px');
+        el.style.setProperty('--gpy', '0px');
       }
       el.addEventListener('pointerenter', enter);
       el.addEventListener('pointermove', move);
@@ -551,116 +567,92 @@
   }
 
   /* =========================================================================
-   * PLATFORM FIVE LAYERS ARCHITECTURE STACK — Premium ScrollTrigger Storytelling
-   * 
-   * Enterprise narrative experience: progressive activation of architecture
-   * layers (Signals → Backbone → Engines → Workflows → Outcomes) with
-   * scrubbed timeline, pinned section, and smooth 60fps animation.
-   * 
-   * Phases:
-   *   1. Section enters — pin, all layers neutral
-   *   2. Enterprise Signals activates (emphasis, others dim)
-   *   3. Intelligence Backbone activates + connection animates
-   *   4. AI Engines activate (progressive)
-   *   5. Workflows activates
-   *   6. Outcomes activates
-   *   7. Full architecture connected + execution path drawn
-   *   8. Unpin, resume normal scroll
-   * 
-   * Mobile: Reduced pinning, normal scroll flow.
-   * Reduced motion: All layers visible, minimal animations.
-   * No GSAP: All content visible by default (CSS --arch-progress: 1).
+   * PLATFORM ARCHITECTURE STACK — GSAP ScrollTrigger PINNED PRESENTATION
+   * -------------------------------------------------------------------------
+   * Replaces the CSS position:sticky deck with a real pinned, scrubbed
+   * timeline (ScrollSmoother-safe; ScrollTrigger drives the pin via transform).
+   *
+   * The five layers become an absolutely-stacked deck; scrubbing walks the
+   * narrative order (Signals → Backbone → Engines → Workflows → Outcomes).
+   * As each layer becomes active it scales up, brightens and comes to front,
+   * while every prior layer compresses, dims and recedes — a clear hierarchy
+   * that reads like an executive product presentation.
+   *
+   * Transform-only (scale / y / opacity / z-index). Runs on desktop AND mobile
+   * (motion-on). Reduced-motion / no-GSAP: never called from the motion
+   * matchMedia, so the layers stay in natural flow, fully visible.
    * ======================================================================== */
   function setupArchitectureDraw(gsap, ScrollTrigger) {
     var stack = document.querySelector('.arch-stack');
     if (!stack) return;
-    var layers = Array.prototype.slice.call(stack.querySelectorAll('.arch-layer'));
-    if (!layers.length) return;
+    var domLayers = Array.prototype.slice.call(stack.querySelectorAll('.arch-layer'));
+    if (!domLayers.length) return;
 
-    var isDesktop = window.innerWidth >= 1025;
     var isReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Map layers by order (top to bottom): 5 → 1
-    var layerMap = {
-      5: layers.find(function (l) { return l.getAttribute('data-layer') === '5'; }),
-      4: layers.find(function (l) { return l.getAttribute('data-layer') === '4'; }),
-      3: layers.find(function (l) { return l.getAttribute('data-layer') === '3'; }),
-      2: layers.find(function (l) { return l.getAttribute('data-layer') === '2'; }),
-      1: layers.find(function (l) { return l.getAttribute('data-layer') === '1'; })
-    };
-
-    // Fallback: all layers visible if GSAP disabled or reduced motion
+    // Reduced motion / no GSAP — leave everything in natural flow, visible.
     if (!gsap || isReduced) {
       stack.style.setProperty('--arch-progress', '1');
-      layers.forEach(function (l) { gsap.set(l, { autoAlpha: 1, y: 0 }); });
       return;
     }
 
-    // Desktop — STACKED SCROLL STORYTELLING (TRIONN-inspired sticky deck).
-    // Each layer becomes sticky and stacks below the previous one; as the next
-    // layer rises to cover it, the covered card compresses + dims, so the five
-    // layers assemble into a physical deck as you read top→bottom. Content is
-    // always visible (autoAlpha 1 baseline) — this is pure presentation.
-    if (isDesktop) {
-      stack.classList.add('is-stacked');
-      gsap.set(layers, { autoAlpha: 1, y: 0, transformOrigin: 'center top' });
-      stack.style.setProperty('--arch-progress', '0');
+    // Narrative order (bottom→top of the request flow): 1 → 5.
+    var order = ['1', '2', '3', '4', '5'].map(function (d) {
+      return domLayers.find(function (l) { return l.getAttribute('data-layer') === d; });
+    }).filter(Boolean);
+    if (order.length < 2) { stack.style.setProperty('--arch-progress', '1'); return; }
 
-      var BASE = 120;   // sticky offset below the fixed nav
-      var PEEK = 12;    // px each stacked card peeks below the one above it
-      layers.forEach(function (layer, i) {
-        layer.style.top = (BASE + i * PEEK) + 'px';
-        layer.style.zIndex = String(i + 1);   // lower layers sit above (cover)
+    var isMobile = window.matchMedia && window.matchMedia('(max-width: 1024px)').matches;
+    var n = order.length;
+
+    stack.classList.add('is-pinned');
+
+    // Initial deck: first layer centred + crisp, the rest stacked below, faded.
+    order.forEach(function (l, i) {
+      gsap.set(l, {
+        yPercent: -50,
+        y: i === 0 ? 0 : 42,
+        scale: i === 0 ? 1 : 0.94,
+        autoAlpha: i === 0 ? 1 : 0,
+        zIndex: i === 0 ? 50 : 10,
+        transformOrigin: '50% 50%',
+        force3D: true
       });
+    });
+    stack.style.setProperty('--arch-progress', String((1 / n).toFixed(3)));
 
-      // Compress + dim each card as it gets covered by the next one.
-      layers.forEach(function (layer, i) {
-        if (i === layers.length - 1) return;   // last card stays crisp
-        gsap.fromTo(layer,
-          { scale: 1, filter: 'brightness(1)' },
-          {
-            scale: 0.93, filter: 'brightness(0.8)', autoAlpha: 0.62, ease: 'none',
-            scrollTrigger: {
-              trigger: layer,
-              start: 'top ' + (BASE + i * PEEK) + 'px',
-              end: '+=300',
-              scrub: true,
-              invalidateOnRefresh: true
-            }
-          });
-      });
-
-      // Grow the execution-path line down the left as the deck assembles.
-      gsap.fromTo(stack, { '--arch-progress': 0 }, { '--arch-progress': 1, ease: 'none',
-        scrollTrigger: { trigger: stack, start: 'top 68%', end: 'bottom 55%', scrub: true } });
-
-      return;
-    }
-
-    // Mobile fallback — reduced animation, normal scroll behavior
-    if (window.matchMedia && window.matchMedia('(max-width: 1024px)').matches) {
-      stack.style.setProperty('--arch-progress', '1');
-      ScrollTrigger.create({
+    var tl = gsap.timeline({
+      defaults: { ease: 'power3.inOut', duration: 1 },
+      scrollTrigger: {
         trigger: stack,
-        start: 'top 75%',
-        once: true,
-        onEnter: function () {
-          gsap.set(layers, { autoAlpha: 0 });
-          gsap.to(layers, {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.4,
-            ease: 'power2.out',
-            stagger: 0.08
-          });
-        }
-      });
-      return;
-    }
+        start: 'top ' + (isMobile ? 72 : 104),
+        end: function () {
+          return '+=' + Math.round(window.innerHeight * n * (isMobile ? 0.5 : 0.62));
+        },
+        pin: true, scrub: true, anticipatePin: 1, invalidateOnRefresh: true
+      }
+    });
 
-    // Fallback — content visible by default
-    stack.style.setProperty('--arch-progress', '1');
-    layers.forEach(function (l) { gsap.set(l, { autoAlpha: 1, y: 0 }); });
+    for (var k = 1; k < n; k++) {
+      (function (k) {
+        // Active layer: rise, brighten, scale up, come to front (subtle overshoot).
+        tl.to(order[k], {
+          autoAlpha: 1, scale: 1, y: 0, zIndex: 50 + k, ease: 'back.out(1.15)'
+        }, k);
+        // Prior layers: compress, dim, recede — depth-ordered.
+        for (var j = 0; j < k; j++) {
+          var back = k - j;                          // 1 = immediately behind
+          tl.to(order[j], {
+            scale: Math.max(0.8, 1 - back * 0.045),
+            y: -back * (isMobile ? 7 : 11),
+            autoAlpha: Math.max(0.28, 0.62 - back * 0.11),
+            zIndex: 50 - back
+          }, k);
+        }
+        // Grow the execution-path line one step.
+        tl.to(stack, { '--arch-progress': ((k + 1) / n).toFixed(3) }, k);
+      })(k);
+    }
   }
 
   /* Generic stat strips — count up on enter (items visible by default). */
@@ -770,6 +762,84 @@
     var tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
     if (headline) tl.to(headline, { autoAlpha: 1, y: 0, duration: 0.8 }, START);
     if (rest.length) tl.to(rest, { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.14 }, START + 0.7);
+  }
+
+  /* ==========================================================================
+   * PRIORITY 4 — SECTION CONTINUITY. Injects a decorative divider between
+   * consecutive major sections (like setupCtaSystem injects .cta-fx — no
+   * content/structure change) and animates a thin gradient line drawing across
+   * as the next section enters. Transform-only (scaleX); the divider defaults
+   * invisible, so a miss can never hide content. Desktop + mobile.
+   * ======================================================================== */
+  function setupSectionContinuity(gsap, ScrollTrigger) {
+    var main = document.querySelector('main');
+    if (!main) return;
+    var sections = Array.prototype.slice.call(main.children).filter(function (el) {
+      return el.tagName === 'SECTION';
+    });
+    if (sections.length < 2) return;
+
+    sections.forEach(function (sec, i) {
+      if (i === 0) return;                       // no divider above the first
+      if (sec.previousElementSibling && sec.previousElementSibling.classList.contains('gx-divider')) return;
+      var d = document.createElement('div');
+      d.className = 'gx-divider';
+      d.setAttribute('aria-hidden', 'true');
+      d.innerHTML = '<span class="gx-divider__line"></span>';
+      sec.parentNode.insertBefore(d, sec);
+      var line = d.firstChild;
+      gsap.set(line, { scaleX: 0, transformOrigin: '50% 50%' });
+      gsap.to(line, {
+        scaleX: 1, ease: 'power2.out', duration: 1.1,
+        scrollTrigger: { trigger: d, start: 'top 92%', toggleActions: 'play none none reverse' }
+      });
+    });
+  }
+
+  /* ==========================================================================
+   * PRIORITY 5 — HERO INTRO (home). A lightweight ≤2.5s sequence played over
+   * the existing preloader so it can never delay or obscure the real hero:
+   *   1) the Galent mark is already showing (preloader);
+   *   2) fine contour lines briefly draw *inside* the mark;
+   *   3) the motion eases to a stop;
+   *   4) the preloader fades and the hero content becomes primary
+   *      (handled by setupHeroEntrance / setupHeroLogo).
+   * Transform/opacity + SVG stroke only. Skipped under reduced motion.
+   * ======================================================================== */
+  function setupHeroIntro(gsap) {
+    if (REDUCED) return;
+    var mark = document.querySelector('#preloader .preloader-mark');
+    if (!mark || mark.querySelector('.gx-contour')) return;
+
+    var NS = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('class', 'gx-contour');
+    svg.setAttribute('viewBox', '0 0 100 100');
+    svg.setAttribute('aria-hidden', 'true');
+    // Concentric rounded contours that read as "inside" the mark.
+    var rings = [
+      { r: 12, o: 0.9 }, { r: 22, o: 0.7 }, { r: 32, o: 0.5 }, { r: 42, o: 0.32 }
+    ];
+    var paths = [];
+    rings.forEach(function (ring) {
+      var c = document.createElementNS(NS, 'circle');
+      c.setAttribute('cx', '50'); c.setAttribute('cy', '50');
+      c.setAttribute('r', String(ring.r));
+      c.setAttribute('class', 'gx-contour__ring');
+      c.style.opacity = String(ring.o);
+      svg.appendChild(c);
+      paths.push(c);
+    });
+    mark.appendChild(svg);
+
+    // Draw the rings, then let them fade — all wrapped up well under 2.5s.
+    paths.forEach(function (p) {
+      var len = 2 * Math.PI * parseFloat(p.getAttribute('r'));
+      gsap.set(p, { strokeDasharray: len, strokeDashoffset: len });
+    });
+    var tl = gsap.timeline();
+    tl.to(paths, { strokeDashoffset: 0, duration: 0.7, ease: 'power2.inOut', stagger: 0.08 }, 0.15)
+      .to(svg, { opacity: 0, duration: 0.45, ease: 'power1.out' }, 1.15);
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
