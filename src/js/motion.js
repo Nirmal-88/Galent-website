@@ -218,7 +218,14 @@
         if (h.closest('#hero') || h.dataset.split === 'done') return;
         h.dataset.split = 'done';
         try {
-          new window.SplitText(h, { type: 'lines', mask: 'lines', linesClass: 'gx-line', propIndex: true, aria: 'auto' });
+          // Words nested inside masked lines: the line clips, each word rises
+          // independently with a per-word delay (TRIONN-style word reveal).
+          // propIndex writes a `--word` custom property the CSS uses to stagger.
+          new window.SplitText(h, {
+            type: 'lines,words', mask: 'lines',
+            linesClass: 'gx-line', wordsClass: 'gx-word',
+            propIndex: true, aria: 'auto'
+          });
           h.classList.add('gx-split');
         } catch (err) { /* headline stays normal, still revealed by .in */ }
       });
@@ -455,24 +462,57 @@
    * FEATURE 8 — hover: magnetic lean + soft cursor lighting (desktop).
    * ======================================================================== */
   function setupHoverSystem(gsap) {
-    var cardSel = '.svc, .home-sector-card, .proof-card, .fde-rich, .case-study, .engine-deep-card, .feature, .cta-card';
+    var cardSel = '.svc, .home-sector-card, .proof-card, .fde-rich, .case-study, .engine-deep-card, .feature, .cta-card, .kh-tile, .leader-card, .bento-tile';
     var bound = [];
+    var MAX_TILT = 7;   // deg — subtle, premium (not a novelty flip)
+
     document.querySelectorAll(cardSel).forEach(function (el) {
       if (el.closest('.is-horizontal')) return;
-      el.classList.add('gx-magnetic');
-      var xTo = gsap.quickTo(el, 'x', { duration: 0.5, ease: 'power3' });
-      var yTo = gsap.quickTo(el, 'y', { duration: 0.5, ease: 'power3' });
-      function move(e) {
-        var r = el.getBoundingClientRect();
-        xTo(((e.clientX - r.left) / r.width - 0.5) * 14);
-        yTo(((e.clientY - r.top) / r.height - 0.5) * 12);
-        el.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
-        el.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+      el.classList.add('gx-magnetic', 'gx-tilt');
+      // Lazily initialised on first hover so the card's scroll-reveal entrance
+      // (a CSS transform) isn't overwritten by an inline transform at boot.
+      var rxTo, ryTo, zTo, inited = false;
+      function init() {
+        gsap.set(el, { transformPerspective: 900, transformStyle: 'preserve-3d' });
+        rxTo = gsap.quickTo(el, 'rotationX', { duration: 0.5, ease: 'power3' });
+        ryTo = gsap.quickTo(el, 'rotationY', { duration: 0.5, ease: 'power3' });
+        zTo  = gsap.quickTo(el, 'z',         { duration: 0.5, ease: 'power3' });
+        inited = true;
       }
-      function leave() { xTo(0); yTo(0); }
-      el.addEventListener('pointermove', move); el.addEventListener('pointerleave', leave);
-      bound.push(function () { el.removeEventListener('pointermove', move); el.removeEventListener('pointerleave', leave); el.classList.remove('gx-magnetic'); });
+      function enter() { if (!inited) init(); el.classList.add('gx-tilting'); }
+      function move(e) {
+        if (!inited) init();
+        var r = el.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width;   // 0..1
+        var py = (e.clientY - r.top) / r.height;   // 0..1
+        ryTo((px - 0.5) * 2 * MAX_TILT);           // left/right → rotateY
+        rxTo((0.5 - py) * 2 * MAX_TILT);           // up/down    → rotateX
+        zTo(24);                                   // lift toward viewer
+        // Cursor light (::after) + soft shadow that drifts opposite the tilt.
+        el.style.setProperty('--mx', (px * 100) + '%');
+        el.style.setProperty('--my', (py * 100) + '%');
+        el.style.setProperty('--sx', ((0.5 - px) * 26).toFixed(1) + 'px');
+        el.style.setProperty('--sy', ((py - 0.5) * 26 + 18).toFixed(1) + 'px');
+      }
+      function leave() {
+        if (inited) { rxTo(0); ryTo(0); zTo(0); }
+        el.classList.remove('gx-tilting');
+        el.style.setProperty('--sx', '0px');
+        el.style.setProperty('--sy', '18px');
+      }
+      el.addEventListener('pointerenter', enter);
+      el.addEventListener('pointermove', move);
+      el.addEventListener('pointerleave', leave);
+      bound.push(function () {
+        el.removeEventListener('pointerenter', enter);
+        el.removeEventListener('pointermove', move);
+        el.removeEventListener('pointerleave', leave);
+        el.classList.remove('gx-magnetic', 'gx-tilt', 'gx-tilting');
+        if (inited) gsap.set(el, { clearProps: 'rotationX,rotationY,z,transformPerspective,transformStyle' });
+      });
     });
+
+    // Buttons — magnetic pull toward the cursor (transform-only, 60fps).
     document.querySelectorAll('.btn').forEach(function (el) {
       var xTo = gsap.quickTo(el, 'x', { duration: 0.4, ease: 'power3' });
       var yTo = gsap.quickTo(el, 'y', { duration: 0.4, ease: 'power3' });
@@ -556,83 +596,43 @@
       return;
     }
 
-    // Desktop — premium pinned storytelling experience
+    // Desktop — STACKED SCROLL STORYTELLING (TRIONN-inspired sticky deck).
+    // Each layer becomes sticky and stacks below the previous one; as the next
+    // layer rises to cover it, the covered card compresses + dims, so the five
+    // layers assemble into a physical deck as you read top→bottom. Content is
+    // always visible (autoAlpha 1 baseline) — this is pure presentation.
     if (isDesktop) {
-      // Initial state: all layers muted (reduced opacity)
-      gsap.set(layers, { autoAlpha: 0.3, y: 8 });
+      stack.classList.add('is-stacked');
+      gsap.set(layers, { autoAlpha: 1, y: 0, transformOrigin: 'center top' });
       stack.style.setProperty('--arch-progress', '0');
 
-      // No pin / no scrub — the section scrolls naturally like every other
-      // one; the layers simply colour in (top→bottom) once, on enter. This
-      // removes the scroll-jacking "wait" while keeping the staged reveal.
-      var tl = gsap.timeline({
-        defaults: { ease: 'power2.inOut' },
-        scrollTrigger: {
-          trigger: stack,
-          start: 'top 72%',
-          toggleActions: 'play none none none'
-        }
+      var BASE = 120;   // sticky offset below the fixed nav
+      var PEEK = 12;    // px each stacked card peeks below the one above it
+      layers.forEach(function (layer, i) {
+        layer.style.top = (BASE + i * PEEK) + 'px';
+        layer.style.zIndex = String(i + 1);   // lower layers sit above (cover)
       });
 
-      // PHASE 1 — Section pinned, everything neutral (hold 0-8%)
-      tl.to({}, { duration: 0.1 });
-      
-      // PHASE 2 — Outcomes (Layer 5) activates (8-22%)
-      // Top layer highlighted, others dim
-      if (layerMap[5]) {
-        tl.to(layerMap[5], { autoAlpha: 1, y: 0, duration: 0.3 }, 0.08);
-        tl.to([layerMap[4], layerMap[3], layerMap[2], layerMap[1]], 
-          { autoAlpha: 0.2, duration: 0.3 }, 0.08);
-      }
+      // Compress + dim each card as it gets covered by the next one.
+      layers.forEach(function (layer, i) {
+        if (i === layers.length - 1) return;   // last card stays crisp
+        gsap.fromTo(layer,
+          { scale: 1, filter: 'brightness(1)' },
+          {
+            scale: 0.93, filter: 'brightness(0.8)', autoAlpha: 0.62, ease: 'none',
+            scrollTrigger: {
+              trigger: layer,
+              start: 'top ' + (BASE + i * PEEK) + 'px',
+              end: '+=300',
+              scrub: true,
+              invalidateOnRefresh: true
+            }
+          });
+      });
 
-      // PHASE 3 — Workflows (Layer 4) activates, connection (22-36%)
-      // Workflows becomes prominent, Outcomes visible but reduced focus
-      if (layerMap[4]) {
-        tl.to(layerMap[4], { autoAlpha: 1, y: 0, duration: 0.3 }, 0.22);
-        tl.to(layerMap[5], { autoAlpha: 0.55, duration: 0.3 }, 0.22);
-        tl.to([layerMap[3], layerMap[2], layerMap[1]], 
-          { autoAlpha: 0.2, duration: 0.3 }, 0.22);
-        // Animate execution path 0→40%
-        tl.to(stack, { '--arch-progress': 0.4, duration: 0.4 }, 0.22);
-      }
-
-      // PHASE 4 — AI Engines (Layer 3) activate (36-52%)
-      // Engines highlighted, Outcomes+Workflows visible, Backbone+Signals dim
-      if (layerMap[3]) {
-        tl.to(layerMap[3], { autoAlpha: 1, y: 0, duration: 0.3 }, 0.36);
-        tl.to([layerMap[5], layerMap[4]], { autoAlpha: 0.55, duration: 0.3 }, 0.36);
-        tl.to([layerMap[2], layerMap[1]], { autoAlpha: 0.2, duration: 0.3 }, 0.36);
-        // Execution path 40→60%
-        tl.to(stack, { '--arch-progress': 0.6, duration: 0.4 }, 0.36);
-      }
-
-      // PHASE 5 — Intelligence Backbone (Layer 2) activates (52-66%)
-      // Backbone highlighted, Outcomes+Workflows+Engines visible, Signals dim
-      if (layerMap[2]) {
-        tl.to(layerMap[2], { autoAlpha: 1, y: 0, duration: 0.3 }, 0.52);
-        tl.to([layerMap[5], layerMap[4], layerMap[3]], { autoAlpha: 0.55, duration: 0.3 }, 0.52);
-        tl.to(layerMap[1], { autoAlpha: 0.2, duration: 0.3 }, 0.52);
-        // Execution path 60→76%
-        tl.to(stack, { '--arch-progress': 0.76, duration: 0.4 }, 0.52);
-      }
-
-      // PHASE 6 — Enterprise Signals (Layer 1) activates (66-80%)
-      // Bottom layer highlighted, all other layers visible
-      if (layerMap[1]) {
-        tl.to(layerMap[1], { autoAlpha: 1, y: 0, duration: 0.3 }, 0.66);
-        tl.to([layerMap[5], layerMap[4], layerMap[3], layerMap[2]], 
-          { autoAlpha: 0.55, duration: 0.3 }, 0.66);
-        // Execution path 76→88%
-        tl.to(stack, { '--arch-progress': 0.88, duration: 0.4 }, 0.66);
-      }
-
-      // PHASE 7 — Full architecture connected + execution path complete (80-92%)
-      // All layers visible, full connection
-      tl.to(layers, { autoAlpha: 1, duration: 0.3 }, 0.80);
-      tl.to(stack, { '--arch-progress': 1, duration: 0.3 }, 0.80);
-
-      // PHASE 8 — Hold finale, then release pin (92-100%)
-      tl.to({}, { duration: 0.08 });
+      // Grow the execution-path line down the left as the deck assembles.
+      gsap.fromTo(stack, { '--arch-progress': 0 }, { '--arch-progress': 1, ease: 'none',
+        scrollTrigger: { trigger: stack, start: 'top 68%', end: 'bottom 55%', scrub: true } });
 
       return;
     }

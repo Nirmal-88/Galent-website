@@ -9875,3 +9875,97 @@ body[data-page="home"] .hero-content::after {
   body[data-page="home"] .hero-network,
   body[data-page="home"] .hero-network::after { animation: none; }
 }
+
+/* ==================================================================
+ * TRIONN-INSPIRED MOTION UPGRADE  (motion only — no content, copy,
+ * layout or section-order changes. All effects are transform-based,
+ * GPU-composited, and degrade to the plain layout without JS/motion.)
+ * Paired with js/motion.js (engine-14).
+ * ================================================================== */
+
+/* ---- 1. Premium reveal easing (site-wide) --------------------------
+ * Same reliable `.in` system, but a longer, refined cubic-bezier so
+ * content settles in with an enterprise feel instead of a quick pop. */
+[data-reveal] {
+  transition: opacity .7s cubic-bezier(.22,.61,.36,1),
+              transform .7s cubic-bezier(.22,.61,.36,1);
+}
+[data-stagger] > * {
+  transition: opacity .6s cubic-bezier(.22,.61,.36,1),
+              transform .6s cubic-bezier(.22,.61,.36,1);
+}
+
+/* ---- 2. Word-by-word heading reveal --------------------------------
+ * SplitText builds masked lines containing word spans (motion.js). The
+ * line clips; each word rises with a per-word delay from `--word`.
+ * Overrides the earlier line-based translate so only the words move. */
+.section-head h2.gx-split .gx-line { overflow: hidden; transform: none; }
+.section-head h2.gx-split .gx-word {
+  display: inline-block;
+  transform: translateY(115%);
+  transition: transform .72s cubic-bezier(.22,.61,.36,1);
+  transition-delay: calc(var(--word, 0) * 0.045s);
+  will-change: transform;
+}
+.section-head.in h2.gx-split .gx-word { transform: translateY(0); }
+
+/* ---- 3. Card rolling: 3D tilt + layered depth + soft moving shadow -
+ * motion.js rotates the card in 3D toward the cursor and lifts it on Z;
+ * inner headings ride forward on their own Z plane for real depth, and
+ * a soft shadow drifts opposite the tilt via --sx/--sy. */
+.gx-tilt {
+  transform-style: preserve-3d;
+  will-change: transform;
+  /* No transform transition here — GSAP eases the tilt per-frame; a CSS
+     transform transition would double-smooth and smear it. Keep opacity so
+     the scroll-reveal fade still plays. */
+  transition: opacity .7s cubic-bezier(.22,.61,.36,1), box-shadow .45s var(--ease-out);
+}
+.gx-tilt.gx-tilting {
+  box-shadow:
+    var(--sx, 0px) var(--sy, 18px) 46px -18px rgba(0,0,0,0.55),
+    0 2px 10px rgba(0,0,0,0.22);
+}
+/* Layered depth — titles/accents float forward while tilting. :where()
+ * keeps specificity at 0 so any element's own hover transform still wins. */
+.gx-tilt :where(h2, h3, h4, .arch-layer__title, .feature-tag, .read-more, .kh-tile__title, .num-chip) {
+  transition: transform .5s var(--ease-out);
+}
+.gx-tilt.gx-tilting :where(h2, h3, h4, .arch-layer__title, .feature-tag, .read-more, .kh-tile__title, .num-chip) {
+  transform: translateZ(38px);
+}
+
+/* ---- 4. Stacked scroll storytelling — Platform Architecture --------
+ * motion.js adds .is-stacked (desktop, motion-on) and sets each layer's
+ * sticky top + z-index; layers pile into a deck and covered cards
+ * compress + dim (scrubbed). Falls back to normal flow if sticky is
+ * unavailable — content stays fully visible either way. */
+.arch-stack.is-stacked { display: block; }
+.arch-stack.is-stacked .arch-layer {
+  position: sticky;
+  margin-bottom: 44px;
+  transform-origin: center top;
+  backface-visibility: hidden;
+  box-shadow: 0 24px 60px -34px rgba(0,0,0,0.6);
+}
+.arch-stack.is-stacked .arch-layer:last-child { margin-bottom: 0; }
+/* Hard guard: never stack on small screens (survives a desktop→mobile resize
+   where the JS-added .is-stacked class lingers). */
+@media (max-width: 1024px) {
+  .arch-stack.is-stacked { display: flex; }
+  .arch-stack.is-stacked .arch-layer { position: static; margin-bottom: 0; }
+}
+
+/* ---- 5. Microinteractions — button press feedback -----------------
+ * Instant, snappy dim on press (no transition override, so existing button
+ * transitions are untouched). The card cursor sheen is .gx-magnetic::after. */
+.btn:active { filter: brightness(0.94); }
+
+/* ---- Reduced motion + coarse-pointer safety ------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal], [data-stagger] > * { transition: none; }
+  .section-head h2.gx-split .gx-word { transform: none; transition: none; }
+  .gx-tilt { transform: none !important; transition: none; }
+  .gx-tilt.gx-tilting :where(h2, h3, h4, .arch-layer__title, .feature-tag, .read-more, .kh-tile__title, .num-chip) { transform: none; }
+  .arch-stack.is-stacked .arch-layer { position: static; margin-bottom: 12px; }
+}
