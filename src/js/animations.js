@@ -206,12 +206,13 @@
 
       // Edges — brighten and take on brand colour as connections "emerge".
       ctx.lineWidth = scale * (1 + prog * 0.6);
-      const eAlpha = 0.06 + prog * 0.16;
+      const eAlpha = 0.20 + prog * 0.28;
       const k = Math.max(0, Math.min(1, (prog - 0.35) / 0.4));
+      // Light slate at rest → brand violet as connections emerge (visible on dark).
       const edgeCol = [
-        Math.round(18 + (123 - 18) * k),
-        Math.round(19 + (44 - 19) * k),
-        Math.round(23 + (191 - 23) * k)
+        Math.round(150 + (150 - 150) * k),
+        Math.round(156 + (110 - 156) * k),
+        Math.round(172 + (232 - 172) * k)
       ];
       for (const e of edges) {
         const A = pos(nodes[e.a], t);

@@ -9370,3 +9370,23 @@ body[data-page^="service-"] .hero .btn.ghost {
   border-color: rgba(255,255,255,0.4);
 }
 .cta-card .btn.ghost:hover { background: rgba(255,255,255,0.10); }
+
+/* Logo → crisp white on the dark nav/footer (baked raster, so filter the whole
+ * mark+wordmark to white; keeps "Galent" text clearly legible). */
+.nav .brand img, .footer .brand-mark img { filter: brightness(0) invert(1); }
+
+/* CTA headline → dynamic multicolour gradient (clearly visible, not static white) */
+.cta-card .t-h1 {
+  background: linear-gradient(100deg, #FFFFFF 0%, #C6A8F2 26%, #7FE7C4 56%, #FFB48C 100%);
+  background-size: 220% auto;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  animation: ctaHeadlineFlow 9s ease-in-out infinite;
+}
+.cta-card .t-h1 em { -webkit-text-fill-color: transparent; color: transparent; background: transparent; }
+@keyframes ctaHeadlineFlow {
+  0%   { background-position: 0% center; }
+  50%  { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+@media (prefers-reduced-motion: reduce) { .cta-card .t-h1 { animation: none; } }
