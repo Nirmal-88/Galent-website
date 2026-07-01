@@ -9398,7 +9398,7 @@ body[data-page^="service-"] .hero .btn.ghost {
   color: #FFFFFF;
   line-height: 1;
 }
-.nav .brand .brand-word { font-size: 22px; }
+.nav .brand .brand-word { font-size: 22px; font-weight: 500; }
 .footer .brand-mark .brand-word { font-size: 26px; }
 
 /* CTA headline → dynamic multicolour gradient (clearly visible, not static white) */
@@ -9765,9 +9765,11 @@ body[data-page="home"] .hero .hero-headline {
   text-shadow: 0 2px 24px rgba(0,0,0,0.40);
 }
 body[data-page="home"] .hero .hero-line {
-  color: #F4F6FA;
-  -webkit-text-fill-color: #F4F6FA;
-  text-shadow: 0 2px 22px rgba(0,0,0,0.42);
+  background: linear-gradient(180deg, #FFFFFF 0%, #DCEBFF 55%, #CBD6FF 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: none;
+  filter: drop-shadow(0 2px 18px rgba(0,0,0,0.40));
 }
 body[data-page="home"] .hero .hero-highlight--primary,
 body[data-page="home"] .hero .hero-highlight--secondary {
