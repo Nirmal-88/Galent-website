@@ -9322,6 +9322,11 @@ body[data-page^="service-"] .hero .btn.ghost {
   border: 1px solid rgba(255,255,255,0.28);
 }
 
+/* Solid buttons: base is a light pill (bg --on-surface, text --surface). The
+   default :hover swaps bg to --grey-1000 (near-black in the dark theme) while
+   the text stays dark → text vanished. Keep the pill light on hover. */
+.btn:not(.ghost):hover { background: #DDE0E7; color: var(--surface); border-color: #DDE0E7; }
+
 /* Post body: code, pre, blockquote, hr — flip dark-on-light tints to light-on-dark */
 .post-body code { background: rgba(255,255,255,0.08); }
 .post-body pre { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.10); }
