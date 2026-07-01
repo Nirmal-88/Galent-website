@@ -9457,3 +9457,27 @@ body[data-page="home"] .hero .hero-highlight--secondary {
   background: linear-gradient(90deg, var(--brand-purple) 0%, var(--brand-green) 100%);
   height: 2px;
 }
+
+/* Stat-strip "number bar" was a light pill (#FBF8FF) that looks odd on dark.
+ * Give every strip the dark treatment (like the home outcomes panel): subtle
+ * brand glows over a near-transparent dark base, hairline dividers, light
+ * labels, and bright number colours. (.panel-dark .stat-strip keeps its own.) */
+.stat-strip {
+  background:
+    radial-gradient(circle at 0% 50%,   rgba(155,77,224,0.20) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%,  rgba(30,209,151,0.12) 0%, transparent 50%),
+    radial-gradient(circle at 100% 50%, rgba(255,118,52,0.16) 0%, transparent 45%),
+    rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 18px 44px -30px rgba(0,0,0,0.8);
+}
+.stat-strip .item { border-right-color: rgba(255,255,255,0.08); }
+@media (max-width: 600px) {
+  .stat-strip .item:nth-child(odd) { border-right-color: rgba(255,255,255,0.08); }
+  .stat-strip .item:not(:last-child):not(:nth-last-child(2)) { border-bottom-color: rgba(255,255,255,0.08); }
+}
+.stat-strip .label, .stat-strip--animated .label { color: rgba(255,255,255,0.64); }
+/* Brighter solid number colours for non-animated strips on dark */
+.stat-strip .item.p .big { color: #B79CFF; }
+.stat-strip .item.g .big { color: #3FE0A8; }
+.stat-strip .item.o .big { color: #FF7A45; }
