@@ -347,17 +347,17 @@
       const R1 = Math.min(W, H) * 0.32;
       const R2 = Math.min(W, H) * 0.42;
       const R3 = Math.min(W, H) * 0.20;
-      ctx.strokeStyle = 'rgba(18,19,23,0.10)'; ctx.lineWidth = scale;
+      ctx.strokeStyle = 'rgba(240,241,245,0.10)'; ctx.lineWidth = scale;
       ctx.setLineDash([2*scale, 5*scale]);
       ctx.beginPath(); ctx.arc(ccx, ccy, R2, 0, Math.PI*2); ctx.stroke();
       ctx.setLineDash([]);
-      ctx.strokeStyle = 'rgba(18,19,23,0.06)';
+      ctx.strokeStyle = 'rgba(240,241,245,0.06)';
       ctx.beginPath(); ctx.arc(ccx, ccy, R1, 0, Math.PI*2); ctx.stroke();
       ctx.beginPath(); ctx.arc(ccx, ccy, R3, 0, Math.PI*2); ctx.stroke();
 
       // Rotating outer tick marks
       ctx.save(); ctx.translate(ccx, ccy); ctx.rotate(t * 0.08);
-      ctx.strokeStyle = 'rgba(18,19,23,0.20)'; ctx.lineWidth = scale;
+      ctx.strokeStyle = 'rgba(240,241,245,0.20)'; ctx.lineWidth = scale;
       for (let i = 0; i < 36; i++) {
         const a = (i/36) * Math.PI*2;
         ctx.beginPath();
@@ -367,7 +367,7 @@
       }
       ctx.restore();
 
-      ctx.strokeStyle = 'rgba(18,19,23,0.07)'; ctx.lineWidth = scale;
+      ctx.strokeStyle = 'rgba(240,241,245,0.07)'; ctx.lineWidth = scale;
       for (let i = 0; i < PHASES.length; i++) {
         const a = -Math.PI/2 + (i/PHASES.length) * Math.PI*2;
         ctx.beginPath(); ctx.moveTo(ccx, ccy);
@@ -396,7 +396,7 @@
         ctx.beginPath(); ctx.arc(x, y, 6*scale, 0, Math.PI*2); ctx.fill(); ctx.stroke();
         ctx.fillStyle = rgbA(c, 1);
         ctx.beginPath(); ctx.arc(x, y, 2.5*scale, 0, Math.PI*2); ctx.fill();
-        ctx.fillStyle = 'rgba(18,19,23,1)';
+        ctx.fillStyle = 'rgba(240,241,245,1)';
         ctx.font = `500 ${11*scale}px "Plus Jakarta Sans", sans-serif`;
         ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
         ctx.fillText(PHASES[i], ccx + Math.cos(a)*(R1+22*scale), ccy + Math.sin(a)*(R1+22*scale));
@@ -408,7 +408,7 @@
       grd.addColorStop(1,    `rgb(${BRAND.orange.join(',')})`);
       ctx.fillStyle = grd;
       ctx.beginPath(); ctx.arc(ccx, ccy, hubR, 0, Math.PI*2); ctx.fill();
-      ctx.strokeStyle = 'rgba(18,19,23,0.08)'; ctx.lineWidth = scale;
+      ctx.strokeStyle = 'rgba(240,241,245,0.08)'; ctx.lineWidth = scale;
       ctx.beginPath(); ctx.arc(ccx, ccy, hubR + 6*scale, 0, Math.PI*2); ctx.stroke();
       ctx.fillStyle = '#FFFFFF';
       ctx.font = `600 ${12*scale}px "Plus Jakarta Sans", sans-serif`;

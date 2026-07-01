@@ -9329,3 +9329,11 @@ body[data-page^="service-"] .hero .btn.ghost {
 .panel-dark .svc p, .panel-dark .svc li, .panel-dark .svc li a,
 .panel-dark .svc li a > span:first-child { color: var(--on-surface); }
 .panel-dark .svc li { border-top-color: rgba(255,255,255,0.10); }
+
+/* Leftover dark-ink text on now-dark surfaces → readable on dark */
+.ecosystem-partners__label,
+.galent-difference .gd-strike { color: var(--on-surface-variant); }
+.ecosystem-partners__list li,
+.galent-difference .gd-line--2 { color: var(--on-surface); }
+.testimonial__attr-line { color: rgba(255,255,255,0.22); }
+.ba-col--before .ba-col__value { text-decoration-color: rgba(255,255,255,0.30); }
