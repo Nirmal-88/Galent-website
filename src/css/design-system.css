@@ -5941,6 +5941,36 @@ body[data-page="home"] .hero .btn.ghost {
   border-color: #FFFFFF;
 }
 body[data-page="home"] .hero .btn.ghost:hover { background: #ECE9F7; color: #14121F; }
+
+/* Hero lede — oversized, animated "4×" velocity emphasis */
+body[data-page="home"] .hero-velocity { color: #FFFFFF; font-weight: 600; white-space: nowrap; }
+body[data-page="home"] .hero-velocity__num {
+  display: inline-block;
+  font-size: 3.4em;
+  font-weight: 800;
+  line-height: 0.8;
+  vertical-align: -0.28em;
+  margin-right: 0.04em;
+  background: linear-gradient(90deg, #9B7BF0 0%, #C7B6FF 45%, #6FE3B6 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: heroVelocityPulse 2.8s ease-in-out infinite;
+}
+@keyframes heroVelocityPulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(155,123,240,0)); }
+  50%      { transform: scale(1.08); filter: drop-shadow(0 0 16px rgba(155,123,240,0.5)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  body[data-page="home"] .hero-velocity__num { animation: none; }
+}
+
+/* Service pages — the #related "Four delivery categories" section was forced
+   to a full viewport (min-height:100vh), leaving a large blank band above the
+   cards. Size it to its content instead. */
+body[data-page^="service-"] main > section#related {
+  min-height: 0;
+  justify-content: flex-start;
+}
 body[data-page="home"] .scroll-chevron {
   background: rgba(255,255,255,0.08);
   color: #FFFFFF;
