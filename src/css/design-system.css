@@ -9809,3 +9809,67 @@ body[data-page="home"] .hero .cta-row .btn:hover {
   body[data-page="home"] .hero::before { animation: none; }
   body[data-page="home"] .hero .cta-row .btn { animation: none; }
 }
+
+/* 5 — STARFIELD + BRIGHTNESS LIFT
+ * Repurposes the (previously hidden) empty .hero-network div as a twinkling
+ * star layer — no new markup, no change to the aurora/logo or any content.
+ * Two star layers twinkle at different phases; a soft top glow lifts the
+ * overall brightness so the scene reads lively instead of flat. */
+body[data-page="home"] .hero-network {
+  display: block;
+  position: absolute; inset: 0;
+  z-index: 1;                 /* above the aurora, below the copy (z-index 2) */
+  pointer-events: none;
+  /* Sparse, larger stars */
+  background-image:
+    radial-gradient(1.6px 1.6px at 12% 22%, rgba(255,255,255,0.9) 0%, transparent 100%),
+    radial-gradient(1.4px 1.4px at 28% 68%, rgba(198,182,255,0.85) 0%, transparent 100%),
+    radial-gradient(1.8px 1.8px at 46% 14%, rgba(255,255,255,0.8) 0%, transparent 100%),
+    radial-gradient(1.3px 1.3px at 63% 78%, rgba(160,240,210,0.75) 0%, transparent 100%),
+    radial-gradient(1.7px 1.7px at 78% 34%, rgba(255,255,255,0.85) 0%, transparent 100%),
+    radial-gradient(1.4px 1.4px at 90% 60%, rgba(214,196,255,0.8) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 55% 46%, rgba(255,255,255,0.7) 0%, transparent 100%);
+  animation: heroStarTwinkleA 5.5s ease-in-out infinite;
+}
+body[data-page="home"] .hero-network::after {
+  content: '';
+  position: absolute; inset: 0;
+  /* Denser, tiny stars — different positions + phase for depth */
+  background-image:
+    radial-gradient(1px 1px at 8% 52%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 20% 12%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 34% 40%, rgba(198,182,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 42% 84%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 58% 24%, rgba(160,240,210,0.55) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 62%, rgba(255,255,255,0.65) 0%, transparent 100%),
+    radial-gradient(1px 1px at 84% 18%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 95% 44%, rgba(214,196,255,0.55) 0%, transparent 100%),
+    radial-gradient(1px 1px at 15% 90%, rgba(255,255,255,0.55) 0%, transparent 100%),
+    radial-gradient(1px 1px at 66% 92%, rgba(255,255,255,0.5) 0%, transparent 100%);
+  animation: heroStarTwinkleB 7s ease-in-out infinite;
+}
+@keyframes heroStarTwinkleA {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 1; }
+}
+@keyframes heroStarTwinkleB {
+  0%, 100% { opacity: 0.9; }
+  45%      { opacity: 0.4; }
+}
+/* Gentle overall brightness lift — a soft cool glow high in the scene so the
+   hero no longer reads dull. Sits behind everything (does not touch aurora). */
+body[data-page="home"] .hero > .hero-network {
+  box-shadow: none;
+}
+body[data-page="home"] .hero-content::after {
+  content: '';
+  position: absolute; left: 50%; top: -18%;
+  width: 120%; height: 90%;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at center, rgba(150,140,220,0.14) 0%, transparent 68%);
+  z-index: -1; pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body[data-page="home"] .hero-network,
+  body[data-page="home"] .hero-network::after { animation: none; }
+}
