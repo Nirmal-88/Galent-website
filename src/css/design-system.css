@@ -9619,3 +9619,32 @@ body[data-page="fde"] .hero > * { position: relative; z-index: 1; }
 body[data-page="fde"] .container-narrow { max-width: 1040px; }
 body[data-page="fde"] .section-head { text-align: center; }
 body[data-page="fde"] .section-head p { max-width: 68ch; margin-left: auto; margin-right: auto; }
+
+/* Feature cards: centre the heading tag + give the top a tinted header band */
+.feature .feature-tag {
+  text-align: center;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--f-color) 24%, var(--surface)) 0%, color-mix(in srgb, var(--f-color) 6%, var(--surface)) 100%);
+  padding: clamp(18px,2vw,24px) clamp(22px,2.4vw,30px) 14px;
+  border-bottom: 1px solid color-mix(in srgb, var(--f-color) 30%, transparent);
+}
+
+/* "Same Category / Different Delivery Model" — animated bg fills the empty sides */
+#how.galent-difference { position: relative; overflow: hidden; }
+#how.galent-difference::before {
+  content: ''; position: absolute; inset: -10%; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(30% 40% at 24% 28%, rgba(30,209,151,0.13), transparent 70%),
+    radial-gradient(34% 44% at 80% 66%, rgba(123,44,191,0.15), transparent 72%),
+    radial-gradient(26% 34% at 60% 12%, rgba(255,118,52,0.08), transparent 70%);
+  animation: fdeDrift 24s ease-in-out infinite alternate;
+}
+#how.galent-difference::after {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: radial-gradient(ellipse 92% 82% at 50% 38%, #000 18%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 92% 82% at 50% 38%, #000 18%, transparent 80%);
+}
+#how.galent-difference > * { position: relative; z-index: 1; }
