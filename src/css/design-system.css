@@ -5942,27 +5942,8 @@ body[data-page="home"] .hero .btn.ghost {
 }
 body[data-page="home"] .hero .btn.ghost:hover { background: #ECE9F7; color: #14121F; }
 
-/* Hero lede — oversized, animated "4×" velocity emphasis */
+/* Hero lede — "4× the velocity" reads as calm inline emphasis (no scaling/pulse). */
 body[data-page="home"] .hero-velocity { color: #FFFFFF; font-weight: 600; white-space: nowrap; }
-body[data-page="home"] .hero-velocity__num {
-  display: inline-block;
-  font-size: 3.4em;
-  font-weight: 800;
-  line-height: 0.8;
-  vertical-align: -0.28em;
-  margin-right: 0.04em;
-  background: linear-gradient(90deg, #9B7BF0 0%, #C7B6FF 45%, #6FE3B6 100%);
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: heroVelocityPulse 2.8s ease-in-out infinite;
-}
-@keyframes heroVelocityPulse {
-  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(155,123,240,0)); }
-  50%      { transform: scale(1.08); filter: drop-shadow(0 0 16px rgba(155,123,240,0.5)); }
-}
-@media (prefers-reduced-motion: reduce) {
-  body[data-page="home"] .hero-velocity__num { animation: none; }
-}
 
 /* Service pages — the #related "Four delivery categories" section was forced
    to a full viewport (min-height:100vh), leaving a large blank band above the
@@ -9743,4 +9724,82 @@ body[data-page="home"] main > section#how.galent-difference {
   justify-content: flex-start !important;
   padding-top: clamp(56px, 7vw, 96px) !important;
   padding-bottom: clamp(56px, 7vw, 96px) !important;
+}
+
+/* ==================================================================
+ * HERO — PREMIUM ENHANCEMENT  (additive: keeps all existing hero
+ * structure/copy; layers on life so the first screen feels alive
+ * instead of flat. Delete this block to revert.)
+ * ================================================================== */
+body[data-page="home"] .hero { overflow: hidden; }
+
+/* 1 — LIVING AURORA: three drifting colour blooms behind the copy.
+   Re-enables the (previously hidden) ::before as a slow, luminous field. */
+body[data-page="home"] .hero::before {
+  content: '';
+  display: block;
+  position: absolute; inset: -25%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(40% 46% at 28% 32%, rgba(126,99,230,0.55) 0%, transparent 60%),
+    radial-gradient(38% 44% at 74% 66%, rgba(30,209,151,0.42) 0%, transparent 62%),
+    radial-gradient(34% 40% at 60% 20%, rgba(255,140,80,0.24) 0%, transparent 60%);
+  filter: blur(46px) saturate(125%);
+  animation: heroAuroraDrift 20s ease-in-out infinite alternate;
+}
+@keyframes heroAuroraDrift {
+  0%   { transform: translate3d(-3%, -2%, 0) scale(1.05); }
+  50%  { transform: translate3d(3%,  2%, 0) scale(1.13); }
+  100% { transform: translate3d(-2%, 3%, 0) scale(1.07); }
+}
+/* Softer vignette so the aurora colour breathes instead of being crushed. */
+body[data-page="home"] .hero::after {
+  background: radial-gradient(140% 120% at 50% 40%, transparent 44%, rgba(8,9,15,0.48) 78%, rgba(5,6,10,0.86) 100%);
+}
+
+/* 2 — LUMINOUS HEADLINE: gentle halo on the whole line + glow on the
+   animated gradient accents so "Outcomes." / "Headcount." feel lit. */
+body[data-page="home"] .hero .hero-headline {
+  text-shadow: 0 2px 44px rgba(126,99,230,0.20);
+}
+body[data-page="home"] .hero .hero-highlight--primary,
+body[data-page="home"] .hero .hero-highlight--secondary {
+  filter: drop-shadow(0 0 26px rgba(142,123,240,0.40));
+}
+
+/* 3 — BRIGHTER LEDE + a soft gradient lift on the "4× the velocity" phrase
+   (flat, no motion — replaces the removed oversized pulse). */
+body[data-page="home"] .hero .t-body-lg { color: rgba(255,255,255,0.88); }
+body[data-page="home"] .hero-velocity {
+  font-weight: 700;
+  background: linear-gradient(92deg, #C6B6FF 0%, #8E7BF0 45%, #43D1B4 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+
+/* 4 — MAGNETIC CTA: gradient fill, breathing glow, lift on hover so the
+   one action on screen clearly invites the click. */
+body[data-page="home"] .hero .cta-row .btn {
+  background: linear-gradient(100deg, #8E7BF0 0%, #6D4BD6 52%, #1ED197 135%);
+  background-size: 200% auto;
+  border: 0;
+  color: #FFFFFF;
+  transition: background-position .5s ease, box-shadow .3s ease, transform .2s var(--ease-out);
+  animation: heroCtaGlow 3.6s ease-in-out infinite;
+}
+body[data-page="home"] .hero .cta-row .btn:hover {
+  background-position: 100% center;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 18px 42px -10px rgba(30,209,151,0.55);
+}
+@keyframes heroCtaGlow {
+  0%, 100% { box-shadow: 0 10px 30px -10px rgba(126,99,230,0.55); }
+  50%      { box-shadow: 0 14px 40px -8px rgba(126,99,230,0.90); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-page="home"] .hero::before { animation: none; }
+  body[data-page="home"] .hero .cta-row .btn { animation: none; }
 }
