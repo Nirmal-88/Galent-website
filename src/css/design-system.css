@@ -6943,8 +6943,8 @@ body[data-page^="service-"] .service-hero-banner {
 /* Stronger dark scrim so overlaid text stays readable. */
 body[data-page^="service-"] .service-hero-banner::after {
   background:
-    linear-gradient(180deg, rgba(6,7,14,0.80) 0%, rgba(6,7,14,0.48) 38%, rgba(6,7,14,0.55) 62%, rgba(6,7,14,0.88) 100%),
-    radial-gradient(120% 90% at 50% 45%, transparent 28%, rgba(6,7,14,0.40) 100%);
+    linear-gradient(180deg, rgba(6,7,14,0.86) 0%, rgba(6,7,14,0.66) 40%, rgba(6,7,14,0.70) 60%, rgba(6,7,14,0.92) 100%),
+    radial-gradient(120% 90% at 50% 45%, transparent 18%, rgba(6,7,14,0.58) 100%);
 }
 /* The small redundant image caption isn't needed on a full-cover hero. */
 body[data-page^="service-"] .service-hero-banner__caption { display: none; }
