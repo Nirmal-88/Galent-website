@@ -9648,3 +9648,49 @@ body[data-page="fde"] .section-head p { max-width: 68ch; margin-left: auto; marg
   -webkit-mask-image: radial-gradient(ellipse 92% 82% at 50% 38%, #000 18%, transparent 80%);
 }
 #how.galent-difference > * { position: relative; z-index: 1; }
+
+/* "Same Category" section — size to content (was forced full-viewport → blank) */
+body[data-page="home"] main > section#how {
+  min-height: auto;
+  justify-content: flex-start;
+  padding-top: clamp(64px, 9vh, 120px);
+  padding-bottom: clamp(64px, 9vh, 120px);
+}
+
+/* Engine diagram — click a node to slide the diagram left + reveal detail right */
+#engine-diagram-root { transition: gap .5s var(--ease-out); }
+.engine-detail { display: none; }
+#engine-diagram-root.is-exploring {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+}
+#engine-diagram-root.is-exploring .engine-diagram {
+  transform: scale(0.9);
+  margin: 0;
+  transition: transform .5s var(--ease-out);
+}
+#engine-diagram-root.is-exploring .engine-detail {
+  display: block;
+  position: relative;
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 20px;
+  padding: clamp(26px, 3vw, 44px);
+  box-shadow: 0 24px 60px -30px rgba(0,0,0,0.85);
+  animation: engineDetailIn .5s var(--ease-out);
+}
+@keyframes engineDetailIn { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: none; } }
+.engine-detail__close {
+  position: absolute; top: 12px; right: 16px;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: rgba(255,255,255,0.06); border: 0;
+  color: var(--on-surface-variant); font-size: 22px; line-height: 1; cursor: pointer;
+  transition: color .2s ease, background .2s ease;
+}
+.engine-detail__close:hover { color: var(--on-surface); background: rgba(255,255,255,0.12); }
+@media (max-width: 860px) {
+  #engine-diagram-root.is-exploring { grid-template-columns: 1fr; }
+  #engine-diagram-root.is-exploring .engine-diagram { transform: none; }
+}

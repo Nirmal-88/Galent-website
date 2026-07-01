@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/design-system.css?v=dark-14">
+  <link rel="stylesheet" href="css/design-system.css?v=dark-15">
   <link rel="icon" href="assets/images/logo.png?v=4" type="image/png">
 
   <!-- GSAP — used by the architecture-diagram line-draw on this page. -->
@@ -198,6 +198,7 @@
               <span class="name">Context Graph</span>
             </button>
           </div>
+          <div class="engine-detail" aria-live="polite" aria-hidden="true"></div>
         </div>
 
         <div class="engine-cards" data-reveal data-stagger>
@@ -534,6 +535,46 @@
     // is needed (node clicks simply toggle their active state).
     try { Galent.enginesDiagram(document.getElementById('engine-diagram-root'), {}); }
     catch (e) { console.error('enginesDiagram', e); }
+
+    // Click an engine node → slide the diagram left and reveal that engine's
+    // detail on the right. Click it again (or the ×) to return to centre.
+    (function () {
+      var root = document.getElementById('engine-diagram-root');
+      if (!root) return;
+      var detail = root.querySelector('.engine-detail');
+      var nodes = root.querySelectorAll('.engine-node');
+      var cards = document.querySelectorAll('.engine-cards .engine-deep-card');
+      var MAP = { neuroql: 0, rcm: 1, kg: 2, context: 3 };
+      var current = null;
+      function close() {
+        root.classList.remove('is-exploring');
+        detail.setAttribute('aria-hidden', 'true');
+        nodes.forEach(function (n) { n.classList.remove('is-active'); n.setAttribute('aria-pressed', 'false'); });
+        current = null;
+      }
+      function open(engine) {
+        var idx = MAP[engine];
+        if (idx == null || !cards[idx]) return;
+        detail.innerHTML = '<button type="button" class="engine-detail__close" aria-label="Close">×</button>' + cards[idx].innerHTML;
+        detail.setAttribute('aria-hidden', 'false');
+        root.classList.add('is-exploring');
+        nodes.forEach(function (n) {
+          var on = n.dataset.engine === engine;
+          n.classList.toggle('is-active', on);
+          n.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+        var closeBtn = detail.querySelector('.engine-detail__close');
+        if (closeBtn) closeBtn.addEventListener('click', close);
+        current = engine;
+      }
+      nodes.forEach(function (n) {
+        n.addEventListener('click', function (e) {
+          e.preventDefault();
+          var eng = n.dataset.engine;
+          if (current === eng) close(); else open(eng);
+        });
+      });
+    })();
   </script>
 
   <script src="js/motion.js?v=engine-13" defer></script>
