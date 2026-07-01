@@ -9371,9 +9371,19 @@ body[data-page^="service-"] .hero .btn.ghost {
 }
 .cta-card .btn.ghost:hover { background: rgba(255,255,255,0.10); }
 
-/* Logo → crisp white on the dark nav/footer (baked raster, so filter the whole
- * mark+wordmark to white; keeps "Galent" text clearly legible). */
-.nav .brand img, .footer .brand-mark img { filter: brightness(0) invert(1); }
+/* Logo → colourful mark (original colours) + white "Galent" wordmark. */
+.brand-img { width: auto; display: block; }
+.nav .brand .brand-img { height: 42px; }
+.footer .brand-mark .brand-img { height: 48px; }
+.brand-word {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  line-height: 1;
+}
+.nav .brand .brand-word { font-size: 22px; }
+.footer .brand-mark .brand-word { font-size: 26px; }
 
 /* CTA headline → dynamic multicolour gradient (clearly visible, not static white) */
 .cta-card .t-h1 {
