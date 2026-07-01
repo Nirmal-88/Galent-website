@@ -9647,7 +9647,10 @@ body[data-page="fde"] .section-head p { max-width: 68ch; margin-left: auto; marg
   mask-image: radial-gradient(ellipse 92% 82% at 50% 38%, #000 18%, transparent 80%);
   -webkit-mask-image: radial-gradient(ellipse 92% 82% at 50% 38%, #000 18%, transparent 80%);
 }
-#how.galent-difference > * { position: relative; z-index: 1; }
+#how.galent-difference > *:not(.gd-bg) { position: relative; z-index: 1; }
+/* keep the decorative background absolute — leaving it in flow added a
+   ~380px blank band (its own height) above the heading. */
+#how.galent-difference > .gd-bg { position: absolute; z-index: 0; }
 
 /* "Same Category" section — size to content (was forced full-viewport → blank) */
 body[data-page="home"] main > section#how {
