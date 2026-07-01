@@ -9257,9 +9257,18 @@ body {
   color: var(--on-surface);
 }
 
-/* Sticky nav → translucent dark */
-.nav { background: rgba(11,12,16,0.72); }
-.nav.scrolled { border-bottom-color: rgba(255,255,255,0.10); }
+/* Sticky nav → frosted glassmorphism (translucent, blurred, hairline) */
+.nav {
+  background: rgba(18,19,26,0.55);
+  backdrop-filter: saturate(170%) blur(20px);
+  -webkit-backdrop-filter: saturate(170%) blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.05) inset, 0 8px 30px -12px rgba(0,0,0,0.6);
+}
+.nav.scrolled {
+  background: rgba(12,13,18,0.68);
+  border-bottom-color: rgba(255,255,255,0.12);
+}
 
 /* Footer hairline */
 .footer { border-top-color: rgba(255,255,255,0.10); }
@@ -9337,3 +9346,27 @@ body[data-page^="service-"] .hero .btn.ghost {
 .galent-difference .gd-line--2 { color: var(--on-surface); }
 .testimonial__attr-line { color: rgba(255,255,255,0.22); }
 .ba-col--before .ba-col__value { text-decoration-color: rgba(255,255,255,0.30); }
+
+/* CTA card is always a dark aurora card; its text/buttons used var(--surface)
+ * (white in the old light theme) which the token flip turned dark → invisible.
+ * Force them back to light on the dark card. */
+.cta-card,
+.cta-card .t-h1,
+.cta-card .t-h2 { color: #FFFFFF; }
+.cta-card .t-h1 em { color: #FFFFFF; }
+.cta-card .t-body-lg { color: rgba(255,255,255,0.75); }
+/* Primary CTA button → solid white pill with dark text (clearly clickable) */
+.cta-card .btn,
+.cta-card .btn:not(.ghost) {
+  background: #FFFFFF;
+  color: #14151C;
+  border-color: #FFFFFF;
+}
+.cta-card .btn:not(.ghost):hover { background: #EDE8F5; }
+.cta-card .btn .arr { background: rgba(18,19,23,0.10); }
+.cta-card .btn.ghost {
+  background: transparent;
+  color: #FFFFFF;
+  border-color: rgba(255,255,255,0.4);
+}
+.cta-card .btn.ghost:hover { background: rgba(255,255,255,0.10); }
