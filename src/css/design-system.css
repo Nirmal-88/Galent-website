@@ -9481,3 +9481,8 @@ body[data-page="home"] .hero .hero-highlight--secondary {
 .stat-strip .item.p .big { color: #B79CFF; }
 .stat-strip .item.g .big { color: #3FE0A8; }
 .stat-strip .item.o .big { color: #FF7A45; }
+
+/* Remove the white cursor-follow spotlight on cards (looked like a washed blob on dark) */
+.gx-magnetic::after { display: none !important; }
+/* FDE capability cards — drop the 01–06 numbering */
+body[data-page="fde"] .cap-num { display: none; }
