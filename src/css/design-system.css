@@ -9521,3 +9521,25 @@ body[data-page="fde"]::before {
   100% { transform: translate3d(-2%, 2%, 0) scale(1.03); }
 }
 @media (prefers-reduced-motion: reduce) { body[data-page="fde"]::before { animation: none; } }
+
+/* ---- Card polish: hover lift + soft glow so cards aren't static ---- */
+.feature, .engine-card, .engine-pill, .compare-card {
+  transition: transform .3s var(--ease-out), border-color .3s ease, box-shadow .3s ease;
+  will-change: transform;
+}
+.feature:hover, .engine-card:hover, .engine-pill:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,0.18);
+  box-shadow: 0 24px 50px -26px rgba(0,0,0,0.85), 0 0 0 1px rgba(255,255,255,0.04) inset;
+}
+/* Feature cards pick up their accent colour on hover */
+.feature.p:hover { box-shadow: 0 24px 54px -24px rgba(155,77,224,0.5); }
+.feature.g:hover { box-shadow: 0 24px 54px -24px rgba(30,209,151,0.45); }
+.feature.o:hover { box-shadow: 0 24px 54px -24px rgba(255,118,52,0.45); }
+/* Icon badge on capability cards lifts subtly with the card */
+.engine-card:hover .num--icon { transform: translateY(-2px) scale(1.06); transition: transform .3s var(--ease-out); }
+
+/* FDE headings: balance wrapping so lines don't break awkwardly */
+body[data-page="fde"] .hero .t-hero,
+body[data-page="fde"] .t-display-italic { text-wrap: balance; }
+body[data-page="fde"] .hero .hero-content { max-width: 900px; }
