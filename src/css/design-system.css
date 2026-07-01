@@ -9758,14 +9758,23 @@ body[data-page="home"] .hero::after {
   background: radial-gradient(140% 120% at 50% 40%, transparent 44%, rgba(8,9,15,0.48) 78%, rgba(5,6,10,0.86) 100%);
 }
 
-/* 2 — LUMINOUS HEADLINE: gentle halo on the whole line + glow on the
-   animated gradient accents so "Outcomes." / "Headcount." feel lit. */
+/* 2 — LUMINOUS HEADLINE: base words stay crisp bright white (dark scrim for
+   contrast against the aurora); accents flip to a vivid warm violet→pink→amber
+   gradient that pops against the green field instead of blending into it. */
 body[data-page="home"] .hero .hero-headline {
-  text-shadow: 0 2px 44px rgba(126,99,230,0.20);
+  text-shadow: 0 2px 30px rgba(0,0,0,0.45), 0 0 60px rgba(0,0,0,0.30);
+}
+body[data-page="home"] .hero .hero-line {
+  color: #FFFFFF;
+  -webkit-text-fill-color: #FFFFFF;
 }
 body[data-page="home"] .hero .hero-highlight--primary,
 body[data-page="home"] .hero .hero-highlight--secondary {
-  filter: drop-shadow(0 0 26px rgba(142,123,240,0.40));
+  background: linear-gradient(100deg, #B79CFF 0%, #E58ACF 40%, #FFB067 100%);
+  background-size: 220% auto;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  filter: drop-shadow(0 0 28px rgba(229,138,207,0.45));
 }
 
 /* 3 — BRIGHTER LEDE + a soft gradient lift on the "4× the velocity" phrase
