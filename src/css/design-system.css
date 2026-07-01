@@ -9694,3 +9694,15 @@ body[data-page="home"] main > section#how {
   #engine-diagram-root.is-exploring { grid-template-columns: 1fr; }
   #engine-diagram-root.is-exploring .engine-diagram { transform: none; }
 }
+
+/* #how — hard override: no forced viewport height, no vertical centering.
+ * (Full-viewport centring left a screen of blank above the short heading.) */
+body[data-page="home"] main > section#how,
+body[data-page="home"] main > section#how.galent-difference {
+  min-height: 0 !important;
+  height: auto !important;
+  display: block !important;
+  justify-content: flex-start !important;
+  padding-top: clamp(56px, 7vw, 96px) !important;
+  padding-bottom: clamp(56px, 7vw, 96px) !important;
+}
