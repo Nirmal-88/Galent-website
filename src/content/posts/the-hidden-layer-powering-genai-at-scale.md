@@ -1,9 +1,9 @@
 ---
 title: "The Hidden Layer Powering GenAI at Scale"
 excerpt: "Why MCR Servers Are the Control Plane Every Enterprise Needs."
-kind: ESSAY
+kind: BLOG
 length: 4 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: platform
 ---
 ## The AI Stack Is Changing—Quietly, Radically

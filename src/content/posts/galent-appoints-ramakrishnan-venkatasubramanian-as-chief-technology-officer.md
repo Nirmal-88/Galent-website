@@ -3,7 +3,7 @@ title: "Galent Appoints Ramakrishnan Venkatasubramanian as Chief Technology Offi
 excerpt: "Galent announces Ramakrishnan Venkatasubramanian as Chief Technology Officer, bringing 25+ years of digital transformation expertise."
 kind: PRESS
 length: 2 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: culture
 ---
 ### Galent Appoints Ramakrishnan Venkatasubramanian as Chief Technology Officer

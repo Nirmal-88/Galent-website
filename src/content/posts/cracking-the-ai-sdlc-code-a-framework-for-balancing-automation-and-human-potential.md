@@ -1,9 +1,9 @@
 ---
 title: "Cracking the AI-SDLC Code: A Framework for Balancing Automation and Human Potential"
 excerpt: "A framework for balancing automation and human potential as AI reshapes software development roles."
-kind: ESSAY
+kind: BLOG
 length: 5 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: platform
 ---
 **AI is set to displace 9 million jobs by 2030, but it will also create 11 million new roles, fueling demand for AI specialists, developers, and analysts.**

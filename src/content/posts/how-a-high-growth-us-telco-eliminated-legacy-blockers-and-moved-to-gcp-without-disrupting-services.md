@@ -3,7 +3,7 @@ title: "How a High-Growth US Telco Eliminated Legacy Blockers and Moved to GCP W
 excerpt: "A telecommunications provider modernized its PHP-based legacy systems using AI-assisted analysis to enable secure GCP migration with minimal operational disruption."
 kind: CASE STUDY
 length: 6 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: platform
 ---
 A U.S.-based telecommunications and internet service provider partnered with Galent to accelerate its modernization journey in preparation for a critical Google Cloud Platform (GCP) migration.

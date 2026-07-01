@@ -1,7 +1,7 @@
 ---
 title: "What the Axios Supply Chain Attack Means for Engineering Teams"
 excerpt: "A March 31st npm package compromise exposed critical vulnerabilities in how modern software dependencies are managed and trusted."
-kind: ESSAY
+kind: BLOG
 length: 6 MIN
 author: BY PRAVINRAJ MOHAN AND GOKUL MANOGARAN
 domain: governance

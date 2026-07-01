@@ -3,7 +3,7 @@ title: "How a Global Fintech Reimagined Operations from Reactive Support to AI-D
 excerpt: "Leading fintech provider transforms from costly in-house support to AI-enabled managed services across 20+ platforms."
 kind: CASE STUDY
 length: 6 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: delivery
 ---
 A leading global fintech provider partnered with Galent to transform its Application Management Services (AMS) operations across a complex portfolio of payment platforms.

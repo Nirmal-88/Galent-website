@@ -1,9 +1,9 @@
 ---
 title: "RAG vs Graph RAG – The Battle for Enterprise-Grade Intelligence"
 excerpt: "Graph RAG enables context-aware enterprise AI by understanding entity relationships, outperforming traditional retrieval methods with 86% accuracy."
-kind: ESSAY
+kind: BLOG
 length: 4 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: platform
 ---
 ### RAG vs Graph RAG: The Next Leap in Context-Aware Enterprise AI

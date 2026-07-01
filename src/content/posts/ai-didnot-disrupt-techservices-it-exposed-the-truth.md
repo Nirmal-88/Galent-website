@@ -1,7 +1,7 @@
 ---
 title: "AI Didn't Disrupt Tech Services… It Exposed the Truth."
 excerpt: "AI accelerated consequences of structural industry problems that have been building since 2014, reshaping talent models and service delivery."
-kind: ESSAY
+kind: BLOG
 length: 7 MIN
 author: BY ASHWIN BHARATH
 domain: industry

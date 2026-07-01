@@ -9486,3 +9486,38 @@ body[data-page="home"] .hero .hero-highlight--secondary {
 .gx-magnetic::after { display: none !important; }
 /* FDE capability cards — drop the 01–06 numbering */
 body[data-page="fde"] .cap-num { display: none; }
+
+/* Capability card badge is now an icon (numbers dropped) */
+.engine-card .num--icon { display: inline-flex; align-items: center; justify-content: center; }
+
+/* Industries quick-jump: active pill was white text on a white pill -> dark text */
+.sector-quickjump a.active { color: var(--surface); }
+
+/* Nav CTA hover was going dark-on-dark (grey bg + dark text) -> keep gradient + white */
+.nav .menu a.btn:hover, .nav .menu button.btn:hover {
+  background: linear-gradient(100deg, var(--brand-purple) 0%, #6D4BD6 46%, var(--brand-green-deep) 100%);
+  background-size: 180% auto;
+  background-position: 100% center;
+  color: #FFFFFF;
+}
+
+/* FDE page — subtle drifting aurora behind everything so visuals aren't static */
+body[data-page="fde"]::before {
+  content: '';
+  position: fixed;
+  inset: -15%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(35% 35% at 20% 30%, rgba(255,90,31,0.16), transparent 70%),
+    radial-gradient(38% 38% at 80% 70%, rgba(123,44,191,0.18), transparent 72%),
+    radial-gradient(32% 32% at 60% 20%, rgba(30,209,151,0.12), transparent 70%);
+  background-repeat: no-repeat;
+  animation: fdeDrift 22s ease-in-out infinite alternate;
+}
+@keyframes fdeDrift {
+  0%   { transform: translate3d(0,0,0) scale(1); }
+  50%  { transform: translate3d(2%, -2%, 0) scale(1.06); }
+  100% { transform: translate3d(-2%, 2%, 0) scale(1.03); }
+}
+@media (prefers-reduced-motion: reduce) { body[data-page="fde"]::before { animation: none; } }

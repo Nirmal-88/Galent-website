@@ -1,9 +1,9 @@
 ---
 title: "FinOps vs GreenOps: Balancing AI Cost and Sustainability"
 excerpt: "Enterprises face a new triple constraint: AI performance, cloud costs, and environmental impact must be balanced through unified governance."
-kind: ESSAY
+kind: BLOG
 length: 5 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: governance
 ---
 We're living through the fastest scale-up of compute demand in history. AI workloads are exploding – but so are GPU scarcity, cloud bills, and environmental costs. Every enterprise is suddenly confronted with a new, uncomfortable triple constraint:

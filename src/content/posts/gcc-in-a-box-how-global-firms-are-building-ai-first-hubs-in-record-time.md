@@ -1,9 +1,9 @@
 ---
 title: "GCC in a Box: How Global Firms Are Building AI-First Hubs in Record Time"
 excerpt: "Global firms are establishing AI-ready Global Capability Centers in India in weeks, not months, through plug-and-play talent and governance solutions."
-kind: ESSAY
+kind: BLOG
 length: 7 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: industry
 ---
 Global Capability Centers (GCCs) are no longer just strategic options – they are strategic imperatives. With the global GCC market projected to hit $300 billion by 2032, the model is surging in both relevance and reach. And nowhere is this more evident than in India, home to over 1,700 GCCs, employing 1.9 million professionals, and growing at an impressive 11% CAGR, according to NASSCOM.

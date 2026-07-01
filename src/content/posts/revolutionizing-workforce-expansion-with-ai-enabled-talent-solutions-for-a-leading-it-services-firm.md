@@ -3,7 +3,7 @@ title: "Revolutionizing Workforce Expansion with AI-Enabled Talent Solutions for
 excerpt: "A global IT services leader rapidly onboarded 700+ skilled professionals using AI-driven talent acquisition to meet critical telecom contract deadlines."
 kind: CASE STUDY
 length: 6 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: talent
 ---
 

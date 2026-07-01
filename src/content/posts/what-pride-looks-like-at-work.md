@@ -3,7 +3,7 @@ title: "What Pride Looks Like at Work"
 excerpt: "Galent celebrates Pride Month 2025 as an integrated workplace equity initiative, not an isolated event, through employee participation and creative expression."
 kind: PRESS
 length: 3 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: culture
 ---
 At Galent, Pride is not observed as an isolated event. It is part of a broader commitment to workplace equity—where inclusion is not performative, but built into the fabric of how we operate.

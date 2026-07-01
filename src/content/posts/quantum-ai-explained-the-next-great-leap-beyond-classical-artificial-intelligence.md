@@ -1,9 +1,9 @@
 ---
 title: "Quantum AI Explained: The Next Great Leap Beyond Classical Artificial Intelligence"
 excerpt: "How quantum computing and AI are converging to create a new computational paradigm beyond classical systems."
-kind: ESSAY
+kind: BLOG
 length: 6 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: industry
 ---
 Ever wondered what would happen if AI's logic was combined with quantum's scale?

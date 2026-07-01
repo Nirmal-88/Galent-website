@@ -3,7 +3,7 @@ title: "GalentAI: The AI Native SDLC Platform Built for Production"
 excerpt: "Enterprise AI platform addressing the 85-90% failure rate of AI projects reaching production through composable architecture and deterministic execution frameworks."
 kind: WHITEPAPER
 length: 4 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: platform
 ---
 ## GalentAI Platform Whitepaper

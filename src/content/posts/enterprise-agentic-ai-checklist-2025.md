@@ -1,9 +1,9 @@
 ---
 title: "Enterprise Agentic AI Checklist: 2025 Implementation Guide"
 excerpt: "A pragmatic guide for enterprise leaders to evaluate readiness, guide adoption, and build governance for scaling Agentic AI."
-kind: ESSAY
+kind: BLOG
 length: 6 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: platform
 ---
 ## Keeping Up with Agentic AI: The Enterprise Checklist for 2025

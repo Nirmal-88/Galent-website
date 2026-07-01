@@ -1,9 +1,9 @@
 ---
 title: "CIO's Guide to AI Agent Readiness: 5 Critical Questions"
 excerpt: "AI Agents are quickly becoming the operating layer of digital enterprises—but CIOs must ensure their organizations are truly prepared before scaling."
-kind: ESSAY
+kind: BLOG
 length: 3 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: platform
 ---
 ## Are We Ready for AI Agents?

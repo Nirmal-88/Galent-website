@@ -3,7 +3,7 @@ title: "How a Commercial Manufacturer Replaced Manual Bid Management With an AI-
 excerpt: "A commercial furnishings manufacturer transformed fragmented bid management into an AI-enabled platform, reducing cycle time by 60%."
 kind: CASE STUDY
 length: 6 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: industry
 ---
 ### Overview

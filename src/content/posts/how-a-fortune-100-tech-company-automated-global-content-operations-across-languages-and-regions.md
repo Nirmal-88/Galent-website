@@ -3,7 +3,7 @@ title: "How a Fortune 100 Tech Company Automated Global Content Operations Acros
 excerpt: "A Fortune 500 tech leader transformed fragmented content operations into an AI-powered, scalable ecosystem delivering 30% faster creation and 15% higher conversions."
 kind: CASE STUDY
 length: 6 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: delivery
 ---
 A leading Fortune 500 technology company partnered with Galent to transform its global content management ecosystem central to its customer engagement, brand consistency, and digital experience strategy.

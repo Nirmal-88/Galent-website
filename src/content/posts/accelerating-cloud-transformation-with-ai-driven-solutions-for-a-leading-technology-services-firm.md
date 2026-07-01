@@ -3,7 +3,7 @@ title: "Accelerating Cloud Transformation with AI-Driven Solutions for a Leading
 excerpt: "A technology services firm partnered with Galent to optimize cloud migration using AI tools, achieving 40% faster assessments and 25% reduced migration time."
 kind: CASE STUDY
 length: 6 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: platform
 ---
 

@@ -1,9 +1,9 @@
 ---
 title: "AI SOC Agents: Transforming Cybersecurity in 2025"
 excerpt: "AI SOC agents are shifting cybersecurity from reactive automation to autonomous defense, with 40% of large enterprises expected to deploy them in 2025."
-kind: ESSAY
+kind: BLOG
 length: 5 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: governance
 ---
 ## The Rise of AI SOC Agents: Cybersecurity's Boldest Year Yet

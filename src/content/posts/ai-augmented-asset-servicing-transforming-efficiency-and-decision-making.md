@@ -3,7 +3,7 @@ title: "AI-Augmented Asset Servicing: Transforming Efficiency and Decision-Makin
 excerpt: "Galent implemented AI solutions for a global asset servicing leader, achieving a 50% reduction in manual reporting and 45% improvement in fraud detection."
 kind: CASE STUDY
 length: 6 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: industry
 ---
 

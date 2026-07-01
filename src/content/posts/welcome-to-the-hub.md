@@ -3,7 +3,7 @@ title: "Welcome to the Knowledge Hub"
 excerpt: "An example post showing how new essays are authored entirely from the admin panel — no code touched."
 kind: "ESSAY"
 length: "2 MIN"
-author: "BY THE GALENT TEAM"
+author: ""
 domain: "platform"
 ---
 

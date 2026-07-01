@@ -1,9 +1,9 @@
 ---
 title: "Claude Managed Agents vs. Enterprise AI Platforms"
 excerpt: "Enterprise leaders must choose between managed simplicity and platform-based control as AI moves from experimentation to production infrastructure."
-kind: ESSAY
+kind: BLOG
 length: 6 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: platform
 ---
 Enterprise AI has evolved beyond initial experimentation into a critical phase where governance, security, and scalability become paramount. The distinction between deploying AI agents and operating them as enterprise infrastructure reveals significant gaps in what organizations expected versus what they actually need.

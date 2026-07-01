@@ -3,7 +3,7 @@ title: "Legacy Reimagined: The Impact of AI on Customer Experience and Operation
 excerpt: "A commercial furnishings manufacturer deployed Gen AI-powered configurators and design generators to enhance customer experience and operational scalability."
 kind: CASE STUDY
 length: 6 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: platform
 ---
 

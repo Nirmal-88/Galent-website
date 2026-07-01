@@ -86,7 +86,7 @@
     const descHtml = description ? `<p class="desc">${description}</p>` : '';
     return `
       <article class="engine-card" data-reveal${delay}>
-        <div class="num">${num}</div>
+        <div class="num num--icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15.5 10.1 10.9 5.5 9l4.6-1.4L12 3z"/><circle cx="18" cy="18" r="2.3"/><circle cx="6" cy="17.5" r="1.6"/></svg></div>
         <h3 class="t-h3">${title}</h3>
         ${descHtml}
         <ul>${bulletsHtml}</ul>

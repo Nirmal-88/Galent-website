@@ -3,7 +3,7 @@ title: "Intelligent AI-Powered Talent Optimization: Transforming Workforce Strat
 excerpt: "A U.S. healthcare digital transformation company modernized talent acquisition using AI, achieving 20-25% faster hiring and 5-7% cost savings."
 kind: CASE STUDY
 length: 6 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: talent
 ---
 

@@ -1,9 +1,9 @@
 ---
 title: "AI in the Fourth Industrial Revolution: Transforming Industries, Shaping the Future"
 excerpt: "GenAI is reshaping industries globally as investment surges and adoption accelerates, unlocking potential across sectors."
-kind: ESSAY
+kind: BLOG
 length: 3 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: industry
 ---
 AI is no longer a futuristic concept, it's a present-day catalyst reshaping industries globally. As investment surges and adoption accelerates, GenAI is unlocking potential, from enhancing customer experiences to driving operational efficiencies. This blog explores the transformative impact of GenAI across sectors, highlighting key trends, strategic insights, and high-impact use cases across industries.

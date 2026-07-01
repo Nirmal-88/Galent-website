@@ -1,9 +1,9 @@
 ---
 title: "Cracking the Code on Talent, Tech, and Transformation: Fourthwards Roundtable Reflections"
 excerpt: "How AI is transforming Global Capability Centers from cost centers into innovation engines."
-kind: ESSAY
+kind: BLOG
 length: 5 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: talent
 ---
 The world is shifting under our feet. The Fourth Industrial Revolution once a buzzword debated in think tanks and boardrooms has arrived. It's real, it's accelerating, and it's redefining how we work, build, and lead. At the center of this revolution is AI: a force so potent it evokes fear and ambition in equal measure.

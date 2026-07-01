@@ -3,7 +3,7 @@ title: "How a Leading US Industrial Distributor Overhauled a Slow, Costly Pricin
 excerpt: "Legacy monolithic pricing system modernized through Strangler Fig pattern, enabling zero-disruption transformation into scalable microservices architecture."
 kind: CASE STUDY
 length: 6 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: platform
 ---
 A leading U.S.-based industrial parts distributor partnered with Galent to modernize its pricing portal central to its sales operations across MRO (Maintenance, Repair, and Operations) and OEM markets.

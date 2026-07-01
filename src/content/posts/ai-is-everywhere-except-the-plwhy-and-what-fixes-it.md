@@ -1,9 +1,9 @@
 ---
 title: "AI Is Everywhere Except the P&L. Here's Why – and What Fixes It."
 excerpt: "Enterprise AI investments show high activity metrics but fail to deliver measurable financial returns."
-kind: ESSAY
+kind: BLOG
 length: 6 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: delivery
 ---
 It's earnings season. And something quietly uncomfortable is happening in boardrooms across the world. AI features in the majority of major corporate earnings calls. CEOs are leaning into it. CFOs are funding it. CTOs are staking their reputations on it. And yet — when the slide deck comes down and the real questions start — almost no one can point to a clean line in the P&L and say: "that's what AI returned."

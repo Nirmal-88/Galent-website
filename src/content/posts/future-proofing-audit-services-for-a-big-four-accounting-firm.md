@@ -3,7 +3,7 @@ title: "Future-Proofing Audit Services for a Big Four Accounting Firm"
 excerpt: "Galent deployed AI-driven solutions to modernize audit and compliance, achieving a 60% reduction in manual tasks and 50% improvement in fraud detection."
 kind: CASE STUDY
 length: 6 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: industry
 ---
 

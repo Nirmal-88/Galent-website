@@ -3,7 +3,7 @@ title: "Innovating Insurance: Streamlining Operations with AI and Predictive Ana
 excerpt: "An insurance provider scaled claims processing and reduced fraud through AI-driven automation and predictive analytics."
 kind: CASE STUDY
 length: 6 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: industry
 ---
 A prominent insurance services provider grappled with scaling claims processing, streamlining operations, and meeting rising customer demands for speed and accuracy. Critical demands for candidates skilled in niche platforms like Duckcreek and Ebao further compounded their challenges. Outdated systems, fragmented data, and increasing fraud risks hindered their progress. Galent delivered AI-driven automation and predictive analytics to modernize workflows, improve fraud detection, and elevate customer satisfaction.

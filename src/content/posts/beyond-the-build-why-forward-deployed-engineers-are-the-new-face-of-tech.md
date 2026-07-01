@@ -1,9 +1,9 @@
 ---
 title: "Beyond the Build: Why Forward-Deployed Engineers Are the New Face of Tech"
 excerpt: "Forward-Deployed Software Engineers blend full-stack expertise with customer context to bridge AI innovation and enterprise outcomes."
-kind: ESSAY
+kind: BLOG
 length: 5 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: talent
 ---
 One of the most interesting shifts in the AI startup landscape has been the rise of the Forward Deployed Engineer (FDE) – a role that's quickly becoming "the hottest job in tech," mentioned by a venture capital (VC) firm a16z.

@@ -1,9 +1,9 @@
 ---
 title: "Agentic AI for ETL: Moving Beyond Traditional ETL vs ELT"
 excerpt: "Why Indian Enterprises Should Move from ETL vs ELT to Agentic ETL."
-kind: ESSAY
+kind: BLOG
 length: 6 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: platform
 ---
 ## AI and ETL: Why Indian Enterprises Should Move from ETL vs ELT to Agentic ETL

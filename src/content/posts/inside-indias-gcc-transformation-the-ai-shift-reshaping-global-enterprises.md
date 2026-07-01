@@ -1,9 +1,9 @@
 ---
 title: "Inside India's GCC Transformation: The AI Shift Reshaping Global Enterprises"
 excerpt: "India's 2,975 GCCs are building the world's largest AI workforce with 120,000+ professionals generating $121 billion by 2030."
-kind: ESSAY
+kind: BLOG
 length: 6 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: industry
 ---
 For much of the early 2000s, India's Global Capability Centers (GCCs) were dismissed as back-office operations, low-cost extensions of western corporations doing grunt work at scale.

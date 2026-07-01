@@ -1,9 +1,9 @@
 ---
 title: "The Asymmetry No CIO Can Afford to Ignore"
 excerpt: "Attackers now iterate faster than defenders can patch—a permanent structural shift in enterprise cybersecurity."
-kind: ESSAY
+kind: BLOG
 length: 5 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: governance
 ---
 I have spent the better part of two decades helping enterprises modernize their technology infrastructure. I have seen many threat reports come and go, most of them compelling at the moment, quickly filed and forgotten.

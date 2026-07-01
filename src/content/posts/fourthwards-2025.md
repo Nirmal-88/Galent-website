@@ -3,7 +3,7 @@ title: "Fourthwards 2025"
 excerpt: "Galent's signature report guides enterprise leaders through AI-driven transformation and the Fourth Industrial Revolution."
 kind: WHITEPAPER
 length: 4 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: industry
 ---
 ### Fourthwards 2025

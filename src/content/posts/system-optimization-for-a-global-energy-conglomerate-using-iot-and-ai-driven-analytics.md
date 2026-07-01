@@ -3,7 +3,7 @@ title: "System Optimization for a Global Energy Conglomerate Using IoT and AI-Dr
 excerpt: "A power technologies conglomerate deployed AI-driven predictive maintenance using IoT sensors, cutting maintenance costs 30% and improving uptime 40%."
 kind: CASE STUDY
 length: 6 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: industry
 ---
 

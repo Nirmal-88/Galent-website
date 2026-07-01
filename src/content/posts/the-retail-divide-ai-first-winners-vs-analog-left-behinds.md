@@ -1,9 +1,9 @@
 ---
 title: "The Retail Divide: AI-First Winners vs. Analog Left Behinds"
 excerpt: "AI is reshaping retail operations—those who adopt it gain competitive advantage, while others risk obsolescence."
-kind: ESSAY
+kind: BLOG
 length: 5 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: industry
 ---
 Imagine this: A major fashion retailer launches a new collection, but outdated demand forecasting tools fail them. Half the inventory sits unsold, while another product sells out in days – frustrating customers and slashing potential profits. Meanwhile, an AI-powered competitor dynamically adjusts stock, personalizes promotions, and sees a 15% revenue boost.

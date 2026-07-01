@@ -1,9 +1,9 @@
 ---
 title: "Vibe Coding: The AI-Driven Evolution of Software Engineering"
 excerpt: "A new movement in developer culture powered by AI emphasizes intuitive problem-solving and creative flow over rigid planning and structure."
-kind: ESSAY
+kind: BLOG
 length: 5 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: platform
 ---
 **Deadlines? Out. Flow states? In.**

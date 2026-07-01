@@ -1,9 +1,9 @@
 ---
 title: "3 Ways AI Will Break Software Development and How to Stay Ahead in 2025"
 excerpt: "AI is reshaping software development with unprecedented speed, but introducing new risks around quality, security, and governance."
-kind: ESSAY
+kind: BLOG
 length: 3 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: platform
 ---
 AI isn't just another tool in the developer's arsenal— it's a paradigm shift rewriting the rules of software development itself. Picture this: a senior engineer uses GenAI to ship a full feature in record time. No bugs, no blockers. But a few weeks later, the code is tangled with inefficiencies, security gaps, and missed compliance requirements. The team scrambles to fix what AI didn't catch. Welcome to the new era of development — high speed, high stakes. While AI promises to boost productivity, streamline workflows, and accelerate innovation, it also can break traditional development models. Here are 3 ways how AI will break software development:

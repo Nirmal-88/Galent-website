@@ -3,7 +3,7 @@ title: "Galent Launches 'Fourthwards' Series on AI's Role in Elevating GCC Value
 excerpt: "Galent hosted its inaugural Fourthwards Roundtable in Hyderabad and Bangalore, convening 60+ GCC leaders from Fortune 200/500 companies to discuss AI-driven transformation."
 kind: PRESS
 length: 4 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: industry
 ---
 ## Galent Launches 'Fourthwards' Series on AI's Role in Elevating GCC Value

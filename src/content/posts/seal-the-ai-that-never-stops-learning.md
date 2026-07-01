@@ -1,9 +1,9 @@
 ---
 title: "SEAL: The AI That Never Stops Learning"
 excerpt: "Transforming LLMs from Static Tools to Living, Self-Improving IT Agents."
-kind: ESSAY
+kind: BLOG
 length: 5 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: platform
 ---
 ## LLMs as Living Systems: A Strategic Reframe for the AI-First Enterprise

@@ -1,9 +1,9 @@
 ---
 title: "App Modernization Strategies to Outpace Competitors in the AI-First Era"
 excerpt: "Legacy applications are bottlenecks costing enterprises millions—modernization is now existential for competitive survival."
-kind: ESSAY
+kind: BLOG
 length: 4 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: platform
 ---
 Your legacy applications are doing a lot – except keeping up with 2025. Behind every stalled release, every outage, and every data silo is a system that was architected for a different era. These legacy applications – coded years ago, patched over time, are no match for today's real-time, AI-native, API-first world.

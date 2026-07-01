@@ -3,7 +3,7 @@ title: "Galent Unveils AI Studio in Chennai to Accelerate AI-Native Digital Engi
 excerpt: "Galent opens a new AI Studio in Chennai to advance AI-native digital engineering and expand global delivery capabilities."
 kind: PRESS
 length: 3 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: platform
 ---
 ## Galent Unveils AI Studio in Chennai to Accelerate AI-Native Digital Engineering

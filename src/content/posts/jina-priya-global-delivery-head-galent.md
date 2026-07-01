@@ -3,7 +3,7 @@ title: "Galent Welcomes JinaPriya Ajitha Doss as Global Delivery Head – Servic
 excerpt: "Industry veteran with 24 years of experience joins Galent to lead global delivery operations and drive AI-native service frameworks."
 kind: PRESS
 length: 2 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: delivery
 ---
 ## Galent Welcomes JinaPriya Ajitha Doss as Global Delivery Head – Services

@@ -3,7 +3,7 @@ title: "IBM & Ford Veteran Joins Galent as Chief AI Architect"
 excerpt: "Vijayakumar Anbu appointed Chief Architect of Galent AI Platform, bringing 20+ years of experience from IBM, Ford, and other Fortune 500 organizations."
 kind: PRESS
 length: 2 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: culture
 ---
 ## Galent Announces Vijayakumar Anbu as Chief Architect of Galent AI Platform

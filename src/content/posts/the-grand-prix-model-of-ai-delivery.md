@@ -1,7 +1,7 @@
 ---
 title: "The Grand Prix Model of AI Delivery: Machine, Driver & Crew"
 excerpt: "How elite engineering talent, precision AI tooling, and specialized teams compete in the Age of Intelligence."
-kind: ESSAY
+kind: BLOG
 length: 8 MIN
 author: BY ASHWIN BHARATH
 domain: delivery

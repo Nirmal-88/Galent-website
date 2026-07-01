@@ -3,7 +3,7 @@ title: "How a Fortune 100 Tech Company Eliminated Incident Overload With AI-Enab
 excerpt: "Fortune 500 tech company transforms operations with AI-driven SRE, achieving 99.999% SLA adherence and 60% reduction in support effort."
 kind: CASE STUDY
 length: 6 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: delivery
 ---
 A leading Fortune 500 technology company partnered with Galent to transform its enterprise operations landscape with a focus on improving reliability, scalability, and SLA adherence across a complex, multi-stack software ecosystem.

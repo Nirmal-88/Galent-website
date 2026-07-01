@@ -1,9 +1,9 @@
 ---
 title: "Why Most GenAI Pilots Fail – And How to Scale Yours Successfully"
 excerpt: "Breaking through pilot purgatory: A strategic roadmap from experimentation to enterprise-wide GenAI deployment."
-kind: ESSAY
+kind: BLOG
 length: 7 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: delivery
 ---
 Gen AI is no longer just a fascinating experiment, or a side project tucked away in innovation labs. As its capabilities advance, enterprises are eager to harness its full potential – not just in isolated pilots, but across entire organizations. Yet, many businesses find themselves stuck in "pilot purgatory": initial experiments succeed, but scaling remains elusive.

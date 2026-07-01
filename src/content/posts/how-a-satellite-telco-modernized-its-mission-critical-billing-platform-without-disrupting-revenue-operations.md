@@ -3,7 +3,7 @@ title: "How a Satellite Telco Modernized Its Mission-Critical Billing Platform W
 excerpt: "A satellite telecom provider leveraged AI-driven analysis to transform legacy billing systems into scalable microservices architecture while reducing support costs by 50-70%."
 kind: CASE STUDY
 length: 6 MIN
-author: BY THE GALENT TEAM
+author: ""
 domain: delivery
 ---
 A leading provider of satellite and telecom services partnered with Galent to modernize its mission-critical billing and invoicing platform central to its revenue operations. Built on a legacy, monolithic architecture, the platform had become increasingly complex to maintain, scale, and evolve. Aging technologies tightly coupled components, and limited visibility into system behavior created constraints across performance, agility, and long-term sustainability.
