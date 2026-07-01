@@ -871,8 +871,8 @@
         const A = NODES[a], B = NODES[b];
         const isFocus = focusId !== -1 && (a === focusId || b === focusId);
         ctx.strokeStyle = isFocus
-          ? rgbA(BRAND.purple, 0.5)
-          : rgbA(BRAND.ink, 0.10);
+          ? rgbA(BRAND.purple, 0.65)
+          : 'rgba(198,204,222,0.24)';
         ctx.beginPath();
         ctx.moveTo(A.x * W, A.y * H);
         ctx.lineTo(B.x * W, B.y * H);

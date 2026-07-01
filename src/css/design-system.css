@@ -9400,3 +9400,8 @@ body[data-page^="service-"] .hero .btn.ghost {
   100% { background-position: 0% center; }
 }
 @media (prefers-reduced-motion: reduce) { .cta-card .t-h1 { animation: none; } }
+
+/* Engine diagram nodes: name text inherited the browser's dark button colour →
+ * make it light on the dark node cards (the .code number keeps its accent). */
+.engine-node { color: var(--on-surface); }
+.engine-node .name { color: var(--on-surface); }
