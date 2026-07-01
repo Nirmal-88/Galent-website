@@ -77,7 +77,10 @@
         root.classList.add('gsap-smooth');
         smoother = ScrollSmoother.create({
           wrapper: '#smooth-wrapper', content: '#smooth-content',
-          smooth: 1.15, effects: true, normalizeScroll: true, ignoreMobileResize: true
+          // Heavier, more luxurious glide. normalizeScroll off — it was
+          // intercepting the wheel and causing the rough, patchy stutter;
+          // native scroll + transform smoothing is far smoother on desktop.
+          smooth: 1.4, effects: true, normalizeScroll: false, ignoreMobileResize: true
         });
         routeAnchorsThroughSmoother(smoother);
       }
@@ -585,74 +588,12 @@
   function setupArchitectureDraw(gsap, ScrollTrigger) {
     var stack = document.querySelector('.arch-stack');
     if (!stack) return;
-    var domLayers = Array.prototype.slice.call(stack.querySelectorAll('.arch-layer'));
-    if (!domLayers.length) return;
-
-    var isReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // Reduced motion / no GSAP — leave everything in natural flow, visible.
-    if (!gsap || isReduced) {
-      stack.style.setProperty('--arch-progress', '1');
-      return;
-    }
-
-    // Narrative order (bottom→top of the request flow): 1 → 5.
-    var order = ['1', '2', '3', '4', '5'].map(function (d) {
-      return domLayers.find(function (l) { return l.getAttribute('data-layer') === d; });
-    }).filter(Boolean);
-    if (order.length < 2) { stack.style.setProperty('--arch-progress', '1'); return; }
-
-    var isMobile = window.matchMedia && window.matchMedia('(max-width: 1024px)').matches;
-    var n = order.length;
-
-    stack.classList.add('is-pinned');
-
-    // Initial deck: first layer centred + crisp, the rest stacked below, faded.
-    order.forEach(function (l, i) {
-      gsap.set(l, {
-        yPercent: -50,
-        y: i === 0 ? 0 : 42,
-        scale: i === 0 ? 1 : 0.94,
-        autoAlpha: i === 0 ? 1 : 0,
-        zIndex: i === 0 ? 50 : 10,
-        transformOrigin: '50% 50%',
-        force3D: true
-      });
-    });
-    stack.style.setProperty('--arch-progress', String((1 / n).toFixed(3)));
-
-    var tl = gsap.timeline({
-      defaults: { ease: 'power3.inOut', duration: 1 },
-      scrollTrigger: {
-        trigger: stack,
-        start: 'top ' + (isMobile ? 72 : 104),
-        end: function () {
-          return '+=' + Math.round(window.innerHeight * n * (isMobile ? 0.5 : 0.62));
-        },
-        pin: true, scrub: true, anticipatePin: 1, invalidateOnRefresh: true
-      }
-    });
-
-    for (var k = 1; k < n; k++) {
-      (function (k) {
-        // Active layer: rise, brighten, scale up, come to front (subtle overshoot).
-        tl.to(order[k], {
-          autoAlpha: 1, scale: 1, y: 0, zIndex: 50 + k, ease: 'back.out(1.15)'
-        }, k);
-        // Prior layers: compress, dim, recede — depth-ordered.
-        for (var j = 0; j < k; j++) {
-          var back = k - j;                          // 1 = immediately behind
-          tl.to(order[j], {
-            scale: Math.max(0.8, 1 - back * 0.045),
-            y: -back * (isMobile ? 7 : 11),
-            autoAlpha: Math.max(0.28, 0.62 - back * 0.11),
-            zIndex: 50 - back
-          }, k);
-        }
-        // Grow the execution-path line one step.
-        tl.to(stack, { '--arch-progress': ((k + 1) / n).toFixed(3) }, k);
-      })(k);
-    }
+    // REVERTED — no pin, no scrub, no deck. The stack reveals through the
+    // standard reliable `.in` system in natural document flow; layers stay
+    // fully visible and the execution-path line is drawn complete. This keeps
+    // scrolling perfectly smooth (a pinned/scrubbed section here was the main
+    // source of the rough, "patchy" feel).
+    stack.style.setProperty('--arch-progress', '1');
   }
 
   /* Generic stat strips — count up on enter (items visible by default). */

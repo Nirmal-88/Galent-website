@@ -9946,28 +9946,9 @@ body[data-page="home"] .hero-content::after {
   transform: translate3d(var(--gpx, 0px), var(--gpy, 0px), 34px);
 }
 
-/* ---- 4. Platform Architecture — PINNED presentation deck -----------
- * motion.js adds .is-pinned (motion-on) and drives a pinned ScrollTrigger
- * timeline: layers become an absolutely-stacked deck, animated with
- * transform/opacity only. This CSS just provides the fixed-height pin box
- * and the absolute overlap; GSAP owns every transition. Reduced-motion and
- * no-JS never add .is-pinned, so layers stay in natural flow, fully visible. */
-.arch-stack.is-pinned {
-  display: block;
-  position: relative;
-  height: clamp(400px, 62vh, 580px);
-}
-.arch-stack.is-pinned .arch-layer {
-  position: absolute;
-  left: 0; right: 0; top: 50%;
-  margin: 0;
-  backface-visibility: hidden;
-  will-change: transform, opacity;
-  box-shadow: 0 34px 80px -38px rgba(0,0,0,0.7);
-}
-@media (max-width: 1024px) {
-  .arch-stack.is-pinned { height: clamp(340px, 60vh, 460px); }
-}
+/* ---- 4. Platform Architecture — reverted to natural flow ----------
+ * (The pinned/scrubbed deck was removed; the stack now scrolls normally and
+ * reveals via the standard `.in` system. No special layout needed here.) */
 
 /* ---- 5. Microinteractions — button press feedback -----------------
  * Instant, snappy dim on press (no transition override, so existing button
@@ -10034,6 +10015,4 @@ body[data-page="home"] .hero-content::after {
   .section-head h2.gx-split .gx-word { transform: none; transition: none; }
   .gx-tilt { transform: none !important; transition: none; }
   .gx-tilt.gx-tilting :where(h2, h3, h4, .arch-layer__title, .feature-tag, .read-more, .kh-tile__title, .num-chip) { transform: none; }
-  .arch-stack.is-pinned { height: auto; display: flex; }
-  .arch-stack.is-pinned .arch-layer { position: static; }
 }
