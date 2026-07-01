@@ -9543,3 +9543,79 @@ body[data-page="fde"]::before {
 body[data-page="fde"] .hero .t-hero,
 body[data-page="fde"] .t-display-italic { text-wrap: balance; }
 body[data-page="fde"] .hero .hero-content { max-width: 900px; }
+
+/* ============================================================
+ * REDESIGN PASS — feature cards, compare section, FDE sections
+ * ============================================================ */
+
+/* ---- 1. Feature "problem" cards: unified dark card, accent top-line,
+ *         mono tag label, gradient metric. (content untouched) ---- */
+.feature {
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  box-shadow: 0 20px 46px -30px rgba(0,0,0,0.85);
+}
+.feature::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--f-color), transparent 85%);
+  z-index: 3;
+}
+.feature .feature-tag {
+  background: transparent;
+  color: var(--f-color);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  padding: clamp(24px,2.6vw,32px) clamp(24px,2.6vw,32px) 0;
+}
+.feature .feature-body {
+  background: radial-gradient(130% 90% at 100% 0%, color-mix(in srgb, var(--f-color) 13%, transparent) 0%, transparent 55%);
+  color: var(--on-surface);
+  padding-top: 12px;
+  gap: 12px;
+}
+.feature .big {
+  background: linear-gradient(180deg, #FFFFFF 0%, color-mix(in srgb, var(--f-color) 62%, #FFFFFF) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+.feature .big .unit { -webkit-text-fill-color: var(--f-color); color: var(--f-color); }
+.feature .feature-body h3 { color: var(--on-surface); }
+.feature .feature-body p { color: var(--on-surface-variant); }
+
+/* ---- 2. "Same Category / Different Delivery Model" — cleaner alignment ---- */
+.gd-lede {
+  max-width: 62ch;
+  margin: var(--space-lg) auto 0;
+  text-align: center;
+  line-height: 1.65;
+  color: var(--on-surface-variant);
+  text-wrap: pretty;
+}
+.compare-card .pane { padding: clamp(28px, 3vw, 46px); }
+.compare-card .pane li { padding: 11px 0; line-height: 1.4; }
+
+/* ---- 3. FDE first sections — subtle grid texture so wide sides aren't empty,
+ *         and comfortable centred measure ---- */
+body[data-page="fde"] .hero,
+body[data-page="fde"] section:nth-of-type(-n+3) {
+  position: relative;
+}
+body[data-page="fde"] .hero::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, #000 30%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, #000 30%, transparent 78%);
+}
+body[data-page="fde"] .hero > * { position: relative; z-index: 1; }
+body[data-page="fde"] .container-narrow { max-width: 1040px; }
+body[data-page="fde"] .section-head { text-align: center; }
+body[data-page="fde"] .section-head p { max-width: 68ch; margin-left: auto; margin-right: auto; }
