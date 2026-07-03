@@ -10078,3 +10078,95 @@ body[data-page="home"] .hero .gx-split-hero .hero-highlight--secondary .gx-word 
   -webkit-text-fill-color: transparent; color: transparent;
   /* saturate(1.3) already applies at the .hero-highlight level */
 }
+
+/* --- HERO LIVING MARK (3D) — home. motion.js adds .gx-mark3d-host to the
+ * existing .travel-mark (CSS default opacity:0 — animations-off unchanged)
+ * and builds the brand mark's three shapes as 3D layers. Geometry ratios
+ * come straight from the brand SVG (green cx16cy18 rx13ry11 / purple
+ * cx25cy34 rx20ry15 / orange cx36cy14 r4.5). transition:none is
+ * load-bearing: transforms are written per-frame. Blurs are static. */
+body[data-page="home"] #hero .gx-mark3d-host {
+  position: absolute;
+  width: min(62vh, 580px);
+  aspect-ratio: 1 / 1;
+  left: 50%;
+  top: 50%;
+  z-index: 1;   /* same stacking context as the copy (z 2) — text always on top */
+  opacity: 0;   /* motion.js reveals it; animations-off = invisible, unchanged */
+  pointer-events: none;
+  transition: none !important;
+  will-change: transform, opacity;
+}
+.gx-mark3d {
+  position: absolute; inset: 0;
+  transform-style: preserve-3d;
+  transition: none !important;
+  will-change: transform;
+}
+.gx-mark3d .gx-orb {
+  position: absolute;
+  border-radius: 44%;
+  transition: none !important;
+  will-change: transform, opacity;
+}
+/* purple — the large back shape */
+.gx-orb--p {
+  left: 10%; top: 38%; width: 80%; height: 60%;
+  background: radial-gradient(62% 58% at 44% 36%,
+    #C89BFF 0%, #9A55E8 30%, #7B2CBF 62%, rgba(96, 28, 158, 0.85) 100%);
+  box-shadow:
+    0 0 90px 24px rgba(123, 44, 191, 0.45),
+    inset 0 4px 26px rgba(255, 255, 255, 0.30),
+    inset 0 -14px 40px rgba(40, 6, 76, 0.55);
+}
+/* green — the top shape */
+.gx-orb--g {
+  left: 6%; top: 14%; width: 52%; height: 44%;
+  background: radial-gradient(62% 58% at 42% 36%,
+    #A8FFD2 0%, #3CE58F 34%, #1ED197 64%, rgba(16, 154, 96, 0.9) 100%);
+  box-shadow:
+    0 0 80px 20px rgba(30, 209, 151, 0.42),
+    inset 0 4px 22px rgba(255, 255, 255, 0.38),
+    inset 0 -12px 34px rgba(6, 92, 58, 0.5);
+}
+/* orange — the small accent, front */
+.gx-orb--o {
+  left: 63.5%; top: 19.5%; width: 17%; height: 17%;
+  border-radius: 50%;
+  background: radial-gradient(60% 60% at 42% 36%,
+    #FFC49A 0%, #FF8A4D 40%, #FF5A1F 78%, rgba(214, 62, 10, 0.9) 100%);
+  box-shadow:
+    0 0 46px 12px rgba(255, 90, 31, 0.5),
+    inset 0 2px 12px rgba(255, 255, 255, 0.45);
+}
+/* soft aurora halo behind the formation */
+.gx-mark3d .gx-halo {
+  position: absolute; inset: -14%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side,
+    rgba(123, 44, 191, 0.30), rgba(30, 209, 151, 0.12) 55%, transparent 76%);
+  filter: blur(46px);
+  will-change: transform, opacity;
+  transition: none !important;
+}
+/* orbital rings — thin, tilted in 3D, each with a travelling light dot */
+.gx-mark3d .gx-orbit {
+  position: absolute; inset: -5%;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  transition: none !important;
+  will-change: transform, opacity;
+}
+.gx-mark3d .gx-orbit span {
+  position: absolute; left: 50%; top: -3.5px;
+  width: 7px; height: 7px; margin-left: -3.5px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  box-shadow: 0 0 14px 4px rgba(255, 255, 255, 0.75);
+}
+.gx-mark3d .gx-orbit--b span { background: #7CF7B8; box-shadow: 0 0 14px 4px rgba(30, 209, 151, 0.8); }
+@media (max-width: 1024px) {
+  body[data-page="home"] #hero .gx-mark3d-host {
+    width: min(76vw, 380px);
+  }
+}
