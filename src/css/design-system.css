@@ -10048,22 +10048,8 @@ body[data-page="home"] .hero-content::after {
   will-change: transform;
 }
 
-/* --- ARCH DECK — flagship pinned storytelling (platform, desktop) ------
- * motion.js adds .is-deck. transition:none is load-bearing: ScrollTrigger
- * pins this element by writing its transform EVERY frame under
- * ScrollSmoother, and the [data-reveal] transform transition made the
- * previous pin lag a beat behind the scroll (the rough, patchy feel).
- * The perspective makes the layers' Z-recede read as true depth. */
-.arch-stack.is-deck { transition: none !important; perspective: 1100px; }
-.arch-stack.is-deck .arch-layer {
-  /* transform/opacity intentionally NOT transitioned — GSAP owns them. */
-  transition: box-shadow .35s ease, border-color .35s ease;
-  will-change: transform, opacity;
-}
-.arch-stack.is-deck .arch-layer.is-focus {
-  border-color: color-mix(in srgb, var(--layer-color) 45%, transparent);
-  box-shadow: 0 18px 50px -18px color-mix(in srgb, var(--layer-color) 38%, transparent);
-}
+/* (ARCH DECK pinned storytelling removed — the Platform Architecture stack
+ * now scrolls in plain natural flow, no pin/scrub/deck.) */
 
 /* --- SPLIT HERO HEADLINE — gradient repair --------------------------------
  * The home headline paints via background-clip:text on .hero-line, which
