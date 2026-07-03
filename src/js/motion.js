@@ -107,7 +107,6 @@
         if (c.isDesktop) {
           setupPinnedComparison(gsap, ScrollTrigger);
           setupIndustriesRing(gsap, ScrollTrigger);
-          setupSectionSettle(gsap, ScrollTrigger);
         }
       }
 
@@ -526,33 +525,18 @@
     });
   }
 
-  /* ==========================================================================
-   * SECTION SETTLE (home, desktop) — TRIONN-style hand-off: as a section's
-   * bottom leaves, it settles back a touch (scale + slight dim from its top
-   * edge) so the next section reads as arriving on top of it. Transform/
-   * opacity only, scrubbed, immediateRender:false (natural state if a
-   * trigger never fires). NEVER applied to sections that contain pins
-   * (#industries) — a transformed ancestor breaks pinning.
-   * ======================================================================== */
-  function setupSectionSettle(gsap, ScrollTrigger) {
-    ['#problem', '#outcomes', '#how', '#ops', '#cases'].forEach(function (sel) {
-      var sec = document.querySelector(sel);
-      if (!sec || sec.querySelector('.pin-spacer')) return;
-      gsap.fromTo(sec,
-        { scale: 1, opacity: 1 },
-        { scale: 0.975, opacity: 0.85, ease: 'none', immediateRender: false,
-          transformOrigin: '50% 0%',
-          scrollTrigger: { trigger: sec, start: 'bottom 45%', end: 'bottom -5%', scrub: true } });
-    });
-  }
+  /* SECTION SETTLE — REMOVED. Scrubbing scale/opacity on entire sections
+     rasterises multi-thousand-pixel GPU layers every frame; it was a main
+     source of the rough, patchy scroll. Sections flow naturally again. */
 
   /* Hero copy back-plane parallax (home) — the copy drifts slower than the
-     scroll, so leaving the hero has depth. Decorative scrub; yPercent only. */
+     scroll, so leaving the hero has depth. Numeric scrub so wheel ticks
+     glide instead of stepping. */
   function setupHeroCopyParallax(gsap, ScrollTrigger) {
     var copy = document.querySelector('#hero .hero-content');
     if (!copy) return;
     gsap.to(copy, { yPercent: 12, ease: 'none',
-      scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true } });
+      scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 0.6 } });
   }
 
   /* ==========================================================================
@@ -687,7 +671,6 @@
   function setupMediaRolling(gsap, ScrollTrigger, isDesktop, smoother) {
     var mediaSel = '.sector-media img, .service-hero-banner img, .kh-tile img, ' +
                    '.proof-card img, .fde-rich img, .post-hero img, .case-study img';
-    var wrapSel = '.sector-media, .service-hero-banner, .kh-tile__media, .kh-tile figure';
 
     // 1) Clip reveal — never gates content (partial clip, once, natural state
     //    if the trigger never activates).
@@ -700,13 +683,18 @@
           scrollTrigger: { trigger: img, start: 'top 90%', once: true } });
     });
 
-    // 2) Velocity skew (desktop).
+    // 2) Velocity skew (desktop) — small card-media wrappers ONLY (never
+    //    full-width banners: huge skewed layers cost real GPU time). Writes
+    //    go straight through GSAP's transform cache per element — a root
+    //    CSS var was invalidating style for the WHOLE document every frame,
+    //    a main source of the rough, patchy scroll.
     if (!isDesktop) return function () {};
-    var wraps = Array.prototype.slice.call(document.querySelectorAll(wrapSel));
+    var wraps = Array.prototype.slice.call(
+      document.querySelectorAll('.sector-media, .kh-tile__media, .kh-tile figure'));
     if (!wraps.length) return function () {};
     wraps.forEach(function (w) { w.classList.add('gx-rollwrap'); });
 
-    var lastY = window.pageYOffset, vel = 0, skew = 0, idleFrames = 0;
+    var lastY = window.pageYOffset, skew = 0, resting = true;
     var tick = function (time, dt) {
       var v;
       if (smoother && smoother.getVelocity) v = smoother.getVelocity();
@@ -715,19 +703,19 @@
         v = (y - lastY) / Math.max(0.001, dt / 1000);
         lastY = y;
       }
-      var target = Math.max(-3.5, Math.min(3.5, v / 900));
-      skew += (target - skew) * 0.11;
+      var target = Math.max(-2.5, Math.min(2.5, v / 1100));
+      skew += (target - skew) * 0.12;
       if (Math.abs(skew) < 0.02 && Math.abs(target) < 0.02) {
-        if (idleFrames++ === 1) root.style.setProperty('--gx-skew', '0deg');
-        return;   // at rest — write nothing
+        if (!resting) { resting = true; gsap.set(wraps, { skewY: 0 }); }
+        return;   // at rest — write nothing at all
       }
-      idleFrames = 0;
-      root.style.setProperty('--gx-skew', skew.toFixed(3) + 'deg');
+      resting = false;
+      gsap.set(wraps, { skewY: skew });
     };
     gsap.ticker.add(tick);
     return function () {
       gsap.ticker.remove(tick);
-      root.style.removeProperty('--gx-skew');
+      gsap.set(wraps, { clearProps: 'transform' });
       wraps.forEach(function (w) { w.classList.remove('gx-rollwrap'); });
     };
   }

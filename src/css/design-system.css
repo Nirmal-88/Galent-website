@@ -10041,12 +10041,10 @@ body[data-page="home"] .hero-content::after {
  * ==================================================================== */
 
 /* --- TRIONN PICTURE ROLLING — velocity shear on media wrappers --------
- * motion.js writes ONE root var (--gx-skew) per frame while scrolling;
- * every tagged wrapper shears with it and eases back to rest. */
-.gx-rollwrap {
-  transform: skewY(var(--gx-skew, 0deg));
-  will-change: transform;
-}
+ * motion.js writes the skew directly per element through GSAP while
+ * scrolling (a root CSS var here forced a whole-document style recalc
+ * every frame — rough, patchy scroll). This class only promotes. */
+.gx-rollwrap { will-change: transform; }
 
 /* (ARCH DECK pinned storytelling removed — the Platform Architecture stack
  * now scrolls in plain natural flow, no pin/scrub/deck.) */
