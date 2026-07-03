@@ -10015,65 +10015,6 @@ body[data-page="home"] .hero-content::after {
  * classes exist, so the site looks exactly as approved.
  * ==================================================================== */
 
-/* --- HERO 3D FLOATING PANEL (home) ------------------------------------
- * motion.js adds .gx-hero-panel to the existing .travel-mark and nests
- * the mark image inside an injected .gx-panel-3d. The wrapper takes the
- * cursor tilt; the inner takes the idle wobble + the glass-card look.
- * transition:none is load-bearing (per-frame transform writes). */
-body[data-page="home"] .travel-mark.gx-hero-panel {
-  width: clamp(280px, 24vw, 400px);
-  aspect-ratio: 5 / 6;
-  left: 73%;
-  top: 45vh;
-  z-index: 3;                 /* front plane — floats over the headline */
-  pointer-events: none;
-  transition: none !important;
-  will-change: transform, opacity;
-}
-.gx-hero-panel .gx-panel-3d {
-  position: absolute; inset: 0;
-  border-radius: 26px;
-  overflow: hidden;
-  background:
-    radial-gradient(130% 95% at 16% 10%, rgba(123, 44, 191, 0.62), transparent 56%),
-    radial-gradient(115% 85% at 86% 90%, rgba(30, 209, 151, 0.4), transparent 58%),
-    radial-gradient(70% 55% at 78% 18%, rgba(255, 90, 31, 0.22), transparent 60%),
-    linear-gradient(158deg, #171224 0%, #0B0D13 55%, #0F1620 100%);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  box-shadow:
-    0 70px 130px -34px rgba(4, 5, 10, 0.9),
-    0 30px 60px -22px rgba(123, 44, 191, 0.38),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  will-change: transform;
-  transition: none !important;
-}
-.gx-hero-panel .gx-panel-3d img {
-  position: absolute; left: 50%; top: 50%;
-  width: 56%; height: auto;
-  transform: translate(-50%, -50%);
-  filter: drop-shadow(0 18px 34px rgba(4, 5, 10, 0.55));   /* crisp, not the muted aurora */
-}
-/* Sheen — its own compositor layer; slides opposite the cursor tilt via
- * --gx-sheen (set per-frame by motion.js on the panel wrapper). */
-.gx-hero-panel .gx-panel-3d::after {
-  content: '';
-  position: absolute; inset: -35%;
-  background: linear-gradient(115deg,
-    transparent 42%, rgba(255, 255, 255, 0.14) 50%,
-    rgba(255, 255, 255, 0.04) 55%, transparent 62%);
-  transform: translateX(var(--gx-sheen, 0%));
-  will-change: transform;
-  pointer-events: none;
-}
-@media (max-width: 1024px) {
-  body[data-page="home"] .travel-mark.gx-hero-panel {
-    width: 56vw;
-    left: 50%;
-    top: 33vh;
-    z-index: 1;               /* behind the copy on small screens */
-  }
-}
-
 /* --- TRIONN PICTURE ROLLING — velocity shear on media wrappers --------
  * motion.js writes ONE root var (--gx-skew) per frame while scrolling;
  * every tagged wrapper shears with it and eases back to rest. */
@@ -10081,48 +10022,6 @@ body[data-page="home"] .travel-mark.gx-hero-panel {
   transform: skewY(var(--gx-skew, 0deg));
   will-change: transform;
 }
-
-/* --- MAGNETIC CURSOR (desktop, fine pointer) ---------------------------
- * Follower ring after the native cursor (which stays visible). The
- * wrapper is positioned per-frame by GSAP (NO transition); the ring
- * scales via class with its own transition, so they never fight. */
-.gx-cursor {
-  position: fixed; left: 0; top: 0;
-  z-index: 12000;
-  pointer-events: none;
-  opacity: 0;
-}
-.gx-cursor.is-on { opacity: 1; }
-.gx-cursor__ring {
-  position: absolute; left: 0; top: 0;
-  width: 34px; height: 34px;
-  transform: translate(-50%, -50%) scale(1);
-  border: 1.5px solid rgba(255, 255, 255, 0.7);
-  border-radius: 999px;
-  display: flex; align-items: center; justify-content: center;
-  mix-blend-mode: difference;
-  transition: transform .3s cubic-bezier(0.22, 1, 0.36, 1),
-              background-color .3s ease, border-color .3s ease;
-}
-.gx-cursor__label {
-  font-family: var(--font-mono, monospace);
-  font-size: 11px; font-weight: 600; letter-spacing: 0.4px; line-height: 1;
-  color: #0A0B12;
-  opacity: 0; transform: scale(0.4);
-  transition: opacity .22s ease, transform .22s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.gx-cursor.is-link .gx-cursor__ring {
-  transform: translate(-50%, -50%) scale(1.55);
-  background: rgba(255, 255, 255, 0.14);
-}
-.gx-cursor.is-view .gx-cursor__ring {
-  transform: translate(-50%, -50%) scale(2.15);
-  background: rgba(255, 255, 255, 0.95);
-  border-color: transparent;
-  mix-blend-mode: normal;
-}
-.gx-cursor.is-view .gx-cursor__label { opacity: 1; transform: scale(0.5); }
-@media (prefers-reduced-motion: reduce) { .gx-cursor { display: none; } }
 
 /* --- ARCH DECK — flagship pinned storytelling (platform, desktop) ------
  * motion.js adds .is-deck. transition:none is load-bearing: ScrollTrigger

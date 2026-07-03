@@ -102,7 +102,7 @@
       var heroCleanup = function () {};
       if (isHome) {
         setupHeroEntrance(gsap);
-        heroCleanup = setupHeroPanel(gsap, ScrollTrigger, !!c.isDesktop);
+        heroCleanup = setupHeroLogo(gsap, ScrollTrigger);
         if (c.isDesktop) {
           setupPinnedComparison(gsap, ScrollTrigger);
           setupHorizontalIndustries(gsap, ScrollTrigger);
@@ -113,9 +113,8 @@
       var engineCleanup = c.isDesktop ? setupPlatformEngines(gsap, ScrollTrigger) : function () {};
 
       var hoverCleanup = c.isDesktop ? setupHoverSystem(gsap) : function () {};
-      var cursorCleanup = c.isDesktop ? setupCursor(gsap) : function () {};
       ScrollTrigger.refresh();
-      return function () { root.classList.remove('gsap-smooth'); if (smoother) smoother.kill(); engineCleanup(); heroCleanup(); hoverCleanup(); cursorCleanup(); mediaCleanup(); };
+      return function () { root.classList.remove('gsap-smooth'); if (smoother) smoother.kill(); engineCleanup(); heroCleanup(); hoverCleanup(); mediaCleanup(); };
     });
 
     markBooted();
@@ -259,120 +258,138 @@
   }
 
   /* ==========================================================================
-   * HERO 3D FLOATING PANEL (home) — the TRIONN reference effect. The existing
-   * .travel-mark (which motion.js has always owned end-to-end; CSS default is
-   * opacity:0, so animations-off looks identical) becomes a glossy glass panel
-   * floating IN FRONT of the headline in true 3D:
-   *   * base pose is visibly tilted (rotX/rotY/rotZ) with per-element
-   *     transformPerspective — near edge large, far edge tapering;
-   *   * a slow idle wobble loops on separate axes (offset periods so the
-   *     motion never repeats visibly) — alive at rest;
-   *   * the cursor pushes extra tilt with heavy lerp smoothing, easing back
-   *     to the idle float when the pointer leaves — weighty, never flips;
-   *   * a sheen highlight (own compositor layer) slides with the tilt;
-   *   * on scroll the panel lifts, rotates away and fades while the headline
-   *     parallaxes slower — front plane vs back plane.
-   * Two nested transforms so tweens never fight: the WRAPPER (.travel-mark)
-   * takes cursor tilt + scroll exit; the injected .gx-panel-3d takes the idle
-   * wobble. All transform/opacity; decorative only. Returns a cleanup fn.
+   * HERO LOGO SYSTEM (home). The Galent mark IMAGE is the centerpiece — only
+   * transforms / filters animate it; the geometry is never recreated. It
+   * floats at rest, then on scroll it scales + lights up while an intelligence
+   * network radiates OUT FROM the mark (paths drawn from its centre, nodes
+   * resolve, pulses travel) — the logo "evolving" into the platform. The hero
+   * copy lifts away as you leave. Returns a cleanup fn.
+   *
+   * (Reverted from a 3D floating-panel + cursor-tilt treatment trialled in
+   * this session — the user asked for the panel and the custom cursor both
+   * removed after seeing them live. This is the pre-panel aurora-mark
+   * behaviour, restored verbatim.)
    * ======================================================================== */
-  function setupHeroPanel(gsap, ScrollTrigger, isDesktop) {
+  function setupHeroLogo(gsap, ScrollTrigger) {
+    var main = document.getElementById('top');
     var hero = document.getElementById('hero');
     var mark = document.querySelector('.travel-mark');
     var img = mark && mark.querySelector('img');
-    if (!hero || !mark || !img) return function () {};
+    var headline = document.querySelector('#problem .section-head h2') ||
+                   document.querySelector('#problem .section-head');
+    if (!main || !hero || !mark || !img) return function () {};
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    var START = 1.05;   // entrance begins as the loading screen fades
+    var GAP = 22;             // gap to the left of the headline
+    var START = 1.05;         // entrance begins as the loading screen fades
+    var ASPECT = 320 / 395;   // mark width / height
 
-    // Build the panel chrome around the existing mark image (decorative DOM,
-    // same precedent as .cta-fx injection — no content change).
-    mark.classList.add('gx-hero-panel');
-    var inner = mark.querySelector('.gx-panel-3d');
-    if (!inner) {
-      inner = document.createElement('div');
-      inner.className = 'gx-panel-3d';
-      inner.appendChild(img);
-      mark.appendChild(inner);
+    // Geometry relative to <main>; recomputed on refresh / resize. The docked
+    // mark is sized to the headline's height so it matches "The Delivery Model…".
+    var geo = { heroCX: 0, heroCY: 0, dockCX: 0, dockCY: 0, smallScale: 1 };
+    function layout() {
+      var m = main.getBoundingClientRect();
+      var h = hero.getBoundingClientRect();
+      var mw = mark.offsetWidth || 1;
+      geo.heroCX = (h.left - m.left) + h.width / 2;
+      geo.heroCY = (h.top - m.top) + h.height / 2;
+      if (headline) {
+        var hl = headline.getBoundingClientRect();
+        var targetH = Math.max(96, Math.min(240, hl.height));
+        var targetW = targetH * ASPECT;
+        geo.smallScale = targetW / mw;
+        geo.dockCX = (hl.left - m.left) - GAP - targetW / 2;
+        geo.dockCY = (hl.top - m.top) + hl.height / 2;
+      } else {
+        geo.smallScale = 150 / mw;
+        geo.dockCX = geo.heroCX;
+        geo.dockCY = geo.heroCY + 900;
+      }
+      gsap.set(mark, { left: geo.heroCX, top: geo.heroCY });
     }
 
-    var PERSP = 1050;
-    var BASE = { rx: 9, ry: -17, rz: -7 };   // the reference's resting tilt
-    gsap.set(mark,  { transformPerspective: PERSP, transformStyle: 'preserve-3d', xPercent: -50, yPercent: -50, transformOrigin: '50% 50%' });
-    gsap.set(inner, { transformPerspective: PERSP, transformStyle: 'preserve-3d', rotationX: BASE.rx, rotationY: BASE.ry, rotationZ: BASE.rz, transformOrigin: '50% 50%' });
+    gsap.set(mark, { xPercent: -50, yPercent: -50, opacity: 0, scale: 1, transformOrigin: '50% 50%' });
+    layout();
+    ScrollTrigger.addEventListener('refresh', layout);
 
-    // Entrance: settle from deeper in space to the base pose (≤1.6s, done
-    // well inside the 2.5s budget alongside the preloader fade).
+    // Entrance: hand off from the loading screen — start compact, then (as the
+    // subtext fades in) expand into the full-bleed, blurred aurora.
+    gsap.set(mark, { scale: geo.smallScale, filter: 'blur(7px)' });
     var entrance = gsap.timeline();
-    entrance.fromTo(mark,
-      { opacity: 0, scale: 0.82, y: 46 },
-      { opacity: 1, scale: 1, y: 0, duration: 1.25, ease: 'power3.out' }, START);
-    entrance.fromTo(inner,
-      { rotationY: BASE.ry - 26, rotationX: BASE.rx + 10 },
-      { rotationY: BASE.ry, rotationX: BASE.rx, duration: 1.45, ease: 'power3.out' }, START);
+    entrance.to(mark, { opacity: 1, duration: 0.45, ease: 'power1.out' }, START - 0.15);
+    entrance.to(mark, { scale: 1, filter: 'blur(72px)', duration: 1.2, ease: 'power2.inOut' }, START + 0.1);
+    entrance.to(mark, { opacity: 0.24, duration: 1.2, ease: 'power2.inOut' }, START + 0.1);
 
-    // Idle wobble — infinite sine loops on the INNER element, one tween per
-    // axis with offset periods so the composite path never visibly repeats.
-    var idle = [
-      gsap.to(inner, { rotationX: BASE.rx - 6,  duration: 4.6, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: START + 1.3 }),
-      gsap.to(inner, { rotationY: BASE.ry + 11, duration: 6.2, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: START + 1.3 }),
-      gsap.to(inner, { rotationZ: BASE.rz + 4,  duration: 7.4, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: START + 1.3 }),
-      gsap.to(inner, { y: -16, duration: 3.8, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: START + 1.3 })
-    ];
+    // Travel: on scroll the aurora shrinks, sharpens and flies to dock just left
+    // of the second section's headline. immediateRender:false so it doesn't fight
+    // the entrance at rest; function values survive refresh/resize.
+    var travel = gsap.timeline({
+      scrollTrigger: {
+        trigger: hero, start: 'top top',
+        endTrigger: '#problem', end: 'top 45%',
+        scrub: 1, invalidateOnRefresh: true,
+        // In the hero the mark is the aurora (behind copy, under the opaque
+        // section 2). Once it has set off it lifts above section 2 so it shows
+        // when docked — but stays below the nav.
+        onUpdate: function (self) { mark.style.zIndex = self.progress < 0.4 ? '1' : '30'; }
+      }
+    });
+    travel.fromTo(mark,
+      { x: 0, y: 0, scale: 1, opacity: 0.24, filter: 'blur(72px)' },
+      {
+        x: function () { return geo.dockCX - geo.heroCX; },
+        y: function () { return geo.dockCY - geo.heroCY; },
+        scale: function () { return geo.smallScale; },
+        opacity: 0.96, filter: 'blur(2px)', ease: 'power1.inOut',
+        immediateRender: false
+      }, 0);
 
-    // Cursor drive (desktop, fine pointer) — heavy lerp on the WRAPPER, so it
-    // composes with (never fights) the idle wobble on the inner element. The
-    // sheen slides opposite the push via a CSS var consumed by a transform.
-    var cur = { rx: 0, ry: 0, tx: 0, ty: 0 };
-    var off = { rx: 0, ry: 0, tx: 0, ty: 0 };
-    var tick = null, onMove = null, onLeave = null;
-    if (isDesktop && window.matchMedia && window.matchMedia('(pointer: fine)').matches) {
-      onMove = function (e) {
-        var nx = (e.clientX / window.innerWidth) - 0.5;    // -0.5..0.5
-        var ny = (e.clientY / window.innerHeight) - 0.5;
-        cur.ry = nx * 16;          // push tilt — capped, never flips
-        cur.rx = -ny * 12;
-        cur.tx = nx * 26;          // slight positional drift
-        cur.ty = ny * 18;
-      };
-      onLeave = function () { cur.rx = 0; cur.ry = 0; cur.tx = 0; cur.ty = 0; };
-      tick = function () {
-        off.rx += (cur.rx - off.rx) * 0.055;   // heavy smoothing = weighty
-        off.ry += (cur.ry - off.ry) * 0.055;
-        off.tx += (cur.tx - off.tx) * 0.055;
-        off.ty += (cur.ty - off.ty) * 0.055;
-        gsap.set(mark, { rotationX: off.rx, rotationY: off.ry, x: off.tx, y: off.ty });
-        mark.style.setProperty('--gx-sheen', (-off.ry * 3.2).toFixed(2) + '%');
+    // Constant fast rotation + cursor parallax in the hero, both easing to a stop
+    // as the mark docks — so in section 2 it sits still and upright. Rotation +
+    // parallax live on the IMG (screen-aligned translate), independent of the
+    // wrapper's travel/scale transform.
+    var DEG_PER_SEC = 60;            // ~6s per turn (much faster than before)
+    var cur = { x: 0, y: 0 };         // cursor target offset
+    var off = { x: 0, y: 0 };         // smoothed offset
+    var rot = 0;
+    var tick = null;
+    if (!reduce) {
+      tick = function (time, dt) {
+        var p = (travel.scrollTrigger && travel.scrollTrigger.progress) || 0;
+        if (p < 0.8) {
+          rot += DEG_PER_SEC * (dt / 1000) * (1 - p / 0.8);   // spin, slowing
+        } else {
+          rot += (Math.round(rot / 360) * 360 - rot) * 0.12;  // settle upright, stop
+        }
+        var k = Math.max(0, 1 - p / 0.8);                     // parallax fades out by dock
+        off.x += (cur.x * k - off.x) * 0.08;
+        off.y += (cur.y * k - off.y) * 0.08;
+        gsap.set(img, { rotation: rot, x: off.x, y: off.y });
       };
       gsap.ticker.add(tick);
-      window.addEventListener('pointermove', onMove);
-      document.documentElement.addEventListener('pointerleave', onLeave);
     }
 
-    // Scroll exit — the panel (front plane) lifts and rotates away faster
-    // than the copy (back plane), then fades before section 2 arrives.
-    // yPercent/opacity only on the wrapper: never the cursor's x/y/rotation.
-    var exit = gsap.timeline({
-      scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom 25%', scrub: 0.8, invalidateOnRefresh: true }
-    });
-    exit.fromTo(mark, { yPercent: -50, opacity: 1 },
-      { yPercent: -86, opacity: 0, ease: 'power1.in', immediateRender: false }, 0);
-    exit.fromTo(inner, { scale: 1 }, { scale: 0.9, ease: 'power1.in', immediateRender: false }, 0);
+    var onMove = null;
+    if (!reduce && window.matchMedia && window.matchMedia('(pointer: fine)').matches) {
+      onMove = function (e) {
+        cur.x = ((e.clientX / window.innerWidth) - 0.5) * 80;
+        cur.y = ((e.clientY / window.innerHeight) - 0.5) * 80;
+      };
+      window.addEventListener('pointermove', onMove);
+    }
 
-    // Back plane: the headline block parallaxes slower than the scroll.
-    var copy = hero.querySelector('.hero-content');
-    var back = copy ? gsap.to(copy, { yPercent: 14, ease: 'none',
-      scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } }) : null;
+    var onResize = function () { layout(); };
+    window.addEventListener('resize', onResize);
 
     return function () {
       if (tick) gsap.ticker.remove(tick);
       if (onMove) window.removeEventListener('pointermove', onMove);
-      if (onLeave) document.documentElement.removeEventListener('pointerleave', onLeave);
       entrance.kill();
-      idle.forEach(function (t) { t.kill(); });
-      if (exit.scrollTrigger) exit.scrollTrigger.kill();
-      exit.kill();
-      if (back) { if (back.scrollTrigger) back.scrollTrigger.kill(); back.kill(); }
-      gsap.set([mark, inner, img], { clearProps: 'all' });
+      if (travel.scrollTrigger) travel.scrollTrigger.kill();
+      travel.kill();
+      ScrollTrigger.removeEventListener('refresh', layout);
+      window.removeEventListener('resize', onResize);
+      gsap.set([mark, img], { clearProps: 'all' });
     };
   }
 
@@ -717,52 +734,6 @@
       gsap.ticker.remove(tick);
       root.style.removeProperty('--gx-skew');
       wraps.forEach(function (w) { w.classList.remove('gx-rollwrap'); });
-    };
-  }
-
-  /* ==========================================================================
-   * MAGNETIC CURSOR (desktop, fine pointer). A follower ring lerps after the
-   * native cursor (which stays visible — no hijack): it tightens over links
-   * and buttons, and blooms into a "View" chip over media tiles. Injected,
-   * aria-hidden, pointer-events:none — pure decoration. The wrapper takes the
-   * per-frame position (no CSS transition); the ring scales via a class so
-   * its transition never fights the follow. Returns a cleanup fn.
-   * ======================================================================== */
-  function setupCursor(gsap) {
-    if (!(window.matchMedia && window.matchMedia('(pointer: fine)').matches)) return function () {};
-    if (document.querySelector('.gx-cursor')) return function () {};
-    var wrap = document.createElement('div');
-    wrap.className = 'gx-cursor';
-    wrap.setAttribute('aria-hidden', 'true');
-    wrap.innerHTML = '<div class="gx-cursor__ring"><span class="gx-cursor__label">View</span></div>';
-    document.body.appendChild(wrap);
-
-    var cur = { x: -100, y: -100 }, pos = { x: -100, y: -100 }, seen = false;
-    var onMove = function (e) {
-      cur.x = e.clientX; cur.y = e.clientY;
-      if (!seen) { seen = true; pos.x = cur.x; pos.y = cur.y; wrap.classList.add('is-on'); }
-    };
-    var tick = function () {
-      pos.x += (cur.x - pos.x) * 0.16;
-      pos.y += (cur.y - pos.y) * 0.16;
-      gsap.set(wrap, { x: pos.x, y: pos.y });
-    };
-    var viewSel = '.kh-tile, .proof-card, .sector-tile, .home-sector-card, .case-study, [data-cursor="view"]';
-    var linkSel = 'a, button, .btn, [role="button"], input, select, textarea, summary';
-    var onOver = function (e) {
-      var t = e.target;
-      if (t.closest && t.closest(viewSel)) { wrap.classList.add('is-view'); wrap.classList.remove('is-link'); }
-      else if (t.closest && t.closest(linkSel)) { wrap.classList.add('is-link'); wrap.classList.remove('is-view'); }
-      else wrap.classList.remove('is-view', 'is-link');
-    };
-    window.addEventListener('pointermove', onMove, { passive: true });
-    document.addEventListener('pointerover', onOver, { passive: true });
-    gsap.ticker.add(tick);
-    return function () {
-      gsap.ticker.remove(tick);
-      window.removeEventListener('pointermove', onMove);
-      document.removeEventListener('pointerover', onOver);
-      wrap.remove();
     };
   }
 
