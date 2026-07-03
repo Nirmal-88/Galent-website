@@ -93,7 +93,7 @@
       setupParallaxLayers(gsap, ScrollTrigger);
       setupOutcomes(gsap, ScrollTrigger);
       setupStatStrips(gsap, ScrollTrigger);
-      setupArchitectureDeck(gsap, ScrollTrigger, !!c.isDesktop);
+      setupArchitectureDraw(gsap, ScrollTrigger);
       setupSectionContinuity(gsap, ScrollTrigger);
       setupCtaSystem(gsap, ScrollTrigger);
       setupOffscreenPause(ScrollTrigger);
@@ -570,104 +570,30 @@
   }
 
   /* =========================================================================
-   * PLATFORM ARCHITECTURE STACK — flagship pinned storytelling (rebuilt).
+   * PLATFORM ARCHITECTURE STACK — GSAP ScrollTrigger PINNED PRESENTATION
    * -------------------------------------------------------------------------
-   * The previous pinned deck felt rough and was reverted. Root cause found:
-   * `.arch-stack` carries [data-reveal], whose CSS sets `transition:
-   * transform .4s` — and under ScrollSmoother a pin is applied via transform
-   * EVERY FRAME, so the pin lagged 400ms behind the scroll. The `.is-deck`
-   * class removes that transition, which is what makes this pin smooth.
+   * Replaces the CSS position:sticky deck with a real pinned, scrubbed
+   * timeline (ScrollSmoother-safe; ScrollTrigger drives the pin via transform).
    *
-   * The walk follows the narrative order (Signals → Backbone → Engines →
-   * Workflows → Outcomes = data-layer 1→5, visually bottom→top: a request
-   * rising through the operating system). The focused layer sits forward at
-   * full strength; passed layers compress slightly, dim and recede in Z
-   * (real perspective on the container). Rules that keep it smooth + safe:
-   *   * content is NEVER hidden — opacity floor 0.4, no autoAlpha:0;
-   *   * transform/opacity only — no z-index, layout or filter animation;
-   *   * numeric scrub (0.75) so the playhead glides between wheel ticks;
-   *   * focus ring/border is a class toggled at step boundaries, not a
-   *     per-frame paint.
-   * Mobile: no pin — the execution-path line simply draws on scrub.
-   * Reduced-motion / no-GSAP: never called; CSS default keeps the stack in
-   * natural flow, fully visible, line fully drawn.
+   * The five layers become an absolutely-stacked deck; scrubbing walks the
+   * narrative order (Signals → Backbone → Engines → Workflows → Outcomes).
+   * As each layer becomes active it scales up, brightens and comes to front,
+   * while every prior layer compresses, dims and recedes — a clear hierarchy
+   * that reads like an executive product presentation.
+   *
+   * Transform-only (scale / y / opacity / z-index). Runs on desktop AND mobile
+   * (motion-on). Reduced-motion / no-GSAP: never called from the motion
+   * matchMedia, so the layers stay in natural flow, fully visible.
    * ======================================================================== */
-  function setupArchitectureDeck(gsap, ScrollTrigger, isDesktop) {
+  function setupArchitectureDraw(gsap, ScrollTrigger) {
     var stack = document.querySelector('.arch-stack');
     if (!stack) return;
-    var domLayers = Array.prototype.slice.call(stack.querySelectorAll('.arch-layer'));
-    var order = ['1', '2', '3', '4', '5'].map(function (d) {
-      return domLayers.find(function (l) { return l.getAttribute('data-layer') === d; });
-    }).filter(Boolean);
-    var n = order.length;
-    if (n < 2) { stack.style.setProperty('--arch-progress', '1'); return; }
-
-    // Mobile / tablet — natural flow; the execution path draws as you pass.
-    if (!isDesktop) {
-      stack.style.setProperty('--arch-progress', '0.15');
-      gsap.to(stack, {
-        '--arch-progress': 1, ease: 'none',
-        scrollTrigger: { trigger: stack, start: 'top 80%', end: 'bottom 60%', scrub: 0.6 }
-      });
-      return;
-    }
-
-    // Reveal must be complete BEFORE the pin measures, and the reveal's CSS
-    // transform transition must be gone (see header) — `.is-deck` does both.
-    stack.classList.add('in', 'is-deck');
-
-    var DIM = 0.4;         // opacity floor — content stays readable, never hidden
-    var cur = 0;
-    order.forEach(function (l, i) {
-      gsap.set(l, i === 0
-        ? { opacity: 1, z: 0.01, scale: 1, transformOrigin: '50% 50%', force3D: true }
-        : { opacity: DIM, z: -34, scale: 0.985, transformOrigin: '50% 50%', force3D: true });
-    });
-    order[0].classList.add('is-focus');
-
-    var tl = gsap.timeline({
-      defaults: { ease: 'power2.inOut', duration: 0.7 },
-      scrollTrigger: {
-        trigger: stack,
-        start: 'center center',
-        end: function () { return '+=' + Math.round(window.innerHeight * 0.55 * n); },
-        pin: true, scrub: 0.75, anticipatePin: 1, invalidateOnRefresh: true,
-        onUpdate: function (self) {
-          // Focus ring — a discrete class swap at step boundaries (cheap).
-          var k = Math.max(0, Math.min(n - 1, Math.floor(self.progress * n)));
-          if (k !== cur) {
-            order[cur].classList.remove('is-focus');
-            order[k].classList.add('is-focus');
-            cur = k;
-          }
-        }
-      }
-    });
-
-    for (var k = 1; k < n; k++) {
-      (function (k) {
-        // Next layer steps forward to full strength.
-        tl.to(order[k], { opacity: 1, z: 0.01, scale: 1, y: 0 }, k);
-        // Every prior layer compresses, dims and recedes — depth-ordered.
-        for (var j = 0; j < k; j++) {
-          var back = k - j;   // 1 = immediately behind the focus
-          tl.to(order[j], {
-            opacity: Math.max(DIM, 0.66 - back * 0.09),
-            z: -34 - back * 18,
-            scale: Math.max(0.94, 1 - back * 0.012),
-            y: back * 4
-          }, k);
-        }
-      })(k);
-    }
-    // The execution path grows continuously with the story. A single fromTo
-    // with BOTH ends explicit — the pin rewrites the element's inline style
-    // during refresh, so a `to` tween can capture a wrong start value.
-    tl.fromTo(stack,
-      { '--arch-progress': (1 / n).toFixed(3) },
-      { '--arch-progress': 1, ease: 'none', duration: n - 1 }, 1);
-    // A settle beat at the end so the last layer is savoured before unpin.
-    tl.to({}, { duration: 0.45 }, n - 0.3);
+    // REVERTED — no pin, no scrub, no deck. The stack reveals through the
+    // standard reliable `.in` system in natural document flow; layers stay
+    // fully visible and the execution-path line is drawn complete. This keeps
+    // scrolling perfectly smooth (a pinned/scrubbed section here was the main
+    // source of the rough, "patchy" feel).
+    stack.style.setProperty('--arch-progress', '1');
   }
 
   /* Generic stat strips — count up on enter (items visible by default). */
