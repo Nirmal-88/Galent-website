@@ -9140,20 +9140,45 @@ html.gsap-smooth main > section:not(.hero):not(.platform-hero):not(.about-hero):
 .gx-netnode { fill: rgba(123, 44, 191, 0.85); }
 .gx-netnode.is-hub { fill: var(--brand-green); }
 
-/* FEATURE 3 — horizontal executive deck (Industries). Desktop only; the
- * engine adds .is-horizontal and pins the section while the track moves x. */
-#industries.is-horizontal { overflow: hidden; }
-#industries.is-horizontal .home-sector-grid {
-  display: flex;
-  flex-wrap: nowrap;
-  width: max-content;
-  grid-template-columns: none;
-  align-items: stretch;
-  will-change: transform;
+/* FEATURE 3 — Industries 3D RING (desktop, home). The engine adds .is-ring,
+ * pins the section and rotates the existing sector cards around a real 3D
+ * cylinder (TRIONN-style). transition:none on the cards is load-bearing:
+ * the ring writes card transforms EVERY frame, and the data-stagger
+ * transform transition would lag each write (the pin-jank lesson). */
+#industries.is-ring { overflow: hidden; transition: none !important; }
+#industries.is-ring .container { position: relative; perspective: 1500px; }
+#industries.is-ring .home-sector-grid {
+  position: relative;
+  z-index: 1;
+  display: block;
+  height: clamp(380px, 54vh, 500px);
+  margin-top: clamp(16px, 3vh, 40px);
+  transform-style: preserve-3d;
 }
-#industries.is-horizontal .home-sector-card {
-  flex: 0 0 clamp(300px, 30vw, 380px);
-  min-height: clamp(280px, 34vh, 340px);
+#industries.is-ring .home-sector-card {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: clamp(300px, 24vw, 360px);
+  min-height: clamp(310px, 42vh, 420px);
+  margin: 0;
+  transition: none !important;      /* per-frame transform writes */
+  will-change: transform, opacity;
+}
+/* Giant echo of the section's own heading, drifting behind the ring. */
+#industries.is-ring .gx-ring-echo {
+  position: absolute;
+  left: 50%; top: 62%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  font-weight: 700;
+  font-size: clamp(80px, 11vw, 180px);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+  user-select: none;
+  will-change: transform;
 }
 
 /* NOTE: this used to pause the CTA's orbs/rings/sparks until motion.js added

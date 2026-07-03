@@ -103,9 +103,11 @@
       if (isHome) {
         setupHeroEntrance(gsap);
         heroCleanup = setupHeroLogo(gsap, ScrollTrigger);
+        setupHeroCopyParallax(gsap, ScrollTrigger);
         if (c.isDesktop) {
           setupPinnedComparison(gsap, ScrollTrigger);
-          setupHorizontalIndustries(gsap, ScrollTrigger);
+          setupIndustriesRing(gsap, ScrollTrigger);
+          setupSectionSettle(gsap, ScrollTrigger);
         }
       }
 
@@ -448,32 +450,109 @@
   }
 
   /* ==========================================================================
-   * FEATURE 3 — horizontal Industries deck (desktop). Cards are revealed by
-   * the `.in` system (always visible); the pin + x-translate is presentation.
-   * Falls back to the normal grid if there's nothing to scroll.
+   * FEATURE 3 — INDUSTRIES 3D RING (desktop, home). The TRIONN signature:
+   * the existing sector cards arrange on a full 3D cylinder — real
+   * perspective, heavy curvature — and scrolling rotates the ring so every
+   * card sweeps through the front. An oversized, aria-hidden echo of the
+   * section's own heading drifts behind the ring (decorative duplicate of
+   * EXISTING text — no content change). Rules that keep it smooth + safe:
+   *   * cards stay visible (opacity floor 0.35, links stay clickable);
+   *   * `.is-ring` kills the data-stagger transform transition on the cards
+   *     — per-frame transform writes must never be CSS-transitioned;
+   *   * one proxy tween + a manual render of 7 transform strings per frame
+   *     (compositor-only after recalc); preserve-3d does the depth sorting —
+   *     no z-index writes, no filters, no layout;
+   *   * mobile / reduced-motion / no-GSAP: the approved grid, untouched.
    * ======================================================================== */
-  function setupHorizontalIndustries(gsap, ScrollTrigger) {
+  function setupIndustriesRing(gsap, ScrollTrigger) {
     var section = document.getElementById('industries');
     if (!section) return;
     var track = section.querySelector('.home-sector-grid');
     if (!track) return;
     var cards = Array.prototype.slice.call(track.children);
-    if (cards.length < 4) return;
-    track.classList.add('in'); // ensure cards visible regardless of pin
-    section.classList.add('cv-visible', 'is-horizontal');
+    var n = cards.length;
+    if (n < 5) return;   // a ring needs enough panels to read as a ring
 
-    var getShift = function () { return Math.max(0, track.scrollWidth - window.innerWidth + 120); };
-    if (getShift() <= 0) { section.classList.remove('is-horizontal'); return; }
+    track.classList.add('in');   // cards visible no matter what
+    section.classList.add('cv-visible', 'is-ring');
 
-    var scrollTween = gsap.to(track, {
-      x: function () { return -getShift(); }, ease: 'none',
-      scrollTrigger: { trigger: section, start: 'top top', end: function () { return '+=' + getShift(); },
-        pin: true, scrub: 1, anticipatePin: 1, invalidateOnRefresh: true }
+    // Giant echo type behind the ring — duplicates the existing heading.
+    var head = section.querySelector('.section-head h2');
+    var echo = section.querySelector('.gx-ring-echo');
+    if (!echo && head && track.parentNode) {
+      echo = document.createElement('div');
+      echo.className = 'gx-ring-echo';
+      echo.setAttribute('aria-hidden', 'true');
+      echo.textContent = head.textContent.replace(/\s+/g, ' ').trim();
+      track.parentNode.insertBefore(echo, track);
+    }
+
+    var STEP = 360 / n;
+    var state = { rot: 0 };
+    var radius = 480;
+    function measure() {
+      var w = cards[0].offsetWidth || 340;
+      // Chord-fit the cards around the cylinder, plus breathing room.
+      radius = Math.round((w / 2) / Math.tan(Math.PI / n)) + 40;
+    }
+
+    function render() {
+      for (var i = 0; i < n; i++) {
+        var a = STEP * i + state.rot;
+        var depth = Math.cos(a * Math.PI / 180);   // 1 = front, -1 = back
+        cards[i].style.transform =
+          'translate(-50%, -50%) rotateY(' + a.toFixed(2) + 'deg) translateZ(' + radius + 'px)';
+        cards[i].style.opacity = (0.35 + 0.65 * (depth + 1) / 2).toFixed(3);
+      }
+      if (echo) {
+        echo.style.transform =
+          'translate(-50%, -50%) translateX(' + (state.rot * 0.6).toFixed(1) + 'px)';
+      }
+    }
+    measure();
+    render();
+
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section, start: 'top top',
+        end: function () { return '+=' + Math.round(window.innerHeight * 0.5 * n); },
+        pin: true, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true,
+        onRefresh: function () { measure(); render(); }
+      }
     });
-    cards.forEach(function (cardEl) {
-      gsap.fromTo(cardEl, { scale: 0.95 }, { scale: 1, ease: 'power2.out', duration: 0.4,
-        scrollTrigger: { trigger: cardEl, containerAnimation: scrollTween, start: 'left 80%', end: 'right 55%', toggleActions: 'play none none reverse' } });
+    // One proxy tween; scrub smooths the playhead, render paints the ring.
+    tl.to(state, {
+      rot: -STEP * (n - 1), ease: 'none', duration: 1, onUpdate: render
     });
+  }
+
+  /* ==========================================================================
+   * SECTION SETTLE (home, desktop) — TRIONN-style hand-off: as a section's
+   * bottom leaves, it settles back a touch (scale + slight dim from its top
+   * edge) so the next section reads as arriving on top of it. Transform/
+   * opacity only, scrubbed, immediateRender:false (natural state if a
+   * trigger never fires). NEVER applied to sections that contain pins
+   * (#industries) — a transformed ancestor breaks pinning.
+   * ======================================================================== */
+  function setupSectionSettle(gsap, ScrollTrigger) {
+    ['#problem', '#outcomes', '#how', '#ops', '#cases'].forEach(function (sel) {
+      var sec = document.querySelector(sel);
+      if (!sec || sec.querySelector('.pin-spacer')) return;
+      gsap.fromTo(sec,
+        { scale: 1, opacity: 1 },
+        { scale: 0.975, opacity: 0.85, ease: 'none', immediateRender: false,
+          transformOrigin: '50% 0%',
+          scrollTrigger: { trigger: sec, start: 'bottom 45%', end: 'bottom -5%', scrub: true } });
+    });
+  }
+
+  /* Hero copy back-plane parallax (home) — the copy drifts slower than the
+     scroll, so leaving the hero has depth. Decorative scrub; yPercent only. */
+  function setupHeroCopyParallax(gsap, ScrollTrigger) {
+    var copy = document.querySelector('#hero .hero-content');
+    if (!copy) return;
+    gsap.to(copy, { yPercent: 12, ease: 'none',
+      scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true } });
   }
 
   /* ==========================================================================
@@ -485,7 +564,9 @@
     var MAX_TILT = 5;   // deg — capped low; expensive/intentional, never a flip
 
     document.querySelectorAll(cardSel).forEach(function (el) {
-      if (el.closest('.is-horizontal')) return;
+      // Ring cards get per-frame transform strings from the ring renderer —
+      // the tilt system must never write transforms on the same elements.
+      if (el.closest('.is-horizontal') || el.closest('.is-ring')) return;
       el.classList.add('gx-magnetic', 'gx-tilt');
       // Lazily initialised on first hover so the card's scroll-reveal entrance
       // (a CSS transform) isn't overwritten by an inline transform at boot.
