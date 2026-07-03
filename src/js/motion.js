@@ -102,7 +102,7 @@
       var heroCleanup = function () {};
       if (isHome) {
         setupHeroEntrance(gsap);
-        heroCleanup = setupHeroMark3D(gsap, ScrollTrigger, !!c.isDesktop);
+        heroCleanup = setupHeroLogo(gsap, ScrollTrigger);
         setupHeroCopyParallax(gsap, ScrollTrigger);
         if (c.isDesktop) {
           setupPinnedComparison(gsap, ScrollTrigger);
@@ -259,144 +259,138 @@
   }
 
   /* ==========================================================================
-   * HERO LIVING MARK — true-3D logo assembly (home). The Galent mark's three
-   * shapes (per the brand SVG: green rounded shape, larger purple rounded
-   * shape behind, small orange accent upper-right) are rebuilt as layered
-   * 3D orbs at DIFFERENT Z-DEPTHS inside a perspective stage:
-   *   * entrance: the shapes fly in from scattered depth and assemble into
-   *     the exact mark formation (orange pops last with a spring) — ≤2.5s,
-   *     riding the preloader handoff;
-   *   * idle: the whole formation slowly turns in 3D while each shape
-   *     breathes on its own period — alive, never repeating visibly;
-   *   * two tilted orbital rings (with travelling light dots) circle the
-   *     formation — the mark reads as a system, not a sticker;
-   *   * cursor: the stage tilts with heavy lerp; because each shape sits at
-   *     a different translateZ, perspective creates REAL depth parallax;
-   *   * scroll: the formation rotates away, lifts and dissolves as the
-   *     hero exits (numeric scrub).
-   * It sits BEHIND the hero copy (z-index 1 vs copy's 2) so readability is
-   * never touched. All transform/opacity; blurs are static (rendered once).
-   * Reduced-motion / no-GSAP: never called — .travel-mark keeps its CSS
-   * default opacity:0, page looks identical. Returns a cleanup fn.
+   * HERO LOGO SYSTEM (home). The Galent mark IMAGE is the centerpiece — only
+   * transforms / filters animate it; the geometry is never recreated. It
+   * floats at rest, then on scroll it scales + lights up while an intelligence
+   * network radiates OUT FROM the mark (paths drawn from its centre, nodes
+   * resolve, pulses travel) — the logo "evolving" into the platform. The hero
+   * copy lifts away as you leave. Returns a cleanup fn.
+   *
+   * (Reverted from a 3D floating-panel + cursor-tilt treatment trialled in
+   * this session — the user asked for the panel and the custom cursor both
+   * removed after seeing them live. This is the pre-panel aurora-mark
+   * behaviour, restored verbatim.)
    * ======================================================================== */
-  function setupHeroMark3D(gsap, ScrollTrigger, isDesktop) {
+  function setupHeroLogo(gsap, ScrollTrigger) {
+    var main = document.getElementById('top');
     var hero = document.getElementById('hero');
-    if (!hero) return function () {};
-    var copy = hero.querySelector('.hero-content');
+    var mark = document.querySelector('.travel-mark');
+    var img = mark && mark.querySelector('img');
+    var headline = document.querySelector('#problem .section-head h2') ||
+                   document.querySelector('#problem .section-head');
+    if (!main || !hero || !mark || !img) return function () {};
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    var START = 1.05;   // entrance begins as the loading screen fades
+    var GAP = 22;             // gap to the left of the headline
+    var START = 1.05;         // entrance begins as the loading screen fades
+    var ASPECT = 320 / 395;   // mark width / height
 
-    // Build the 3D stage INSIDE the hero section (z-index 1) so the copy
-    // (z-index 2, same stacking context) always paints on top — the old
-    // .travel-mark lives outside the section and would cover the headline.
-    var mark = hero.querySelector('.gx-mark3d-host');
-    if (!mark) {
-      mark = document.createElement('div');
-      mark.className = 'gx-mark3d-host';
-      mark.setAttribute('aria-hidden', 'true');
-      hero.insertBefore(mark, copy || hero.firstChild);
+    // Geometry relative to <main>; recomputed on refresh / resize. The docked
+    // mark is sized to the headline's height so it matches "The Delivery Model…".
+    var geo = { heroCX: 0, heroCY: 0, dockCX: 0, dockCY: 0, smallScale: 1 };
+    function layout() {
+      var m = main.getBoundingClientRect();
+      var h = hero.getBoundingClientRect();
+      var mw = mark.offsetWidth || 1;
+      geo.heroCX = (h.left - m.left) + h.width / 2;
+      geo.heroCY = (h.top - m.top) + h.height / 2;
+      if (headline) {
+        var hl = headline.getBoundingClientRect();
+        var targetH = Math.max(96, Math.min(240, hl.height));
+        var targetW = targetH * ASPECT;
+        geo.smallScale = targetW / mw;
+        geo.dockCX = (hl.left - m.left) - GAP - targetW / 2;
+        geo.dockCY = (hl.top - m.top) + hl.height / 2;
+      } else {
+        geo.smallScale = 150 / mw;
+        geo.dockCX = geo.heroCX;
+        geo.dockCY = geo.heroCY + 900;
+      }
+      gsap.set(mark, { left: geo.heroCX, top: geo.heroCY });
     }
-    var stage = mark.querySelector('.gx-mark3d');
-    if (!stage) {
-      stage = document.createElement('div');
-      stage.className = 'gx-mark3d';
-      stage.setAttribute('aria-hidden', 'true');
-      stage.innerHTML =
-        '<div class="gx-halo"></div>' +
-        '<div class="gx-orbit gx-orbit--a"><span></span></div>' +
-        '<div class="gx-orbit gx-orbit--b"><span></span></div>' +
-        '<div class="gx-orb gx-orb--p"></div>' +
-        '<div class="gx-orb gx-orb--g"></div>' +
-        '<div class="gx-orb gx-orb--o"></div>';
-      mark.appendChild(stage);
-    }
-    var halo   = stage.querySelector('.gx-halo');
-    var orbitA = stage.querySelector('.gx-orbit--a');
-    var orbitB = stage.querySelector('.gx-orbit--b');
-    var orbP   = stage.querySelector('.gx-orb--p');
-    var orbG   = stage.querySelector('.gx-orb--g');
-    var orbO   = stage.querySelector('.gx-orb--o');
 
-    var PERSP = 1100;
-    gsap.set(mark,  { xPercent: -50, yPercent: -50, opacity: 0, transformPerspective: PERSP, transformStyle: 'preserve-3d', transformOrigin: '50% 50%' });
-    gsap.set(stage, { transformPerspective: PERSP, transformStyle: 'preserve-3d', transformOrigin: '50% 50%' });
+    gsap.set(mark, { xPercent: -50, yPercent: -50, opacity: 0, scale: 1, transformOrigin: '50% 50%' });
+    layout();
+    ScrollTrigger.addEventListener('refresh', layout);
 
-    // Formation depths — purple deepest, green mid, orange in front.
-    var FORM = { p: -70, g: 0, o: 55 };
-
-    // Scattered pre-assembly poses.
-    gsap.set(orbP, { z: -360, x: -140, y: 110, opacity: 0, force3D: true });
-    gsap.set(orbG, { z: -280, x: 120, y: -100, opacity: 0, force3D: true });
-    gsap.set(orbO, { z: 260, x: 180, y: -60, opacity: 0, scale: 0.4, force3D: true });
-    gsap.set(halo, { scale: 0.55, opacity: 0 });
-    // Tilt the ring planes via GSAP (not CSS) so the infinite rotationZ spin
-    // composes with the tilt instead of overwriting it.
-    gsap.set(orbitA, { opacity: 0, rotationX: 72, rotationZ: 0, transformOrigin: '50% 50%' });
-    gsap.set(orbitB, { opacity: 0, rotationX: 64, rotationY: 24, rotationZ: 0, transformOrigin: '50% 50%' });
-
-    // ENTRANCE — assemble the mark out of deep space (≤2.5s total).
+    // Entrance: hand off from the loading screen — start compact, then (as the
+    // subtext fades in) expand into the full-bleed, blurred aurora.
+    gsap.set(mark, { scale: geo.smallScale, filter: 'blur(7px)' });
     var entrance = gsap.timeline();
-    entrance.to(mark, { opacity: 1, duration: 0.4, ease: 'power1.out' }, START);
-    entrance.to(orbP, { z: FORM.p, x: 0, y: 0, opacity: 1, duration: 1.15, ease: 'power3.out' }, START + 0.05);
-    entrance.to(orbG, { z: FORM.g, x: 0, y: 0, opacity: 1, duration: 1.15, ease: 'power3.out' }, START + 0.2);
-    entrance.to(orbO, { z: FORM.o, x: 0, y: 0, opacity: 1, scale: 1, duration: 0.9, ease: 'back.out(2.2)' }, START + 0.65);
-    entrance.to(halo, { scale: 1, opacity: 0.55, duration: 1.3, ease: 'power2.out' }, START + 0.35);
-    entrance.to([orbitA, orbitB], { opacity: 1, duration: 1.0, ease: 'power1.inOut' }, START + 0.9);
+    entrance.to(mark, { opacity: 1, duration: 0.45, ease: 'power1.out' }, START - 0.15);
+    entrance.to(mark, { scale: 1, filter: 'blur(72px)', duration: 1.2, ease: 'power2.inOut' }, START + 0.1);
+    entrance.to(mark, { opacity: 0.24, duration: 1.2, ease: 'power2.inOut' }, START + 0.1);
 
-    // IDLE — the formation lives. Offset periods so it never visibly loops.
-    var idleDelay = START + 1.5;
-    var idle = [
-      gsap.to(stage, { rotationY: 13, duration: 9.5, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: idleDelay }),
-      gsap.to(stage, { rotationX: -7, duration: 7.5, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: idleDelay }),
-      gsap.to(orbP, { y: '+=12', z: FORM.p - 18, duration: 6.2, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: idleDelay }),
-      gsap.to(orbG, { y: '-=10', z: FORM.g + 14, duration: 4.8, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: idleDelay }),
-      gsap.to(orbO, { y: '-=8', x: '+=6', duration: 3.6, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: idleDelay }),
-      gsap.to(halo, { scale: 1.07, duration: 5.5, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: idleDelay }),
-      // Orbital rings spin forever — the travelling dots ride the rotation.
-      gsap.to(orbitA, { rotationZ: 360, duration: 26, repeat: -1, ease: 'none', delay: idleDelay - 1 }),
-      gsap.to(orbitB, { rotationZ: -360, duration: 38, repeat: -1, ease: 'none', delay: idleDelay - 1 })
-    ];
+    // Travel: on scroll the aurora shrinks, sharpens and flies to dock just left
+    // of the second section's headline. immediateRender:false so it doesn't fight
+    // the entrance at rest; function values survive refresh/resize.
+    var travel = gsap.timeline({
+      scrollTrigger: {
+        trigger: hero, start: 'top top',
+        endTrigger: '#problem', end: 'top 45%',
+        scrub: 1, invalidateOnRefresh: true,
+        // In the hero the mark is the aurora (behind copy, under the opaque
+        // section 2). Once it has set off it lifts above section 2 so it shows
+        // when docked — but stays below the nav.
+        onUpdate: function (self) { mark.style.zIndex = self.progress < 0.4 ? '1' : '30'; }
+      }
+    });
+    travel.fromTo(mark,
+      { x: 0, y: 0, scale: 1, opacity: 0.24, filter: 'blur(72px)' },
+      {
+        x: function () { return geo.dockCX - geo.heroCX; },
+        y: function () { return geo.dockCY - geo.heroCY; },
+        scale: function () { return geo.smallScale; },
+        opacity: 0.96, filter: 'blur(2px)', ease: 'power1.inOut',
+        immediateRender: false
+      }, 0);
 
-    // CURSOR — heavy-lerp tilt on the host; per-shape parallax comes free
-    // from perspective, because each orb sits at a different Z.
-    var cur = { rx: 0, ry: 0 };
-    var off = { rx: 0, ry: 0 };
-    var tick = null, onMove = null, onLeave = null;
-    if (isDesktop && window.matchMedia && window.matchMedia('(pointer: fine)').matches) {
-      onMove = function (e) {
-        cur.ry = ((e.clientX / window.innerWidth) - 0.5) * 22;
-        cur.rx = (0.5 - (e.clientY / window.innerHeight)) * 14;
-      };
-      onLeave = function () { cur.rx = 0; cur.ry = 0; };
-      tick = function () {
-        off.rx += (cur.rx - off.rx) * 0.05;
-        off.ry += (cur.ry - off.ry) * 0.05;
-        gsap.set(mark, { rotationX: off.rx, rotationY: off.ry });
+    // Constant fast rotation + cursor parallax in the hero, both easing to a stop
+    // as the mark docks — so in section 2 it sits still and upright. Rotation +
+    // parallax live on the IMG (screen-aligned translate), independent of the
+    // wrapper's travel/scale transform.
+    var DEG_PER_SEC = 60;            // ~6s per turn (much faster than before)
+    var cur = { x: 0, y: 0 };         // cursor target offset
+    var off = { x: 0, y: 0 };         // smoothed offset
+    var rot = 0;
+    var tick = null;
+    if (!reduce) {
+      tick = function (time, dt) {
+        var p = (travel.scrollTrigger && travel.scrollTrigger.progress) || 0;
+        if (p < 0.8) {
+          rot += DEG_PER_SEC * (dt / 1000) * (1 - p / 0.8);   // spin, slowing
+        } else {
+          rot += (Math.round(rot / 360) * 360 - rot) * 0.12;  // settle upright, stop
+        }
+        var k = Math.max(0, 1 - p / 0.8);                     // parallax fades out by dock
+        off.x += (cur.x * k - off.x) * 0.08;
+        off.y += (cur.y * k - off.y) * 0.08;
+        gsap.set(img, { rotation: rot, x: off.x, y: off.y });
       };
       gsap.ticker.add(tick);
-      window.addEventListener('pointermove', onMove, { passive: true });
-      document.documentElement.addEventListener('pointerleave', onLeave);
     }
 
-    // SCROLL EXIT — the system rotates away and dissolves as the hero
-    // leaves. yPercent/opacity on the host (never the cursor's rotations);
-    // extra spin on the inner stage so the two never fight.
-    var exit = gsap.timeline({
-      scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom 20%', scrub: 0.8, invalidateOnRefresh: true }
-    });
-    exit.fromTo(mark, { yPercent: -50, opacity: 1 },
-      { yPercent: -78, opacity: 0, ease: 'power1.in', immediateRender: false }, 0);
-    exit.fromTo(stage, { scale: 1 }, { scale: 1.18, rotationY: '+=38', ease: 'power1.in', immediateRender: false }, 0);
+    var onMove = null;
+    if (!reduce && window.matchMedia && window.matchMedia('(pointer: fine)').matches) {
+      onMove = function (e) {
+        cur.x = ((e.clientX / window.innerWidth) - 0.5) * 80;
+        cur.y = ((e.clientY / window.innerHeight) - 0.5) * 80;
+      };
+      window.addEventListener('pointermove', onMove);
+    }
+
+    var onResize = function () { layout(); };
+    window.addEventListener('resize', onResize);
 
     return function () {
       if (tick) gsap.ticker.remove(tick);
       if (onMove) window.removeEventListener('pointermove', onMove);
-      if (onLeave) document.documentElement.removeEventListener('pointerleave', onLeave);
       entrance.kill();
-      idle.forEach(function (t) { t.kill(); });
-      if (exit.scrollTrigger) exit.scrollTrigger.kill();
-      exit.kill();
-      gsap.set([mark, stage, halo, orbitA, orbitB, orbP, orbG, orbO], { clearProps: 'all' });
+      if (travel.scrollTrigger) travel.scrollTrigger.kill();
+      travel.kill();
+      ScrollTrigger.removeEventListener('refresh', layout);
+      window.removeEventListener('resize', onResize);
+      gsap.set([mark, img], { clearProps: 'all' });
     };
   }
 
@@ -897,7 +891,7 @@
    *   2) fine contour lines briefly draw *inside* the mark;
    *   3) the motion eases to a stop;
    *   4) the preloader fades and the hero content becomes primary
-   *      (handled by setupHeroEntrance / setupHeroMark3D).
+   *      (handled by setupHeroEntrance / setupHeroLogo).
    * Transform/opacity + SVG stroke only. Skipped under reduced motion.
    * ======================================================================== */
   function setupHeroIntro(gsap) {
