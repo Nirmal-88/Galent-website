@@ -90,12 +90,15 @@
       setupHeadlineReveals(c);
 
       // Effects (decorative / visible-by-default — never gate content).
-      setupParallaxLayers(gsap, ScrollTrigger);
+      // Scrub-driven parallax is DESKTOP ONLY: on mobile (native scroll) a
+      // scrubbed transform repaints its target every scroll frame, which read
+      // as the rough, patchy phone scroll. Phones just scroll normally.
+      if (c.isDesktop) setupParallaxLayers(gsap, ScrollTrigger);
       setupOutcomes(gsap, ScrollTrigger);
       setupStatStrips(gsap, ScrollTrigger);
       setupArchitectureDeck(gsap, ScrollTrigger, !!c.isDesktop);
       setupSectionContinuity(gsap, ScrollTrigger);
-      setupCtaSystem(gsap, ScrollTrigger);
+      setupCtaSystem(gsap, ScrollTrigger, !!c.isDesktop);
       setupOffscreenPause(ScrollTrigger);
       var mediaCleanup = setupMediaRolling(gsap, ScrollTrigger, !!c.isDesktop, smoother);
 
@@ -103,8 +106,11 @@
       if (isHome) {
         setupHeroEntrance(gsap);
         heroCleanup = setupHeroLogo(gsap, ScrollTrigger, !!c.isDesktop);
-        setupHeroCopyParallax(gsap, ScrollTrigger);
         if (c.isDesktop) {
+          // Hero-copy parallax scrubs the headline/lede/CTA as you leave the
+          // hero — smooth on desktop, but on a phone repainting that text each
+          // scroll frame was the patchy hero→section-2 stutter. Desktop only.
+          setupHeroCopyParallax(gsap, ScrollTrigger);
           setupPinnedComparison(gsap, ScrollTrigger);
           setupHorizontalIndustries(gsap, ScrollTrigger);
         }
@@ -682,7 +688,7 @@
   }
 
   /* CTA system — inject decorations + decorative scroll parallax. */
-  function setupCtaSystem(gsap, ScrollTrigger) {
+  function setupCtaSystem(gsap, ScrollTrigger, isDesktop) {
     document.querySelectorAll('.cta-card').forEach(function (card) {
       if (!card.querySelector('.cta-fx')) {
         var fx = document.createElement('div');
@@ -694,14 +700,19 @@
           + '<div class="cta-spark cta-spark--3"></div><div class="cta-spark cta-spark--4"></div>';
         card.insertBefore(fx, card.firstChild);
       }
-      card.setAttribute('data-cta-parallax', '');
-      var o = { v: -1 };
-      gsap.fromTo(o, { v: -1 }, { v: 1, ease: 'none',
-        scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: true },
-        onUpdate: function () {
-          card.style.setProperty('--cta-shift', (o.v * 60).toFixed(2) + 'px');
-          card.style.setProperty('--cta-shift-x', (o.v * 18).toFixed(2) + 'px');
-        } });
+      // Scroll parallax on the CTA decorations — DESKTOP ONLY. On mobile the
+      // per-frame CSS-var writes invalidate the card's paint every scroll frame
+      // (patchy). Phones keep the static decorations, no scroll-linked shift.
+      if (isDesktop) {
+        card.setAttribute('data-cta-parallax', '');
+        var o = { v: -1 };
+        gsap.fromTo(o, { v: -1 }, { v: 1, ease: 'none',
+          scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: true },
+          onUpdate: function () {
+            card.style.setProperty('--cta-shift', (o.v * 60).toFixed(2) + 'px');
+            card.style.setProperty('--cta-shift-x', (o.v * 18).toFixed(2) + 'px');
+          } });
+      }
     });
   }
 
