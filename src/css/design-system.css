@@ -10134,4 +10134,20 @@ body[data-page="home"] .hero .gx-split-hero .hero-highlight--secondary .gx-word 
     background: rgba(12,13,18,0.94);
   }
   .nav.scrolled { background: rgba(10,11,16,0.97); }
+
+  /* PHONE/TABLET HERO — the travelling Galent mark is a ~1266px element with a
+   * 72px blur: a huge GPU texture that a phone must repaint as the page scrolls,
+   * which is what made the hero→next-section stretch rough and patchy. On touch
+   * devices (no smooth-scroll engine) we drop that blurred image entirely and
+   * paint the aurora as a cheap, static CSS gradient instead — it scrolls for
+   * free. Desktop (>1024px) keeps the real travelling mark, which is smooth. */
+  body[data-page="home"] .travel-mark { display: none !important; }
+  body[data-page="home"] .hero {
+    background:
+      radial-gradient(90% 58% at 20% 16%, rgba(48,68,152,0.32), transparent 62%),
+      radial-gradient(85% 55% at 84% 10%, rgba(30,209,151,0.18), transparent 58%),
+      radial-gradient(105% 72% at 50% 110%, rgba(123,44,191,0.32), transparent 62%),
+      radial-gradient(70% 50% at 92% 88%, rgba(30,209,151,0.12), transparent 60%),
+      #0A0B12;
+  }
 }
