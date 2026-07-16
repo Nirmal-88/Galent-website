@@ -10078,3 +10078,51 @@ body[data-page="home"] .hero .gx-split-hero .hero-highlight--secondary .gx-word 
   -webkit-text-fill-color: transparent; color: transparent;
   /* saturate(1.3) already applies at the .hero-highlight level */
 }
+
+/* ==================================================================
+ * MOBILE REFINEMENT LAYER  —  appended override (delete this whole
+ * block to revert). Every rule below is gated behind a max-width media
+ * query, so DESKTOP RENDERING IS BYTE-FOR-BYTE UNCHANGED. Purpose:
+ * make the site fully phone-friendly without touching the desktop
+ * design. Added 2026-07-16.
+ * ================================================================== */
+@media (max-width: 640px) {
+
+  /* ---- HOME HERO ------------------------------------------------
+   * The headline forced .hero-line--1 to `white-space: nowrap`, so
+   * "Engineering Outcomes." ran off the right edge on phones and
+   * dragged the lede + CTA off-screen with it. Let it wrap, size it
+   * to the viewport, and cap the content to the column width. */
+  body[data-page="home"] .hero-headline .hero-line--1 { white-space: normal; }
+  body[data-page="home"] .hero .t-hero { font-size: clamp(38px, 11vw, 52px); }
+  body[data-page="home"] .hero .hero-content { max-width: 100%; }
+
+  /* The full-bleed travelling aurora mark is ~1200px wide and sits at
+   * left:0; on a phone it spilled past the viewport and created a
+   * horizontal scroll. #top is its positioned container, and the mark
+   * only ever travels vertically — so clipping the x-axis here is safe
+   * and removes the empty side-scroll. */
+  body[data-page="home"] #top { overflow-x: clip; }
+
+  /* ---- HERO CTAs (all pages) ------------------------------------
+   * Stack the hero buttons full-width so they never overflow and are
+   * comfortable tap targets on a phone. */
+  .hero .cta-row { flex-direction: column; align-items: stretch; width: 100%; }
+  .hero .cta-row .btn { width: 100%; justify-content: center; }
+  .hero .t-body-lg { max-width: 100%; }
+
+  /* ---- KNOWLEDGE HUB filter tabs --------------------------------
+   * The pill tab-bar was a single non-wrapping row (~735px) and forced
+   * the page to scroll sideways. Let it wrap into a rounded chip group,
+   * matching the Industries filter pattern. */
+  .hub-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
+    border-radius: var(--radius-lg);
+  }
+
+  /* Media thumbnails never spill past their card. */
+  .card-thumb { overflow: hidden; }
+}

@@ -21,5 +21,19 @@
   ],
   "rewrites": [
     { "source": "/admin", "destination": "/admin/index.html" }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "insights.galent.com" }],
+      "destination": "/knowledge-hub.html",
+      "permanent": false
+    },
+    {
+      "source": "/index.html",
+      "has": [{ "type": "host", "value": "insights.galent.com" }],
+      "destination": "/knowledge-hub.html",
+      "permanent": false
+    }
   ]
 }
