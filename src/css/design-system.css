@@ -10104,3 +10104,15 @@ body[data-page="home"] .hero .gx-split-hero .hero-highlight--secondary .gx-word 
   /* Media thumbnails never spill past their card. */
   .card-thumb { overflow: hidden; }
 }
+
+/* ==================================================================
+ * FLAT BACKGROUND — remove the decorative blurred glow "orbs" behind
+ * content sections for a neater, simpler look (all pages, all sizes).
+ * Kept: hero backdrops (.travel-mark / .hero-fx__orb / .about-hero__orb)
+ * and functional blurs (nav glass, card thumbnails). Delete this block
+ * to bring the section glows back. Added 2026-07-16.
+ * ================================================================== */
+.gd-orb,
+.hygi-orb,
+.cta-orb,
+.compass-aura { display: none !important; }
