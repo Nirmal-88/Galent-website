@@ -102,7 +102,7 @@
       var heroCleanup = function () {};
       if (isHome) {
         setupHeroEntrance(gsap);
-        heroCleanup = setupHeroLogo(gsap, ScrollTrigger);
+        heroCleanup = setupHeroLogo(gsap, ScrollTrigger, !!c.isDesktop);
         setupHeroCopyParallax(gsap, ScrollTrigger);
         if (c.isDesktop) {
           setupPinnedComparison(gsap, ScrollTrigger);
@@ -271,7 +271,7 @@
    * removed after seeing them live. This is the pre-panel aurora-mark
    * behaviour, restored verbatim.)
    * ======================================================================== */
-  function setupHeroLogo(gsap, ScrollTrigger) {
+  function setupHeroLogo(gsap, ScrollTrigger, isDesktop) {
     var main = document.getElementById('top');
     var hero = document.getElementById('hero');
     var mark = document.querySelector('.travel-mark');
@@ -321,10 +321,15 @@
     entrance.to(mark, { scale: 1, filter: 'blur(72px)', duration: 1.2, ease: 'power2.inOut' }, START + 0.1);
     entrance.to(mark, { opacity: 0.24, duration: 1.2, ease: 'power2.inOut' }, START + 0.1);
 
-    // Travel: on scroll the aurora shrinks, sharpens and flies to dock just left
-    // of the second section's headline. immediateRender:false so it doesn't fight
-    // the entrance at rest; function values survive refresh/resize.
-    var travel = gsap.timeline({
+    // Travel: DESKTOP ONLY. On scroll the aurora shrinks and flies to dock just
+    // left of the second section's headline. On mobile (native scroll, weaker
+    // GPU) scrubbing the SCALE of this ~2000px blurred layer re-rasterised it
+    // every frame — that was the rough, patchy stretch from the hero downward.
+    // On phones the mark simply stays the static hero aurora and scrolls away
+    // with the page (no per-frame cost). Desktop feel is unchanged.
+    var travel = null;
+    if (isDesktop) {
+    travel = gsap.timeline({
       scrollTrigger: {
         trigger: hero, start: 'top top',
         endTrigger: '#problem', end: 'top 45%',
@@ -349,6 +354,7 @@
         opacity: 0.42, ease: 'power1.inOut',
         immediateRender: false
       }, 0);
+    } /* end if (isDesktop) — travel */
 
     // The mark used to spin + follow the cursor via a constant rAF ticker, but
     // rotating/translating the IMG inside the blurred wrapper forced the whole
@@ -366,8 +372,8 @@
       if (tick) gsap.ticker.remove(tick);
       if (onMove) window.removeEventListener('pointermove', onMove);
       entrance.kill();
-      if (travel.scrollTrigger) travel.scrollTrigger.kill();
-      travel.kill();
+      if (travel && travel.scrollTrigger) travel.scrollTrigger.kill();
+      if (travel) travel.kill();
       ScrollTrigger.removeEventListener('refresh', layout);
       window.removeEventListener('resize', onResize);
       gsap.set([mark, img], { clearProps: 'all' });
