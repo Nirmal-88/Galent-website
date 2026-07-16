@@ -9961,7 +9961,10 @@ body[data-page="home"] .hero-content::after {
   z-index: 1;
 }
 .gx-divider__line {
-  display: block;
+  /* Glowing purple→white→green seam line removed per request (all pages).
+     The divider element still provides its spacing/depth-mask; only the
+     visible line is hidden. Delete `display:none` to bring it back. */
+  display: none;
   width: min(1100px, 84%);
   height: 1px;
   transform: scaleX(0);
