@@ -7,6 +7,9 @@
 /* Lumora visual language — Onest typeface (loaded here so every page inherits
    it without touching 21 <head>s). */
 @import url('https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700&display=swap');
+/* Blueprint theme fonts — appended BLUEPRINT THEME block at end of file uses these. */
+@import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700,800&f[]=satoshi@400,500,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:wght@400;500&display=swap');
 
 :root {
   /* Surface scale — warm near-white (Lumora). Page stays #fff; fills warm. */
@@ -10151,3 +10154,117 @@ body[data-page="home"] .hero .gx-split-hero .hero-highlight--secondary .gx-word 
       #0A0B12;
   }
 }
+
+/* ==================================================================
+ * BLUEPRINT THEME  (appended override layer — extends the v6 "Blueprint"
+ * homepage design language to every inner page. Content/markup untouched;
+ * this restyles the existing components only. Delete this whole block to
+ * revert inner pages to the previous dark theme. Added 2026-07-16.
+ * Palette: bg #06080f, cyan accent #6fe3ff, Cabinet Grotesk / Satoshi /
+ * Spline Sans Mono. The home page is self-contained and unaffected.
+ * ================================================================== */
+:root {
+  /* Fold every brand accent (purple/green/orange) into blueprint cyan */
+  --brand-purple:#6fe3ff; --brand-purple-deep:#37c9ec; --brand-purple-soft:rgba(111,227,255,0.14);
+  --brand-green:#6fe3ff;  --brand-green-deep:#37c9ec;  --brand-green-soft:rgba(111,227,255,0.14);
+  --brand-orange:#6fe3ff; --brand-orange-soft:rgba(111,227,255,0.14);
+  --primary:#6fe3ff; --primary-deep:#37c9ec; --primary-soft:rgba(111,227,255,0.14);
+  --accent:#6fe3ff; --accent-from:#8af0ff; --accent-to:#37c9ec;
+  --page-accent:#6fe3ff; --page-accent-deep:#37c9ec; --page-accent-soft:rgba(111,227,255,0.16);
+  /* Blueprint surfaces */
+  --surface:#0b1018; --on-surface:#eef2f6; --on-surface-variant:#aab3bd;
+  --surface-container:#0b1018; --surface-container-high:#111826; --surface-container-higher:#16202e;
+  --line:rgba(111,227,255,0.16); --muted:#8a929c; --subtle:#5d6570; --grey-400:#8a929c;
+  /* Blueprint type */
+  --font-sans:"Satoshi","Plus Jakarta Sans","Inter",system-ui,-apple-system,sans-serif;
+  --font-mono:"Spline Sans Mono","JetBrains Mono",ui-monospace,monospace;
+}
+
+/* Base canvas: blueprint grid paper */
+html { background:#06080f !important; }
+body {
+  background:
+    linear-gradient(rgba(111,227,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(111,227,255,0.035) 1px, transparent 1px),
+    #06080f !important;
+  background-size:64px 64px, 64px 64px, auto !important;
+  background-attachment:fixed !important;
+  color:#eef2f6 !important;
+}
+::selection { background:#6fe3ff; color:#06080f; }
+
+/* Display type → Cabinet Grotesk */
+h1,h2,h3,h4,h5,
+.t-hero,.t-h1,.t-h2,.t-h3,.hero-headline,.gd-headline,
+.big,.proof-card__title,.engine-pill__name {
+  font-family:"Cabinet Grotesk","Satoshi",sans-serif !important;
+  letter-spacing:-0.01em;
+}
+/* Mono micro-labels stay mono (now Spline Sans Mono via --font-mono) */
+
+/* Accent emphasis spans → cyan */
+em.ac-p, em.ac-g, em.ac-o,
+.hero-highlight, .gd-highlight, .hero-velocity { color:#6fe3ff !important; }
+.gd-strike { color:#8a929c !important; }
+
+/* Nav → blueprint bar */
+.nav, .nav.scrolled {
+  background:rgba(6,8,15,0.72) !important;
+  backdrop-filter:saturate(140%) blur(10px);
+  -webkit-backdrop-filter:saturate(140%) blur(10px);
+  border-bottom:1px solid rgba(111,227,255,0.14) !important;
+  box-shadow:none !important;
+}
+.nav .menu a { font-family:var(--font-mono); letter-spacing:0.06em; }
+.dropdown-panel { background:rgba(9,12,20,0.97) !important; border-color:rgba(111,227,255,0.18) !important; }
+.dropdown-group a:hover { color:#6fe3ff !important; }
+.nav-group-label { color:#6fe3ff !important; }
+
+/* Card / panel surfaces → blueprint square-edged with cyan hairline */
+.feature, .svc, .card-item, .service-related a, .delivery-step, .diff-list li,
+.cap, .engagement-card, .ecosystem-partners__list li, .related-tile, .svc-cat,
+.engine-card, .case-study, .archetype-card, .leader-card, .about-sector,
+.sector-tile, .fde-rich, .home-sector-card, .kh-tile, .contact-card, .arch-layer,
+.proof-card, .testimonial, .bento-tile, .spec-strip, .engine-pill,
+input[type="email"], input[type="text"], input[type="search"], input[type="tel"],
+textarea, select, .hub-search, .hub-search input {
+  background:#0b1018 !important;
+  border-color:rgba(111,227,255,0.18) !important;
+  border-radius:0 !important;
+}
+.feature:hover, .svc:hover, .card-item:hover, .engine-card:hover, .case-study:hover,
+.leader-card:hover, .home-sector-card:hover, .proof-card:hover, .cap:hover,
+.related-tile:hover, .kh-tile:hover, .archetype-card:hover, .contact-card:hover {
+  border-color:rgba(111,227,255,0.45) !important;
+}
+
+/* Icon / chip tints → cyan translucent */
+.service-related .num, .delivery-step .df-step, .diff-list li strong::before,
+.cap .cap-icon, .related-tile__arrow, .engine-card .num, .case-study .sector,
+.archetype-body .skill, .about-sector .sector-num, .home-sector-card .num-chip,
+.kh-live, .contact-card__icon, .arch-node, .proof-card__icon, .sector-tile .sector-num,
+.badge, .feature-tag, .engine-pill__icon {
+  background:rgba(111,227,255,0.10) !important;
+  color:#cfe9f4 !important;
+}
+
+/* Buttons → blueprint (solid cyan / ghost hairline, square) */
+.btn:not(.ghost) {
+  background:#6fe3ff !important; color:#06080f !important;
+  border:1px solid #6fe3ff !important; border-radius:0 !important; font-weight:700;
+}
+.btn:not(.ghost):hover { background:#8af0ff !important; color:#06080f !important; border-color:#8af0ff !important; }
+.btn.ghost { background:transparent !important; color:#eef2f6 !important;
+  border:1px solid rgba(111,227,255,0.4) !important; border-radius:0 !important; }
+.btn.ghost:hover { border-color:#6fe3ff !important; background:rgba(111,227,255,0.06) !important; }
+.link-button { color:#6fe3ff !important; }
+
+/* Links */
+a { color:inherit; }
+.footer a:hover, .menu a:hover { color:#6fe3ff !important; }
+
+/* Panel-dark bands: deepen to blueprint tone */
+.panel-dark { background:#05070c !important; }
+
+/* Focus states → cyan */
+:focus-visible { outline-color:#6fe3ff !important; }
