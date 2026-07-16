@@ -335,49 +335,29 @@
         onUpdate: function (self) { mark.style.zIndex = self.progress < 0.4 ? '1' : '30'; }
       }
     });
+    // Transform + opacity only on scroll — NO filter animation. Animating
+    // filter:blur() on this ~2000px layer re-rasterised the whole blurred
+    // aurora every frame (the main cause of the rough, patchy home scroll).
+    // The blur now stays constant (set by the entrance); only x/y/scale/opacity
+    // move, which are compositor-only.
     travel.fromTo(mark,
-      { x: 0, y: 0, scale: 1, opacity: 0.24, filter: 'blur(72px)' },
+      { x: 0, y: 0, scale: 1, opacity: 0.24 },
       {
         x: function () { return geo.dockCX - geo.heroCX; },
         y: function () { return geo.dockCY - geo.heroCY; },
         scale: function () { return geo.smallScale; },
-        opacity: 0.96, filter: 'blur(2px)', ease: 'power1.inOut',
+        opacity: 0.42, ease: 'power1.inOut',
         immediateRender: false
       }, 0);
 
-    // Constant fast rotation + cursor parallax in the hero, both easing to a stop
-    // as the mark docks — so in section 2 it sits still and upright. Rotation +
-    // parallax live on the IMG (screen-aligned translate), independent of the
-    // wrapper's travel/scale transform.
-    var DEG_PER_SEC = 60;            // ~6s per turn (much faster than before)
-    var cur = { x: 0, y: 0 };         // cursor target offset
-    var off = { x: 0, y: 0 };         // smoothed offset
-    var rot = 0;
+    // The mark used to spin + follow the cursor via a constant rAF ticker, but
+    // rotating/translating the IMG inside the blurred wrapper forced the whole
+    // 72px aurora blur to re-rasterise EVERY frame (60fps, even at rest) — a
+    // major, always-on cost on both mobile and desktop. Removed: the aurora is
+    // now static and only travels on scroll (transform/opacity). tick/onMove
+    // stay null so the existing cleanup guards are no-ops.
     var tick = null;
-    if (!reduce) {
-      tick = function (time, dt) {
-        var p = (travel.scrollTrigger && travel.scrollTrigger.progress) || 0;
-        if (p < 0.8) {
-          rot += DEG_PER_SEC * (dt / 1000) * (1 - p / 0.8);   // spin, slowing
-        } else {
-          rot += (Math.round(rot / 360) * 360 - rot) * 0.12;  // settle upright, stop
-        }
-        var k = Math.max(0, 1 - p / 0.8);                     // parallax fades out by dock
-        off.x += (cur.x * k - off.x) * 0.08;
-        off.y += (cur.y * k - off.y) * 0.08;
-        gsap.set(img, { rotation: rot, x: off.x, y: off.y });
-      };
-      gsap.ticker.add(tick);
-    }
-
     var onMove = null;
-    if (!reduce && window.matchMedia && window.matchMedia('(pointer: fine)').matches) {
-      onMove = function (e) {
-        cur.x = ((e.clientX / window.innerWidth) - 0.5) * 80;
-        cur.y = ((e.clientY / window.innerHeight) - 0.5) * 80;
-      };
-      window.addEventListener('pointermove', onMove);
-    }
 
     var onResize = function () { layout(); };
     window.addEventListener('resize', onResize);
