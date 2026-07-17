@@ -10283,3 +10283,45 @@ html.bp-cursor, html.bp-cursor * { cursor: none !important; }
 @media (prefers-reduced-motion: reduce) {
   #bp-ring, #bp-dot, #bp-pre { display: none !important; }
 }
+
+/* ==================================================================
+ * BLUEPRINT SERVICE POLISH  (style-only enhancement for the Tech Services
+ * pages + other themed inner pages so they echo the scene pages. Content
+ * and CMS untouched. Delete this block to revert. 2026-07-17)
+ * ================================================================== */
+/* Blueprint grid backdrop on service heroes + dark bands */
+body[data-page^="service-"] .hero,
+body[data-page^="service-"] .panel-dark,
+body[data-page="hub"] .panel-dark,
+body[data-page="fde"] .panel-dark,
+body[data-page="about"] .panel-dark {
+  background-image:
+    linear-gradient(rgba(111,227,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(111,227,255,0.05) 1px, transparent 1px) !important;
+  background-size: 60px 60px !important;
+  background-color: #06080f !important;
+}
+/* Big display stats → Cabinet Grotesk, cyan */
+.stat-strip .big, .hero-metric .big, .metric-box .big,
+.related-tile__num, .engine-card .num {
+  font-family: "Cabinet Grotesk", sans-serif !important;
+  color: #6fe3ff !important;
+  letter-spacing: -0.02em;
+}
+/* Section eyebrow / divider labels → mono cyan kicker */
+.section-divider .label, .section-head .eyebrow, .service-related .eyebrow,
+.hero .powered-by, .powered-by {
+  font-family: "Spline Sans Mono", monospace !important;
+  letter-spacing: 0.22em !important;
+  color: #6fe3ff !important;
+}
+/* Service hero headline → tighter blueprint display */
+body[data-page^="service-"] .hero .t-hero { letter-spacing: -0.02em; }
+/* Sharpen the CMS engine cards + related tiles */
+.engines-grid .engine-card, .related-tile, .metric-box {
+  border-radius: 0 !important;
+  border-color: rgba(111,227,255,0.20) !important;
+}
+.engines-grid .engine-card:hover, .related-tile:hover {
+  border-color: rgba(111,227,255,0.5) !important;
+}
