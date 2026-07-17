@@ -10268,3 +10268,18 @@ a { color:inherit; }
 
 /* Focus states → cyan */
 :focus-visible { outline-color:#6fe3ff !important; }
+
+/* ==================================================================
+ * BLUEPRINT EXPERIENCE  (chrome for the site-wide interactive layer
+ * injected by js/motion.js: custom crosshair cursor, boot preloader,
+ * scroll progress bar + HUD, magnetic buttons. Delete this block AND
+ * the matching block at the end of js/motion.js to revert. 2026-07-17)
+ * ================================================================== */
+html.bp-cursor, html.bp-cursor * { cursor: none !important; }
+#bp-ring, #bp-dot, #bp-progress, #bp-pre { will-change: transform; }
+@media (max-width: 860px) {
+  #bp-ring, #bp-dot { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #bp-ring, #bp-dot, #bp-pre { display: none !important; }
+}

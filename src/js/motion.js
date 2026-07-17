@@ -885,3 +885,109 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
 })();
+
+/* ==================================================================
+ * BLUEPRINT EXPERIENCE (appended) — brings the v6 homepage's signature
+ * interactive layer to every page that loads motion.js: boot preloader
+ * (once per session), crosshair cursor, scroll progress bar + chapter/pct
+ * HUD, and magnetic buttons. The home page is self-contained and never
+ * loads this file, so it is unaffected. Delete this whole block (and the
+ * BLUEPRINT EXPERIENCE block in design-system.css) to revert. 2026-07-17
+ * ================================================================== */
+(function () {
+  if (window.__galentBP) return; window.__galentBP = 1;
+  var mq = function (q) { return window.matchMedia && window.matchMedia(q).matches; };
+  var reduce = mq('(prefers-reduced-motion: reduce)');
+  var fine = mq('(pointer:fine)');
+  var mobile = mq('(max-width: 860px)');
+  var clamp = function (x) { return Math.min(Math.max(x, 0), 1); };
+  var mk = function (tag, css, html) { var e = document.createElement(tag); if (css) e.style.cssText = css; if (html != null) e.innerHTML = html; return e; };
+
+  function injectChrome() {
+    var bar = mk('div', 'position:fixed;top:0;left:0;height:2px;width:0;background:#6fe3ff;z-index:9997;pointer-events:none;'); bar.id = 'bp-progress';
+    document.body.appendChild(bar);
+    if (!mobile) {
+      var chap = mk('div', 'position:fixed;left:26px;bottom:22px;z-index:950;font-family:"Spline Sans Mono",monospace;font-size:10px;letter-spacing:.25em;color:#8a929c;mix-blend-mode:difference;pointer-events:none;', '<span id="bp-chapter">00 — start</span>');
+      var pct = mk('div', 'position:fixed;right:26px;bottom:22px;z-index:950;font-family:"Spline Sans Mono",monospace;font-size:10px;letter-spacing:.25em;color:#8a929c;mix-blend-mode:difference;pointer-events:none;', '<span id="bp-pct">00%</span>');
+      document.body.appendChild(chap); document.body.appendChild(pct);
+    }
+    if (fine && !reduce) {
+      var ring = mk('div', 'position:fixed;top:0;left:0;width:36px;height:36px;border:1px solid rgba(238,242,246,.5);transform:translate(-50%,-50%) rotate(45deg);pointer-events:none;z-index:9998;transition:width .3s,height .3s,border-color .3s,background .3s,border-radius .3s;mix-blend-mode:difference;'); ring.id = 'bp-ring';
+      var dot = mk('div', 'position:fixed;top:0;left:0;width:5px;height:5px;background:#6fe3ff;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:9999;'); dot.id = 'bp-dot';
+      document.body.appendChild(ring); document.body.appendChild(dot);
+      document.documentElement.classList.add('bp-cursor');
+    }
+  }
+
+  function boot() {
+    if (reduce) return;
+    try { if (sessionStorage.getItem('bp-booted')) return; } catch (e) {}
+    var pre = mk('div', 'position:fixed;inset:0;z-index:10000;background:#06080f;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;padding:40px;gap:6px;font-family:\'Spline Sans Mono\',monospace;font-size:13px;color:#5d6570;',
+      '<span>&#9656; loading knowledge graph &hellip;</span>' +
+      '<span id="bp-b2" style="opacity:0">&#9656; compiling context &hellip; ok</span>' +
+      '<span id="bp-b3" style="opacity:0">&#9656; engines online <span style="color:#6fe3ff">&#9632; &#9632; &#9632; &#9632;</span></span>' +
+      '<div style="display:flex;justify-content:space-between;width:100%;align-items:flex-end;margin-top:16px"><span style="color:#6fe3ff">galent_</span><span id="bp-n" style="font-family:\'Cabinet Grotesk\',sans-serif;font-weight:800;font-size:clamp(70px,12vw,170px);line-height:.8;color:#eef2f6">0</span></div>');
+    pre.id = 'bp-pre';
+    document.body.appendChild(pre);
+    var t0 = performance.now(), n = pre.querySelector('#bp-n'), b2 = pre.querySelector('#bp-b2'), b3 = pre.querySelector('#bp-b3');
+    (function tick(now) { var p = clamp((now - t0) / 1300); if (n) n.textContent = Math.round(p * 100); if (b2 && p > 0.35) b2.style.opacity = 1; if (b3 && p > 0.7) b3.style.opacity = 1; if (p < 1) requestAnimationFrame(tick); })(t0);
+    pre.style.transition = 'transform .7s cubic-bezier(.75,0,.25,1)';
+    setTimeout(function () { pre.style.transform = 'translateY(-101%)'; }, 1500);
+    setTimeout(function () { if (pre.parentNode) pre.parentNode.removeChild(pre); }, 2300);
+    try { sessionStorage.setItem('bp-booted', '1'); } catch (e) {}
+  }
+
+  function cursor() {
+    var ring = document.getElementById('bp-ring'), dot = document.getElementById('bp-dot');
+    if (!ring || !dot) return;
+    var mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my;
+    addEventListener('mousemove', function (e) { mx = e.clientX; my = e.clientY; dot.style.left = mx + 'px'; dot.style.top = my + 'px'; });
+    (function raf() { rx += (mx - rx) * 0.16; ry += (my - ry) * 0.16; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(raf); })();
+    var grow = function () { ring.style.width = '60px'; ring.style.height = '60px'; ring.style.borderRadius = '50%'; ring.style.background = 'rgba(111,227,255,.12)'; ring.style.borderColor = 'rgba(111,227,255,.7)'; };
+    var shrink = function () { ring.style.width = '36px'; ring.style.height = '36px'; ring.style.borderRadius = '0'; ring.style.background = 'transparent'; ring.style.borderColor = 'rgba(238,242,246,.5)'; };
+    document.querySelectorAll('a,button,.btn,[data-magnetic],input,textarea,select,.feature,.svc,.card-item,.engine-card,.case-study,.leader-card,.home-sector-card,.proof-card,.cap,.archetype-card,.related-tile,.kh-tile,.contact-card').forEach(function (x) { x.addEventListener('mouseenter', grow); x.addEventListener('mouseleave', shrink); });
+  }
+
+  function magnetic() {
+    document.querySelectorAll('.btn, [data-magnetic]').forEach(function (x) {
+      x.addEventListener('mousemove', function (e) { var r = x.getBoundingClientRect(); x.style.transform = 'translate(' + ((e.clientX - (r.left + r.width / 2)) * 0.18).toFixed(1) + 'px,' + ((e.clientY - (r.top + r.height / 2)) * 0.28).toFixed(1) + 'px)'; });
+      x.addEventListener('mouseleave', function () { x.style.transform = ''; });
+    });
+  }
+
+  function progressHUD() {
+    var bar = document.getElementById('bp-progress'), pct = document.getElementById('bp-pct'), chap = document.getElementById('bp-chapter');
+    var scope = document.querySelector('main') || document.body;
+    var chapters = [].slice.call(scope.querySelectorAll(':scope > section'));
+    if (!chapters.length) chapters = [].slice.call(document.querySelectorAll('section'));
+    chapters = chapters.filter(function (s) { return s.offsetParent !== null || s.getBoundingClientRect().height > 0; });
+    var cur = -1, ticking = false, tops = [];
+    function measure() { tops = chapters.map(function (s) { return s.getBoundingClientRect().top + (pageYOffset || document.documentElement.scrollTop || 0); }); }
+    function label(i, s) { var h = s.querySelector('h1,h2,h3'); var t = h ? h.textContent.replace(/\s+/g, ' ').trim().slice(0, 30) : (s.id || 'section'); return (String(i + 1).padStart(2, '0')) + ' — ' + t.toLowerCase(); }
+    function on() {
+      if (ticking) return; ticking = true;
+      requestAnimationFrame(function () {
+        ticking = false;
+        var st = pageYOffset || document.documentElement.scrollTop, dh = document.documentElement.scrollHeight - innerHeight, gp = dh > 0 ? st / dh : 0;
+        if (bar) bar.style.width = (gp * 100) + '%';
+        if (pct) pct.textContent = String(Math.round(gp * 100)).padStart(2, '0') + '%';
+        if (chap && chapters.length) { var probe = st + innerHeight * 0.4, ci = 0; for (var i = 0; i < tops.length; i++) { if (tops[i] <= probe) ci = i; } if (ci !== cur) { cur = ci; chap.textContent = label(ci, chapters[ci]); } }
+      });
+    }
+    measure();
+    addEventListener('scroll', on, { passive: true });
+    addEventListener('resize', function () { measure(); on(); }, { passive: true });
+    addEventListener('load', function () { setTimeout(function () { measure(); on(); }, 200); });
+    on();
+  }
+
+  function start() {
+    injectChrome();
+    boot();
+    if (fine && !reduce) { cursor(); magnetic(); }
+    progressHUD();
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
+})();
