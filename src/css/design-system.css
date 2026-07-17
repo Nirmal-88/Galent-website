@@ -7890,15 +7890,14 @@ blockquote,
   height: 100%;
   display: block;
 }
-/* Blurred backdrop fills the box edge-to-edge (no empty bars)… */
+/* Blurred backdrop removed — client wants the real image only, no blur. */
 .card-thumb.has-image .thumb-fill {
-  object-fit: cover;
-  transform: scale(1.18);
-  filter: blur(22px) saturate(1.15) brightness(0.92);
+  display: none;
 }
-/* …while the real image is shown in full, never cropped. */
+/* Real image fills the thumbnail frame exactly, sharp, no blurred bars. */
 .card-thumb.has-image .thumb-img {
-  object-fit: contain;
+  object-fit: cover;
+  image-rendering: auto;
   z-index: 1;
 }
 /* Keep the play overlay readable on top of imagery */
@@ -7916,28 +7915,21 @@ blockquote,
   margin: 0 0 clamp(28px, 3.4vw, 48px);
   border-radius: 18px;
   overflow: hidden;
-  aspect-ratio: 16 / 9;
   background: var(--surface-container);
 }
-.post-cover img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-/* Blurred backdrop fills the banner area edge-to-edge… */
-.post-cover .cover-fill {
-  object-fit: cover;
-  transform: scale(1.15);
-  filter: blur(28px) saturate(1.12) brightness(0.9);
-}
-/* …the real banner sits on top, shown in full with no cropping. */
+/* Blurred backdrop removed — show the real banner only. */
+.post-cover .cover-fill { display: none; }
+/* Banner shown at its own natural aspect ratio: full image, sharp, no blur,
+   no crop, filling the width exactly. */
 .post-cover .cover-img {
+  position: static;
+  width: 100%;
+  height: auto;
+  display: block;
   object-fit: contain;
   z-index: 1;
 }
-@media (max-width: 720px) { .post-cover { aspect-ratio: 4 / 3; border-radius: 14px; } }
+@media (max-width: 720px) { .post-cover { border-radius: 14px; } }
 
 /* Home hero single-line lede — tighter, more breathing room above the CTAs */
 .hero .hero-lede {
