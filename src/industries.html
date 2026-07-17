@@ -3,448 +3,271 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#FFFFFF">
+  <meta name="theme-color" content="#06080f">
   <title>Industries — Galent</title>
   <meta name="description" content="Galent works where stakes are high: BFSI, healthcare, life sciences, manufacturing, retail, technology, and global capability centres.">
-
+  <link rel="icon" href="assets/images/logo.png?v=4" type="image/png">
+  <link rel="canonical" href="https://galent.com/industries.html">
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700,800&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/design-system.css?v=blueprint-2">
-  <link rel="icon" href="assets/images/logo.png?v=4" type="image/png">
-
-  <!-- Motion engine bootstrap: stand down legacy reveals; safety-net reveal -->
-  <script>window.GALENT_MOTION=1;setTimeout(function(){if(!window.__galentMotionBooted){document.querySelectorAll('[data-reveal],[data-stagger]').forEach(function(e){e.classList.add('in');});}},3000);</script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/blueprint-scenes.css?v=bp-1">
 </head>
-<body data-page="industries">
+<body>
 
-  <header class="nav" id="site-nav">
-    <a href="index.html" class="brand" aria-label="Galent — Home">
-      <img src="assets/images/galent-mark-crisp.png" alt="" class="brand-img"><span class="brand-word">Galent</span>
+  <!-- NAV -->
+  <nav class="bp-nav" style="position:fixed;top:0;left:0;width:100%;z-index:900;display:flex;align-items:center;justify-content:space-between;padding:22px 48px;mix-blend-mode:difference;">
+    <a href="index.html" data-magnetic style="display:flex;align-items:center;gap:10px;text-decoration:none;color:#eef2f6;">
+      <img src="assets/design/Galent New Logo.png" alt="Galent" style="width:26px;height:26px;object-fit:contain;display:block;">
+      <span class="bp-display" style="font-size:19px;">Galent</span>
     </a>
-    <nav class="menu" aria-label="Primary" id="primary-menu">
-      <a href="platform.html">Platform</a>
-      <a href="fde.html">FDE</a>
-      <a href="about.html">About</a>
-      <a href="knowledge-hub.html">Knowledge Hub</a>
-      <div class="has-dropdown">
-        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="services-menu">
-          Tech Services <span class="caret" aria-hidden="true">▾</span>
-        </button>
-        <div class="dropdown-panel" id="services-menu" role="menu" aria-hidden="true">
-          <div class="dropdown-group">
-            <h6>App Dev &amp; Modernization</h6>
-            <a href="services/legacy-modernisation.html" role="menuitem">Legacy Modernization</a>
-            <a href="services/brownfield-greenfield.html" role="menuitem">Brownfield &amp; Greenfield</a>
-            <a href="services/quality-engineering.html" role="menuitem">Quality Engineering</a>
-          </div>
-          <div class="dropdown-group">
-            <h6>Managed Services</h6>
-            <a href="services/itsm-transformation.html" role="menuitem">ITSM Transformation</a>
-            <a href="services/sre-observability.html" role="menuitem">SRE &amp; Observability</a>
-            <a href="services/everything-ops.html" role="menuitem">Everything Ops</a>
-          </div>
-          <div class="dropdown-group">
-            <h6>Data &amp; Platforms</h6>
-            <a href="services/data-transformation.html" role="menuitem">Data Transformation</a>
-            <a href="services/enterprise-platforms.html" role="menuitem">Enterprise Platforms</a>
-          </div>
-          <div class="dropdown-group">
-            <h6>Context Engineering</h6>
-            <a href="services/knowledge-graph.html" role="menuitem">Knowledge Graph</a>
-            <a href="services/context-graph.html" role="menuitem">Context Graph</a>
-          </div>
-          <div class="dropdown-group">
-            <h6>Talent Services</h6>
-            <a href="services/talent-capability-stack.html" role="menuitem">Talent Services</a>
-          </div>
-        </div>
-      </div>
-      <a href="industries.html" aria-current="page">Industries</a>
-      <span class="sep" aria-hidden="true"></span>
-      <a href="#" class="btn" style="padding:10px 18px;font-size:14px">Talk to us <span class="arr">→</span></a>
-    </nav>
-    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-menu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    <button class="bp-burger" aria-label="Menu" aria-expanded="false" style="display:none;background:none;border:0;color:#eef2f6;cursor:pointer;padding:6px;line-height:0;">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
     </button>
-  </header>
+    <div class="bp-nav-links" style="display:flex;gap:24px;align-items:center;font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:.18em;">
+      <a class="bp-nav-hide" href="platform.html" style="color:#eef2f6;text-decoration:none;">platform</a>
+      <a href="industries.html" style="color:#6fe3ff;text-decoration:none;">industries</a>
+      <a class="bp-nav-hide" href="fde.html" style="color:#eef2f6;text-decoration:none;">fde</a>
+      <a href="knowledge-hub.html" style="color:#eef2f6;text-decoration:none;">knowledge hub</a>
+      <a class="bp-nav-hide" href="about.html" style="color:#eef2f6;text-decoration:none;">about</a>
+      <a class="bp-nav-cta" href="contact.html" data-magnetic style="color:#06080f;background:#6fe3ff;text-decoration:none;padding:11px 22px;font-weight:700;">contact ↗</a>
+    </div>
+  </nav>
 
-  <main id="top">
-
-    <!-- HERO -->
-    <section class="hero" style="background: radial-gradient(ellipse at 30% 30%, rgba(123,44,191,0.08), transparent 55%), radial-gradient(ellipse at 70% 70%, rgba(14,165,233,0.06), transparent 50%);">
-      <div class="hero-content">
-        <h1 class="t-hero">
-          <span style="display:block">Seven sectors.</span>
-          <span style="display:block"><em class="ac-p">One operating model.</em></span>
+  <!-- SC1 · DIVE -->
+  <section class="bp-scene" data-scene="dive" data-label="industries" style="position:relative;height:300vh;">
+    <div class="bp-pin" style="position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#06080f;">
+      <img class="bp-dive-img" src="assets/design/im-3-galent-process-journey-ai-factory-v2.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;will-change:transform,opacity;">
+      <div class="bp-dive-veil" style="position:absolute;inset:0;background:rgba(6,8,15,.55);opacity:0;pointer-events:none;"></div>
+      <div class="bp-dive-stage" style="position:relative;text-align:center;padding:0 24px;will-change:transform,opacity;">
+        <div class="bp-kicker" style="margin-bottom:30px;overflow:hidden;"><span style="display:inline-block;animation:bpRise .9s cubic-bezier(.16,1,.3,1) .15s both;">industries · where the stakes are high</span></div>
+        <h1 class="bp-dive-h1 bp-display" style="font-size:clamp(52px,10vw,170px);line-height:.95;will-change:transform;">
+          <span style="display:block;overflow:hidden;padding-bottom:.05em;"><span style="display:inline-block;animation:bpRise 1s cubic-bezier(.16,1,.3,1) .3s both;background-image:linear-gradient(rgba(111,227,255,.5),rgba(255,255,255,.28)),url('assets/design/im-3-galent-process-journey-ai-factory-v2.webp');background-size:cover;background-position:center 30%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:1px rgba(111,227,255,.4);">Seven sectors.</span></span>
+          <span style="display:block;overflow:hidden;padding-bottom:.05em;"><span style="display:inline-block;animation:bpRise 1s cubic-bezier(.16,1,.3,1) .45s both;background-image:linear-gradient(rgba(111,227,255,.5),rgba(255,255,255,.28)),url('assets/design/im-3-galent-process-journey-ai-factory-v2.webp');background-size:cover;background-position:center 70%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:1px rgba(111,227,255,.4);">One operating model.</span></span>
         </h1>
-        <p class="t-body-lg">
-          Galent works where regulation is tight, change is constant, and downtime carries a real cost. Each sector below is colour-coded by accent and routes to the service that anchors the engagement.
-        </p>
-        <div class="cta-row" style="margin-top: var(--space-2xl);">
-          <a href="#sectors" class="btn">Explore sectors <span class="arr">→</span></a>
-          <a href="#" class="btn ghost">Talk to us <span class="arr">→</span></a>
+        <p class="bp-dive-sub" style="margin-top:34px;font-size:17px;line-height:1.6;color:#aab3bd;max-width:580px;margin-left:auto;margin-right:auto;">Galent works where regulation is tight, change is constant, and downtime carries a real cost. Scroll — we'll take you through every sector.</p>
+        <div class="bp-dive-cue bp-kicker" style="margin-top:40px;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:10px;letter-spacing:.3em;color:#8a929c;">
+          <span>dive in</span><span style="animation:bpScroll 1.8s ease-in-out infinite;">↓</span>
         </div>
       </div>
-    </section>
-
-    <!-- SECTOR ACCORDION — quick-jump pills + 7 expandable strips -->
-    <section id="sectors">
-      <div class="container">
-        <div class="section-head" data-reveal style="text-align: left; margin-bottom: var(--space-md);">
-          <h2 class="t-display-italic">Where we <em>operate.</em></h2>
-        </div>
-
-        <nav class="sector-quickjump" aria-label="Jump to sector">
-          <a href="#technology" data-jump="technology">Tech</a>
-          <a href="#bfsi" data-jump="bfsi">BFSI</a>
-          <a href="#healthcare" data-jump="healthcare">Healthcare</a>
-          <a href="#manufacturing" data-jump="manufacturing">Manufacturing</a>
-          <a href="#life-sciences" data-jump="life-sciences">Life Sciences</a>
-          <a href="#retail" data-jump="retail">Retail/CPG</a>
-          <a href="#gcc" data-jump="gcc">GCC</a>
-        </nav>
-
-        <div class="sector-accordion" data-reveal>
-
-          <div class="sector-strip" id="technology" style="--sector-color: #7B2CBF;" data-num="01">
-            <div class="strip-header">
-              <div class="strip-num">01</div>
-              <div class="strip-title">
-                <strong>Technology &amp; Software</strong>
-                <span>Where the platform IS the product, and engineering velocity is the moat.</span>
-              </div>
-              <div class="strip-cta">Explore<span class="toggle">+</span></div>
-            </div>
-            <div class="strip-body">
-              <div>
-                <h2>Technology &amp; Software</h2>
-                <p>Tech companies live and die by engineering velocity. Galent embeds Forward-Deployed QA and platform engineers inside your product squads, governs every PR with RCM policy gates, and shifts coverage modelling left so quality is defined before code is generated.</p>
-                <ul>
-                  <li>Autonomous QA across product squads</li>
-                  <li>Platform-grade test orchestration</li>
-                  <li>Predictive coverage modelling</li>
-                  <li>RCM-governed quality at PR time</li>
-                </ul>
-                <a href="services/quality-engineering.html" class="strip-btn">Explore Quality Engineering &rarr;</a>
-              </div>
-              <div class="metric-quad">
-                <div class="metric-box"><div class="big">99%+</div><div class="lbl">Code accuracy at PR</div></div>
-                <div class="metric-box"><div class="big">70%</div><div class="lbl">Fewer context-loss defects</div></div>
-                <div class="metric-box"><div class="big">3&ndash;4&times;</div><div class="lbl">Sprint velocity</div></div>
-                <div class="metric-box"><div class="big">0</div><div class="lbl">Manual regression cycles</div></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="sector-strip" id="bfsi" style="--sector-color: #2563EB;" data-num="02">
-            <div class="strip-header">
-              <div class="strip-num">02</div>
-              <div class="strip-title">
-                <strong>Banking, Financial Services &amp; Insurance</strong>
-                <span>Where compliance and change have to coexist &mdash; and legacy is everywhere.</span>
-              </div>
-              <div class="strip-cta">Explore<span class="toggle">+</span></div>
-            </div>
-            <div class="strip-body">
-              <div>
-                <h2>BFSI</h2>
-                <p>Regulated finance demands two things that usually fight each other: airtight compliance and continuous change. Galent rebuilds Salesforce and core platform stacks around the GalentAI engine, with policy and audit baked into every change &mdash; from CRM to cash.</p>
-                <ul>
-                  <li>Salesforce &amp; ERP rebuilt for regulated scale</li>
-                  <li>Risk, fraud, and AML platform consolidation</li>
-                  <li>Regulatory reporting automation</li>
-                  <li>Customer-intelligence stack at scale</li>
-                </ul>
-                <a href="services/enterprise-platforms.html" class="strip-btn">Explore Enterprise Platforms &rarr;</a>
-              </div>
-              <div class="metric-quad">
-                <div class="metric-box"><div class="big">800%</div><div class="lbl">Faster sales decisions</div></div>
-                <div class="metric-box"><div class="big">100%</div><div class="lbl">Compliance maintained</div></div>
-                <div class="metric-box"><div class="big">3&ndash;4&times;</div><div class="lbl">Programme velocity</div></div>
-                <div class="metric-box"><div class="big">15&times;</div><div class="lbl">Faster modernisation</div></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="sector-strip" id="healthcare" style="--sector-color: #06B6D4;" data-num="03">
-            <div class="strip-header">
-              <div class="strip-num">03</div>
-              <div class="strip-title">
-                <strong>Healthcare &amp; Insurance</strong>
-                <span>Where patient data, regulation, and operational AI live on the same plane.</span>
-              </div>
-              <div class="strip-cta">Explore<span class="toggle">+</span></div>
-            </div>
-            <div class="strip-body">
-              <div>
-                <h2>Healthcare &amp; Insurance</h2>
-                <p>Healthcare cannot tolerate noisy ITSM or unclear ownership when patient outcomes are on the line. Galent brings HIPAA-aware change workflows, predictive incident triage, and self-healing operations to clinical, claims, and care-coordination systems.</p>
-                <ul>
-                  <li>Predictive ITSM on clinical and claims systems</li>
-                  <li>HIPAA-aware change and incident workflows</li>
-                  <li>Self-healing ops for care platforms</li>
-                  <li>Less noise, faster resolution</li>
-                </ul>
-                <a href="services/itsm-transformation.html" class="strip-btn">Explore ITSM Transformation &rarr;</a>
-              </div>
-              <div class="metric-quad">
-                <div class="metric-box"><div class="big">90%</div><div class="lbl">Data ops automated</div></div>
-                <div class="metric-box"><div class="big">0</div><div class="lbl">Compliance breaches</div></div>
-                <div class="metric-box"><div class="big">70%</div><div class="lbl">Fewer escalations</div></div>
-                <div class="metric-box"><div class="big">99.99%</div><div class="lbl">Critical-system uptime</div></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="sector-strip" id="manufacturing" style="--sector-color: #F59E0B;" data-num="04">
-            <div class="strip-header">
-              <div class="strip-num">04</div>
-              <div class="strip-title">
-                <strong>Manufacturing</strong>
-                <span>Where reliability and predictive intelligence translate directly to margin.</span>
-              </div>
-              <div class="strip-cta">Explore<span class="toggle">+</span></div>
-            </div>
-            <div class="strip-body">
-              <div>
-                <h2>Manufacturing</h2>
-                <p>Plant-floor data, IoT telemetry, MES and ERP signal &mdash; all of it pays off only when the data is unified and AI-ready. Galent builds the pipelines and data products that make predictive maintenance, supply-chain visibility, and Industry 4.0 a daily reality.</p>
-                <ul>
-                  <li>Plant-floor and IoT data unification</li>
-                  <li>Predictive maintenance pipelines at fleet scale</li>
-                  <li>Supply-chain visibility data products</li>
-                  <li>AI-native pipelines wired into MES &amp; ERP</li>
-                </ul>
-                <a href="services/data-transformation.html" class="strip-btn">Explore Data Transformation &rarr;</a>
-              </div>
-              <div class="metric-quad">
-                <div class="metric-box"><div class="big">10&times;</div><div class="lbl">Faster pipeline build</div></div>
-                <div class="metric-box"><div class="big">~30%</div><div class="lbl">Downtime reduction</div></div>
-                <div class="metric-box"><div class="big">99%+</div><div class="lbl">Data contract integrity</div></div>
-                <div class="metric-box"><div class="big">0</div><div class="lbl">Schema-drift incidents</div></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="sector-strip" id="life-sciences" style="--sector-color: #1ED197;" data-num="05">
-            <div class="strip-header">
-              <div class="strip-num">05</div>
-              <div class="strip-title">
-                <strong>Life Sciences</strong>
-                <span>Where discovery speed and compliance discipline matter at the same time.</span>
-              </div>
-              <div class="strip-cta">Explore<span class="toggle">+</span></div>
-            </div>
-            <div class="strip-body">
-              <div>
-                <h2>Life Sciences</h2>
-                <p>Research velocity and GxP-grade governance need to coexist on the same data fabric. Galent designs lineage-aware pipelines for clinical trials, research acceleration, and real-world evidence &mdash; without compromising audit readiness.</p>
-                <ul>
-                  <li>Research-acceleration AI pipelines</li>
-                  <li>Clinical-trial data platforms</li>
-                  <li>GxP-grade lineage and governance</li>
-                  <li>Real-world evidence at scale</li>
-                </ul>
-                <a href="services/data-transformation.html" class="strip-btn">Explore Data Transformation &rarr;</a>
-              </div>
-              <div class="metric-quad">
-                <div class="metric-box"><div class="big">3&times;</div><div class="lbl">Trial data turnaround</div></div>
-                <div class="metric-box"><div class="big">100%</div><div class="lbl">GxP audit-ready</div></div>
-                <div class="metric-box"><div class="big">15&times;</div><div class="lbl">Faster RWE assembly</div></div>
-                <div class="metric-box"><div class="big">0</div><div class="lbl">Lineage gaps</div></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="sector-strip" id="retail" style="--sector-color: #EF4444;" data-num="06">
-            <div class="strip-header">
-              <div class="strip-num">06</div>
-              <div class="strip-title">
-                <strong>Retail &amp; CPG</strong>
-                <span>Where personalisation, supply, and merchandising move on the same fabric.</span>
-              </div>
-              <div class="strip-cta">Explore<span class="toggle">+</span></div>
-            </div>
-            <div class="strip-body">
-              <div>
-                <h2>Retail &amp; CPG</h2>
-                <p>Commerce, OMS, and ERP traditionally live in silos that throttle velocity. Galent unifies them as a single revenue platform, with customer intelligence and merchandising operating on the same data backbone.</p>
-                <ul>
-                  <li>Commerce, OMS, and ERP unification</li>
-                  <li>Merchandising and pricing on a single platform</li>
-                  <li>Customer-intelligence stack at scale</li>
-                  <li>Inventory and demand systems modernisation</li>
-                </ul>
-                <a href="services/enterprise-platforms.html" class="strip-btn">Explore Enterprise Platforms &rarr;</a>
-              </div>
-              <div class="metric-quad">
-                <div class="metric-box"><div class="big">2&times;</div><div class="lbl">Inventory turn</div></div>
-                <div class="metric-box"><div class="big">~25%</div><div class="lbl">Lift on personalised pages</div></div>
-                <div class="metric-box"><div class="big">15&times;</div><div class="lbl">Platform consolidation</div></div>
-                <div class="metric-box"><div class="big">3&ndash;4&times;</div><div class="lbl">Sprint velocity</div></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="sector-strip" id="gcc" style="--sector-color: #FF5A1F;" data-num="07">
-            <div class="strip-header">
-              <div class="strip-num">07</div>
-              <div class="strip-title">
-                <strong>Global Capability Centres</strong>
-                <span>Where in-house engineering is being built and AI-native sets the bar from day one.</span>
-              </div>
-              <div class="strip-cta">Explore<span class="toggle">+</span></div>
-            </div>
-            <div class="strip-body">
-              <div>
-                <h2>GCC Transformations</h2>
-                <p>New centres of excellence are being built worldwide; the wrong choice is to copy a legacy SI model. Galent helps you build GCCs that are AI-native from week one &mdash; embedded FDEs, platform-led patterns, and a delivery cadence that compounds.</p>
-                <ul>
-                  <li>Legacy stacks unwound at 15&times; velocity</li>
-                  <li>92% lower risk vs. conventional modernisation</li>
-                  <li>FDE-led centre-of-excellence buildout</li>
-                  <li>Platform-native delivery patterns</li>
-                </ul>
-                <a href="services/legacy-modernisation.html" class="strip-btn">Explore Legacy Modernization &rarr;</a>
-              </div>
-              <div class="metric-quad">
-                <div class="metric-box"><div class="big">15&times;</div><div class="lbl">Faster modernisation</div></div>
-                <div class="metric-box"><div class="big">92%</div><div class="lbl">Lower modernisation risk</div></div>
-                <div class="metric-box"><div class="big">3&ndash;4&times;</div><div class="lbl">Programme velocity</div></div>
-                <div class="metric-box"><div class="big">72hr</div><div class="lbl">Legacy estate mapped</div></div>
-              </div>
-            </div>
-          </div>
-
-        </div>
+      <div class="bp-dive-after" style="position:absolute;left:48px;right:48px;bottom:100px;opacity:0;will-change:transform,opacity;">
+        <div class="bp-kicker" style="margin-bottom:16px;">01 — same platform, different posture</div>
+        <h2 class="bp-display" style="font-size:clamp(28px,4.5vw,60px);line-height:1;max-width:960px;">GalentAI is one platform — but the engagement model bends to the sector. Healthcare is not retail. BFSI is not life sciences.</h2>
       </div>
-    </section>
-
-    <!-- DARK BAND — Why sector matters -->
-    <section class="panel-dark" style="padding: var(--space-4xl) 0;">
-      <div class="container container-narrow">
-        <div class="section-head" data-reveal>
-          <h2 class="t-display-italic" style="color:#fff;">Same platform. <em>Different posture.</em></h2>
-          <p class="t-body-lg" style="color: rgba(255,255,255,0.7); margin-top: var(--space-md);">
-            GalentAI is one platform — but the engagement model bends to the sector. Healthcare is not retail. BFSI is not life sciences. We bring sector-specific FDE archetypes, regulation-aware policy packs, and outcome metrics that match how the business actually measures itself.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section id="cta">
-      <div class="container">
-        <div class="cta-card" data-reveal data-cta-parallax><div class="cta-fx" aria-hidden="true"><div class="cta-grid"></div><div class="cta-orb cta-orb--a"></div><div class="cta-orb cta-orb--b"></div><div class="cta-orb cta-orb--c"></div><div class="cta-rings"><span></span><span></span><span></span></div><div class="cta-spark cta-spark--1"></div><div class="cta-spark cta-spark--2"></div><div class="cta-spark cta-spark--3"></div><div class="cta-spark cta-spark--4"></div></div>
-          <h2 class="t-h1">Tell us your sector. <em style="color:#fff;font-style:normal;border-bottom:2px solid var(--page-accent);padding-bottom:2px;">We'll match the model.</em></h2>
-          <p class="t-body-lg">A 45-minute sector briefing covering regulation, FDE archetypes, and the services most relevant to your operating environment.</p>
-          <div style="display:inline-flex;flex-wrap:wrap;gap:12px;justify-content:center">
-            <a href="#" class="btn">Book a briefing <span class="arr">→</span></a>
-            <a href="platform.html" class="btn ghost">See the platform <span class="arr">→</span></a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="footer">
-    <div>
-      <div class="brand-mark">
-        <img src="assets/images/galent-mark-crisp.png" alt="" class="brand-img"><span class="brand-word">Galent</span>
-      </div>
-      <p>Engineering outcomes. Not headcount. Technology services delivered at 3–4× velocity, powered by GalentAI.</p>
-      <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.5px;color:var(--brand-purple);">OUTPACE · OUTPLAY · OUTSTAND</div>
     </div>
-    <div>
-      <h5>Platform</h5>
-      <ul>
-        <li><a href="platform.html">GalentAI</a></li>
-        <li><a href="platform.html#engines">NeuroQL Engine</a></li>
-        <li><a href="platform.html#engines">RCM Engine</a></li>
-        <li><a href="platform.html#engines">Knowledge Graph</a></li>
-      </ul>
-    </div>
-    <div>
-      <h5>Tech Services</h5>
-      <ul>
-        <li><a href="services/legacy-modernisation.html">App Dev &amp; Modernization</a></li>
-        <li><a href="services/itsm-transformation.html">Managed Services</a></li>
-        <li><a href="services/data-transformation.html">Data &amp; Platforms</a></li>
-        <li><a href="services/enterprise-platforms.html">Context Engineering</a></li>
-      </ul>
-    </div>
-    <div>
-      <h5>Company</h5>
-      <ul>
-        <li><a href="about.html">About</a></li>
-        <li><a href="knowledge-hub.html">Knowledge Hub</a></li>
-        <li><a href="fde.html">Talk to an FDE</a></li>
-        <li><a href="#">Talk to us</a></li>
-      </ul>
-    </div>
-    <div class="bottom">
-      <div>© 2026 Galent · All rights reserved.</div>
+  </section>
 
+  <!-- POSTURE intro -->
+  <section class="bp-chapter" data-label="different posture" style="padding:130px 48px;max-width:1040px;margin:0 auto;">
+    <div class="bp-kicker" style="margin-bottom:20px;">— same platform. different posture.</div>
+    <h2 class="bp-display" style="font-size:clamp(30px,4.4vw,64px);line-height:1.02;">We bring sector-specific FDE archetypes, regulation-aware policy packs, and <span class="bp-cyan">outcome metrics that match how the business actually measures itself.</span></h2>
+    <div class="bp-cols4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:44px;">
+      <div class="bp-pillar" data-reveal style="min-height:0;padding:22px;"><span class="bp-mono" style="font-size:11px;color:#6fe3ff;">01 · tech</span><h3 class="bp-display" style="font-size:17px;margin-top:10px;">Technology</h3></div>
+      <div class="bp-pillar" data-reveal style="min-height:0;padding:22px;"><span class="bp-mono" style="font-size:11px;color:#6fe3ff;">02 · bfsi</span><h3 class="bp-display" style="font-size:17px;margin-top:10px;">BFSI</h3></div>
+      <div class="bp-pillar" data-reveal style="min-height:0;padding:22px;"><span class="bp-mono" style="font-size:11px;color:#6fe3ff;">03 · health</span><h3 class="bp-display" style="font-size:17px;margin-top:10px;">Healthcare</h3></div>
+      <div class="bp-pillar" data-reveal style="min-height:0;padding:22px;"><span class="bp-mono" style="font-size:11px;color:#6fe3ff;">04 · mfg</span><h3 class="bp-display" style="font-size:17px;margin-top:10px;">Manufacturing</h3></div>
+      <div class="bp-pillar" data-reveal style="min-height:0;padding:22px;"><span class="bp-mono" style="font-size:11px;color:#6fe3ff;">05 · lifesci</span><h3 class="bp-display" style="font-size:17px;margin-top:10px;">Life Sciences</h3></div>
+      <div class="bp-pillar" data-reveal style="min-height:0;padding:22px;"><span class="bp-mono" style="font-size:11px;color:#6fe3ff;">06 · retail</span><h3 class="bp-display" style="font-size:17px;margin-top:10px;">Retail &amp; CPG</h3></div>
+      <div class="bp-pillar" data-reveal style="min-height:0;padding:22px;"><span class="bp-mono" style="font-size:11px;color:#6fe3ff;">07 · gcc</span><h3 class="bp-display" style="font-size:17px;margin-top:10px;">GCC</h3></div>
+      <div class="bp-pillar" data-reveal style="min-height:0;padding:22px;background:rgba(111,227,255,.09);"><span class="bp-mono" style="font-size:11px;color:#6fe3ff;">→</span><h3 class="bp-display" style="font-size:17px;margin-top:10px;">One model</h3></div>
+    </div>
+  </section>
+
+  <!-- SC · WIPE (7 sectors) -->
+  <section class="bp-scene" data-scene="wipe" data-label="where we operate" style="position:relative;height:720vh;">
+    <div class="bp-pin" style="position:sticky;top:0;height:100vh;overflow:hidden;">
+
+      <div class="bp-slide" data-i="0" style="position:absolute;inset:0;background:#0a1220;display:flex;align-items:center;will-change:clip-path;">
+        <div class="bp-grid2" style="max-width:1240px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1.4fr auto;gap:48px;align-items:center;width:100%;">
+          <div>
+            <div class="bp-kicker" style="margin-bottom:18px;">sector 1/7 — technology &amp; software</div>
+            <h3 class="bp-display" style="font-size:clamp(34px,5vw,74px);line-height:.95;margin-bottom:18px;">Technology &amp;<br>Software</h3>
+            <p style="font-size:15.5px;line-height:1.65;color:#aab3bd;max-width:560px;">Tech lives and dies by engineering velocity. Galent embeds Forward-Deployed QA and platform engineers inside your squads, governs every PR with RCM policy gates, and shifts coverage modelling left — quality defined before code is generated.</p>
+            <div class="bp-metrics" style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px;max-width:620px;">
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">99%+</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">Code accuracy at PR</div></div>
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">70%</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">Fewer context defects</div></div>
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">3–4×</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">Sprint velocity</div></div>
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">0</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">Manual regressions</div></div>
+            </div>
+            <a href="services/quality-engineering.html" class="bp-mono" style="display:inline-block;margin-top:24px;font-size:12px;letter-spacing:.15em;color:#eef2f6;text-decoration:none;border-bottom:1px solid #6fe3ff;padding-bottom:3px;">explore quality engineering →</a>
+          </div>
+          <div class="bp-ghostnum bp-display" style="font-size:clamp(120px,16vw,280px);line-height:.8;color:rgba(111,227,255,.08);">1</div>
+        </div>
+      </div>
+
+      <div class="bp-slide" data-i="1" style="position:absolute;inset:0;background:#081525;display:flex;align-items:center;clip-path:inset(100% 0 0 0);will-change:clip-path;">
+        <div class="bp-grid2" style="max-width:1240px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1.4fr auto;gap:48px;align-items:center;width:100%;">
+          <div>
+            <div class="bp-kicker" style="margin-bottom:18px;">sector 2/7 — banking, financial services &amp; insurance</div>
+            <h3 class="bp-display" style="font-size:clamp(34px,5vw,74px);line-height:.95;margin-bottom:18px;">BFSI</h3>
+            <p style="font-size:15.5px;line-height:1.65;color:#aab3bd;max-width:560px;">Regulated finance demands airtight compliance and continuous change at once. Galent rebuilds Salesforce and core platform stacks around GalentAI, with policy and audit baked into every change — from CRM to cash.</p>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px;max-width:620px;">
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">800%</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">Faster sales decisions</div></div>
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">100%</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">Compliance maintained</div></div>
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">3–4×</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">Programme velocity</div></div>
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">15×</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">Faster modernisation</div></div>
+            </div>
+            <a href="services/enterprise-platforms.html" class="bp-mono" style="display:inline-block;margin-top:24px;font-size:12px;letter-spacing:.15em;color:#eef2f6;text-decoration:none;border-bottom:1px solid #6fe3ff;padding-bottom:3px;">explore enterprise platforms →</a>
+          </div>
+          <div class="bp-ghostnum bp-display" style="font-size:clamp(120px,16vw,280px);line-height:.8;color:rgba(111,227,255,.08);">2</div>
+        </div>
+      </div>
+
+      <div class="bp-slide" data-i="2" style="position:absolute;inset:0;background:#0a1220;display:flex;align-items:center;clip-path:inset(100% 0 0 0);will-change:clip-path;">
+        <div class="bp-grid2" style="max-width:1240px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1.4fr auto;gap:48px;align-items:center;width:100%;">
+          <div>
+            <div class="bp-kicker" style="margin-bottom:18px;">sector 3/7 — healthcare &amp; insurance</div>
+            <h3 class="bp-display" style="font-size:clamp(34px,5vw,74px);line-height:.95;margin-bottom:18px;">Healthcare &amp;<br>Insurance</h3>
+            <p style="font-size:15.5px;line-height:1.65;color:#aab3bd;max-width:560px;">Patient outcomes can't tolerate noisy ITSM or unclear ownership. Galent brings HIPAA-aware change workflows, predictive incident triage, and self-healing operations to clinical, claims, and care-coordination systems.</p>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px;max-width:620px;">
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">90%</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">Data ops automated</div></div>
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">0</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">Compliance breaches</div></div>
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">70%</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">Fewer escalations</div></div>
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">99.99%</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">Critical uptime</div></div>
+            </div>
+            <a href="services/itsm-transformation.html" class="bp-mono" style="display:inline-block;margin-top:24px;font-size:12px;letter-spacing:.15em;color:#eef2f6;text-decoration:none;border-bottom:1px solid #6fe3ff;padding-bottom:3px;">explore itsm transformation →</a>
+          </div>
+          <div class="bp-ghostnum bp-display" style="font-size:clamp(120px,16vw,280px);line-height:.8;color:rgba(111,227,255,.08);">3</div>
+        </div>
+      </div>
+
+      <div class="bp-slide" data-i="3" style="position:absolute;inset:0;background:#081525;display:flex;align-items:center;clip-path:inset(100% 0 0 0);will-change:clip-path;">
+        <div class="bp-grid2" style="max-width:1240px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1.4fr auto;gap:48px;align-items:center;width:100%;">
+          <div>
+            <div class="bp-kicker" style="margin-bottom:18px;">sector 4/7 — manufacturing</div>
+            <h3 class="bp-display" style="font-size:clamp(34px,5vw,74px);line-height:.95;margin-bottom:18px;">Manufacturing</h3>
+            <p style="font-size:15.5px;line-height:1.65;color:#aab3bd;max-width:560px;">Plant-floor data, IoT telemetry, MES and ERP signal pay off only when unified and AI-ready. Galent builds the pipelines and data products that make predictive maintenance, supply-chain visibility, and Industry 4.0 a daily reality.</p>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px;max-width:620px;">
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">10×</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">Faster pipeline build</div></div>
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">~30%</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">Downtime reduction</div></div>
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">99%+</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">Data contract integrity</div></div>
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">0</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">Schema-drift incidents</div></div>
+            </div>
+            <a href="services/data-transformation.html" class="bp-mono" style="display:inline-block;margin-top:24px;font-size:12px;letter-spacing:.15em;color:#eef2f6;text-decoration:none;border-bottom:1px solid #6fe3ff;padding-bottom:3px;">explore data transformation →</a>
+          </div>
+          <div class="bp-ghostnum bp-display" style="font-size:clamp(120px,16vw,280px);line-height:.8;color:rgba(111,227,255,.08);">4</div>
+        </div>
+      </div>
+
+      <div class="bp-slide" data-i="4" style="position:absolute;inset:0;background:#0a1220;display:flex;align-items:center;clip-path:inset(100% 0 0 0);will-change:clip-path;">
+        <div class="bp-grid2" style="max-width:1240px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1.4fr auto;gap:48px;align-items:center;width:100%;">
+          <div>
+            <div class="bp-kicker" style="margin-bottom:18px;">sector 5/7 — life sciences</div>
+            <h3 class="bp-display" style="font-size:clamp(34px,5vw,74px);line-height:.95;margin-bottom:18px;">Life Sciences</h3>
+            <p style="font-size:15.5px;line-height:1.65;color:#aab3bd;max-width:560px;">Research velocity and GxP-grade governance must coexist on one data fabric. Galent designs lineage-aware pipelines for clinical trials, research acceleration, and real-world evidence — without compromising audit readiness.</p>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px;max-width:620px;">
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">3×</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">Trial data turnaround</div></div>
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">100%</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">GxP audit-ready</div></div>
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">15×</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">Faster RWE assembly</div></div>
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">0</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">Lineage gaps</div></div>
+            </div>
+            <a href="services/data-transformation.html" class="bp-mono" style="display:inline-block;margin-top:24px;font-size:12px;letter-spacing:.15em;color:#eef2f6;text-decoration:none;border-bottom:1px solid #6fe3ff;padding-bottom:3px;">explore data transformation →</a>
+          </div>
+          <div class="bp-ghostnum bp-display" style="font-size:clamp(120px,16vw,280px);line-height:.8;color:rgba(111,227,255,.08);">5</div>
+        </div>
+      </div>
+
+      <div class="bp-slide" data-i="5" style="position:absolute;inset:0;background:#081525;display:flex;align-items:center;clip-path:inset(100% 0 0 0);will-change:clip-path;">
+        <div class="bp-grid2" style="max-width:1240px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1.4fr auto;gap:48px;align-items:center;width:100%;">
+          <div>
+            <div class="bp-kicker" style="margin-bottom:18px;">sector 6/7 — retail &amp; cpg</div>
+            <h3 class="bp-display" style="font-size:clamp(34px,5vw,74px);line-height:.95;margin-bottom:18px;">Retail &amp; CPG</h3>
+            <p style="font-size:15.5px;line-height:1.65;color:#aab3bd;max-width:560px;">Commerce, OMS, and ERP traditionally live in silos that throttle velocity. Galent unifies them as a single revenue platform, with customer intelligence and merchandising operating on the same data backbone.</p>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px;max-width:620px;">
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">2×</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">Inventory turn</div></div>
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">~25%</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">Lift on personalised pages</div></div>
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">15×</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">Platform consolidation</div></div>
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">3–4×</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">Sprint velocity</div></div>
+            </div>
+            <a href="services/enterprise-platforms.html" class="bp-mono" style="display:inline-block;margin-top:24px;font-size:12px;letter-spacing:.15em;color:#eef2f6;text-decoration:none;border-bottom:1px solid #6fe3ff;padding-bottom:3px;">explore enterprise platforms →</a>
+          </div>
+          <div class="bp-ghostnum bp-display" style="font-size:clamp(120px,16vw,280px);line-height:.8;color:rgba(111,227,255,.08);">6</div>
+        </div>
+      </div>
+
+      <div class="bp-slide" data-i="6" style="position:absolute;inset:0;background:#0a1220;display:flex;align-items:center;clip-path:inset(100% 0 0 0);will-change:clip-path;">
+        <div class="bp-grid2" style="max-width:1240px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1.4fr auto;gap:48px;align-items:center;width:100%;">
+          <div>
+            <div class="bp-kicker" style="margin-bottom:18px;">sector 7/7 — global capability centres</div>
+            <h3 class="bp-display" style="font-size:clamp(34px,5vw,74px);line-height:.95;margin-bottom:18px;">GCC<br>Transformations</h3>
+            <p style="font-size:15.5px;line-height:1.65;color:#aab3bd;max-width:560px;">New centres of excellence are being built worldwide — the wrong move is copying a legacy SI model. Galent helps you build GCCs that are AI-native from week one: embedded FDEs, platform-led patterns, and a delivery cadence that compounds.</p>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px;max-width:620px;">
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">15×</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">Faster modernisation</div></div>
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">92%</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">Lower modernisation risk</div></div>
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">3–4×</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">Programme velocity</div></div>
+              <div><div class="bp-display bp-cyan" style="font-size:26px;">72hr</div><div class="bp-mono" style="font-size:10px;color:#8a929c;margin-top:4px;">Legacy estate mapped</div></div>
+            </div>
+            <a href="services/legacy-modernisation.html" class="bp-mono" style="display:inline-block;margin-top:24px;font-size:12px;letter-spacing:.15em;color:#eef2f6;text-decoration:none;border-bottom:1px solid #6fe3ff;padding-bottom:3px;">explore legacy modernization →</a>
+          </div>
+          <div class="bp-ghostnum bp-display" style="font-size:clamp(120px,16vw,280px);line-height:.8;color:rgba(111,227,255,.08);">7</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROOF -->
+  <section class="bp-chapter" data-label="the proof" style="padding:130px 48px;max-width:1340px;margin:0 auto;">
+    <div class="bp-kicker" style="margin-bottom:40px;">— outcomes across regulated production</div>
+    <div class="bp-proofwall" style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(111,227,255,.12);border:1px solid rgba(111,227,255,.12);">
+      <div style="background:#06080f;padding:40px 30px;"><div class="bp-display bp-cyan" style="font-size:clamp(42px,4.5vw,80px);line-height:1;">15×</div><div style="font-size:13px;color:#aab3bd;margin-top:10px;">Faster modernisation</div></div>
+      <div style="background:#06080f;padding:40px 30px;"><div class="bp-display" style="font-size:clamp(42px,4.5vw,80px);line-height:1;">99.99<span class="bp-cyan">%</span></div><div style="font-size:13px;color:#aab3bd;margin-top:10px;">Critical-system uptime</div></div>
+      <div style="background:#06080f;padding:40px 30px;"><div class="bp-display" style="font-size:clamp(42px,4.5vw,80px);line-height:1;">92<span class="bp-cyan">%</span></div><div style="font-size:13px;color:#aab3bd;margin-top:10px;">Lower modernisation risk</div></div>
+      <div style="background:#06080f;padding:40px 30px;"><div class="bp-display bp-cyan" style="font-size:clamp(42px,4.5vw,80px);line-height:1;">3–4×</div><div style="font-size:13px;color:#aab3bd;margin-top:10px;">Programme velocity</div></div>
+    </div>
+    <p class="bp-mono" style="margin-top:22px;font-size:12.5px;letter-spacing:.14em;color:#8a929c;line-height:2;">Sector-specific FDE archetypes · regulation-aware policy packs · <span class="bp-cyan">one operating model</span> across seven industries.</p>
+  </section>
+
+  <!-- SC · IRIS FINALE -->
+  <section class="bp-scene" data-scene="iris" data-label="let's build" style="position:relative;height:300vh;">
+    <div class="bp-pin" style="position:sticky;top:0;height:100vh;overflow:hidden;background:#05070c;display:flex;align-items:center;justify-content:center;">
+      <div class="bp-iris" style="position:absolute;inset:0;background:#6fe3ff;display:flex;align-items:center;justify-content:center;clip-path:circle(0% at 50% 50%);will-change:clip-path;">
+        <div style="text-align:center;color:#06080f;padding:0 24px;">
+          <div class="bp-kicker" style="color:#06080f;margin-bottom:26px;">— let's build</div>
+          <h2 class="bp-display" style="font-size:clamp(38px,6.5vw,110px);line-height:.95;">Tell us your sector.<br>We'll match the model.</h2>
+          <p style="margin-top:24px;font-size:17px;font-weight:500;">A 45-minute sector briefing covering regulation, FDE archetypes, and the services most relevant to your operating environment.</p>
+          <div style="margin-top:44px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">
+            <a href="contact.html" data-magnetic style="display:inline-flex;align-items:center;gap:12px;background:#06080f;color:#eef2f6;text-decoration:none;padding:20px 40px;font-family:'Cabinet Grotesk',sans-serif;font-weight:700;font-size:16px;">Book a briefing <span class="bp-cyan">↗</span></a>
+            <a href="platform.html" data-magnetic style="display:inline-flex;align-items:center;gap:12px;background:transparent;color:#06080f;text-decoration:none;padding:20px 40px;border:1px solid rgba(6,8,15,.35);font-family:'Cabinet Grotesk',sans-serif;font-weight:700;font-size:16px;">See the platform</a>
+          </div>
+        </div>
+      </div>
+      <div class="bp-iris-pre" style="position:relative;text-align:center;">
+        <div class="bp-kicker" style="color:#8a929c;margin-bottom:20px;">the aperture is opening</div>
+        <div class="bp-display" style="font-size:clamp(30px,4vw,58px);color:#eef2f6;">Keep scrolling<span class="bp-cyan">.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="border-top:1px solid rgba(111,227,255,.14);padding:90px 48px 40px;">
+    <div style="max-width:1340px;margin:0 auto;">
+      <div class="bp-footer-main" style="display:grid;grid-template-columns:1.5fr 1fr;gap:40px;padding-bottom:52px;border-bottom:1px solid rgba(111,227,255,.12);">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;"><img src="assets/design/Galent New Logo.png" alt="Galent" style="width:26px;height:26px;object-fit:contain;"><span class="bp-display" style="font-size:19px;">Galent</span></div>
+          <p style="font-size:13.5px;line-height:1.65;color:#aab3bd;max-width:460px;">Engineering outcomes. Not headcount. GalentAI delivers deterministic, auditable technology services at 3–4× the velocity of conventional engagements.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px;align-items:flex-end;justify-content:center;">
+          <div style="display:flex;gap:20px;font-size:13.5px;font-weight:700;">
+            <a href="platform.html" style="color:#eef2f6;text-decoration:none;">Platform</a>
+            <a href="industries.html" style="color:#eef2f6;text-decoration:none;">Industries</a>
+            <a href="knowledge-hub.html" style="color:#eef2f6;text-decoration:none;">Knowledge Hub</a>
+            <a href="contact.html" style="color:#eef2f6;text-decoration:none;">Contact</a>
+          </div>
+          <div style="display:flex;gap:20px;font-size:12.5px;">
+            <a href="https://galent.com/privacy-policy/" rel="noopener" target="_blank" style="color:#8a929c;text-decoration:none;">Privacy Policy</a>
+            <a href="https://galent.com/terms-of-service/" rel="noopener" target="_blank" style="color:#8a929c;text-decoration:none;">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+      <div class="bp-mono" style="padding-top:26px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:11px;color:#8a929c;">
+        <span>© 2026 galent</span><span>outpace · outplay · outstand</span>
+      </div>
     </div>
   </footer>
 
-  <script src="js/animations.js?v=net-dark-3"></script>
-  <script>
-    Galent.persistentReveal();
-    Galent.stickyNav('site-nav');
-    Galent.contactModal();
-
-    document.querySelectorAll('.sector-strip .strip-header').forEach(h => {
-      h.addEventListener('click', () => {
-        const strip = h.parentElement;
-        const open = strip.classList.toggle('open');
-        if (open) {
-          document.querySelectorAll('.sector-strip.open').forEach(s => {
-            if (s !== strip) s.classList.remove('open');
-          });
-        }
-      });
-    });
-
-    document.querySelectorAll('.sector-quickjump a').forEach(a => {
-      a.addEventListener('click', (e) => {
-        const id = a.getAttribute('data-jump');
-        const strip = document.getElementById(id);
-        if (!strip) return;
-        e.preventDefault();
-        document.querySelectorAll('.sector-strip.open').forEach(s => s.classList.remove('open'));
-        strip.classList.add('open');
-        const offset = 100;
-        const y = strip.getBoundingClientRect().top + window.scrollY - offset;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-      });
-    });
-
-    if ('IntersectionObserver' in window) {
-      const links = document.querySelectorAll('.sector-quickjump a');
-      const linkById = Object.fromEntries(
-        Array.from(links).map(a => [a.getAttribute('data-jump'), a])
-      );
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          const link = linkById[e.target.id];
-          if (!link) return;
-          if (e.isIntersecting) {
-            links.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-          }
-        });
-      }, { rootMargin: '-40% 0px -45% 0px' });
-      document.querySelectorAll('.sector-strip').forEach(s => io.observe(s));
-    }
-  </script>
-
-  <script src="js/motion.js?v=engine-bp1" defer></script>
+  <script src="js/blueprint-scenes.js?v=bp-1" defer></script>
 </body>
 </html>

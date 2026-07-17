@@ -1,0 +1,79 @@
+/* ==================================================================
+ * BLUEPRINT SCENES — shared design + scroll-scene system for inner pages
+ * that opt into the full homepage-style storytelling experience
+ * (platform.html, industries.html, ...). Self-contained: pages using this
+ * do NOT load design-system.css / motion.js / animations.js. Paired with
+ * js/blueprint-scenes.js. Base look mirrors the v6 Blueprint home page.
+ * ================================================================== */
+* { margin:0; padding:0; box-sizing:border-box; }
+html { overflow-x:clip; background:#06080f; scroll-behavior:smooth; }
+body {
+  background:#06080f; color:#eef2f6; font-family:'Satoshi',sans-serif;
+  overflow-x:clip; -webkit-font-smoothing:antialiased;
+}
+::selection { background:#6fe3ff; color:#06080f; }
+@media (pointer:fine){ html.bp-cursor, html.bp-cursor * { cursor:none; } }
+a { color:inherit; }
+
+@keyframes bpRise   { from{ transform:translateY(112%);} to{ transform:translateY(0);} }
+@keyframes bpBlink  { 0%,49%{opacity:1;} 50%,100%{opacity:0;} }
+@keyframes bpScroll { 0%{transform:translateY(0);opacity:1;} 70%{transform:translateY(12px);opacity:0;} 100%{transform:translateY(0);opacity:0;} }
+@keyframes bpReveal { from{opacity:0;transform:translateY(44px);} to{opacity:1;transform:translateY(0);} }
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal] { animation:bpReveal .9s cubic-bezier(.16,1,.3,1) both; animation-timeline:view(); animation-range:entry 0% cover 22%; }
+  @supports not (animation-timeline: view()) { [data-reveal] { animation-timeline:auto; } }
+}
+@media (prefers-reduced-motion: reduce) {
+  #bp-ring,#bp-dot,#bp-pre { display:none !important; }
+}
+
+/* type helpers */
+.bp-mono { font-family:'Spline Sans Mono',monospace; }
+.bp-display { font-family:'Cabinet Grotesk',sans-serif; font-weight:800; letter-spacing:-.02em; }
+.bp-kicker { font-family:'Spline Sans Mono',monospace; font-size:12px; letter-spacing:.3em; color:#6fe3ff; }
+.bp-cyan { color:#6fe3ff; }
+
+/* pillars / cards reusable */
+.bp-pillar { background:rgba(111,227,255,.035); border:1px solid rgba(111,227,255,.18); padding:38px 32px; min-height:280px; display:flex; flex-direction:column; justify-content:space-between; transition:transform .5s cubic-bezier(.16,1,.3,1),border-color .5s,background .5s; }
+
+/* ---- MOBILE: linearize every scene into normal flow ---- */
+@media (max-width: 860px) {
+  #bp-ring,#bp-dot { display:none !important; }
+  #bp-chapter-wrap,#bp-pct-wrap { display:none !important; }
+  .bp-scene { height:auto !important; }
+  .bp-pin { position:static !important; height:auto !important; overflow:visible !important; display:block !important; padding:80px 20px !important; }
+  .bp-scene[data-scene="dive"] .bp-pin { display:flex !important; min-height:86vh; padding:118px 20px 70px !important; }
+  .bp-dive-img,.bp-dive-veil,.bp-dive-after { display:none !important; }
+  .bp-dive-stage { transform:none !important; opacity:1 !important; }
+  .bp-grid2 { grid-template-columns:1fr !important; gap:30px !important; display:block !important; }
+  .bp-grid2 > * + * { margin-top:30px; }
+  .bp-schematic { display:block !important; }
+  .bp-schematic svg { max-width:330px; margin:0 auto 26px; display:block; }
+  .bp-bp-panel { height:auto !important; }
+  .bp-bp-d,.bp-bp-init { position:static !important; opacity:1 !important; transform:none !important; margin-bottom:18px !important; }
+  .bp-bp-imgwrap { display:none !important; }
+  .bp-fan { height:auto !important; display:block !important; }
+  .bp-card { position:static !important; width:auto !important; max-width:340px !important; min-height:0 !important; transform:none !important; margin:0 auto 16px !important; box-shadow:none !important; }
+  .bp-slide { position:relative !important; inset:auto !important; clip-path:none !important; display:block !important; padding:60px 20px !important; }
+  .bp-slide .bp-grid2 { display:block !important; }
+  .bp-ghostnum { font-size:70px !important; margin-top:6px; }
+  .bp-iris { position:static !important; clip-path:none !important; height:auto !important; padding:90px 20px !important; }
+  .bp-iris-pre { display:none !important; }
+  .bp-cols3,.bp-cols4 { grid-template-columns:1fr !important; }
+  .bp-proofwall { grid-template-columns:1fr !important; }
+  .bp-nav { padding:15px 20px !important; mix-blend-mode:normal !important;
+    background:rgba(6,8,15,.86); backdrop-filter:saturate(140%) blur(9px); -webkit-backdrop-filter:saturate(140%) blur(9px);
+    border-bottom:1px solid rgba(111,227,255,.1); }
+  .bp-burger { display:block !important; }
+  .bp-nav-links {
+    position:absolute; top:100%; left:0; right:0; flex-direction:column; align-items:stretch !important; gap:0 !important;
+    background:#080b12; border-top:1px solid rgba(111,227,255,.18); border-bottom:1px solid rgba(111,227,255,.18);
+    padding:6px 20px 16px; display:none !important; mix-blend-mode:normal; isolation:isolate; font-size:13px !important;
+  }
+  .bp-nav.open .bp-nav-links { display:flex !important; }
+  .bp-nav-links a { padding:14px 4px !important; border-bottom:1px solid rgba(111,227,255,.08); }
+  .bp-nav-links a.bp-nav-hide { display:block !important; }
+  .bp-nav-links a.bp-nav-cta { background:#6fe3ff !important; color:#06080f !important; text-align:center; margin-top:12px; border-bottom:0; padding:15px !important; }
+  .bp-footer-grid4 { grid-template-columns:repeat(2,1fr) !important; }
+  .bp-footer-main { grid-template-columns:1fr !important; }
+}

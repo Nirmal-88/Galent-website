@@ -3,580 +3,298 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#FFFFFF">
+  <meta name="theme-color" content="#06080f">
   <title>GalentAI · The Platform — Galent</title>
   <meta name="description" content="GalentAI is built for one thing: production-grade outcomes at enterprise scale. Deterministic, auditable delivery — running on your existing people, processes, and stack.">
-
+  <link rel="icon" href="assets/images/logo.png?v=4" type="image/png">
+  <link rel="canonical" href="https://galent.com/platform.html">
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700,800&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/design-system.css?v=blueprint-2">
-  <link rel="icon" href="assets/images/logo.png?v=4" type="image/png">
-
-  <!-- GSAP — used by the architecture-diagram line-draw on this page. -->
-
-  <!-- Motion engine bootstrap: stand down legacy reveals; safety-net reveal -->
-  <script>window.GALENT_MOTION=1;setTimeout(function(){if(!window.__galentMotionBooted){document.querySelectorAll('[data-reveal],[data-stagger]').forEach(function(e){e.classList.add('in');});}},3000);</script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/blueprint-scenes.css?v=bp-1">
 </head>
-<body data-page="platform">
+<body>
 
-  <header class="nav" id="site-nav">
-    <a href="index.html" class="brand" aria-label="Galent — Home">
-      <img src="assets/images/galent-mark-crisp.png" alt="" class="brand-img"><span class="brand-word">Galent</span>
+  <!-- NAV -->
+  <nav class="bp-nav" style="position:fixed;top:0;left:0;width:100%;z-index:900;display:flex;align-items:center;justify-content:space-between;padding:22px 48px;mix-blend-mode:difference;">
+    <a href="index.html" data-magnetic style="display:flex;align-items:center;gap:10px;text-decoration:none;color:#eef2f6;">
+      <img src="assets/design/Galent New Logo.png" alt="Galent" style="width:26px;height:26px;object-fit:contain;display:block;">
+      <span class="bp-display" style="font-size:19px;">Galent</span>
     </a>
-    <nav class="menu" aria-label="Primary" id="primary-menu">
-      <a href="platform.html" aria-current="page">Platform</a>
-      <a href="fde.html">FDE</a>
-      <a href="about.html">About</a>
-      <a href="knowledge-hub.html">Knowledge Hub</a>
-      <div class="has-dropdown">
-        <button class="dropdown-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="services-menu">
-          Tech Services <span class="caret" aria-hidden="true">▾</span>
-        </button>
-        <div class="dropdown-panel" id="services-menu" role="menu" aria-hidden="true">
-          <div class="dropdown-group">
-            <h6>App Dev &amp; Modernization</h6>
-            <a href="services/legacy-modernisation.html" role="menuitem">Legacy Modernization</a>
-            <a href="services/brownfield-greenfield.html" role="menuitem">Brownfield &amp; Greenfield</a>
-            <a href="services/quality-engineering.html" role="menuitem">Quality Engineering</a>
-          </div>
-          <div class="dropdown-group">
-            <h6>Managed Services</h6>
-            <a href="services/itsm-transformation.html" role="menuitem">ITSM Transformation</a>
-            <a href="services/sre-observability.html" role="menuitem">SRE &amp; Observability</a>
-            <a href="services/everything-ops.html" role="menuitem">Everything Ops</a>
-          </div>
-          <div class="dropdown-group">
-            <h6>Data &amp; Platforms</h6>
-            <a href="services/data-transformation.html" role="menuitem">Data Transformation</a>
-            <a href="services/enterprise-platforms.html" role="menuitem">Enterprise Platforms</a>
-          </div>
-          <div class="dropdown-group">
-            <h6>Context Engineering</h6>
-            <a href="services/knowledge-graph.html" role="menuitem">Knowledge Graph</a>
-            <a href="services/context-graph.html" role="menuitem">Context Graph</a>
-          </div>
-          <div class="dropdown-group">
-            <h6>Talent Services</h6>
-            <a href="services/talent-capability-stack.html" role="menuitem">Talent Services</a>
-          </div>
-        </div>
-      </div>
-      <a href="industries.html">Industries</a>
-      <span class="sep" aria-hidden="true"></span>
-      <a href="#" class="btn" style="padding:10px 18px;font-size:14px">Book a demo <span class="arr">→</span></a>
-    </nav>
-    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-menu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    <button class="bp-burger" aria-label="Menu" aria-expanded="false" style="display:none;background:none;border:0;color:#eef2f6;cursor:pointer;padding:6px;line-height:0;">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
     </button>
-  </header>
-
-  <main id="top">
-
-    <!-- HERO — SPLIT LAYOUT: text left, orbital compass right -->
-    <section class="platform-hero">
-      <div class="hero-fx" aria-hidden="true">
-        <div class="hero-fx__grid"></div>
-        <div class="hero-fx__orb hero-fx__orb--purple"></div>
-        <div class="hero-fx__orb hero-fx__orb--green"></div>
-        <div class="hero-fx__orb hero-fx__orb--orange"></div>
-        <div class="hero-fx__particles">
-          <span></span><span></span><span></span><span></span>
-          <span></span><span></span><span></span><span></span>
-          <span></span><span></span>
-        </div>
-      </div>
-      <div class="split-hero">
-        <div class="text">
-          <h1 class="t-hero" style="font-size: clamp(40px, 5.6vw, 60px);">
-            AI Is Everywhere. Except in Your <em class="ac-p">P&amp;L.</em>
-          </h1>
-          <p class="t-body-lg">
-            Most enterprise AI produces impressive PoCs and little else. Not because the models aren't capable. Because nobody solved how to deploy them — repeatably, at scale, in production.
-          </p>
-          <p class="t-body-lg" style="margin-top: var(--space-md); max-width: 60ch; font-weight: 500; color: var(--on-surface);">
-            GalentAI is built for one thing: production-grade outcomes at enterprise scale. Not demos. Deterministic, auditable delivery — running on your existing people, processes, and stack.
-          </p>
-          <div class="cta-row" style="margin-top: var(--space-2xl);">
-            <a href="#" class="btn">Schedule a leadership briefing <span class="arr">→</span></a>
-            <a href="#engines" class="btn ghost">Explore the platform <span class="arr">→</span></a>
-          </div>
-        </div>
-        <div class="compass-visual" aria-hidden="true">
-          <div class="compass-aura"></div>
-          <div class="compass-aura compass-aura--2"></div>
-          <canvas id="cv-compass"></canvas>
-        </div>
-      </div>
-    </section>
-
-    <!-- THE CORE PROBLEM — context Achilles heel + quote -->
-    <section>
-      <div class="container container-narrow">
-        <div class="section-head" data-reveal style="text-align: left;">
-          <h2 class="t-display-italic">The Achilles Heel of Every AI Deployment <em>Is Context.</em></h2>
-          <p class="t-body-lg" style="margin-top: var(--space-md);">
-            Load too much into a context window and accuracy degrades. Load the wrong content and results become unreliable. This is why AI works for individual tasks and fails for team-scale programmes.
-          </p>
-        </div>
-        <div class="pull-quote" data-reveal style="margin-top: var(--space-2xl);">
-          <span class="mark">"</span>
-          <blockquote>
-            The biggest problem isn't individual AI wins. It's getting meaningful results as a team — across handoffs, sprints, programmes — rather than individual heroism.
-          </blockquote>
-        </div>
-        <p data-reveal style="margin-top: var(--space-xl); font-weight: 500; color: var(--on-surface); font-size: 17px;">
-          GalentAI solves this by changing how the model behaves — not prompting around its limitations.
-        </p>
-      </div>
-    </section>
-
-    <!-- PLATFORM PERFORMANCE — 6 stats -->
-    <section style="padding-top: 0;">
-      <div class="container">
-        <div class="section-head" data-reveal>
-          <h2 class="t-display-italic">Measured across <em>production deployments.</em></h2>
-        </div>
-        <div class="stat-strip six" data-reveal>
-          <div class="item p"><div class="big">3&ndash;4<span class="unit">&times;</span></div><div class="label">Delivery velocity</div></div>
-          <div class="item g"><div class="big">85&ndash;90<span class="unit">%</span></div><div class="label">Fewer PoC failures</div></div>
-          <div class="item p"><div class="big">99<span class="unit">%</span></div><div class="label">Code accuracy</div></div>
-          <div class="item o"><div class="big">70<span class="unit">%</span></div><div class="label">Fewer context failures</div></div>
-          <div class="item p"><div class="big">41<span class="unit">%</span></div><div class="label">Bug premium eliminated</div></div>
-          <div class="item g"><div class="big">10<span class="unit">&times;</span></div><div class="label">Less AI-generated debt</div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- DARK BAND — How It Works / 4 engines -->
-    <section class="panel-dark" id="engines" style="padding: var(--space-4xl) 0;">
-      <div class="container">
-        <div class="section-divider" data-reveal>
-          <div class="label">Four Engines. <em style="color: var(--page-accent);">One Closed-Loop Execution System.</em></div>
-        </div>
-        <p data-reveal style="text-align: center; max-width: 70ch; margin: var(--space-md) auto 0; color: rgba(255,255,255,0.7); font-size: 16px; line-height: 1.55;">
-          Each engine solves a specific failure mode in conventional AI-assisted delivery. Together they are deterministic, compliant, and persistent across the full programme lifecycle.
-        </p>
-
-        <div id="engine-diagram-root" style="margin-top: var(--space-3xl);" data-reveal>
-          <div class="engine-diagram">
-            <div class="engine-fx" aria-hidden="true">
-              <div class="engine-stars">
-                <span></span><span></span><span></span><span></span><span></span>
-                <span></span><span></span><span></span><span></span><span></span>
-                <span></span><span></span>
-              </div>
-              <div class="engine-ring engine-ring--1"></div>
-              <div class="engine-ring engine-ring--2"></div>
-              <div class="engine-ring engine-ring--3"></div>
-              <div class="engine-sweep"></div>
-              <div class="engine-particle engine-particle--top"></div>
-              <div class="engine-particle engine-particle--right"></div>
-              <div class="engine-particle engine-particle--bottom"></div>
-              <div class="engine-particle engine-particle--left"></div>
-            </div>
-            <svg class="engine-diagram-svg" aria-hidden="true"></svg>
-            <div class="engine-hub">GalentAI</div>
-            <button class="engine-node" data-engine="neuroql" data-pos="top" aria-pressed="false">
-              <span class="code">3.1</span>
-              <span class="name">NeuroQL</span>
-            </button>
-            <button class="engine-node" data-engine="rcm" data-pos="right" aria-pressed="false">
-              <span class="code">3.2</span>
-              <span class="name">RCM</span>
-            </button>
-            <button class="engine-node" data-engine="kg" data-pos="bottom" aria-pressed="false">
-              <span class="code">3.3</span>
-              <span class="name">Knowledge Graph</span>
-            </button>
-            <button class="engine-node" data-engine="context" data-pos="left" aria-pressed="false">
-              <span class="code">3.4</span>
-              <span class="name">Context Graph</span>
-            </button>
-          </div>
-          <div class="engine-detail" aria-live="polite" aria-hidden="true"></div>
-        </div>
-
-        <div class="engine-cards" data-reveal data-stagger>
-          <article class="engine-deep-card engine-deep-card--purple">
-            <span class="engine-deep-card__code">3.1 · Natural Language → Code · Patent Pending</span>
-            <h3 class="engine-deep-card__name">NeuroQL Engine</h3>
-            <p class="engine-deep-card__desc">The deterministic execution engine. AmbientAI monitors the execution environment in real time — knowing what data is relevant, when, and why. It feeds a MicroPrompt architecture that breaks complex tasks into sequential queries under 2,000 tokens each. The output is TONIC — a compact, schema-driven language that encodes AI's operating contract: token-efficient, versioned, deterministically compiled across teams, runs, and clients.</p>
-            <ul class="engine-deep-card__bullets">
-              <li>AmbientAI: phase, persona, dependencies, business rules — loaded precisely</li>
-              <li>MicroPrompts: sequential, each under 2,000 tokens</li>
-              <li>TONIC: schema-driven, versioned, compiled</li>
-              <li>70% fewer context window failures</li>
-              <li>Full chain-of-reasoning audit trail</li>
-              <li>4-tier memory: execution, episodic, semantic, principle</li>
-            </ul>
-          </article>
-
-          <article class="engine-deep-card engine-deep-card--orange">
-            <span class="engine-deep-card__code">3.2 · Runtime Governance · Patent Pending</span>
-            <h3 class="engine-deep-card__name">RCM Engine — Reasoning &amp; Compliance Management</h3>
-            <p class="engine-deep-card__desc">Neurosymbolic AI: neural understanding combined with symbolic rule enforcement. When a model proposes an action, the symbolic layer validates it against your business rules, compliance requirements, and architectural constraints — before execution. Not after incident review.</p>
-            <ul class="engine-deep-card__bullets">
-              <li>Closed loop: Sense → Propose → Validate → Execute → Learn → Adapt</li>
-              <li>Neural proposes — symbolic validates — output is deterministic</li>
-              <li>99%+ code accuracy via neurosymbolic validation</li>
-              <li>Compliance automation with full auditable proof</li>
-              <li>Zero hallucination-led deployment risk</li>
-              <li>Dual explainability: neural + symbolic, separately traceable</li>
-            </ul>
-          </article>
-
-          <article class="engine-deep-card engine-deep-card--green">
-            <span class="engine-deep-card__code">3.3 · Organisational Intelligence</span>
-            <h3 class="engine-deep-card__name">Enterprise Knowledge Graph</h3>
-            <p class="engine-deep-card__desc">Before any engagement executes, GalentAI builds the Knowledge Graph — a living, queryable map of your entire system ecosystem. Code, logs, data schemas, infrastructure, tickets, runbooks — ingested, continuously updated, always current. "What breaks if we change this?" becomes a seconds-long query — not weeks of manual analysis.</p>
-            <ul class="engine-deep-card__bullets">
-              <li>Source code (AST), logs, data schemas, tickets, runbooks — all ingested</li>
-              <li>Functional map, architecture diagrams, deployment topology — generated</li>
-              <li>90% faster legacy code understanding</li>
-              <li>Blast-radius and impact analysis in seconds</li>
-              <li>Living documentation — eliminates SME dependency</li>
-              <li>Full temporal versioning and lineage tracking</li>
-            </ul>
-          </article>
-
-          <article class="engine-deep-card engine-deep-card--indigo">
-            <span class="engine-deep-card__code">3.4 · Dependency Mapping &amp; Governance</span>
-            <h3 class="engine-deep-card__name">Context Graph</h3>
-            <p class="engine-deep-card__desc">The Knowledge Graph captures what exists. The Context Graph captures what should happen — the governing framework for every SDLC phase. Business rules buried in code, scattered across docs, or locked in tribal knowledge are extracted into structured epics. Every decision is recorded as a Decision Trace: what, why, who, when. Institutional memory that compounds across every sprint.</p>
-            <ul class="engine-deep-card__bullets">
-              <li>Governs all SDLC phases: architecture → design → dev → test → deploy → SRE</li>
-              <li>Business logic syndication from code, docs, tribal knowledge</li>
-              <li>Decision trace: what, why, who, when — full provenance</li>
-              <li>45ms context retrieval at the 95th percentile</li>
-              <li>Institutional memory compounding across every sprint</li>
-              <li>Knowledge Graph + Context Graph = context-driven SDLC</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- LIGHT — Live Knowledge Graph (interactive, hover + click) -->
-    <section>
-      <div class="container">
-        <div class="kg-section" data-reveal>
-          <div class="kg-text">
-            <h2 class="t-display-italic">A living map of your <em>entire system ecosystem.</em></h2>
-            <p class="t-body-lg" style="margin-top: var(--space-md);">
-              Code, logs, data schemas, infrastructure, tickets, runbooks &mdash; ingested, continuously updated, always current. &quot;What breaks if we change this?&quot; becomes a seconds-long query &mdash; not weeks of manual analysis.
-            </p>
-            <p class="t-body" style="margin-top: var(--space-md);">
-              Hover any node. Click to explore. Every connection here is a live signal in a real programme.
-            </p>
-            <div class="kg-legend">
-              <span><span class="dot" style="background:#1ED197;"></span>Live signal traversing an edge</span>
-              <span><span class="dot" style="background:#7B2CBF;"></span>Hover / focus highlight</span>
-            </div>
-          </div>
-          <div class="kg-canvas-host">
-            <canvas id="cv-knowledge-graph" aria-hidden="true"></canvas>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ARCHITECTURE — One Size Fits One -->
-    <section>
-      <div class="container">
-        <div class="section-head" data-reveal>
-          <h2 class="t-display-italic">&quot;One Size <em>Fits One.&quot;</em></h2>
-          <p class="t-body-lg" style="margin-top: var(--space-md);">
-            One-size-fits-all AI deployments look great in demos and collapse in production. They assume the organisation adapts to the tool. GalentAI adapts to the organisation. Delivered through Reverse Conway's Maneuver &mdash; value streams designed first, architecture assembled to support them.
-          </p>
-        </div>
-
-        <div class="arch-grid" data-reveal>
-          <div class="arch-cell">
-            <h4>Composable by design</h4>
-            <p>Sits on top of your existing tools, frameworks, patterns, and infrastructure. No retooling required.</p>
-          </div>
-          <div class="arch-cell">
-            <h4>Reverse Conway's Maneuver</h4>
-            <p>Value streams first. Architecture assembled to support them. Boundary agents at the handoff points.</p>
-          </div>
-          <div class="arch-cell">
-            <h4>Preserve the developer pipeline</h4>
-            <p>GalentAI augments your teams. Doesn't replace them. AI scales alongside people.</p>
-          </div>
-          <div class="arch-cell">
-            <h4>Enterprise-wide collective intelligence</h4>
-            <p>Transforms individual heroism into repeatable team outcomes &mdash; consistent across handoffs, runs, clients.</p>
-          </div>
-        </div>
-
-        <p data-reveal style="margin-top: var(--space-xl); text-align: center; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.4px; color: var(--on-surface-variant);">
-          151+ languages &middot; 1,115+ integrations &middot; All major LLMs &middot; Cloud, hybrid, on-prem
-        </p>
-      </div>
-    </section>
-
-    <!-- ARCHITECTURE STACK — enterprise reference diagram -->
-    <section id="architecture-stack" aria-labelledby="arch-stack-title">
-      <div class="container">
-        <div class="section-head" data-reveal>
-          <h2 id="arch-stack-title" class="t-h1">Five layers. <em class="ac-p">One execution path.</em></h2>
-          <p class="t-body-lg">From your raw enterprise signals through to auditable, production-grade outcomes — read top to bottom, that's the route a request takes.</p>
-        </div>
-
-        <div class="arch-stack" data-reveal>
-
-          <!-- LAYER 5 — Outcomes -->
-          <div class="arch-layer arch-layer--i" data-layer="5">
-            <div class="arch-layer__meta">
-              <span class="arch-layer__num">05</span>
-              <span class="arch-layer__title">Outcomes</span>
-              <span class="arch-layer__desc">Auditable, production-grade results.</span>
-            </div>
-            <div class="arch-layer__nodes">
-              <span class="arch-node">Ship</span>
-              <span class="arch-node">Resolve</span>
-              <span class="arch-node">Govern</span>
-              <span class="arch-node">Operate</span>
-              <span class="arch-node">Scale</span>
-            </div>
-          </div>
-
-          <!-- LAYER 4 — Workflows -->
-          <div class="arch-layer arch-layer--o" data-layer="4">
-            <div class="arch-layer__meta">
-              <span class="arch-layer__num">04</span>
-              <span class="arch-layer__title">Workflows</span>
-              <span class="arch-layer__desc">Service lines that run on top of the engines.</span>
-            </div>
-            <div class="arch-layer__nodes">
-              <span class="arch-node">Modernisation</span>
-              <span class="arch-node">Quality</span>
-              <span class="arch-node">ITSM</span>
-              <span class="arch-node">SRE</span>
-              <span class="arch-node">Data</span>
-              <span class="arch-node">Talent</span>
-            </div>
-          </div>
-
-          <!-- LAYER 3 — AI Engines -->
-          <div class="arch-layer arch-layer--g" data-layer="3">
-            <div class="arch-layer__meta">
-              <span class="arch-layer__num">03</span>
-              <span class="arch-layer__title">AI Engines</span>
-              <span class="arch-layer__desc">Four engines, one closed-loop execution system.</span>
-            </div>
-            <div class="arch-layer__nodes">
-              <span class="arch-node arch-node--solid">NeuroQL</span>
-              <span class="arch-node arch-node--solid">RCM Policy</span>
-              <span class="arch-node arch-node--solid">Knowledge Graph</span>
-              <span class="arch-node arch-node--solid">Context Graph</span>
-            </div>
-          </div>
-
-          <!-- LAYER 2 — Intelligence Backbone -->
-          <div class="arch-layer arch-layer--p" data-layer="2">
-            <div class="arch-layer__meta">
-              <span class="arch-layer__num">02</span>
-              <span class="arch-layer__title">Intelligence Backbone</span>
-              <span class="arch-layer__desc">Living, provenance-native, time-versioned.</span>
-            </div>
-            <div class="arch-layer__nodes">
-              <span class="arch-node">Entities</span>
-              <span class="arch-node">Relationships</span>
-              <span class="arch-node">Memory</span>
-              <span class="arch-node">Policies</span>
-              <span class="arch-node">Lineage</span>
-            </div>
-          </div>
-
-          <!-- LAYER 1 — Sources -->
-          <div class="arch-layer arch-layer--n" data-layer="1">
-            <div class="arch-layer__meta">
-              <span class="arch-layer__num">01</span>
-              <span class="arch-layer__title">Enterprise Signals</span>
-              <span class="arch-layer__desc">Read in continuously. No retooling required.</span>
-            </div>
-            <div class="arch-layer__nodes">
-              <span class="arch-node">Code (Git)</span>
-              <span class="arch-node">Service mesh</span>
-              <span class="arch-node">Data catalogs</span>
-              <span class="arch-node">ITSM</span>
-              <span class="arch-node">Telemetry</span>
-              <span class="arch-node">Governance</span>
-            </div>
-          </div>
-
-        </div>
-
-        <p class="arch-stack__legend" data-reveal>
-          A request flows up the stack: enterprise signals → reasoned by the intelligence backbone → executed by the engines → realised in workflows → measured as outcomes. Every step traceable. Every decision auditable.
-        </p>
-      </div>
-    </section>
-
-    <!-- APPLIED AI AT SCALE — six stats -->
-    <section class="panel-dark" style="padding: var(--space-4xl) 0;">
-      <div class="container">
-        <div class="section-head" data-reveal>
-          <h2 class="t-display-italic" style="color:#fff;">The Four Engines Are the Foundation. <em>This Is What Runs on Top.</em></h2>
-        </div>
-        <div class="stat-strip six stat-strip--animated" data-reveal>
-          <div class="item p"><div class="big"><span data-countup="125">0</span><span class="unit">+</span></div><div class="label">Reusable agents</div></div>
-          <div class="item g"><div class="big"><span data-countup="70">0</span><span class="unit">+</span></div><div class="label">Validated use cases</div></div>
-          <div class="item p"><div class="big"><span data-countup="20">0</span><span class="unit">+</span></div><div class="label">Design patterns</div></div>
-          <div class="item o"><div class="big"><span data-countup="15">0</span><span class="unit">+</span></div><div class="label">Agentic AI techniques</div></div>
-          <div class="item p"><div class="big"><span data-countup="12">0</span></div><div class="label">Delivery methods</div></div>
-          <div class="item g"><div class="big"><span data-countup="9">0</span></div><div class="label">Core engines</div></div>
-        </div>
-        <p data-reveal style="margin-top: var(--space-lg); text-align: center; color: rgba(255,255,255,0.6); font-size: 14px;">
-          This library grows with every client engagement &mdash; compounding returns across programmes.
-        </p>
-      </div>
-    </section>
-
-    <!-- HOW YOU GET IT — five steps -->
-    <section class="how-you-get-it">
-      <div class="hygi-bg" aria-hidden="true">
-        <div class="hygi-orb hygi-orb--a"></div>
-        <div class="hygi-orb hygi-orb--b"></div>
-        <div class="hygi-grid"></div>
-      </div>
-      <div class="container">
-        <div class="section-head" data-reveal>
-          <h2 class="t-display-italic">The Platform Comes <em>With the People.</em></h2>
-          <p class="t-body-lg" style="margin-top: var(--space-md);">
-            GalentAI doesn't ship as a licence. It arrives operationalised &mdash; deployed and run by Galent's Forward-Deployed Engineers inside your environment. We don't run pilots. We build production-grade AI operating models.
-          </p>
-        </div>
-
-        <div class="steps" data-reveal>
-          <div class="step"><div class="n">01</div><div class="body"><h4>Scoping</h4><p>We map your stack, constraints, and target outcomes. GalentAI configured before day one.</p></div></div>
-          <div class="step"><div class="n">02</div><div class="body"><h4>Knowledge Graph construction</h4><p>Codebase, infrastructure, logs, and operational data ingested. Enterprise graph live within days.</p></div></div>
-          <div class="step"><div class="n">03</div><div class="body"><h4>Context Graph activation</h4><p>Business logic extracted from code, docs, and tribal knowledge. Governing framework live.</p></div></div>
-          <div class="step"><div class="n">04</div><div class="body"><h4>Delivery at acceleration</h4><p>FDEs operate GalentAI inside your teams. Deterministic outputs. Full compliance. Zero hallucinations in production.</p></div></div>
-          <div class="step"><div class="n">05</div><div class="body"><h4>Compounding intelligence</h4><p>Every decision captured. Every outcome learned from. The platform gets faster as the engagement matures.</p></div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section id="cta">
-      <div class="container">
-        <div class="cta-card" data-reveal data-cta-parallax><div class="cta-fx" aria-hidden="true"><div class="cta-grid"></div><div class="cta-orb cta-orb--a"></div><div class="cta-orb cta-orb--b"></div><div class="cta-orb cta-orb--c"></div><div class="cta-rings"><span></span><span></span><span></span></div><div class="cta-spark cta-spark--1"></div><div class="cta-spark cta-spark--2"></div><div class="cta-spark cta-spark--3"></div><div class="cta-spark cta-spark--4"></div></div>
-          <h2 class="t-h1">Turn AI Strategy into <em style="color:#fff;font-style:normal;border-bottom:2px solid var(--page-accent);padding-bottom:2px;">Deterministic Execution.</em></h2>
-          <p class="t-body-lg">We show you how GalentAI operates inside your environment &mdash; your stack, your constraints, your outcomes on the table.</p>
-          <div style="display:inline-flex;flex-wrap:wrap;gap:12px;justify-content:center">
-            <a href="#" class="btn">Schedule a leadership briefing <span class="arr">→</span></a>
-            <a href="#" class="btn ghost">Request a platform deep dive <span class="arr">→</span></a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="footer">
-    <div>
-      <div class="brand-mark">
-        <img src="assets/images/galent-mark-crisp.png" alt="" class="brand-img"><span class="brand-word">Galent</span>
-      </div>
-      <p>Engineering outcomes. Not headcount. Technology services delivered at 3–4× velocity, powered by GalentAI.</p>
-      <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.5px;color:var(--brand-purple);">OUTPACE · OUTPLAY · OUTSTAND</div>
+    <div class="bp-nav-links" style="display:flex;gap:24px;align-items:center;font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:.18em;">
+      <a href="platform.html" style="color:#6fe3ff;text-decoration:none;">platform</a>
+      <a class="bp-nav-hide" href="industries.html" style="color:#eef2f6;text-decoration:none;">industries</a>
+      <a class="bp-nav-hide" href="fde.html" style="color:#eef2f6;text-decoration:none;">fde</a>
+      <a href="knowledge-hub.html" style="color:#eef2f6;text-decoration:none;">knowledge hub</a>
+      <a class="bp-nav-hide" href="about.html" style="color:#eef2f6;text-decoration:none;">about</a>
+      <a class="bp-nav-cta" href="contact.html" data-magnetic style="color:#06080f;background:#6fe3ff;text-decoration:none;padding:11px 22px;font-weight:700;">contact ↗</a>
     </div>
-    <div>
-      <h5>Platform</h5>
-      <ul>
-        <li><a href="platform.html">GalentAI</a></li>
-        <li><a href="platform.html#engines">NeuroQL Engine</a></li>
-        <li><a href="platform.html#engines">RCM Engine</a></li>
-        <li><a href="platform.html#engines">Knowledge Graph</a></li>
-      </ul>
-    </div>
-    <div>
-      <h5>Tech Services</h5>
-      <ul>
-        <li><a href="services/legacy-modernisation.html">App Dev &amp; Modernization</a></li>
-        <li><a href="services/itsm-transformation.html">Managed Services</a></li>
-        <li><a href="services/data-transformation.html">Data &amp; Platforms</a></li>
-        <li><a href="services/enterprise-platforms.html">Context Engineering</a></li>
-      </ul>
-    </div>
-    <div>
-      <h5>Company</h5>
-      <ul>
-        <li><a href="about.html">About</a></li>
-        <li><a href="knowledge-hub.html">Knowledge Hub</a></li>
-        <li><a href="fde.html">Talk to an FDE</a></li>
-        <li><a href="#">Talk to us</a></li>
-      </ul>
-    </div>
-    <div class="bottom">
-      <div>© 2026 Galent · All rights reserved.</div>
+  </nav>
 
+  <!-- SC1 · DIVE -->
+  <section class="bp-scene" data-scene="dive" data-label="the platform" style="position:relative;height:300vh;">
+    <div class="bp-pin" style="position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#06080f;">
+      <img class="bp-dive-img" src="assets/design/im-2-galent-process-journey-ai-studio-v2.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;will-change:transform,opacity;">
+      <div class="bp-dive-veil" style="position:absolute;inset:0;background:rgba(6,8,15,.55);opacity:0;pointer-events:none;"></div>
+      <div class="bp-dive-stage" style="position:relative;text-align:center;padding:0 24px;will-change:transform,opacity;">
+        <div class="bp-kicker" style="margin-bottom:30px;overflow:hidden;"><span style="display:inline-block;animation:bpRise .9s cubic-bezier(.16,1,.3,1) .15s both;">the platform · galentai</span></div>
+        <h1 class="bp-dive-h1 bp-display" style="font-size:clamp(48px,9vw,150px);line-height:.95;will-change:transform;">
+          <span style="display:block;overflow:hidden;padding-bottom:.05em;"><span style="display:inline-block;animation:bpRise 1s cubic-bezier(.16,1,.3,1) .3s both;background-image:linear-gradient(rgba(111,227,255,.5),rgba(255,255,255,.28)),url('assets/design/im-2-galent-process-journey-ai-studio-v2.webp');background-size:cover;background-position:center 30%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:1px rgba(111,227,255,.4);">AI is everywhere.</span></span>
+        <span style="display:block;overflow:hidden;padding-bottom:.05em;"><span style="display:inline-block;animation:bpRise 1s cubic-bezier(.16,1,.3,1) .45s both;background-image:linear-gradient(rgba(111,227,255,.5),rgba(255,255,255,.28)),url('assets/design/im-2-galent-process-journey-ai-studio-v2.webp');background-size:cover;background-position:center 70%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:1px rgba(111,227,255,.4);">Except in your P&amp;L.</span></span>
+        </h1>
+        <p class="bp-dive-sub" style="margin-top:34px;font-size:17px;line-height:1.6;color:#aab3bd;max-width:600px;margin-left:auto;margin-right:auto;">Most enterprise AI produces impressive PoCs and little else — not because the models aren't capable, but because nobody solved how to deploy them repeatably, at scale, in production. Scroll — this is how GalentAI does.</p>
+        <div class="bp-dive-cue bp-kicker" style="margin-top:40px;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:10px;letter-spacing:.3em;color:#8a929c;">
+          <span>dive in</span><span style="animation:bpScroll 1.8s ease-in-out infinite;">↓</span>
+        </div>
+      </div>
+      <div class="bp-dive-after" style="position:absolute;left:48px;right:48px;bottom:100px;opacity:0;will-change:transform,opacity;">
+        <div class="bp-kicker" style="margin-bottom:16px;">01 — production-grade by design</div>
+        <h2 class="bp-display" style="font-size:clamp(28px,4.5vw,60px);line-height:1;max-width:900px;">GalentAI is built for one thing: deterministic, auditable delivery — running on your existing people, processes, and stack.</h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- SC2 · ODOMETER PROBLEM -->
+  <section class="bp-scene" data-scene="odometer" data-label="the problem" style="position:relative;height:280vh;">
+    <div class="bp-pin" style="position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;background-image:linear-gradient(rgba(111,227,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(111,227,255,.05) 1px,transparent 1px);background-size:64px 64px;">
+      <div class="bp-grid2" style="width:100%;max-width:1340px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;">
+        <div>
+          <div class="bp-kicker" style="margin-bottom:26px;">02 — the achilles heel</div>
+          <div class="bp-display" style="display:flex;align-items:baseline;font-size:clamp(110px,15vw,240px);line-height:1;">
+            <span class="bp-dig" data-d="8" style="display:inline-block;height:1em;overflow:hidden;vertical-align:top;"><span class="bp-dig-strip" style="display:block;white-space:pre;line-height:1;will-change:transform;">0
+1
+2
+3
+4
+5
+6
+7
+8</span></span>
+            <span class="bp-dig" data-d="5" style="display:inline-block;height:1em;overflow:hidden;vertical-align:top;"><span class="bp-dig-strip" style="display:block;white-space:pre;line-height:1;will-change:transform;">0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+0
+1
+2
+3
+4
+5</span></span>
+            <span class="bp-cyan">%</span>
+          </div>
+          <div class="bp-mono" style="font-size:12.5px;letter-spacing:.18em;color:#8a929c;margin-top:14px;">of enterprise AI stalls as PoCs that never reach production</div>
+        </div>
+        <div>
+          <h2 class="bp-display" style="font-weight:700;font-size:clamp(26px,3.3vw,46px);line-height:1.2;letter-spacing:-.01em;">
+            <span class="bp-word">The </span><span class="bp-word">Achilles </span><span class="bp-word">heel </span><span class="bp-word">of </span><span class="bp-word">every </span><span class="bp-word">AI </span><span class="bp-word">deployment </span><span class="bp-word">is </span><span class="bp-word bp-cyan">context.</span> <span class="bp-word">Load </span><span class="bp-word">too </span><span class="bp-word">much </span><span class="bp-word">and </span><span class="bp-word">accuracy </span><span class="bp-word">degrades; </span><span class="bp-word">load </span><span class="bp-word">the </span><span class="bp-word">wrong </span><span class="bp-word">content </span><span class="bp-word">and </span><span class="bp-word">results </span><span class="bp-word">become </span><span class="bp-word bp-cyan">unreliable.</span>
+          </h2>
+          <p class="bp-quote" style="margin-top:28px;font-size:15.5px;line-height:1.65;color:#aab3bd;max-width:470px;opacity:0;will-change:opacity;">"The biggest problem isn't individual AI wins. It's getting meaningful results as a team — across handoffs, sprints, programmes — rather than individual heroism." <span style="color:#5d6570;">GalentAI solves this by changing how the model behaves — not prompting around its limitations.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLARS · architecture principles -->
+  <section class="bp-chapter" data-label="one size fits one" style="padding:130px 48px;max-width:1340px;margin:0 auto;">
+    <div style="margin-bottom:48px;">
+      <div class="bp-kicker" style="margin-bottom:16px;">— one size fits one</div>
+      <h2 class="bp-display" style="font-size:clamp(28px,4vw,56px);line-height:1;">One-size-fits-all AI collapses in production.<br><span class="bp-cyan">GalentAI adapts to the organisation.</span></h2>
+    </div>
+    <div class="bp-cols4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px;">
+      <div class="bp-pillar" data-reveal><span class="bp-mono" style="font-size:12px;color:#6fe3ff;">[01]</span><div><h3 class="bp-display" style="font-weight:700;font-size:22px;margin-bottom:12px;">Composable by design</h3><p style="font-size:14px;line-height:1.6;color:#aab3bd;">Sits on top of your existing tools, frameworks, patterns, and infrastructure. No retooling required.</p></div></div>
+      <div class="bp-pillar" data-reveal><span class="bp-mono" style="font-size:12px;color:#6fe3ff;">[02]</span><div><h3 class="bp-display" style="font-weight:700;font-size:22px;margin-bottom:12px;">Reverse Conway's Maneuver</h3><p style="font-size:14px;line-height:1.6;color:#aab3bd;">Value streams first. Architecture assembled to support them. Boundary agents at the handoff points.</p></div></div>
+      <div class="bp-pillar" data-reveal><span class="bp-mono" style="font-size:12px;color:#6fe3ff;">[03]</span><div><h3 class="bp-display" style="font-weight:700;font-size:22px;margin-bottom:12px;">Preserve the developer pipeline</h3><p style="font-size:14px;line-height:1.6;color:#aab3bd;">GalentAI augments your teams — it doesn't replace them. AI scales alongside people.</p></div></div>
+      <div class="bp-pillar" data-reveal><span class="bp-mono" style="font-size:12px;color:#6fe3ff;">[04]</span><div><h3 class="bp-display" style="font-weight:700;font-size:22px;margin-bottom:12px;">Collective intelligence</h3><p style="font-size:14px;line-height:1.6;color:#aab3bd;">Turns individual heroism into repeatable team outcomes — consistent across handoffs, runs, and clients.</p></div></div>
+    </div>
+    <p class="bp-mono" style="margin-top:26px;font-size:12px;letter-spacing:.4px;color:#8a929c;">151+ languages · 1,115+ integrations · all major LLMs · cloud, hybrid, on-prem</p>
+  </section>
+
+  <!-- SC3 · SCHEMATIC (four engines) -->
+  <section class="bp-scene" data-scene="schematic" data-label="four engines" data-names="drafting core…|node 1/4 — NeuroQL|node 2/4 — RCM|node 3/4 — Knowledge Graph|node 4/4 — Context Graph" style="position:relative;height:520vh;background:#05070c;">
+    <div class="bp-pin" style="position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;background-image:linear-gradient(rgba(111,227,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(111,227,255,.06) 1px,transparent 1px);background-size:56px 56px;">
+      <div style="width:100%;max-width:1360px;margin:0 auto;padding:0 48px;">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:40px;flex-wrap:wrap;gap:14px;">
+          <div>
+            <div class="bp-kicker" style="margin-bottom:14px;">03 — four engines · one closed-loop system</div>
+            <h2 class="bp-display" style="font-size:clamp(26px,3.4vw,50px);line-height:1;">Each engine solves a specific failure mode — <span class="bp-cyan">together, deterministic.</span></h2>
+          </div>
+          <span class="bp-bp-count bp-mono" style="font-size:13px;color:#8a929c;">drafting…</span>
+        </div>
+        <div class="bp-schematic" style="display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center;">
+          <svg viewBox="0 0 560 460" style="width:100%;height:auto;overflow:visible;">
+            <circle class="bp-bp-core" cx="280" cy="230" r="56" fill="none" stroke="#6fe3ff" stroke-width="1.5" stroke-dasharray="352" stroke-dashoffset="352" style="filter:drop-shadow(0 0 10px rgba(111,227,255,.4));"></circle>
+            <text class="bp-bp-corelabel" x="280" y="224" text-anchor="middle" fill="#eef2f6" font-size="15" font-weight="700" font-family="Cabinet Grotesk,sans-serif" opacity="0">GalentAI</text>
+            <text class="bp-bp-corelabel" x="280" y="243" text-anchor="middle" fill="#8a929c" font-size="10" font-family="Spline Sans Mono,monospace" opacity="0">core</text>
+            <path class="bp-bp-line" d="M 236 194 L 120 100" fill="none" stroke="#6fe3ff" stroke-width="1.2" stroke-dasharray="150" stroke-dashoffset="150"></path>
+            <circle class="bp-bp-node" cx="120" cy="100" r="9" fill="#06080f" stroke="#6fe3ff" stroke-width="1.5" opacity="0"></circle>
+            <text class="bp-bp-text" x="120" y="72" text-anchor="middle" fill="#eef2f6" font-size="14" font-weight="700" font-family="Cabinet Grotesk,sans-serif" opacity="0">3.1 NeuroQL</text>
+            <path class="bp-bp-line" d="M 324 194 L 440 100" fill="none" stroke="#6fe3ff" stroke-width="1.2" stroke-dasharray="150" stroke-dashoffset="150"></path>
+            <circle class="bp-bp-node" cx="440" cy="100" r="9" fill="#06080f" stroke="#6fe3ff" stroke-width="1.5" opacity="0"></circle>
+            <text class="bp-bp-text" x="440" y="72" text-anchor="middle" fill="#eef2f6" font-size="14" font-weight="700" font-family="Cabinet Grotesk,sans-serif" opacity="0">3.2 RCM</text>
+            <path class="bp-bp-line" d="M 236 266 L 120 360" fill="none" stroke="#6fe3ff" stroke-width="1.2" stroke-dasharray="150" stroke-dashoffset="150"></path>
+            <circle class="bp-bp-node" cx="120" cy="360" r="9" fill="#06080f" stroke="#6fe3ff" stroke-width="1.5" opacity="0"></circle>
+            <text class="bp-bp-text" x="120" y="392" text-anchor="middle" fill="#eef2f6" font-size="14" font-weight="700" font-family="Cabinet Grotesk,sans-serif" opacity="0">3.3 Knowledge Graph</text>
+            <path class="bp-bp-line" d="M 324 266 L 440 360" fill="none" stroke="#6fe3ff" stroke-width="1.2" stroke-dasharray="150" stroke-dashoffset="150"></path>
+            <circle class="bp-bp-node" cx="440" cy="360" r="9" fill="#06080f" stroke="#6fe3ff" stroke-width="1.5" opacity="0"></circle>
+            <text class="bp-bp-text" x="440" y="392" text-anchor="middle" fill="#eef2f6" font-size="14" font-weight="700" font-family="Cabinet Grotesk,sans-serif" opacity="0">3.4 Context Graph</text>
+          </svg>
+          <div style="position:relative;">
+            <div class="bp-bp-panel" style="position:relative;height:220px;">
+              <div class="bp-bp-d" data-i="0" style="position:absolute;inset:0;opacity:0;will-change:transform,opacity;"><h3 class="bp-display" style="font-size:clamp(26px,3.2vw,44px);line-height:1;margin-bottom:14px;">NeuroQL <span class="bp-cyan">Engine</span></h3><p style="font-size:15px;line-height:1.6;color:#aab3bd;max-width:440px;">The deterministic execution engine. AmbientAI loads exactly the right context; MicroPrompts break work into sub-2,000-token queries; TONIC compiles a versioned, schema-driven contract. 70% fewer context-window failures, full chain-of-reasoning audit.</p></div>
+              <div class="bp-bp-d" data-i="1" style="position:absolute;inset:0;opacity:0;will-change:transform,opacity;"><h3 class="bp-display" style="font-size:clamp(26px,3.2vw,44px);line-height:1;margin-bottom:14px;">RCM <span class="bp-cyan">Engine</span></h3><p style="font-size:15px;line-height:1.6;color:#aab3bd;max-width:440px;">Reasoning &amp; Compliance Management. Neurosymbolic AI: the neural layer proposes, the symbolic layer validates every action against your rules and compliance — before execution, not after incident review. 99%+ accuracy, zero hallucination-led deployment risk.</p></div>
+              <div class="bp-bp-d" data-i="2" style="position:absolute;inset:0;opacity:0;will-change:transform,opacity;"><h3 class="bp-display" style="font-size:clamp(26px,3.2vw,44px);line-height:1;margin-bottom:14px;">Knowledge <span class="bp-cyan">Graph</span></h3><p style="font-size:15px;line-height:1.6;color:#aab3bd;max-width:440px;">A living, queryable map of your entire system — code, logs, schemas, infrastructure, tickets, runbooks — built before any AI executes. "What breaks if we change this?" becomes a seconds-long query. 90% faster legacy understanding.</p></div>
+              <div class="bp-bp-d" data-i="3" style="position:absolute;inset:0;opacity:0;will-change:transform,opacity;"><h3 class="bp-display" style="font-size:clamp(26px,3.2vw,44px);line-height:1;margin-bottom:14px;">Context <span class="bp-cyan">Graph</span></h3><p style="font-size:15px;line-height:1.6;color:#aab3bd;max-width:440px;">The Knowledge Graph captures what exists; the Context Graph captures what should happen — governing every SDLC phase. Business logic extracted into structured epics; every decision recorded as a trace: what, why, who, when. 45ms context retrieval at p95.</p></div>
+              <div class="bp-bp-init" style="position:absolute;inset:0;will-change:opacity;"><h3 class="bp-display" style="font-size:clamp(26px,3.2vw,44px);line-height:1;margin-bottom:14px;">Stop <span class="bp-cyan">prompt-and-pray.</span></h3><p style="font-size:15px;line-height:1.6;color:#aab3bd;max-width:440px;">Four proprietary engines deliver deterministic, auditable AI at enterprise scale. Keep scrolling — the schematic draws itself.</p></div>
+            </div>
+            <div class="bp-bp-imgwrap" style="position:relative;height:220px;margin-top:26px;border:1px solid rgba(111,227,255,.2);overflow:hidden;">
+              <img class="bp-bp-img" data-i="0" src="assets/design/im-1-galent-process-journey-ai-garage-v2.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;will-change:opacity;">
+              <img class="bp-bp-img" data-i="1" src="assets/design/im-2-galent-process-journey-ai-studio-v2.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;will-change:opacity;">
+              <img class="bp-bp-img" data-i="2" src="assets/design/im-3-galent-process-journey-ai-factory-v2.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;will-change:opacity;">
+              <img class="bp-bp-img" data-i="3" src="assets/design/sandro-katalina-k1bO_VTiZSs-unsplash.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;will-change:opacity;">
+              <div class="bp-bp-ph bp-mono" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;letter-spacing:.25em;color:#5d6570;">[ awaiting node signal ]</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SC4 · FAN (delivery steps) -->
+  <section class="bp-scene" data-scene="fan" data-label="how you get it" style="position:relative;height:320vh;">
+    <div class="bp-pin" style="position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;">
+      <div style="text-align:center;margin-bottom:40px;padding:0 48px;">
+        <div class="bp-kicker" style="margin-bottom:14px;">04 — the platform comes with the people</div>
+        <h2 class="bp-display" style="font-size:clamp(28px,4vw,60px);line-height:1;">Not a licence.<br>An operating model, deployed.</h2>
+      </div>
+      <div class="bp-fan" style="position:relative;height:54vh;display:flex;align-items:center;justify-content:center;">
+        <div class="bp-card" style="position:absolute;width:min(22vw,300px);min-height:44vh;background:#0b1018;border:1px solid rgba(111,227,255,.25);padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;will-change:transform;box-shadow:0 30px 70px rgba(0,0,0,.45);">
+          <div><div class="bp-mono" style="font-size:11px;color:#6fe3ff;margin-bottom:14px;">[01]</div><h3 class="bp-display" style="font-size:23px;line-height:1.05;margin-bottom:12px;">Scoping</h3><p style="font-size:13.5px;line-height:1.6;color:#aab3bd;">We map your stack, constraints, and target outcomes. GalentAI configured before day one.</p></div>
+        </div>
+        <div class="bp-card" style="position:absolute;width:min(22vw,300px);min-height:44vh;background:#0b1018;border:1px solid rgba(111,227,255,.25);padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;will-change:transform;box-shadow:0 30px 70px rgba(0,0,0,.45);">
+          <div><div class="bp-mono" style="font-size:11px;color:#6fe3ff;margin-bottom:14px;">[02]</div><h3 class="bp-display" style="font-size:23px;line-height:1.05;margin-bottom:12px;">Knowledge Graph construction</h3><p style="font-size:13.5px;line-height:1.6;color:#aab3bd;">Codebase, infrastructure, logs, and operational data ingested. Enterprise graph live within days.</p></div>
+        </div>
+        <div class="bp-card" style="position:absolute;width:min(22vw,300px);min-height:44vh;background:#0b1018;border:1px solid rgba(111,227,255,.25);padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;will-change:transform;box-shadow:0 30px 70px rgba(0,0,0,.45);">
+          <div><div class="bp-mono" style="font-size:11px;color:#6fe3ff;margin-bottom:14px;">[03]</div><h3 class="bp-display" style="font-size:23px;line-height:1.05;margin-bottom:12px;">Context Graph activation</h3><p style="font-size:13.5px;line-height:1.6;color:#aab3bd;">Business logic extracted from code, docs, and tribal knowledge. Governing framework live.</p></div>
+        </div>
+        <div class="bp-card" style="position:absolute;width:min(22vw,300px);min-height:44vh;background:#0b1018;border:1px solid rgba(111,227,255,.25);padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;will-change:transform;box-shadow:0 30px 70px rgba(0,0,0,.45);">
+          <div><div class="bp-mono" style="font-size:11px;color:#6fe3ff;margin-bottom:14px;">[04]</div><h3 class="bp-display" style="font-size:23px;line-height:1.05;margin-bottom:12px;">Delivery at acceleration</h3><p style="font-size:13.5px;line-height:1.6;color:#aab3bd;">FDEs operate GalentAI inside your teams. Deterministic outputs, full compliance, zero hallucinations in production.</p></div>
+        </div>
+        <div class="bp-card" style="position:absolute;width:min(22vw,300px);min-height:44vh;background:#0b1018;border:1px solid rgba(111,227,255,.25);padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;will-change:transform;box-shadow:0 30px 70px rgba(0,0,0,.45);">
+          <div><div class="bp-mono" style="font-size:11px;color:#6fe3ff;margin-bottom:14px;">[05]</div><h3 class="bp-display" style="font-size:23px;line-height:1.05;margin-bottom:12px;">Compounding intelligence</h3><p style="font-size:13.5px;line-height:1.6;color:#aab3bd;">Every decision captured, every outcome learned from. The platform gets faster as the engagement matures.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SC5 · WIPE (architecture stack, 5 layers) -->
+  <section class="bp-scene" data-scene="wipe" data-label="the stack" style="position:relative;height:520vh;">
+    <div class="bp-pin" style="position:sticky;top:0;height:100vh;overflow:hidden;">
+      <div class="bp-slide" data-i="0" style="position:absolute;inset:0;background:#0a1220;display:flex;align-items:center;will-change:clip-path;">
+        <div class="bp-grid2" style="max-width:1240px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1fr auto;gap:60px;align-items:center;width:100%;">
+          <div><div class="bp-kicker" style="margin-bottom:20px;">05 · layer 1/5 — enterprise signals</div><h3 class="bp-display" style="font-size:clamp(36px,5vw,80px);line-height:.95;margin-bottom:22px;">Enterprise<br>Signals</h3><p style="font-size:16px;line-height:1.65;color:#aab3bd;max-width:520px;">Read in continuously — no retooling required. The raw material a request is reasoned from.</p><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:26px;max-width:560px;"><span class="bp-chip" style="font-size:12.5px;padding:8px 14px;border:1px solid rgba(111,227,255,.3);">Code (Git)</span><span style="font-size:12.5px;padding:8px 14px;border:1px solid rgba(111,227,255,.3);">Service mesh</span><span style="font-size:12.5px;padding:8px 14px;border:1px solid rgba(111,227,255,.3);">Data catalogs</span><span style="font-size:12.5px;padding:8px 14px;border:1px solid rgba(111,227,255,.3);">ITSM</span><span style="font-size:12.5px;padding:8px 14px;border:1px solid rgba(111,227,255,.3);">Telemetry</span><span style="font-size:12.5px;padding:8px 14px;border:1px solid rgba(111,227,255,.3);">Governance</span></div></div>
+          <div class="bp-ghostnum bp-display" style="font-size:clamp(120px,18vw,300px);line-height:.8;color:rgba(111,227,255,.08);">1</div>
+        </div>
+      </div>
+      <div class="bp-slide" data-i="1" style="position:absolute;inset:0;background:#081525;display:flex;align-items:center;clip-path:inset(100% 0 0 0);will-change:clip-path;">
+        <div class="bp-grid2" style="max-width:1240px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1fr auto;gap:60px;align-items:center;width:100%;">
+          <div><div class="bp-kicker" style="margin-bottom:20px;">05 · layer 2/5 — intelligence backbone</div><h3 class="bp-display" style="font-size:clamp(36px,5vw,80px);line-height:.95;margin-bottom:22px;">Intelligence<br>Backbone</h3><p style="font-size:16px;line-height:1.65;color:#aab3bd;max-width:520px;">Living, provenance-native, time-versioned. Where signals become reasoned understanding.</p><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:26px;max-width:560px;"><span style="font-size:12.5px;padding:8px 14px;border:1px solid rgba(111,227,255,.3);">Entities</span><span style="font-size:12.5px;padding:8px 14px;border:1px solid rgba(111,227,255,.3);">Relationships</span><span style="font-size:12.5px;padding:8px 14px;border:1px solid rgba(111,227,255,.3);">Memory</span><span style="font-size:12.5px;padding:8px 14px;border:1px solid rgba(111,227,255,.3);">Policies</span><span style="font-size:12.5px;padding:8px 14px;border:1px solid rgba(111,227,255,.3);">Lineage</span></div></div>
+          <div class="bp-ghostnum bp-display" style="font-size:clamp(120px,18vw,300px);line-height:.8;color:rgba(111,227,255,.08);">2</div>
+        </div>
+      </div>
+      <div class="bp-slide" data-i="2" style="position:absolute;inset:0;background:#0a1220;display:flex;align-items:center;clip-path:inset(100% 0 0 0);will-change:clip-path;">
+        <div class="bp-grid2" style="max-width:1240px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1fr auto;gap:60px;align-items:center;width:100%;">
+          <div><div class="bp-kicker" style="margin-bottom:20px;">05 · layer 3/5 — ai engines</div><h3 class="bp-display" style="font-size:clamp(36px,5vw,80px);line-height:.95;margin-bottom:22px;">AI Engines</h3><p style="font-size:16px;line-height:1.65;color:#aab3bd;max-width:520px;">Four engines, one closed-loop execution system. Where reasoning becomes deterministic action.</p><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:26px;max-width:560px;"><span style="font-size:12.5px;padding:8px 14px;border:1px solid rgba(111,227,255,.3);">NeuroQL</span><span style="font-size:12.5px;padding:8px 14px;border:1px solid rgba(111,227,255,.3);">RCM Policy</span><span style="font-size:12.5px;padding:8px 14px;border:1px solid rgba(111,227,255,.3);">Knowledge Graph</span><span style="font-size:12.5px;padding:8px 14px;border:1px solid rgba(111,227,255,.3);">Context Graph</span></div></div>
+          <div class="bp-ghostnum bp-display" style="font-size:clamp(120px,18vw,300px);line-height:.8;color:rgba(111,227,255,.08);">3</div>
+        </div>
+      </div>
+      <div class="bp-slide" data-i="3" style="position:absolute;inset:0;background:#081525;display:flex;align-items:center;clip-path:inset(100% 0 0 0);will-change:clip-path;">
+        <div class="bp-grid2" style="max-width:1240px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1fr auto;gap:60px;align-items:center;width:100%;">
+          <div><div class="bp-kicker" style="margin-bottom:20px;">05 · layer 4/5 — workflows</div><h3 class="bp-display" style="font-size:clamp(36px,5vw,80px);line-height:.95;margin-bottom:22px;">Workflows</h3><p style="font-size:16px;line-height:1.65;color:#aab3bd;max-width:520px;">Service lines that run on top of the engines. Where action becomes delivered work.</p><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:26px;max-width:560px;"><span style="font-size:12.5px;padding:8px 14px;border:1px solid rgba(111,227,255,.3);">Modernisation</span><span style="font-size:12.5px;padding:8px 14px;border:1px solid rgba(111,227,255,.3);">Quality</span><span style="font-size:12.5px;padding:8px 14px;border:1px solid rgba(111,227,255,.3);">ITSM</span><span style="font-size:12.5px;padding:8px 14px;border:1px solid rgba(111,227,255,.3);">SRE</span><span style="font-size:12.5px;padding:8px 14px;border:1px solid rgba(111,227,255,.3);">Data</span><span style="font-size:12.5px;padding:8px 14px;border:1px solid rgba(111,227,255,.3);">Talent</span></div></div>
+          <div class="bp-ghostnum bp-display" style="font-size:clamp(120px,18vw,300px);line-height:.8;color:rgba(111,227,255,.08);">4</div>
+        </div>
+      </div>
+      <div class="bp-slide" data-i="4" style="position:absolute;inset:0;background:#0a1220;display:flex;align-items:center;clip-path:inset(100% 0 0 0);will-change:clip-path;">
+        <div class="bp-grid2" style="max-width:1240px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1fr auto;gap:60px;align-items:center;width:100%;">
+          <div><div class="bp-kicker" style="margin-bottom:20px;">05 · layer 5/5 — outcomes</div><h3 class="bp-display" style="font-size:clamp(36px,5vw,80px);line-height:.95;margin-bottom:22px;">Outcomes</h3><p style="font-size:16px;line-height:1.65;color:#aab3bd;max-width:520px;">Auditable, production-grade results. Every step traceable, every decision auditable.</p><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:26px;max-width:560px;"><span style="font-size:12.5px;padding:8px 14px;border:1px solid rgba(111,227,255,.3);">Ship</span><span style="font-size:12.5px;padding:8px 14px;border:1px solid rgba(111,227,255,.3);">Resolve</span><span style="font-size:12.5px;padding:8px 14px;border:1px solid rgba(111,227,255,.3);">Govern</span><span style="font-size:12.5px;padding:8px 14px;border:1px solid rgba(111,227,255,.3);">Operate</span><span style="font-size:12.5px;padding:8px 14px;border:1px solid rgba(111,227,255,.3);">Scale</span></div></div>
+          <div class="bp-ghostnum bp-display" style="font-size:clamp(120px,18vw,300px);line-height:.8;color:rgba(111,227,255,.08);">5</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF -->
+  <section class="bp-chapter" data-label="the proof" style="padding:130px 48px;max-width:1340px;margin:0 auto;">
+    <div class="bp-kicker" style="margin-bottom:40px;">06 — measured across production deployments</div>
+    <div class="bp-proofwall" style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(111,227,255,.12);border:1px solid rgba(111,227,255,.12);">
+      <div style="background:#06080f;padding:40px 34px;"><div class="bp-display bp-cyan" style="font-size:clamp(46px,5vw,86px);line-height:1;">3–4×</div><div style="font-size:13px;color:#aab3bd;margin-top:10px;">Delivery velocity</div></div>
+      <div style="background:#06080f;padding:40px 34px;"><div class="bp-display" style="font-size:clamp(46px,5vw,86px);line-height:1;">85–90<span class="bp-cyan">%</span></div><div style="font-size:13px;color:#aab3bd;margin-top:10px;">Fewer PoC failures</div></div>
+      <div style="background:#06080f;padding:40px 34px;"><div class="bp-display" style="font-size:clamp(46px,5vw,86px);line-height:1;">99<span class="bp-cyan">%</span></div><div style="font-size:13px;color:#aab3bd;margin-top:10px;">Code accuracy</div></div>
+      <div style="background:#06080f;padding:40px 34px;"><div class="bp-display" style="font-size:clamp(46px,5vw,86px);line-height:1;">70<span class="bp-cyan">%</span></div><div style="font-size:13px;color:#aab3bd;margin-top:10px;">Fewer context failures</div></div>
+      <div style="background:#06080f;padding:40px 34px;"><div class="bp-display" style="font-size:clamp(46px,5vw,86px);line-height:1;">41<span class="bp-cyan">%</span></div><div style="font-size:13px;color:#aab3bd;margin-top:10px;">Bug premium eliminated</div></div>
+      <div style="background:#06080f;padding:40px 34px;"><div class="bp-display bp-cyan" style="font-size:clamp(46px,5vw,86px);line-height:1;">10×</div><div style="font-size:13px;color:#aab3bd;margin-top:10px;">Less AI-generated debt</div></div>
+    </div>
+    <p class="bp-mono" style="margin-top:22px;font-size:12.5px;letter-spacing:.14em;color:#8a929c;line-height:2;">125+ reusable agents · 70+ validated use cases · 20+ design patterns · 15+ agentic techniques · 12 delivery methods · <span class="bp-cyan">9 core engines</span> — a library that compounds with every engagement.</p>
+  </section>
+
+  <!-- SC7 · IRIS FINALE -->
+  <section class="bp-scene" data-scene="iris" data-label="let's build" style="position:relative;height:300vh;">
+    <div class="bp-pin" style="position:sticky;top:0;height:100vh;overflow:hidden;background:#05070c;display:flex;align-items:center;justify-content:center;">
+      <div class="bp-iris" style="position:absolute;inset:0;background:#6fe3ff;display:flex;align-items:center;justify-content:center;clip-path:circle(0% at 50% 50%);will-change:clip-path;">
+        <div style="text-align:center;color:#06080f;padding:0 24px;">
+          <div class="bp-kicker" style="color:#06080f;margin-bottom:26px;">07 — let's build</div>
+          <h2 class="bp-display" style="font-size:clamp(38px,6.5vw,110px);line-height:.95;">Turn AI strategy into<br>deterministic execution.</h2>
+          <p style="margin-top:24px;font-size:17px;font-weight:500;">We show you how GalentAI operates inside your environment — your stack, your constraints, your outcomes on the table.</p>
+          <div style="margin-top:44px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">
+            <a href="contact.html" data-magnetic style="display:inline-flex;align-items:center;gap:12px;background:#06080f;color:#eef2f6;text-decoration:none;padding:20px 40px;font-family:'Cabinet Grotesk',sans-serif;font-weight:700;font-size:16px;">Schedule a leadership briefing <span class="bp-cyan">↗</span></a>
+            <a href="fde.html" data-magnetic style="display:inline-flex;align-items:center;gap:12px;background:transparent;color:#06080f;text-decoration:none;padding:20px 40px;border:1px solid rgba(6,8,15,.35);font-family:'Cabinet Grotesk',sans-serif;font-weight:700;font-size:16px;">Request a deep dive</a>
+          </div>
+        </div>
+      </div>
+      <div class="bp-iris-pre" style="position:relative;text-align:center;">
+        <div class="bp-kicker" style="color:#8a929c;margin-bottom:20px;">the aperture is opening</div>
+        <div class="bp-display" style="font-size:clamp(30px,4vw,58px);color:#eef2f6;">Keep scrolling<span class="bp-cyan">.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="border-top:1px solid rgba(111,227,255,.14);padding:90px 48px 40px;">
+    <div style="max-width:1340px;margin:0 auto;">
+      <div class="bp-footer-main" style="display:grid;grid-template-columns:1.5fr 1fr;gap:40px;padding-bottom:52px;border-bottom:1px solid rgba(111,227,255,.12);">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;"><img src="assets/design/Galent New Logo.png" alt="Galent" style="width:26px;height:26px;object-fit:contain;"><span class="bp-display" style="font-size:19px;">Galent</span></div>
+          <p style="font-size:13.5px;line-height:1.65;color:#aab3bd;max-width:460px;">Engineering outcomes. Not headcount. GalentAI delivers deterministic, auditable technology services at 3–4× the velocity of conventional engagements.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px;align-items:flex-end;justify-content:center;">
+          <div style="display:flex;gap:20px;font-size:13.5px;font-weight:700;">
+            <a href="platform.html" style="color:#eef2f6;text-decoration:none;">Platform</a>
+            <a href="industries.html" style="color:#eef2f6;text-decoration:none;">Industries</a>
+            <a href="knowledge-hub.html" style="color:#eef2f6;text-decoration:none;">Knowledge Hub</a>
+            <a href="contact.html" style="color:#eef2f6;text-decoration:none;">Contact</a>
+          </div>
+          <div style="display:flex;gap:20px;font-size:12.5px;">
+            <a href="https://galent.com/privacy-policy/" rel="noopener" target="_blank" style="color:#8a929c;text-decoration:none;">Privacy Policy</a>
+            <a href="https://galent.com/terms-of-service/" rel="noopener" target="_blank" style="color:#8a929c;text-decoration:none;">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+      <div class="bp-mono" style="padding-top:26px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:11px;color:#8a929c;">
+        <span>© 2026 galent</span><span>outpace · outplay · outstand</span>
+      </div>
     </div>
   </footer>
 
-  <script src="js/animations.js?v=net-dark-3"></script>
-  <script>
-    // Reveal first — never let a canvas init failure leave the page invisible.
-    try { Galent.persistentReveal(); } catch (e) { console.error('reveal', e); document.querySelectorAll('[data-reveal],[data-stagger]').forEach(el => el.classList.add('in')); }
-    try { Galent.stickyNav('site-nav'); }   catch (e) { console.error('stickyNav', e); }
-    try { Galent.contactModal(); }          catch (e) { console.error('contactModal', e); }
-    try { Galent.compass(document.getElementById('cv-compass')); } catch (e) { console.error('compass', e); }
-    try { Galent.knowledgeGraph(document.getElementById('cv-knowledge-graph')); } catch (e) { console.error('knowledgeGraph', e); }
-
-    // Engine diagram — paints the hub→node connectors; motion.js animates them
-    // on scroll. The click-to-explore detail panel was removed, so no data map
-    // is needed (node clicks simply toggle their active state).
-    try { Galent.enginesDiagram(document.getElementById('engine-diagram-root'), {}); }
-    catch (e) { console.error('enginesDiagram', e); }
-
-    // Click an engine node → slide the diagram left and reveal that engine's
-    // detail on the right. Click it again (or the ×) to return to centre.
-    (function () {
-      var root = document.getElementById('engine-diagram-root');
-      if (!root) return;
-      var detail = root.querySelector('.engine-detail');
-      var nodes = root.querySelectorAll('.engine-node');
-      var cards = document.querySelectorAll('.engine-cards .engine-deep-card');
-      var MAP = { neuroql: 0, rcm: 1, kg: 2, context: 3 };
-      var current = null;
-      function close() {
-        root.classList.remove('is-exploring');
-        detail.setAttribute('aria-hidden', 'true');
-        nodes.forEach(function (n) { n.classList.remove('is-active'); n.setAttribute('aria-pressed', 'false'); });
-        current = null;
-      }
-      function open(engine) {
-        var idx = MAP[engine];
-        if (idx == null || !cards[idx]) return;
-        detail.innerHTML = '<button type="button" class="engine-detail__close" aria-label="Close">×</button>' + cards[idx].innerHTML;
-        detail.setAttribute('aria-hidden', 'false');
-        root.classList.add('is-exploring');
-        nodes.forEach(function (n) {
-          var on = n.dataset.engine === engine;
-          n.classList.toggle('is-active', on);
-          n.setAttribute('aria-pressed', on ? 'true' : 'false');
-        });
-        var closeBtn = detail.querySelector('.engine-detail__close');
-        if (closeBtn) closeBtn.addEventListener('click', close);
-        current = engine;
-      }
-      nodes.forEach(function (n) {
-        n.addEventListener('click', function (e) {
-          e.preventDefault();
-          var eng = n.dataset.engine;
-          if (current === eng) close(); else open(eng);
-        });
-      });
-    })();
-  </script>
-
-  <script src="js/motion.js?v=engine-bp1" defer></script>
+  <script src="js/blueprint-scenes.js?v=bp-1" defer></script>
 </body>
 </html>
