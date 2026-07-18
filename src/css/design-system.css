@@ -10323,3 +10323,29 @@ body[data-page^="service-"] .hero .t-hero { letter-spacing: -0.02em; }
 .engines-grid .engine-card:hover, .related-tile:hover {
   border-color: rgba(111,227,255,0.5) !important;
 }
+
+/* ==================================================================
+ * POST BODY IMAGE FIXES (2026-07-19)
+ * The blog graphics were authored for the old light-themed site, so
+ * transparent-background infographics with dark text (e.g. the "Grand
+ * Prix Framework" table) disappeared on our dark theme. Give post-body
+ * images a white backing so they read correctly. Also constrain the
+ * author headshot that's embedded in the article body to a small avatar.
+ * ================================================================== */
+.post-body img {
+  background: #ffffff;
+  padding: 6px;
+}
+/* Author headshot embedded in the markdown body → small centered avatar */
+.post-body img[src*="-author"] {
+  background: transparent;
+  padding: 0;
+  width: 128px;
+  max-width: 128px;
+  height: 128px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  margin: 1.8em auto 0.6em;
+}
