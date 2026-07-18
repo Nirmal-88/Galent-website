@@ -92,3 +92,30 @@ a { color:inherit; }
 .leader-card .leader-cta .arr { color:#6fe3ff; }
 @media (max-width:860px){ .leadership-grid { grid-template-columns:repeat(2,1fr); } }
 @media (max-width:520px){ .leadership-grid { grid-template-columns:1fr; } }
+
+/* ---- Restored NAV "Tech Services" dropdown (content parity) ---- */
+.bp-dd { position: relative; display: inline-flex; align-items: center; }
+.bp-dd-toggle { background: none; border: 0; color: #eef2f6; font-family: 'Spline Sans Mono', monospace; font-size: 11px; letter-spacing: .18em; cursor: pointer; padding: 0; display: inline-flex; align-items: center; gap: 6px; }
+.bp-dd-panel { position: absolute; top: 100%; right: 0; left: auto; transform: translateY(10px); background: #080b12; border: 1px solid rgba(111,227,255,.22); padding: 16px; display: grid; grid-template-columns: repeat(2, minmax(160px,1fr)); gap: 0 22px; min-width: 380px; opacity: 0; visibility: hidden; transition: opacity .2s, transform .2s; z-index: 1000; mix-blend-mode: normal; isolation: isolate; }
+.bp-dd:hover .bp-dd-panel, .bp-dd.open .bp-dd-panel { opacity: 1; visibility: visible; transform: translateY(4px); }
+.bp-dd-panel a { display: block; padding: 7px 8px; color: #c3ccd6 !important; text-decoration: none; font-family: 'Satoshi', sans-serif; font-size: 12px; letter-spacing: .02em; white-space: nowrap; }
+.bp-dd-panel a:hover { background: rgba(111,227,255,.08); color: #eef2f6 !important; }
+.bp-dd-group { grid-column: 1 / -1; font-family: 'Spline Sans Mono', monospace; font-size: 9px; letter-spacing: .2em; color: #6fe3ff; padding: 10px 8px 3px; text-transform: uppercase; }
+.bp-dd-group:first-child { padding-top: 0; }
+
+/* ---- Restored 4-column footer ---- */
+.bp-footer4 { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; max-width: 1340px; margin: 0 auto; }
+.bp-footer4 h5 { font-family: 'Spline Sans Mono', monospace; font-size: 11px; letter-spacing: .2em; color: #8a929c; text-transform: uppercase; margin-bottom: 14px; font-weight: 500; }
+.bp-footer4 ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.bp-flink { color: #aab3bd; text-decoration: none; font-size: 13.5px; }
+.bp-flink:hover { color: #6fe3ff; }
+
+@media (max-width: 860px) {
+  /* dropdown becomes an inline group inside the mobile menu */
+  .bp-nav-links .bp-dd { display: block; width: 100%; }
+  .bp-nav-links .bp-dd-toggle { display: none; }
+  .bp-nav-links .bp-dd-panel { position: static; opacity: 1; visibility: visible; transform: none; display: block; min-width: 0; border: 0; padding: 0; background: transparent; }
+  .bp-nav-links .bp-dd-panel a { padding: 12px 4px !important; border-bottom: 1px solid rgba(111,227,255,.08); }
+  .bp-nav-links .bp-dd-group { padding: 12px 4px 4px; border-bottom: 0; }
+  .bp-footer4 { grid-template-columns: 1fr !important; gap: 30px !important; }
+}
