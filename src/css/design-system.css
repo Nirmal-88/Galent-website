@@ -7879,26 +7879,32 @@ blockquote,
 /* ==================================================================
  * Hub card image + Post cover image (CMS-driven)
  * ================================================================== */
+/* Show the real card graphic in FULL — no crop (so title text is never cut),
+   no blur, no zoom-upscaling. The thumbnail box takes the image's own height,
+   so the whole poster (with all its text) is shown at native resolution. */
 .card-thumb.has-image {
   position: relative;
   overflow: hidden;
+  aspect-ratio: 300 / 235;       /* the native thumbnail ratio → uniform grid */
+  display: block;
+  background: #0b1018;
 }
-.card-thumb.has-image > img {
+.card-thumb.has-image .thumb-fill { display: none; }  /* blurred backdrop removed */
+.card-thumb.has-image .thumb-img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   display: block;
-}
-/* Blurred backdrop removed — client wants the real image only, no blur. */
-.card-thumb.has-image .thumb-fill {
-  display: none;
-}
-/* Real image fills the thumbnail frame exactly, sharp, no blurred bars. */
-.card-thumb.has-image .thumb-img {
-  object-fit: cover;
-  image-rendering: auto;
+  object-fit: contain;           /* whole poster shown — text never cropped */
   z-index: 1;
+}
+/* Video overlays sit on top of the (now in-flow) image */
+.card-thumb.has-image .play-btn {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2;
+}
+.card-thumb.has-image .runtime {
+  position: absolute; bottom: 8px; right: 8px; z-index: 2;
 }
 /* Keep the play overlay readable on top of imagery */
 .card-thumb.has-image .play-btn,
