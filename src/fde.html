@@ -14,47 +14,53 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/blueprint-scenes.css?v=bp-3">
+  <link rel="stylesheet" href="css/site-header.css?v=hdr-1">
 </head>
 <body>
 
   <!-- NAV -->
-  <nav class="bp-nav" style="position:fixed;top:0;left:0;width:100%;z-index:900;display:flex;align-items:center;justify-content:space-between;padding:18px 48px;background:rgba(6,8,15,.72);backdrop-filter:saturate(140%) blur(10px);-webkit-backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid rgba(111,227,255,.12);">
-    <a href="index.html" data-magnetic style="display:flex;align-items:center;gap:10px;text-decoration:none;color:#eef2f6;">
-      <img src="assets/design/Galent New Logo.png" alt="Galent" style="width:26px;height:26px;object-fit:contain;display:block;">
-      <span class="bp-display" style="font-size:19px;">Galent</span>
+  <nav class="sh-nav" id="sh-nav">
+    <a href="index.html" class="sh-brand" aria-label="Galent — Home">
+      <img src="assets/images/galent-mark-crisp.png" alt=""><span class="sh-word">Galent</span>
     </a>
-    <button class="bp-burger" aria-label="Menu" aria-expanded="false" style="display:none;background:none;border:0;color:#eef2f6;cursor:pointer;padding:6px;line-height:0;">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-    </button>
-    <div class="bp-nav-links" style="display:flex;gap:24px;align-items:center;font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:.18em;">
-      <a class="bp-nav-hide" href="platform.html" style="color:#eef2f6;text-decoration:none;">platform</a>
-      <a class="bp-nav-hide" href="industries.html" style="color:#eef2f6;text-decoration:none;">industries</a>
-      <a href="fde.html" style="color:#6fe3ff;text-decoration:none;">fde</a>
-      <a href="knowledge-hub.html" style="color:#eef2f6;text-decoration:none;">knowledge hub</a>
-      <div class="bp-dd">
-        <button class="bp-dd-toggle" aria-haspopup="true" aria-expanded="false">tech services ▾</button>
-        <div class="bp-dd-panel">
-          <span class="bp-dd-group">App Dev &amp; Modernization</span>
-          <a href="services/legacy-modernisation.html">Legacy Modernization</a>
-          <a href="services/brownfield-greenfield.html">Brownfield &amp; Greenfield</a>
-          <a href="services/quality-engineering.html">Quality Engineering</a>
-          <span class="bp-dd-group">Managed Services</span>
-          <a href="services/itsm-transformation.html">ITSM Transformation</a>
-          <a href="services/sre-observability.html">SRE &amp; Observability</a>
-          <a href="services/everything-ops.html">Everything Ops</a>
-          <span class="bp-dd-group">Data &amp; Platforms</span>
-          <a href="services/data-transformation.html">Data Transformation</a>
-          <a href="services/enterprise-platforms.html">Enterprise Platforms</a>
-          <span class="bp-dd-group">Context Engineering</span>
-          <a href="services/knowledge-graph.html">Knowledge Graph</a>
-          <a href="services/context-graph.html">Context Graph</a>
-          <span class="bp-dd-group">Talent Services</span>
-          <a href="services/talent-capability-stack.html">Talent Services</a>
+    <div class="sh-menu" id="sh-menu">
+      <a href="platform.html">Platform</a>
+      <a href="fde.html" aria-current="page">FDE</a>
+      <a href="about.html">About</a>
+      <a href="knowledge-hub.html">Knowledge Hub</a>
+      <div class="sh-dd">
+        <button class="sh-dd-toggle" aria-haspopup="true" aria-expanded="false">Tech Services <span class="sh-caret" aria-hidden="true">▾</span></button>
+        <div class="sh-dd-panel" role="menu">
+          <div class="sh-dd-group"><h6>App Dev &amp; Modernization</h6>
+            <a href="services/legacy-modernisation.html" role="menuitem">Legacy Modernization</a>
+            <a href="services/brownfield-greenfield.html" role="menuitem">Brownfield &amp; Greenfield</a>
+            <a href="services/quality-engineering.html" role="menuitem">Quality Engineering</a>
+          </div>
+          <div class="sh-dd-group"><h6>Managed Services</h6>
+            <a href="services/itsm-transformation.html" role="menuitem">ITSM Transformation</a>
+            <a href="services/sre-observability.html" role="menuitem">SRE &amp; Observability</a>
+            <a href="services/everything-ops.html" role="menuitem">Everything Ops</a>
+          </div>
+          <div class="sh-dd-group"><h6>Data &amp; Platforms</h6>
+            <a href="services/data-transformation.html" role="menuitem">Data Transformation</a>
+            <a href="services/enterprise-platforms.html" role="menuitem">Enterprise Platforms</a>
+          </div>
+          <div class="sh-dd-group"><h6>Context Engineering</h6>
+            <a href="services/knowledge-graph.html" role="menuitem">Knowledge Graph</a>
+            <a href="services/context-graph.html" role="menuitem">Context Graph</a>
+          </div>
+          <div class="sh-dd-group"><h6>Talent Services</h6>
+            <a href="services/talent-capability-stack.html" role="menuitem">Talent Services</a>
+          </div>
         </div>
       </div>
-      <a class="bp-nav-hide" href="about.html" style="color:#eef2f6;text-decoration:none;">about</a>
-      <a class="bp-nav-cta" href="contact.html" data-magnetic style="color:#06080f;background:#6fe3ff;text-decoration:none;padding:11px 22px;font-weight:700;">contact ↗</a>
+      <a href="industries.html">Industries</a>
+      <span class="sh-sep" aria-hidden="true"></span>
+      <a href="contact.html" class="sh-cta">Contact <span class="sh-arr" aria-hidden="true">→</span></a>
     </div>
+    <button class="sh-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sh-menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
   </nav>
 
   <!-- SC1 · DIVE -->
@@ -298,5 +304,6 @@
   </footer>
 
   <script src="js/blueprint-scenes.js?v=bp-1" defer></script>
+  <script src="js/site-header.js?v=hdr-1" defer></script>
 </body>
 </html>

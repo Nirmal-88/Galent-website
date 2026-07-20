@@ -1,0 +1,172 @@
+/* ==================================================================
+ * GALENT — unified site header (self-contained)
+ * ------------------------------------------------------------------
+ * Reproduces the design-system header (the "image 2" look: dark frosted
+ * bar, light wordmark, cyan accents + cyan CTA) with NO dependency on
+ * design-system.css or blueprint-scenes.css. Loaded on the pages that
+ * don't already ship the design-system stylesheet (homepage + the
+ * blueprint pages) so every page's header is identical.
+ * Selectors are scoped to the header markup (.sh-nav …) so they can't
+ * collide with those pages' own styles.
+ * ================================================================== */
+.sh-nav {
+  position: fixed;
+  top: 0; left: 0; width: 100%;
+  z-index: 950;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px clamp(20px, 4vw, 48px);
+  background: rgba(18, 19, 26, 0.62);
+  -webkit-backdrop-filter: saturate(160%) blur(10px);
+  backdrop-filter: saturate(160%) blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05) inset, 0 8px 30px -12px rgba(0, 0, 0, 0.6);
+  font-family: 'Satoshi', 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+.sh-nav.scrolled {
+  background: rgba(12, 13, 18, 0.72);
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+.sh-nav .sh-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #eef2f6;
+}
+.sh-nav .sh-brand img { height: 42px; width: auto; display: block; }
+.sh-nav .sh-brand .sh-word { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; color: #eef2f6; }
+
+.sh-nav .sh-menu { display: flex; gap: 6px; align-items: center; }
+.sh-nav .sh-menu a,
+.sh-nav .sh-menu .sh-dd-toggle {
+  padding: 8px 14px;
+  border-radius: 9999px;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #eef2f6;
+  position: relative;
+  text-decoration: none;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.15s ease;
+}
+/* animated underline on hover / active */
+.sh-nav .sh-menu a:not(.sh-cta)::after,
+.sh-nav .sh-menu .sh-dd-toggle::after {
+  content: '';
+  position: absolute;
+  left: 14px; right: 14px; bottom: 2px;
+  height: 2px;
+  background: #6fe3ff;
+  border-radius: 1px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.2s cubic-bezier(.22, 1, .36, 1);
+}
+.sh-nav .sh-menu a:not(.sh-cta):hover::after,
+.sh-nav .sh-menu .sh-dd-toggle:hover::after,
+.sh-nav .sh-menu a[aria-current="page"]:not(.sh-cta)::after,
+.sh-nav .sh-dd.open .sh-dd-toggle::after { transform: scaleX(1); }
+.sh-nav .sh-menu .sh-caret { font-size: 13px; line-height: 1; opacity: 0.85; transition: transform 0.2s ease; }
+.sh-nav .sh-dd.open .sh-caret { transform: rotate(180deg); }
+.sh-nav .sh-sep { width: 1px; height: 18px; background: rgba(255, 255, 255, 0.2); margin: 0 4px; }
+
+/* CTA — cyan pill (matches image 2) */
+.sh-nav .sh-menu a.sh-cta {
+  background: #6fe3ff;
+  color: #06080f;
+  font-weight: 700;
+  padding: 10px 18px;
+}
+.sh-nav .sh-menu a.sh-cta:hover { background: #8dedff; }
+
+/* Tech Services dropdown */
+.sh-nav .sh-dd { position: relative; }
+.sh-nav .sh-dd-panel {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  background: rgba(16, 17, 23, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 24px 56px -20px rgba(0, 0, 0, 0.6);
+  display: none;
+  z-index: 60;
+  min-width: 640px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+.sh-nav .sh-dd.open .sh-dd-panel { display: grid; }
+.sh-nav .sh-dd-group h6 {
+  font-family: 'Spline Sans Mono', 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #6fe3ff;
+  margin: 0 0 8px;
+  font-weight: 500;
+}
+.sh-nav .sh-dd-group a {
+  display: block;
+  padding: 10px 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #eef2f6;
+  border-top: 1px solid rgba(255, 255, 255, 0.10);
+  transition: color 0.15s ease, padding-left 0.2s cubic-bezier(.22, 1, .36, 1);
+}
+.sh-nav .sh-dd-group a:first-of-type { border-top: 0; }
+.sh-nav .sh-dd-group a:hover { color: #6fe3ff; padding-left: 4px; }
+
+/* Hamburger — hidden on desktop */
+.sh-nav .sh-toggle {
+  display: none;
+  width: 44px; height: 44px;
+  border: 0; background: transparent; cursor: pointer;
+  padding: 10px; border-radius: 8px; color: #eef2f6;
+}
+.sh-nav .sh-toggle svg { width: 24px; height: 24px; display: block; }
+
+/* Spacer so fixed header doesn't cover page content where needed */
+@media (max-width: 860px) {
+  .sh-nav .sh-menu { gap: 2px; }
+}
+@media (max-width: 760px) {
+  .sh-nav .sh-toggle { display: inline-flex; align-items: center; justify-content: center; }
+  .sh-nav .sh-menu {
+    position: fixed;
+    top: 70px; left: 12px; right: 12px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    background: rgba(12, 13, 18, 0.98);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 14px;
+    padding: 12px;
+    max-height: calc(100vh - 90px);
+    overflow-y: auto;
+    transform: translateY(-10px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  .sh-nav.is-open .sh-menu { transform: translateY(0); opacity: 1; pointer-events: auto; }
+  .sh-nav .sh-menu a, .sh-nav .sh-menu .sh-dd-toggle { width: 100%; justify-content: space-between; }
+  .sh-nav .sh-sep { display: none; }
+  .sh-nav .sh-dd { width: 100%; }
+  .sh-nav .sh-dd-panel {
+    position: static; min-width: 0; grid-template-columns: 1fr;
+    border: 0; padding: 0 8px 8px; box-shadow: none; gap: 12px; background: transparent;
+  }
+  .sh-nav .sh-menu a.sh-cta { justify-content: center; }
+}

@@ -9250,13 +9250,10 @@ body[data-page="home"] .hero .hero-content { position: relative; z-index: 2; }
 /* hub page accent reads better light on dark */
 body[data-page="hub"] { --page-accent: #B79CFF; --page-accent-deep: #9B7CF0; --page-accent-soft: rgba(155,124,240,0.16); }
 
-html { background: #0B0C10; }
+/* Flat page background to match the homepage (no glow band). */
+html { background: #06080f; }
 body {
-  background:
-    radial-gradient(circle at 12% 16%, rgba(79,70,229,0.20) 0%, transparent 42%),
-    radial-gradient(circle at 88% 84%, rgba(30,209,151,0.10) 0%, transparent 48%),
-    #0B0C10;
-  background-attachment: fixed;
+  background: #06080f;
   color: var(--on-surface);
 }
 
@@ -10348,4 +10345,42 @@ body[data-page^="service-"] .hero .t-hero { letter-spacing: -0.02em; }
   border-radius: 50%;
   display: block;
   margin: 1.8em auto 0.6em;
+}
+
+/* ==================================================================
+ * KNOWLEDGE HUB — pagination controls
+ * Appended for the paginated card grid (js/cms.js). Scoped to .hub-pager
+ * so nothing else is affected.
+ * ================================================================== */
+.hub-pager {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--space-2xl, 48px);
+}
+.hub-page-btn {
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid rgba(111, 227, 255, 0.22);
+  background: rgba(111, 227, 255, 0.04);
+  color: var(--on-surface, #eef2f6);
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 13px;
+  line-height: 1;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.hub-page-btn:hover {
+  border-color: rgba(111, 227, 255, 0.55);
+  background: rgba(111, 227, 255, 0.1);
+}
+.hub-page-btn.active {
+  background: #6fe3ff;
+  border-color: #6fe3ff;
+  color: #06080f;
+  font-weight: 600;
 }

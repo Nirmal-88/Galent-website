@@ -74,15 +74,79 @@
     `;
   }
 
+  // How many cards to show per page within a panel before paginating.
+  const PAGE_SIZE = 9;
+
   function renderPanel(panel, items, ctaLabel) {
     const grid = panel.querySelector('.card-grid');
     if (!grid) return;
-    if (!items.length) {
-      grid.innerHTML = `<div class="hub-empty" style="display:block;"><strong>Nothing here yet.</strong>Add an item to <code>content/knowledge.json</code>.</div>`;
+    // Empty categories simply render nothing (no "Nothing here yet" notice).
+    grid.innerHTML = items.length
+      ? items.map((item, i) => renderCard(item, i, ctaLabel)).join('')
+      : '';
+    paginatePanel(panel);
+  }
+
+  // Build (or rebuild) the pager for a panel and show its first page.
+  function paginatePanel(panel) {
+    if (!panel) return;
+    const grid = panel.querySelector('.card-grid');
+    if (!grid) return;
+    const existing = panel.querySelector('.hub-pager');
+    if (existing) existing.remove();
+
+    const cards = Array.prototype.slice.call(grid.querySelectorAll('.card-item'));
+    if (cards.length <= PAGE_SIZE) {
+      cards.forEach((c) => { c.style.display = ''; });
+      panel._page = 1;
       return;
     }
-    grid.innerHTML = items.map((item, i) => renderCard(item, i, ctaLabel)).join('');
+
+    const totalPages = Math.ceil(cards.length / PAGE_SIZE);
+    const pager = document.createElement('div');
+    pager.className = 'hub-pager';
+    let html = '<button class="hub-page-btn" data-page="prev" aria-label="Previous page">←</button>';
+    for (let p = 1; p <= totalPages; p++) {
+      html += `<button class="hub-page-btn" data-page="${p}">${p}</button>`;
+    }
+    html += '<button class="hub-page-btn" data-page="next" aria-label="Next page">→</button>';
+    pager.innerHTML = html;
+    grid.parentNode.insertBefore(pager, grid.nextSibling);
+
+    pager.addEventListener('click', (e) => {
+      const btn = e.target.closest('.hub-page-btn');
+      if (!btn) return;
+      const cur = panel._page || 1;
+      let target = btn.getAttribute('data-page');
+      if (target === 'prev') target = Math.max(1, cur - 1);
+      else if (target === 'next') target = Math.min(totalPages, cur + 1);
+      else target = parseInt(target, 10);
+      showPage(panel, target);
+    });
+
+    showPage(panel, 1);
   }
+
+  function showPage(panel, page) {
+    const grid = panel.querySelector('.card-grid');
+    if (!grid) return;
+    const cards = Array.prototype.slice.call(grid.querySelectorAll('.card-item'));
+    const totalPages = Math.max(1, Math.ceil(cards.length / PAGE_SIZE));
+    page = Math.min(Math.max(1, page), totalPages);
+    panel._page = page;
+    const start = (page - 1) * PAGE_SIZE;
+    const end = start + PAGE_SIZE;
+    cards.forEach((c, i) => { c.style.display = (i >= start && i < end) ? '' : 'none'; });
+    const pager = panel.querySelector('.hub-pager');
+    if (pager) {
+      pager.querySelectorAll('.hub-page-btn').forEach((b) => {
+        b.classList.toggle('active', b.getAttribute('data-page') === String(page));
+      });
+    }
+  }
+
+  HubCMS.showPage = showPage;
+  HubCMS.paginatePanel = paginatePanel;
 
   function updateTabCount(targetId, count) {
     const tab = document.querySelector(`.hub-tab[data-target="${targetId}"]`);
@@ -302,13 +366,21 @@
 
     activePanels.forEach((active) => {
       const cards = active.querySelectorAll('.card-item');
+      const pager = active.querySelector('.hub-pager');
+
+      // No query → restore the paginated view for this panel.
+      if (!q) {
+        if (pager) { pager.style.display = ''; showPage(active, active._page || 1); }
+        else cards.forEach((card) => { card.style.display = ''; });
+        const emptyEl = active.querySelector('.hub-empty');
+        if (emptyEl) emptyEl.style.display = 'none';
+        return;
+      }
+
+      // Searching → ignore pagination, match across the whole section.
+      if (pager) pager.style.display = 'none';
       let visible = 0;
       cards.forEach((card) => {
-        if (!q) {
-          card.style.display = '';
-          visible++;
-          return;
-        }
         const title = (card.querySelector('h3')?.textContent || '').toLowerCase();
         const excerpt = (card.querySelector('.excerpt')?.textContent || '').toLowerCase();
         const meta = (card.querySelector('.card-meta')?.textContent || '').toLowerCase();
