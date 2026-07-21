@@ -80,8 +80,10 @@
       #g6-s1-img,#g6-s1-veil,#g6-s1-after { display:none !important; }
       #g6-s1-stage { transform:none !important; opacity:1 !important; }
 
-      /* SC2 problem */
-      #g6-s2 > div { grid-template-columns:1fr !important; gap:32px !important; }
+      /* SC2 problem — stack the INNER two-column grid so the right column
+         (the word-reveal + quote) is never clipped by the pin's overflow */
+      #g6-s2 > div > div { display:block !important; padding:0 !important; }
+      #g6-s2 > div > div > div + div { margin-top:36px; }
 
       /* SC3 blueprint — stack schematic + reveal all four engine details */
       #g6-s3 [style*="grid-template-columns:1.1fr 1fr"] { display:block !important; }
@@ -986,5 +988,7 @@
 })();
 </script>
   <script src="js/site-header.js?v=hdr-1" defer></script>
+  <script src="js/mobile-motion.js?v=mm-2" defer></script>
+
 </body>
 </html>

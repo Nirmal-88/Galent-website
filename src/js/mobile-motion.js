@@ -19,6 +19,7 @@
   // Section-level blocks to reveal (kept coarse so the effect reads as clean
   // section-by-section motion, not twitchy per-word animation).
   var SELECTOR = [
+    // Blueprint pages (platform/about/fde/industries)
     '.bp-dive-stage',
     '.bp-grid2 > *',
     '.bp-card',
@@ -28,7 +29,15 @@
     '.bp-proofwall',
     '.bp-cols4',
     '.bp-cols3',
-    '.leader-card'
+    '.leader-card',
+    // Homepage (g6) linearized scene blocks
+    '.g6-pillar',
+    '.g6-leader',
+    '.g6-card',
+    '.g6-slide',
+    '#g6-s2 > div > div > div',
+    '#g6-s3 .g6-bp-d',
+    '#g6-bp-d-init'
   ].join(',');
 
   var EASE = 'cubic-bezier(.16,1,.3,1)';
