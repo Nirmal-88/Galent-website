@@ -97,7 +97,7 @@
       if (type === 'dive') { a.stage = $('.bp-dive-stage', sec); a.h1 = $('.bp-dive-h1', sec); a.img = $('.bp-dive-img', sec); a.veil = $('.bp-dive-veil', sec); a.sub = $('.bp-dive-sub', sec); a.cue = $('.bp-dive-cue', sec); a.after = $('.bp-dive-after', sec); }
       else if (type === 'odometer') { a.digs = $$('.bp-dig', sec); a.words = $$('.bp-word', sec); a.words.forEach(function (w) { w.style.opacity = '.15'; w.style.transition = 'opacity .35s ease'; }); a.quote = $('.bp-quote', sec); }
       else if (type === 'schematic') { a.core = $('.bp-bp-core', sec); a.coreLen = a.core && a.core.getTotalLength ? a.core.getTotalLength() : 351.9; a.coreL = $$('.bp-bp-corelabel', sec); a.lines = $$('.bp-bp-line', sec); a.nodes = $$('.bp-bp-node', sec); a.texts = $$('.bp-bp-text', sec); a.n = a.nodes.length; a.details = $$('.bp-bp-d', sec); a.init = $('.bp-bp-init', sec); a.imgs = $$('.bp-bp-img', sec); a.ph = $('.bp-bp-ph', sec); a.count = $('.bp-bp-count', sec); a.names = (sec.getAttribute('data-names') || '').split('|'); a.lineLen = 150; }
-      else if (type === 'fan') { a.cards = $$('.bp-card', sec); }
+      else if (type === 'fan') { a.cards = $$('.bp-card', sec); a.fan = $('.bp-fan', sec); }
       else if (type === 'wipe') { a.slides = $$('.bp-slide', sec); }
       else if (type === 'iris') { a.iris = $('.bp-iris', sec); a.pre = $('.bp-iris-pre', sec); }
       return a;
@@ -107,7 +107,7 @@
   function updateScene(s) {
     var p = secProgress(s.sec);
     if (s.type === 'dive' && s.h1) {
-      var dp = clamp((p - 0.15) / 0.7), dive = dp * dp * dp, sc = 1 + dive * 24;
+      var dp = clamp((p - 0.15) / 0.7), dive = dp * dp * dp, sc = 1 + dive * (mobile ? 17 : 24);
       s.h1.style.transform = 'scale(' + sc.toFixed(2) + ')'; s.h1.style.transformOrigin = '50.5% 30%';
       s.h1.style.opacity = clamp(1 - (sc - 1.6) / 1.4).toFixed(3);
       if (s.stage) s.stage.style.opacity = clamp(1 - (sc - 1.6) / 1.6).toFixed(3);
@@ -138,19 +138,13 @@
       s.imgs.forEach(function (im) { im.style.opacity = +im.getAttribute('data-i') === active ? '1' : '0'; im.style.transition = 'opacity .45s ease'; });
       if (s.ph) s.ph.style.opacity = active < 0 ? '1' : '0';
       if (s.count && s.names[idx] != null) s.count.textContent = s.names[idx];
-    } else if (s.type === 'fan' && s.cards.length) {
-      var e = easeIO(clamp(p * 1.15)), n = s.cards.length, kMax = (n - 1) / 2;
-      // Adaptive spread: step cards ~1.22x their own width apart so text is
-      // never covered, but cap the step so the outermost cards stay on-screen.
-      var cardW = (s.cards[0] && s.cards[0].getBoundingClientRect().width) || 260;
-      var maxStep = kMax > 0 ? (innerWidth / 2 - 24 - cardW / 2) / kMax : 0;
-      var step = Math.max(0, Math.min(cardW * 1.22, maxStep));
-      s.cards.forEach(function (c, i) {
-        var k = i - (n - 1) / 2;
-        var x = k * step * e, y = Math.abs(k) * 14 * e + (1 - e) * i * -6, rot = k * 5 * e + (1 - e) * i * 1.5;
-        c.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) rotate(' + rot.toFixed(2) + 'deg)';
-        c.style.zIndex = String(10 - Math.abs(k) * 2 | 0);
-      });
+    } else if (s.type === 'fan' && s.fan) {
+      // Horizontal deck: the card row slides left as you scroll the pinned
+      // section, so every card is shown in full (replaces the old fan whose
+      // copy was clipped). Desktop + phone.
+      var e = easeIO(clamp(p * 1.02));
+      var max = Math.max(0, s.fan.scrollWidth - innerWidth);
+      s.fan.style.transform = 'translateX(' + (-e * max).toFixed(1) + 'px)';
     } else if (s.type === 'wipe' && s.slides.length) {
       var m = s.slides.length, sg = clamp(p * 0.9999) * (m - 1);
       s.slides.forEach(function (sl, i) { if (i === 0) return; var lp = clamp(sg - (i - 1)); sl.style.clipPath = 'inset(' + (100 - easeIO(lp) * 100).toFixed(2) + '% 0 0 0)'; });
@@ -206,7 +200,10 @@
     if (fine && !reduce) { cursor(); magnetic(); }
     progressHUD();
     var scenes = collectScenes();
-    if (mobile) { scenes.forEach(setFinal); return; }
+    // Reduced-motion: present final states, no scroll choreography. Mobile now
+    // RUNS the full cinematic scenes (the CSS keeps them sticky, re-tuned for
+    // portrait) — same as the v6 home page.
+    if (reduce) { scenes.forEach(setFinal); return; }
     var ticking = false;
     function loop() { if (ticking) return; ticking = true; requestAnimationFrame(function () { ticking = false; scenes.forEach(updateScene); }); }
     addEventListener('scroll', loop, { passive: true });

@@ -34,31 +34,61 @@ a { color:inherit; }
 /* pillars / cards reusable */
 .bp-pillar { background:rgba(111,227,255,.035); border:1px solid rgba(111,227,255,.18); padding:38px 32px; min-height:280px; display:flex; flex-direction:column; justify-content:space-between; transition:transform .5s cubic-bezier(.16,1,.3,1),border-color .5s,background .5s; }
 
-/* ---- MOBILE: linearize every scene into normal flow ---- */
+/* ---- FAN scenes → HORIZONTAL-SCROLL DECK (desktop + phone) ----
+   Replaces the overlapping card "fan" whose copy was clipped. Cards sit in a
+   track that slides left as you scroll the pinned section (translateX driven
+   by blueprint-scenes.js), so every card is shown in full. */
+.bp-fan { position:relative !important; height:auto !important;
+  justify-content:flex-start !important; align-items:stretch !important;
+  width:max-content !important; gap:24px; padding:0 24px; will-change:transform; }
+.bp-fan .bp-card { position:relative !important; inset:auto !important;
+  flex:0 0 auto !important; width:clamp(280px,82vw,380px) !important;
+  min-height:0 !important; transform:none !important; }
+
+/* ---- MOBILE: keep the sticky cinematic scenes on phones (ported from
+   desktop, re-tuned for portrait) instead of linearizing them. ---- */
 @media (max-width: 860px) {
   #bp-ring,#bp-dot { display:none !important; }
   #bp-chapter-wrap,#bp-pct-wrap { display:none !important; }
-  .bp-scene { height:auto !important; }
-  .bp-pin { position:static !important; height:auto !important; overflow:visible !important; display:block !important; padding:80px 20px !important; }
-  .bp-scene[data-scene="dive"] .bp-pin { display:flex !important; min-height:86vh; padding:118px 20px 70px !important; }
-  .bp-dive-img,.bp-dive-veil,.bp-dive-after { display:none !important; }
-  .bp-dive-stage { transform:none !important; opacity:1 !important; }
-  .bp-grid2 { grid-template-columns:1fr !important; gap:30px !important; display:block !important; }
-  .bp-grid2 > * + * { margin-top:30px; }
+  /* Shorter scroll lengths so the longest scenes pace well on a phone. */
+  .bp-scene[data-scene="schematic"] { height:340vh !important; }
+  .bp-scene[data-scene="wipe"] { height:360vh !important; }
+  /* Tighten the scene inner containers' padding (they use `padding:0 48px`).
+     Fixes the right-shifted / indented look — this is what centres content. */
+  [style*="padding:0 48px"] { padding-left:20px !important; padding-right:20px !important; }
+
+  /* dive — keep the reveal; show the FULL bg image on portrait (contain; the
+     letterbox bars blend into the near-black scene) instead of a cover-crop. */
+  .bp-dive-stage { padding:0 20px !important; }
+  .bp-dive-img { object-fit:contain !important; }
+  .bp-dive-after { left:20px !important; right:20px !important; bottom:78px !important; }
+  .bp-dive-after h2 { font-size:clamp(25px,7vw,40px) !important; }
+
+  /* two-column scene grids → single column */
+  .bp-grid2 { grid-template-columns:1fr !important; gap:26px !important; display:block !important; }
+  .bp-grid2 > * + * { margin-top:26px; }
+
+  /* schematic — stack diagram / detail / image; ALL still draw on scroll.
+     Centre the blocks to match the centred diagram (was left-shifted). */
   .bp-schematic { display:block !important; }
-  .bp-schematic svg { max-width:330px; margin:0 auto 26px; display:block; }
+  .bp-schematic svg { width:min(76vw,300px) !important; max-width:300px; height:auto !important; margin:0 auto 18px; display:block; }
   .bp-bp-panel { height:auto !important; }
-  .bp-bp-d,.bp-bp-init { position:static !important; opacity:1 !important; transform:none !important; margin-bottom:18px !important; }
-  .bp-bp-imgwrap { display:none !important; }
-  .bp-fan { height:auto !important; display:block !important; }
-  .bp-card { position:static !important; width:auto !important; max-width:340px !important; min-height:0 !important; transform:none !important; margin:0 auto 16px !important; box-shadow:none !important; }
-  .bp-slide { position:relative !important; inset:auto !important; clip-path:none !important; display:block !important; padding:60px 20px !important; }
-  .bp-slide .bp-grid2 { display:block !important; }
-  .bp-ghostnum { font-size:70px !important; margin-top:6px; }
-  .bp-iris { position:static !important; clip-path:none !important; height:auto !important; padding:90px 20px !important; }
-  .bp-iris-pre { display:none !important; }
+  /* centre the schematic heading row (a sibling of .bp-schematic) + details */
+  .bp-scene[data-scene="schematic"] [style*="justify-content:space-between"] { justify-content:center !important; text-align:center !important; }
+  .bp-scene[data-scene="schematic"] [style*="justify-content:space-between"] > div { margin-left:auto !important; margin-right:auto !important; }
+  .bp-bp-d, .bp-bp-init { text-align:center !important; }
+  .bp-bp-d p, .bp-bp-init p { margin-left:auto !important; margin-right:auto !important; }
+
+  /* wipe slides — keep the sticky clip-path wipe; single-column; ghost number
+     sits behind the copy. */
+  .bp-slide .bp-grid2 { display:block !important; position:relative !important; }
+  .bp-ghostnum { position:absolute !important; top:-6%; right:0; font-size:150px !important; z-index:0; pointer-events:none; }
+
+  /* single-column stat/proof grids; never clip the right border on overflow */
   .bp-cols3,.bp-cols4 { grid-template-columns:1fr !important; }
   .bp-proofwall { grid-template-columns:1fr !important; }
+  .bp-proofwall > div { min-width:0 !important; }
+  .bp-proofwall > div * { overflow-wrap:anywhere; }
   .bp-nav { padding:15px 20px !important; mix-blend-mode:normal !important;
     background:rgba(6,8,15,.86); backdrop-filter:saturate(140%) blur(9px); -webkit-backdrop-filter:saturate(140%) blur(9px);
     border-bottom:1px solid rgba(111,227,255,.1); }
