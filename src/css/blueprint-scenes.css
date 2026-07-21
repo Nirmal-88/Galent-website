@@ -71,10 +71,18 @@ a { color:inherit; }
   /* schematic — stack diagram / detail / image; ALL still draw on scroll.
      Centre the blocks to match the centred diagram (was left-shifted). */
   .bp-schematic { display:block !important; }
-  .bp-schematic svg { width:min(76vw,300px) !important; max-width:300px; height:auto !important; margin:0 auto 18px; display:block; }
-  .bp-bp-panel { height:auto !important; }
+  /* The scene content (long heading + diagram + detail + tags) is taller than
+     it looks, and the fixed nav overlays the top of a vertically-centred pin —
+     so top AND bottom were cropping. Top-align the content just below the nav
+     and shrink the diagram/type so the whole scene fits any phone height. */
+  .bp-scene[data-scene="schematic"] .bp-pin { align-items:flex-start !important; padding-top:88px !important; }
+  .bp-schematic svg { width:min(64vw,244px) !important; max-width:244px; max-height:30vh !important; height:auto !important; margin:4px auto 8px; display:block; }
+  .bp-bp-panel { height:188px !important; }
+  .bp-scene[data-scene="schematic"] h2 { font-size:clamp(15px,4.3vw,19px) !important; line-height:1.28 !important; }
+  .bp-bp-d h3, .bp-bp-init h3 { font-size:19px !important; margin:6px 0 8px !important; }
+  .bp-bp-d p, .bp-bp-init p { font-size:12.5px !important; line-height:1.5 !important; }
   /* centre the schematic heading row (a sibling of .bp-schematic) + details */
-  .bp-scene[data-scene="schematic"] [style*="justify-content:space-between"] { justify-content:center !important; text-align:center !important; }
+  .bp-scene[data-scene="schematic"] [style*="justify-content:space-between"] { justify-content:center !important; text-align:center !important; margin-bottom:14px !important; }
   .bp-scene[data-scene="schematic"] [style*="justify-content:space-between"] > div { margin-left:auto !important; margin-right:auto !important; }
   .bp-bp-d, .bp-bp-init { text-align:center !important; }
   .bp-bp-d p, .bp-bp-init p { margin-left:auto !important; margin-right:auto !important; }
@@ -84,8 +92,13 @@ a { color:inherit; }
   .bp-slide .bp-grid2 { display:block !important; position:relative !important; }
   .bp-ghostnum { position:absolute !important; top:-6%; right:0; font-size:150px !important; z-index:0; pointer-events:none; }
 
-  /* single-column stat/proof grids; never clip the right border on overflow */
-  .bp-cols3,.bp-cols4 { grid-template-columns:1fr !important; }
+  /* single-column stat/proof grids; never clip the right border on overflow.
+     The higher-specificity selectors beat the generic `[style*="repeat(4,1fr)"]
+     → repeat(2,1fr)` collapse below (which was making the pillar grids 2-up and
+     overflowing the right edge on phones). min-width:0 lets cells shrink. */
+  .bp-cols3, .bp-cols4 { grid-template-columns:1fr !important; }
+  .bp-cols3[style*="repeat(3,1fr)"], .bp-cols4[style*="repeat(4,1fr)"] { grid-template-columns:1fr !important; }
+  .bp-cols3 > *, .bp-cols4 > * { min-width:0 !important; }
   .bp-proofwall { grid-template-columns:1fr !important; }
   .bp-proofwall > div { min-width:0 !important; }
   .bp-proofwall > div * { overflow-wrap:anywhere; }
