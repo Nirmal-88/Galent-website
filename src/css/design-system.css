@@ -10374,6 +10374,7 @@ body[data-page^="service-"] .hero .t-hero { letter-spacing: -0.02em; }
   font-size: 13px;
   font-weight: 500;
   color: var(--page-accent, #6fe3ff);
+  text-align: center;
   margin: clamp(40px, 5vw, 72px) 0 var(--space-lg);
   padding-bottom: 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
