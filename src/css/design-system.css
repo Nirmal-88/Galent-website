@@ -10404,3 +10404,21 @@ body[data-page^="service-"] .hero .t-hero { letter-spacing: -0.02em; }
   color: #06080f;
   font-weight: 600;
 }
+
+/* ==================================================================
+ * MOBILE — CTA card decoration
+ * The .cta-fx rings/orbs are sized (480–720px) and parallaxed for a wide
+ * card; on phones they clip in as random arcs from the edges. Calm it down:
+ * drop the sharp concentric rings + sparks, freeze + shrink the ambient
+ * colour orbs so the CTA reads as a clean glowing card.
+ * ================================================================== */
+@media (max-width: 860px) {
+  .cta-rings, .cta-spark { display: none !important; }
+  .cta-orb { animation: none !important; }
+  .cta-card[data-cta-parallax] .cta-orb--a { transform: translateX(-50%) !important; }
+  .cta-card[data-cta-parallax] .cta-orb--b,
+  .cta-card[data-cta-parallax] .cta-orb--c { transform: none !important; }
+  .cta-orb--a { width: 360px !important; height: 360px !important; top: -150px !important; }
+  .cta-orb--b { width: 300px !important; height: 300px !important; bottom: -150px !important; }
+  .cta-orb--c { width: 280px !important; height: 280px !important; bottom: -130px !important; }
+}

@@ -76,6 +76,13 @@ a { color:inherit; }
   .bp-nav-links a.bp-nav-cta { background:#6fe3ff !important; color:#06080f !important; text-align:center; margin-top:12px; border-bottom:0; padding:15px !important; }
   .bp-footer-grid4 { grid-template-columns:repeat(2,1fr) !important; }
   .bp-footer-main { grid-template-columns:1fr !important; }
+  /* Collapse multi-column inline grids (4-up stat rows, 2-up bullet pairs,
+     content+ghostnumber splits) so the right side is never clipped on phones */
+  [style*="repeat(4,1fr)"] { grid-template-columns:repeat(2,1fr) !important; }
+  [style*="repeat(3,1fr)"] { grid-template-columns:1fr !important; }
+  [style*="repeat(2,minmax"] { grid-template-columns:1fr !important; }
+  [style*="grid-template-columns:1fr auto"] { grid-template-columns:1fr !important; }
+  [style*="grid-template-columns:1fr 1fr"] { grid-template-columns:1fr !important; }
 }
 
 /* ---- CMS leadership cards (About) styled in Blueprint ---- */

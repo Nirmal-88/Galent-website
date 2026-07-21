@@ -35,9 +35,11 @@
     '.g6-leader',
     '.g6-card',
     '.g6-slide',
+    '#g6-s1-stage',
     '#g6-s2 > div > div > div',
     '#g6-s3 .g6-bp-d',
     '#g6-bp-d-init',
+    '#g6-s6 [style*="align-items:baseline"]',
     // Design-system pages (services / knowledge-hub / contact / posts)
     '.section-head',
     '.stat-strip',
