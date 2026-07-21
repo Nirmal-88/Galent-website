@@ -202,7 +202,7 @@
     panelsHost.innerHTML = categories
       .map(
         (c) =>
-          `<div class="hub-panel" id="panel-${escapeHTML(c.id)}" role="tabpanel" aria-hidden="true"><div class="card-grid"></div></div>`
+          `<div class="hub-panel" id="panel-${escapeHTML(c.id)}" role="tabpanel" aria-hidden="true"><h3 class="hub-cat-title">${escapeHTML(c.label)}</h3><div class="card-grid"></div></div>`
       )
       .join('');
   }

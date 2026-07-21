@@ -13,11 +13,6 @@
       "ctaLabel": "Request access"
     },
     {
-      "id": "videocasts",
-      "label": "Videocasts",
-      "ctaLabel": "Watch"
-    },
-    {
       "id": "news-room",
       "label": "News Room",
       "ctaLabel": "Read"
