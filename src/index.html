@@ -40,6 +40,19 @@
     /* [data-reveal] fade-ins are driven by js/mobile-motion.js (IntersectionObserver,
        every browser) — the old CSS `animation-timeline: view()` only fired in
        Chromium and played once on load elsewhere, so nothing animated on scroll. */
+
+    /* ---- SC.4 service lines — HORIZONTAL SCROLL DECK (desktop + phone) ----
+       Replaces the overlapping card "fan", whose cards clipped each other so
+       the copy wasn't fully readable. The cards now sit in a horizontal track
+       that slides left as you scroll through the pinned section (translateX is
+       driven by the inline engine), so every card is shown in full. */
+    #g6-s4-track { position:relative !important; height:auto !important;
+      justify-content:flex-start !important; align-items:stretch !important;
+      width:max-content !important; gap:24px; padding:0 24px; will-change:transform; }
+    #g6-s4 .g6-card { position:relative !important; inset:auto !important;
+      flex:0 0 auto !important; width:clamp(300px,84vw,420px) !important;
+      min-height:0 !important; transform:none !important; }
+
     @media (max-width: 860px) {
       /* ---- NAV: solid bar + hamburger dropdown ---- */
       .g6-nav { padding:15px 20px !important; mix-blend-mode:normal !important;
@@ -71,12 +84,17 @@
       /* Shorter scroll lengths so the longest scenes pace well on a phone. */
       #g6-s3 { height:340vh !important; }
       #g6-s5 { height:330vh !important; }
-      /* Tighten sticky-viewport padding across every scene. */
-      #g6-s2 > div, #g6-s3 > div, #g6-s4 > div, #g6-s6 > div,
-      #g6-s5 .g6-slide > div { padding-left:20px !important; padding-right:20px !important; }
+      /* Tighten the scene inner containers' horizontal padding for portrait.
+         They all use `padding:0 48px`; that inner div (not the sticky wrapper)
+         is what carries the padding, so this fixes the right-shifted / indented
+         look on phones. */
+      #g6-root [style*="padding:0 48px"] { padding-left:20px !important; padding-right:20px !important; }
 
-      /* SC1 dive — keep the image reveal + "after" headline; tuned insets. */
+      /* SC1 dive — keep the reveal, but show the FULL background image on a
+         portrait screen (letterbox bars blend into the near-black scene)
+         instead of a hard cover-crop that only showed a vertical slice. */
       #g6-s1-stage { padding:0 20px !important; }
+      #g6-s1-img { object-fit:contain !important; }
       #g6-s1-after { left:20px !important; right:20px !important; bottom:78px !important; }
       #g6-s1-after h2 { font-size:clamp(25px,7vw,40px) !important; }
       #g6-s1-sub { font-size:15px !important; }
@@ -94,11 +112,13 @@
       #g6-s3 [style*="height:220px"] { height:160px !important; margin-top:14px !important; }
       #g6-s3 h3 { font-size:34px !important; }
       #g6-s3 .g6-bp-d p, #g6-bp-d-init p { font-size:14px !important; }
+      /* Centre the blueprint content to match the centred diagram (was left-shifted). */
+      #g6-s3 [style*="justify-content:space-between"] { justify-content:center !important; text-align:center !important; }
+      #g6-s3 .g6-bp-d, #g6-bp-d-init { text-align:center !important; }
+      #g6-s3 .g6-bp-d p, #g6-bp-d-init p { margin-left:auto !important; margin-right:auto !important; }
 
-      /* SC4 services — narrower cards so the fan reads on a phone (JS shrinks
-         the spread unit to match). */
-      #g6-s4 [style*="height:52vh"] { height:58vh !important; }
-      .g6-card { width:min(60vw,210px) !important; min-height:44vh !important; padding:24px 20px !important; }
+      /* SC4 services — horizontal deck; layout lives in the shared rule above
+         the media query (applies to desktop + phone). */
 
       /* SC5 sectors — single-column slide; the giant index number sits behind. */
       #g6-s5 .g6-slide > div { grid-template-columns:1fr !important; gap:18px !important; position:relative !important; }
@@ -114,6 +134,10 @@
       #g6-s6 .g6-proof-desc { font-size:11.5px !important; max-width:none !important; }
       #g6-s6 [style*="repeat(2,1fr)"] > div:last-child { padding:18px 14px !important; }
       #g6-s6 [style*="repeat(2,1fr)"] > div:last-child div { font-size:10.5px !important; line-height:1.75 !important; }
+      /* Let the grid cells shrink so the table never overflows and clips its
+         right border; break long mono tokens (e.g. "forward-deployed"). */
+      #g6-s6 [style*="repeat(2,1fr)"] > div { min-width:0 !important; }
+      #g6-s6 [style*="repeat(2,1fr)"] > div:last-child div { word-break:break-word !important; overflow-wrap:anywhere !important; }
 
       /* SC7 iris finale — keep the aperture reveal; tuned type. */
       #g6-s7 [style*="clamp(40px,7vw,120px)"] { font-size:clamp(34px,9vw,52px) !important; }
@@ -378,7 +402,7 @@
         <div style="font-family:'Spline Sans Mono',monospace;font-size:12px;letter-spacing:.3em;color:#6fe3ff;margin-bottom:14px;">04 — service lines · dealing the deck</div>
         <h2 style="font-family:'Cabinet Grotesk',sans-serif;font-weight:800;font-size:clamp(28px,4vw,60px);line-height:1;">Compose your business;<br>compound your results.</h2>
       </div>
-      <div style="position:relative;height:52vh;display:flex;align-items:center;justify-content:center;">
+      <div id="g6-s4-track" style="position:relative;height:52vh;display:flex;align-items:center;justify-content:center;">
         <div class="g6-card" data-i="0" style="position:absolute;width:min(24vw,330px);min-height:46vh;background:#0b1018;border:1px solid rgba(111,227,255,.25);padding:30px 26px;display:flex;flex-direction:column;justify-content:space-between;will-change:transform;box-shadow:0 30px 70px rgba(0,0,0,.45);">
           <div>
             <div style="font-family:'Spline Sans Mono',monospace;font-size:11px;color:#6fe3ff;margin-bottom:14px;">[01]</div>
@@ -821,6 +845,7 @@
     const bpCount = document.getElementById('g6-bp-count');
     const bpNames = ['drafting core…','node 1/4 — NeuroQL','node 2/4 — RCM','node 3/4 — Knowledge Graph','node 4/4 — Context Graph'];
     const s4 = document.getElementById('g6-s4');
+    const s4track = document.getElementById('g6-s4-track');
     const cards = root.querySelectorAll('.g6-card');
     const s5 = document.getElementById('g6-s5');
     const slides = root.querySelectorAll('.g6-slide');
@@ -936,20 +961,14 @@
           if (bpCount) bpCount.textContent = bpNames[idx];
         }
 
-        // SC4: card fan
-        if (s4 && cards.length) {
+        // SC4: horizontal service deck — the card row slides left as you scroll
+        // through the pinned section, so every card is shown in full (replaces
+        // the old overlapping fan whose copy was clipped). Desktop + phone.
+        if (s4 && s4track) {
           const p = secProgress(s4);
-          const e = easeIO(clamp(p*1.15));
-          const unit = isMobile ? Math.min(innerWidth*0.088, 120) : Math.min(innerWidth*0.145, 260);
-          cards.forEach(c => {
-            const i = +c.getAttribute('data-i');
-            const k = i - 1.5;
-            const x = k * unit * 1.9 * e;
-            const y = Math.abs(k) * 14 * e + (1-e) * i * -6;
-            const rot = k * 5 * e + (1-e) * i * 1.5;
-            c.style.transform = `translate(${x.toFixed(1)}px,${y.toFixed(1)}px) rotate(${rot.toFixed(2)}deg)`;
-            c.style.zIndex = String(10 - Math.abs(k)*2);
-          });
+          const e = easeIO(clamp(p * 1.02));
+          const max = Math.max(0, s4track.scrollWidth - innerWidth);
+          s4track.style.transform = `translateX(${(-e * max).toFixed(1)}px)`;
         }
 
         // SC5: slide wipes
