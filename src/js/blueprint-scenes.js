@@ -139,10 +139,11 @@
       if (s.ph) s.ph.style.opacity = active < 0 ? '1' : '0';
       if (s.count && s.names[idx] != null) s.count.textContent = s.names[idx];
     } else if (s.type === 'fan' && s.cards.length) {
-      var e = easeIO(clamp(p * 1.15)), unit = Math.min(innerWidth * 0.145, 260), n = s.cards.length;
+      var e = easeIO(clamp(p * 1.15)), unit = Math.min(innerWidth * 0.135, 230), n = s.cards.length;
       s.cards.forEach(function (c, i) {
         var k = i - (n - 1) / 2;
-        var x = k * unit * 1.9 * e, y = Math.abs(k) * 14 * e + (1 - e) * i * -6, rot = k * 5 * e + (1 - e) * i * 1.5;
+        // Tighter horizontal spread so the outermost cards stay on-screen.
+        var x = k * unit * 1.2 * e, y = Math.abs(k) * 14 * e + (1 - e) * i * -6, rot = k * 5 * e + (1 - e) * i * 1.5;
         c.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) rotate(' + rot.toFixed(2) + 'deg)';
         c.style.zIndex = String(10 - Math.abs(k) * 2 | 0);
       });
