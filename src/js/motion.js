@@ -90,10 +90,11 @@
       setupHeadlineReveals(c);
 
       // Effects (decorative / visible-by-default — never gate content).
-      // Scrub-driven parallax is DESKTOP ONLY: on mobile (native scroll) a
-      // scrubbed transform repaints its target every scroll frame, which read
-      // as the rough, patchy phone scroll. Phones just scroll normally.
-      if (c.isDesktop) setupParallaxLayers(gsap, ScrollTrigger);
+      // Scrub-driven parallax now runs on mobile too (the client wants the
+      // desktop scroll-depth on phones) — but at a REDUCED magnitude there,
+      // since scrubbing a blurred layer repaints it every frame. The small
+      // shift keeps the per-frame cost low while still giving depth on scroll.
+      setupParallaxLayers(gsap, ScrollTrigger, !!c.isDesktop);
       setupOutcomes(gsap, ScrollTrigger);
       setupStatStrips(gsap, ScrollTrigger);
       setupArchitectureDeck(gsap, ScrollTrigger, !!c.isDesktop);
@@ -256,10 +257,11 @@
   /* ==========================================================================
    * FEATURE 6 — parallax depth (decorative scrub).
    * ======================================================================== */
-  function setupParallaxLayers(gsap, ScrollTrigger) {
+  function setupParallaxLayers(gsap, ScrollTrigger, isDesktop) {
+    var shift = isDesktop ? -8 : -4;   // lighter on phones to cut repaint cost
     document.querySelectorAll('.gd-orb, .signal-bg, .cta-orb').forEach(function (el) {
       var sec = el.closest('section') || el;
-      gsap.to(el, { yPercent: -8, ease: 'none',
+      gsap.to(el, { yPercent: shift, ease: 'none',
         scrollTrigger: { trigger: sec, start: 'top bottom', end: 'bottom top', scrub: true } });
     });
   }

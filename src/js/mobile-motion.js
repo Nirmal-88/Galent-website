@@ -37,7 +37,12 @@
   // the cinematic scrubbed scenes (which are not marked [data-reveal]).
   var SELECTOR = isMobile ? BROAD : '[data-reveal]';
 
-  var EXCLUDE = 'nav,header,footer,.sh-nav,.footer,.nav,.bp-nav,.g6-nav';
+  // Never touch the homepage's cinematic scroll scenes (#g6-s1…#g6-s7): the
+  // page's own inline engine owns every element inside them (dive image,
+  // odometer digits, blueprint, card fan, slide wipes, iris). mobile-motion
+  // still animates the page's NORMAL-FLOW sections (pillars, leadership, etc.).
+  var EXCLUDE = 'nav,header,footer,.sh-nav,.footer,.nav,.bp-nav,.g6-nav,' +
+    '#g6-s1,#g6-s2,#g6-s3,#g6-s4,#g6-s5,#g6-s6,#g6-s7';
   var EASE = 'cubic-bezier(.16,1,.3,1)';
 
   function hide(el) {
