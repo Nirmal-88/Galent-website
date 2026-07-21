@@ -10413,12 +10413,22 @@ body[data-page^="service-"] .hero .t-hero { letter-spacing: -0.02em; }
  * colour orbs so the CTA reads as a clean glowing card.
  * ================================================================== */
 @media (max-width: 860px) {
-  .cta-rings, .cta-spark { display: none !important; }
+  /* Center the orbital rings in the card and size them to fit so they radiate
+     (and keep expanding-animating) from the middle — like desktop — instead of
+     the 480px rings clipping in as arcs from the edges. */
+  .cta-rings {
+    width: 300px !important; height: 300px !important;
+    top: 50% !important; left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+  }
+  .cta-card[data-cta-parallax] .cta-rings { transform: translate(-50%, -50%) !important; }
+  /* Ambient colour orbs: sized to the card, centered, no scroll parallax. */
   .cta-orb { animation: none !important; }
+  .cta-orb--a { width: 320px !important; height: 320px !important; top: -110px !important; left: 50% !important; }
   .cta-card[data-cta-parallax] .cta-orb--a { transform: translateX(-50%) !important; }
+  .cta-orb--b { width: 240px !important; height: 240px !important; bottom: -90px !important; left: -8% !important; }
+  .cta-orb--c { width: 220px !important; height: 220px !important; bottom: -70px !important; right: -8% !important; }
   .cta-card[data-cta-parallax] .cta-orb--b,
   .cta-card[data-cta-parallax] .cta-orb--c { transform: none !important; }
-  .cta-orb--a { width: 360px !important; height: 360px !important; top: -150px !important; }
-  .cta-orb--b { width: 300px !important; height: 300px !important; bottom: -150px !important; }
-  .cta-orb--c { width: 280px !important; height: 280px !important; bottom: -130px !important; }
+  .cta-spark { display: none !important; }
 }

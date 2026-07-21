@@ -1,70 +1,47 @@
 /* Galent — mobile motion layer.
  *
- * On phones (<=860px) the scroll-scene pages present every section in its
- * final static state (blueprint-scenes.js setFinal). That's readable but
- * flat. This module adds a premium reveal: each section/card fades + rises
- * into view as it scrolls on, via IntersectionObserver. Desktop is untouched.
+ * On phones (<=860px) the scroll-scene pages present sections in a mostly
+ * static, linearized flow. This adds a premium reveal: each content block
+ * fades + rises into view as it scrolls on, via IntersectionObserver — so the
+ * phone experience feels alive, not like a PDF. Desktop is untouched.
  *
- * Safety: initial hidden state is applied with inline !important so it wins
- * over any existing inline/stylesheet rules; a failsafe timer reveals
- * everything after 2.6s so content can never get stuck hidden (and reduced
- * motion / no-IO environments are skipped entirely).
+ * Robust by design:
+ *  - Targets block-level containers (cards, sections, headings, media) and
+ *    de-dupes nested matches so only the outermost block animates (no double
+ *    motion, no fragile inline-style attribute selectors).
+ *  - Skips the nav/header/footer and any fixed/sticky chrome.
+ *  - Hides via inline !important so it beats existing inline/stylesheet rules;
+ *    a 2.6s failsafe + first-scroll kick guarantee nothing stays hidden.
+ *  - Skips entirely under reduced-motion or without IntersectionObserver.
  */
 (function () {
-  var mqMobile = window.matchMedia && window.matchMedia('(max-width: 860px)');
-  if (!mqMobile || !mqMobile.matches) return;
+  var mq = window.matchMedia && window.matchMedia('(max-width: 860px)');
+  if (!mq || !mq.matches) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (!('IntersectionObserver' in window)) return;
 
-  // Section-level blocks to reveal (kept coarse so the effect reads as clean
-  // section-by-section motion, not twitchy per-word animation).
   var SELECTOR = [
-    // Blueprint pages (platform/about/fde/industries)
-    '.bp-dive-stage',
-    '.bp-grid2 > *',
-    '.bp-card',
-    '.bp-slide',
-    '.bp-schematic',
-    '.bp-chapter',
-    '.bp-proofwall',
-    '.bp-cols4',
-    '.bp-cols3',
-    '.leader-card',
-    // Homepage (g6) linearized scene blocks
-    '.g6-pillar',
-    '.g6-leader',
-    '.g6-card',
-    '.g6-slide',
-    '#g6-s1-stage',
-    '#g6-s2 > div > div > div',
-    '#g6-s3 .g6-bp-d',
-    '#g6-bp-d-init',
-    '#g6-s6 [style*="align-items:baseline"]',
-    // Design-system pages (services / knowledge-hub / contact / posts)
-    '.section-head',
-    '.stat-strip',
-    '.engine-card',
-    '.card-item',
-    '.feature',
-    '.svc',
-    '.contact-card',
-    '.office-card',
-    '.cta-card',
-    '.diff-list li',
-    '.service-related a',
-    '.cap',
-    '.archetype-card',
-    '.kh-banner',
-    '.subscribe-band',
-    '.hub-cat-title'
+    'h1', 'h2', 'h3',
+    'p',
+    'img',
+    'article',
+    'blockquote',
+    '.btn',
+    '.section-head', '.stat-strip', '.cta-card', '.kh-banner', '.subscribe-band',
+    '.bp-dive-stage', '.bp-chapter', '.bp-proofwall', '.bp-schematic',
+    '[class*="card"]', '[class*="pillar"]', '[class*="leader"]',
+    '[class*="slide"]', '[class*="engine"]', '[class*="tile"]', '[class*="dig"]',
+    '#g6-s1-stage'
   ].join(',');
 
-  var EASE = 'cubic-bezier(.16,1,.3,1)';
+  // Never animate the persistent chrome.
+  var EXCLUDE = 'nav,header,footer,.sh-nav,.footer,.nav,.bp-nav,.g6-nav';
 
+  var EASE = 'cubic-bezier(.16,1,.3,1)';
   function hide(el) {
-    el.style.setProperty('transition', 'opacity .8s ' + EASE + ', transform .8s ' + EASE, 'important');
+    el.style.setProperty('transition', 'opacity .7s ' + EASE + ', transform .7s ' + EASE, 'important');
     el.style.setProperty('opacity', '0', 'important');
-    el.style.setProperty('transform', 'translateY(28px)', 'important');
+    el.style.setProperty('transform', 'translateY(42px)', 'important');
     el.style.setProperty('will-change', 'opacity, transform');
   }
   function show(el) {
@@ -72,28 +49,37 @@
     el.style.setProperty('transform', 'none', 'important');
   }
 
+  function collect() {
+    var all = Array.prototype.slice.call(document.querySelectorAll(SELECTOR));
+    var set = new Set(all);
+    return all.filter(function (el) {
+      if (el.closest(EXCLUDE)) return false;
+      var r = el.getBoundingClientRect();
+      if (r.width < 40 || r.height < 16) return false;         // skip tiny/inline bits
+      var pos = getComputedStyle(el).position;
+      if (pos === 'fixed' || pos === 'sticky') return false;
+      // keep only the OUTERMOST match (skip if an ancestor is also targeted)
+      var p = el.parentElement;
+      while (p) { if (set.has(p)) return false; p = p.parentElement; }
+      return true;
+    });
+  }
+
   function start() {
-    var els = Array.prototype.slice.call(document.querySelectorAll(SELECTOR))
-      .filter(function (el) { return !el.__mm; });
+    var els = collect().filter(function (el) { return !el.__mm; });
     if (!els.length) return;
 
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (en.isIntersecting) { show(en.target); io.unobserve(en.target); }
       });
-    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
 
-    els.forEach(function (el) {
-      el.__mm = 1;
-      hide(el);
-      io.observe(el);
-    });
+    els.forEach(function (el) { el.__mm = 1; hide(el); io.observe(el); });
 
-    // Failsafe: never leave anything hidden.
-    setTimeout(function () { els.forEach(show); }, 2600);
-    // Also reveal on first touch/scroll if IO is slow to fire.
+    setTimeout(function () { els.forEach(show); }, 2600);        // failsafe
     var kick = function () { requestAnimationFrame(function () {
-      els.forEach(function (el) { var r = el.getBoundingClientRect(); if (r.top < innerHeight * 0.94) show(el); });
+      els.forEach(function (el) { if (el.getBoundingClientRect().top < innerHeight * 0.92) show(el); });
     }); };
     addEventListener('scroll', kick, { passive: true, once: true });
   }

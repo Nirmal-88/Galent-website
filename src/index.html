@@ -127,9 +127,9 @@
       [style*="repeat(3,1fr)"] { grid-template-columns:1fr !important; }
       [style*="grid-template-columns:1fr auto"] { grid-template-columns:1fr !important; }
       [style*="grid-template-columns:1fr 1fr"] { grid-template-columns:1fr !important; }
-      /* Proof stat cells: stack the big number above its description */
-      #g6-s6 [style*="align-items:baseline;gap:20px"] { flex-direction:column !important; align-items:flex-start !important; gap:10px !important; }
-      #g6-s6 [style*="max-width:230px"] { max-width:none !important; }
+      /* Proof stat cells: stack the big number above its full-width description */
+      #g6-s6 .g6-proof-cell { flex-direction:column !important; align-items:flex-start !important; gap:12px !important; padding:34px 24px !important; }
+      #g6-s6 .g6-proof-desc { max-width:none !important; }
     }
   </style>
   <link rel="stylesheet" href="css/site-header.css?v=hdr-1">
@@ -500,7 +500,7 @@
       <div style="width:100%;max-width:1340px;margin:0 auto;padding:0 48px;">
         <div style="font-family:'Spline Sans Mono',monospace;font-size:12px;letter-spacing:.3em;color:#6fe3ff;margin-bottom:54px;">06 — the proof · odometers ride your scroll</div>
         <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:rgba(111,227,255,.12);border:1px solid rgba(111,227,255,.12);">
-          <div style="background:#06080f;padding:48px 42px;display:flex;align-items:baseline;gap:20px;">
+          <div class="g6-proof-cell" style="background:#06080f;padding:48px 42px;display:flex;align-items:baseline;gap:20px;">
             <span style="display:inline-flex;align-items:baseline;font-family:'Cabinet Grotesk',sans-serif;font-weight:800;font-size:clamp(52px,6.5vw,110px);line-height:1;color:#6fe3ff;">↓<span class="g6-dig" data-d="2" style="display:inline-block;height:1em;overflow:hidden;vertical-align:top;"><span class="g6-dig-strip" style="display:block;white-space:pre;line-height:1;will-change:transform;">0
 1
 2
@@ -529,9 +529,9 @@
 3
 4
 5</span></span>%</span>
-            <span style="font-size:13.5px;line-height:1.5;color:#aab3bd;max-width:230px;">Lower TCO — 20% of engineering capacity freed for impact</span>
+            <span class="g6-proof-desc" style="font-size:13.5px;line-height:1.5;color:#aab3bd;max-width:230px;">Lower TCO — 20% of engineering capacity freed for impact</span>
           </div>
-          <div style="background:#06080f;padding:48px 42px;display:flex;align-items:baseline;gap:20px;">
+          <div class="g6-proof-cell" style="background:#06080f;padding:48px 42px;display:flex;align-items:baseline;gap:20px;">
             <span style="display:inline-flex;align-items:baseline;font-family:'Cabinet Grotesk',sans-serif;font-weight:800;font-size:clamp(52px,6.5vw,110px);line-height:1;">↓<span class="g6-dig" data-d="9" style="display:inline-block;height:1em;overflow:hidden;vertical-align:top;"><span class="g6-dig-strip" style="display:block;white-space:pre;line-height:1;will-change:transform;">0
 1
 2
@@ -562,9 +562,9 @@
 8
 9
 0</span></span>%</span>
-            <span style="font-size:13.5px;line-height:1.5;color:#aab3bd;max-width:230px;">PoC-to-Production failures cut by 85–90% with AI precision</span>
+            <span class="g6-proof-desc" style="font-size:13.5px;line-height:1.5;color:#aab3bd;max-width:230px;">PoC-to-Production failures cut by 85–90% with AI precision</span>
           </div>
-          <div style="background:#06080f;padding:48px 42px;display:flex;align-items:baseline;gap:20px;">
+          <div class="g6-proof-cell" style="background:#06080f;padding:48px 42px;display:flex;align-items:baseline;gap:20px;">
             <span style="display:inline-flex;align-items:baseline;font-family:'Cabinet Grotesk',sans-serif;font-weight:800;font-size:clamp(52px,6.5vw,110px);line-height:1;"><span class="g6-dig" data-d="1" style="display:inline-block;height:1em;overflow:hidden;vertical-align:top;"><span class="g6-dig-strip" style="display:block;white-space:pre;line-height:1;will-change:transform;">0
 1
 2
@@ -587,7 +587,7 @@
 8
 9
 0</span></span><span style="color:#6fe3ff;">X</span></span>
-            <span style="font-size:13.5px;line-height:1.5;color:#aab3bd;max-width:230px;">4X to 10X faster time to value across the SDLC</span>
+            <span class="g6-proof-desc" style="font-size:13.5px;line-height:1.5;color:#aab3bd;max-width:230px;">4X to 10X faster time to value across the SDLC</span>
           </div>
           <div style="background:#06080f;padding:48px 42px;display:flex;flex-direction:column;gap:14px;justify-content:center;">
             <div style="font-family:'Spline Sans Mono',monospace;font-size:12.5px;letter-spacing:.14em;color:#aab3bd;line-height:2;">50+ enterprise projects · 70+ production deployments<br>10+ templatized solutions · 100% forward-deployed engineers<br><span style="color:#6fe3ff;">9 core engines · 125+ reusable agents · 70+ validated use cases<br>20+ design patterns · 9 scaling frameworks</span></div>
@@ -998,7 +998,7 @@
 })();
 </script>
   <script src="js/site-header.js?v=hdr-1" defer></script>
-  <script src="js/mobile-motion.js?v=mm-4" defer></script>
+  <script src="js/mobile-motion.js?v=mm-5" defer></script>
 
 </body>
 </html>
