@@ -37,7 +37,24 @@
     '.g6-slide',
     '#g6-s2 > div > div > div',
     '#g6-s3 .g6-bp-d',
-    '#g6-bp-d-init'
+    '#g6-bp-d-init',
+    // Design-system pages (services / knowledge-hub / contact / posts)
+    '.section-head',
+    '.stat-strip',
+    '.engine-card',
+    '.card-item',
+    '.feature',
+    '.svc',
+    '.contact-card',
+    '.office-card',
+    '.cta-card',
+    '.diff-list li',
+    '.service-related a',
+    '.cap',
+    '.archetype-card',
+    '.kh-banner',
+    '.subscribe-band',
+    '.hub-cat-title'
   ].join(',');
 
   var EASE = 'cubic-bezier(.16,1,.3,1)';
