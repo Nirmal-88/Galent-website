@@ -75,7 +75,9 @@ a { color:inherit; }
      it looks, and the fixed nav overlays the top of a vertically-centred pin —
      so top AND bottom were cropping. Top-align the content just below the nav
      and shrink the diagram/type so the whole scene fits any phone height. */
-  .bp-scene[data-scene="schematic"] .bp-pin { align-items:flex-start !important; padding-top:88px !important; }
+  /* With the photos removed the scene is short enough to vertically CENTER
+     again, while the top padding keeps it clear of the fixed nav. */
+  .bp-scene[data-scene="schematic"] .bp-pin { align-items:center !important; padding:88px 20px 40px !important; }
   .bp-schematic svg { width:min(64vw,244px) !important; max-width:244px; max-height:30vh !important; height:auto !important; margin:4px auto 8px; display:block; }
   .bp-bp-panel { height:188px !important; }
   .bp-scene[data-scene="schematic"] h2 { font-size:clamp(15px,4.3vw,19px) !important; line-height:1.28 !important; }
@@ -86,6 +88,9 @@ a { color:inherit; }
   .bp-scene[data-scene="schematic"] [style*="justify-content:space-between"] > div { margin-left:auto !important; margin-right:auto !important; }
   .bp-bp-d, .bp-bp-init { text-align:center !important; }
   .bp-bp-d p, .bp-bp-init p { margin-left:auto !important; margin-right:auto !important; }
+  /* No engine photos on phones — keep just the centered text (NeuroQL / RCM /
+     Knowledge Graph / Context Graph). The images added clutter + height. */
+  .bp-bp-imgwrap { display:none !important; }
 
   /* wipe slides — keep the sticky clip-path wipe; single-column; ghost number
      sits behind the copy. */
