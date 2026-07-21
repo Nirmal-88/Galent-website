@@ -75,7 +75,7 @@
   }
 
   // How many cards to show per page within a panel before paginating.
-  const PAGE_SIZE = 9;
+  const PAGE_SIZE = 8;
 
   function renderPanel(panel, items, ctaLabel) {
     const grid = panel.querySelector('.card-grid');
