@@ -37,10 +37,9 @@
     @keyframes g6Blink { 0%,49%{ opacity:1; } 50%,100%{ opacity:0; } }
     @keyframes g6Scroll { 0%{ transform:translateY(0); opacity:1; } 70%{ transform:translateY(12px); opacity:0; } 100%{ transform:translateY(0); opacity:0; } }
     @keyframes g6Reveal { from{ opacity:0; transform:translateY(44px); } to{ opacity:1; transform:translateY(0); } }
-    @media (prefers-reduced-motion: no-preference) {
-      [data-reveal] { animation:g6Reveal .9s cubic-bezier(.16,1,.3,1) both; animation-timeline:view(); animation-range:entry 0% cover 22%; }
-      @supports not (animation-timeline: view()) { [data-reveal] { animation-timeline:auto; } }
-    }
+    /* [data-reveal] fade-ins are driven by js/mobile-motion.js (IntersectionObserver,
+       every browser) — the old CSS `animation-timeline: view()` only fired in
+       Chromium and played once on load elsewhere, so nothing animated on scroll. */
     @media (max-width: 860px) {
       /* ---- NAV: solid bar + hamburger dropdown ---- */
       .g6-nav { padding:15px 20px !important; mix-blend-mode:normal !important;
@@ -998,7 +997,7 @@
 })();
 </script>
   <script src="js/site-header.js?v=hdr-1" defer></script>
-  <script src="js/mobile-motion.js?v=mm-5" defer></script>
+  <script src="js/mobile-motion.js?v=mm-6" defer></script>
 
 </body>
 </html>
