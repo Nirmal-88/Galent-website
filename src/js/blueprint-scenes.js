@@ -22,11 +22,8 @@
   function injectChrome() {
     var bar = mk('div', 'position:fixed;top:0;left:0;height:2px;width:0;background:#6fe3ff;z-index:9997;pointer-events:none;'); bar.id = 'bp-progress';
     document.body.appendChild(bar);
-    if (!mobile) {
-      var c = mk('div', 'position:fixed;left:26px;bottom:22px;z-index:950;font-family:"Spline Sans Mono",monospace;font-size:10px;letter-spacing:.25em;color:#8a929c;mix-blend-mode:difference;pointer-events:none;', '<span id="bp-chapter">00 — start</span>'); c.id = 'bp-chapter-wrap';
-      var p = mk('div', 'position:fixed;right:26px;bottom:22px;z-index:950;font-family:"Spline Sans Mono",monospace;font-size:10px;letter-spacing:.25em;color:#8a929c;mix-blend-mode:difference;pointer-events:none;', '<span id="bp-pct">00%</span>'); p.id = 'bp-pct-wrap';
-      document.body.appendChild(c); document.body.appendChild(p);
-    }
+    // Section "chapter" label + percent HUD removed (they sat fixed at the
+    // bottom of every scene, e.g. "01 — about galent"). Progress bar kept.
     if (fine && !reduce) {
       var ring = mk('div', 'position:fixed;top:0;left:0;width:36px;height:36px;border:1px solid rgba(238,242,246,.5);transform:translate(-50%,-50%) rotate(45deg);pointer-events:none;z-index:9998;transition:width .3s,height .3s,border-color .3s,background .3s,border-radius .3s;mix-blend-mode:difference;'); ring.id = 'bp-ring';
       var dot = mk('div', 'position:fixed;top:0;left:0;width:5px;height:5px;background:#6fe3ff;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:9999;'); dot.id = 'bp-dot';
