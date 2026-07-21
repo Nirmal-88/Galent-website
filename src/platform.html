@@ -133,20 +133,30 @@
         </div>
         <div class="bp-schematic" style="display:grid;grid-template-columns:1.05fr 1fr;gap:52px;align-items:center;">
           <svg viewBox="0 0 560 460" style="width:100%;height:auto;overflow:visible;">
-            <circle class="bp-bp-core" cx="280" cy="230" r="56" fill="none" stroke="#6fe3ff" stroke-width="1.5" stroke-dasharray="352" stroke-dashoffset="352" style="filter:drop-shadow(0 0 10px rgba(111,227,255,.4));"></circle>
+            <defs>
+              <radialGradient id="bpHubGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#6fe3ff" stop-opacity="0.55"></stop>
+                <stop offset="55%" stop-color="#6fe3ff" stop-opacity="0.15"></stop>
+                <stop offset="100%" stop-color="#6fe3ff" stop-opacity="0"></stop>
+              </radialGradient>
+            </defs>
+            <!-- glowing core orb (soft halo + filled centre) behind the ring -->
+            <circle cx="280" cy="230" r="140" fill="url(#bpHubGlow)" opacity="0.55"></circle>
+            <circle cx="280" cy="230" r="72" fill="url(#bpHubGlow)" opacity="0.9"></circle>
+            <circle class="bp-bp-core" cx="280" cy="230" r="56" fill="rgba(6,8,15,0.35)" stroke="#6fe3ff" stroke-width="2" stroke-dasharray="352" stroke-dashoffset="352" style="filter:drop-shadow(0 0 22px rgba(111,227,255,.75));"></circle>
             <text class="bp-bp-corelabel" x="280" y="224" text-anchor="middle" fill="#eef2f6" font-size="15" font-weight="700" font-family="Cabinet Grotesk,sans-serif" opacity="0">GalentAI</text>
             <text class="bp-bp-corelabel" x="280" y="243" text-anchor="middle" fill="#8a929c" font-size="10" font-family="Spline Sans Mono,monospace" opacity="0">core</text>
-            <path class="bp-bp-line" d="M 236 194 L 120 100" fill="none" stroke="#6fe3ff" stroke-width="1.2" stroke-dasharray="150" stroke-dashoffset="150"></path>
-            <circle class="bp-bp-node" cx="120" cy="100" r="9" fill="#06080f" stroke="#6fe3ff" stroke-width="1.5" opacity="0"></circle>
-            <text class="bp-bp-text" x="120" y="72" text-anchor="middle" fill="#eef2f6" font-size="14" font-weight="700" font-family="Cabinet Grotesk,sans-serif" opacity="0">3.1 NeuroQL</text>
-            <path class="bp-bp-line" d="M 324 194 L 440 100" fill="none" stroke="#6fe3ff" stroke-width="1.2" stroke-dasharray="150" stroke-dashoffset="150"></path>
-            <circle class="bp-bp-node" cx="440" cy="100" r="9" fill="#06080f" stroke="#6fe3ff" stroke-width="1.5" opacity="0"></circle>
-            <text class="bp-bp-text" x="440" y="72" text-anchor="middle" fill="#eef2f6" font-size="14" font-weight="700" font-family="Cabinet Grotesk,sans-serif" opacity="0">3.2 RCM</text>
-            <path class="bp-bp-line" d="M 236 266 L 120 360" fill="none" stroke="#6fe3ff" stroke-width="1.2" stroke-dasharray="150" stroke-dashoffset="150"></path>
-            <circle class="bp-bp-node" cx="120" cy="360" r="9" fill="#06080f" stroke="#6fe3ff" stroke-width="1.5" opacity="0"></circle>
+            <path class="bp-bp-line" d="M 236 194 L 120 100" fill="none" stroke="#6fe3ff" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="150" stroke-dashoffset="150" style="filter:drop-shadow(0 0 5px rgba(111,227,255,.7));"></path>
+            <circle class="bp-bp-node" cx="120" cy="100" r="11" fill="#06080f" stroke="#6fe3ff" stroke-width="2" opacity="0" style="filter:drop-shadow(0 0 9px rgba(111,227,255,.85));"></circle>
+            <text class="bp-bp-text" x="120" y="70" text-anchor="middle" fill="#eef2f6" font-size="14" font-weight="700" font-family="Cabinet Grotesk,sans-serif" opacity="0">3.1 NeuroQL</text>
+            <path class="bp-bp-line" d="M 324 194 L 440 100" fill="none" stroke="#6fe3ff" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="150" stroke-dashoffset="150" style="filter:drop-shadow(0 0 5px rgba(111,227,255,.7));"></path>
+            <circle class="bp-bp-node" cx="440" cy="100" r="11" fill="#06080f" stroke="#6fe3ff" stroke-width="2" opacity="0" style="filter:drop-shadow(0 0 9px rgba(111,227,255,.85));"></circle>
+            <text class="bp-bp-text" x="440" y="70" text-anchor="middle" fill="#eef2f6" font-size="14" font-weight="700" font-family="Cabinet Grotesk,sans-serif" opacity="0">3.2 RCM</text>
+            <path class="bp-bp-line" d="M 236 266 L 120 360" fill="none" stroke="#6fe3ff" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="150" stroke-dashoffset="150" style="filter:drop-shadow(0 0 5px rgba(111,227,255,.7));"></path>
+            <circle class="bp-bp-node" cx="120" cy="360" r="11" fill="#06080f" stroke="#6fe3ff" stroke-width="2" opacity="0" style="filter:drop-shadow(0 0 9px rgba(111,227,255,.85));"></circle>
             <text class="bp-bp-text" x="120" y="392" text-anchor="middle" fill="#eef2f6" font-size="14" font-weight="700" font-family="Cabinet Grotesk,sans-serif" opacity="0">3.3 Knowledge Graph</text>
-            <path class="bp-bp-line" d="M 324 266 L 440 360" fill="none" stroke="#6fe3ff" stroke-width="1.2" stroke-dasharray="150" stroke-dashoffset="150"></path>
-            <circle class="bp-bp-node" cx="440" cy="360" r="9" fill="#06080f" stroke="#6fe3ff" stroke-width="1.5" opacity="0"></circle>
+            <path class="bp-bp-line" d="M 324 266 L 440 360" fill="none" stroke="#6fe3ff" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="150" stroke-dashoffset="150" style="filter:drop-shadow(0 0 5px rgba(111,227,255,.7));"></path>
+            <circle class="bp-bp-node" cx="440" cy="360" r="11" fill="#06080f" stroke="#6fe3ff" stroke-width="2" opacity="0" style="filter:drop-shadow(0 0 9px rgba(111,227,255,.85));"></circle>
             <text class="bp-bp-text" x="440" y="392" text-anchor="middle" fill="#eef2f6" font-size="14" font-weight="700" font-family="Cabinet Grotesk,sans-serif" opacity="0">3.4 Context Graph</text>
           </svg>
           <div style="position:relative;">
