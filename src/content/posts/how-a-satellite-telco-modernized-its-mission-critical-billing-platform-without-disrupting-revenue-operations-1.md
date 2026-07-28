@@ -1,6 +1,5 @@
 ---
-title: How a Satellite Telco Modernized Its Mission-Critical Billing Platform
-  Without Disrupting Revenue Operations
+title: how are you?
 excerpt: one line preview
 kind: ESSAY
 length: 5 MIN
