@@ -87,7 +87,7 @@
 
         <div class="kh-hero-visual">
           <!-- Clickable, cross-fading slideshow of the latest posts' card
-               images — populated by js/cms.js from content/knowledge.json. -->
+               images — populated by js/cms.js from Sanity. -->
           <div class="kh-slideshow" data-kh-slides aria-label="Latest from the Knowledge Hub"></div>
         </div>
       </div>
@@ -120,7 +120,7 @@
     <section style="padding-top: var(--space-2xl);">
       <div class="container">
         <div class="hub-toolbar" data-reveal>
-          <!-- Tabs are rendered dynamically from content/knowledge.json -->
+          <!-- Tabs are rendered dynamically from the Sanity "Hub tabs" documents -->
           <div class="hub-tabs" role="tablist" aria-label="Knowledge categories"></div>
           <div class="hub-search">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
@@ -128,8 +128,8 @@
           </div>
         </div>
 
-        <!-- CMS-driven tabs + panels — built by js/cms.js from content/knowledge.json.
-             Add or remove categories via /admin/ -> Knowledge Hub -> Categories. -->
+        <!-- CMS-driven tabs + panels — built by js/cms.js from Sanity.
+             Add or remove tabs in the Studio -> Hub tabs. -->
         <div class="hub-panels"></div>
       </div>
     </section>
@@ -205,8 +205,10 @@
     </div>
   </footer>
 
+  <script src="js/sanity-config.js?v=sanity-1"></script>
+  <script src="js/sanity.js?v=sanity-1"></script>
   <script src="js/animations.js?v=net-dark-3"></script>
-  <script src="js/cms.js?v=cms-10"></script>
+  <script src="js/cms.js?v=cms-11"></script>
   <script>
     Galent.persistentReveal();
     Galent.stickyNav('site-nav');

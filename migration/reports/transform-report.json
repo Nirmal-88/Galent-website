@@ -1,0 +1,280 @@
+{
+  "migratedAt": "2026-08-12T00:00:00.000Z",
+  "counts": {
+    "categories": 4,
+    "posts": 49,
+    "draftPosts": 2,
+    "sourceCards": 49,
+    "sourceMarkdownFiles": 51,
+    "imageDirectives": 144,
+    "warnings": 1,
+    "skipped": 0
+  },
+  "warnings": [
+    "[galentai-ai-native-sdlcplatform] Table converted to plain-text cells (7 rows) in card \"GalentAI: The AI Native SDLC Platform Built for Production\" — inline bold/italic inside cells was dropped."
+  ],
+  "perDocument": [
+    {
+      "slug": "the-grand-prix-model-of-ai-delivery",
+      "blocks": 40,
+      "warnings": []
+    },
+    {
+      "slug": "claude-managed-agents-vs-enterprise-ai-platforms",
+      "blocks": 56,
+      "warnings": []
+    },
+    {
+      "slug": "ai-didnot-disrupt-techservices-it-exposed-the-truth",
+      "blocks": 54,
+      "warnings": []
+    },
+    {
+      "slug": "ai-is-everywhere-except-the-plwhy-and-what-fixes-it",
+      "blocks": 44,
+      "warnings": []
+    },
+    {
+      "slug": "the-asymmetry-no-cio-can-afford-to-ignore",
+      "blocks": 31,
+      "warnings": []
+    },
+    {
+      "slug": "what-the-axios-supply-chain-attack-means-for-engineering-teams",
+      "blocks": 61,
+      "warnings": []
+    },
+    {
+      "slug": "beyond-the-build-why-forward-deployed-engineers-are-the-new-face-of-tech",
+      "blocks": 56,
+      "warnings": []
+    },
+    {
+      "slug": "quantum-ai-explained-the-next-great-leap-beyond-classical-artificial-intelligence",
+      "blocks": 85,
+      "warnings": []
+    },
+    {
+      "slug": "finops-vs-greenops-the-new-ai-dilemma-performance-cost-or-planet",
+      "blocks": 70,
+      "warnings": []
+    },
+    {
+      "slug": "enterprise-agentic-ai-checklist-2025",
+      "blocks": 58,
+      "warnings": []
+    },
+    {
+      "slug": "cio-ai-agent-readiness-guide-2025",
+      "blocks": 19,
+      "warnings": []
+    },
+    {
+      "slug": "ai-soc-agents-transforming-cybersecurity-in-2025",
+      "blocks": 45,
+      "warnings": []
+    },
+    {
+      "slug": "app-modernization-strategies-to-outpace-competitors-in-the-ai-first-era",
+      "blocks": 45,
+      "warnings": []
+    },
+    {
+      "slug": "rag-vs-graph-rag-the-battle-for-enterprise-grade-intelligence",
+      "blocks": 37,
+      "warnings": []
+    },
+    {
+      "slug": "ai-and-etl-why-indian-enterprises-should-move-from-etl-vs-elt-to-agentic-etl",
+      "blocks": 66,
+      "warnings": []
+    },
+    {
+      "slug": "seal-the-ai-that-never-stops-learning",
+      "blocks": 46,
+      "warnings": []
+    },
+    {
+      "slug": "the-hidden-layer-powering-genai-at-scale",
+      "blocks": 29,
+      "warnings": []
+    },
+    {
+      "slug": "cracking-the-code-on-talent-tech-and-transformation-fourthwards-roundtable-reflections",
+      "blocks": 37,
+      "warnings": []
+    },
+    {
+      "slug": "why-most-genai-pilots-fail-and-how-to-scale-yours-successfully",
+      "blocks": 79,
+      "warnings": []
+    },
+    {
+      "slug": "gcc-in-a-box-how-global-firms-are-building-ai-first-hubs-in-record-time",
+      "blocks": 76,
+      "warnings": []
+    },
+    {
+      "slug": "inside-indias-gcc-transformation-the-ai-shift-reshaping-global-enterprises",
+      "blocks": 54,
+      "warnings": []
+    },
+    {
+      "slug": "the-retail-divide-ai-first-winners-vs-analog-left-behinds",
+      "blocks": 58,
+      "warnings": []
+    },
+    {
+      "slug": "cracking-the-ai-sdlc-code-a-framework-for-balancing-automation-and-human-potential",
+      "blocks": 55,
+      "warnings": []
+    },
+    {
+      "slug": "vibe-coding-the-ai-driven-evolution-of-software-engineering",
+      "blocks": 53,
+      "warnings": []
+    },
+    {
+      "slug": "3-ways-ai-will-break-software-development-and-how-to-stay-ahead-in-2025",
+      "blocks": 16,
+      "warnings": []
+    },
+    {
+      "slug": "ai-in-the-fourth-industrial-revolution-transforming-industries-shaping-the-future",
+      "blocks": 20,
+      "warnings": []
+    },
+    {
+      "slug": "fourthwards-2025",
+      "blocks": 28,
+      "warnings": []
+    },
+    {
+      "slug": "galentai-ai-native-sdlcplatform",
+      "blocks": 31,
+      "warnings": [
+        "Table converted to plain-text cells (7 rows) in card \"GalentAI: The AI Native SDLC Platform Built for Production\" — inline bold/italic inside cells was dropped."
+      ]
+    },
+    {
+      "slug": "jina-priya-global-delivery-head-galent",
+      "blocks": 6,
+      "warnings": []
+    },
+    {
+      "slug": "galent-chief-ai-architect-vijayakumar-anbu",
+      "blocks": 10,
+      "warnings": []
+    },
+    {
+      "slug": "galent-unveils-aistudio-in-chennai-to-accelerate-ai-native-digital-engineering",
+      "blocks": 13,
+      "warnings": []
+    },
+    {
+      "slug": "galent-appoints-ramakrishnan-venkatasubramanian-as-chief-technology-officer",
+      "blocks": 6,
+      "warnings": []
+    },
+    {
+      "slug": "galent-launches-fourthwards-series",
+      "blocks": 37,
+      "warnings": []
+    },
+    {
+      "slug": "what-pride-looks-like-at-work",
+      "blocks": 22,
+      "warnings": []
+    },
+    {
+      "slug": "global-fintech-reimagined-operations-from-reactive-support-to-ai-driven-managed-services",
+      "blocks": 56,
+      "warnings": []
+    },
+    {
+      "slug": "commercial-manufacturer-replaced-manual-bid-management-with-an-ai-powered-cost-engine",
+      "blocks": 65,
+      "warnings": []
+    },
+    {
+      "slug": "leading-us-industrial-distributor-overhauled-a-slow-costly-pricing-platform-without-disrupting-business-operations",
+      "blocks": 61,
+      "warnings": []
+    },
+    {
+      "slug": "how-a-satellite-telco-modernized-its-mission-critical-billing-platform-without-disrupting-revenue-operations",
+      "blocks": 72,
+      "warnings": []
+    },
+    {
+      "slug": "how-a-high-growth-us-telco-eliminated-legacy-blockers-and-moved-to-gcp-without-disrupting-services",
+      "blocks": 48,
+      "warnings": []
+    },
+    {
+      "slug": "how-a-fortune-100-tech-company-eliminated-incident-overload-with-ai-enabled-operations",
+      "blocks": 59,
+      "warnings": []
+    },
+    {
+      "slug": "how-a-fortune-100-tech-company-automated-global-content-operations-across-languages-and-regions",
+      "blocks": 63,
+      "warnings": []
+    },
+    {
+      "slug": "innovating-insurance-streamlining-operations-with-ai-and-predictive-analytics",
+      "blocks": 26,
+      "warnings": []
+    },
+    {
+      "slug": "future-proofing-audit-services-for-a-big-four-accounting-firm",
+      "blocks": 28,
+      "warnings": []
+    },
+    {
+      "slug": "revolutionizing-workforce-expansion-with-ai-enabled-talent-solutions-for-a-leading-it-services-firm",
+      "blocks": 23,
+      "warnings": []
+    },
+    {
+      "slug": "intelligent-ai-powered-talent-optimization-transforming-workforce-strategy-for-a-healthcare-leader",
+      "blocks": 23,
+      "warnings": []
+    },
+    {
+      "slug": "accelerating-cloud-transformation-with-ai-driven-solutions-for-a-leading-technology-services-firm",
+      "blocks": 23,
+      "warnings": []
+    },
+    {
+      "slug": "ai-augmented-asset-servicing-transforming-efficiency-and-decision-making",
+      "blocks": 19,
+      "warnings": []
+    },
+    {
+      "slug": "legacy-reimagined-the-impact-of-ai-on-customer-experience-and-operational-excellence",
+      "blocks": 22,
+      "warnings": []
+    },
+    {
+      "slug": "system-optimization-for-a-global-energy-conglomerate-using-iot-and-ai-driven-analytics",
+      "blocks": 20,
+      "warnings": []
+    },
+    {
+      "slug": "hi-how-are-you",
+      "draft": true,
+      "warnings": [
+        "Imported as a draft: this markdown file had no Knowledge Hub card, so it was never reachable on the live site."
+      ]
+    },
+    {
+      "slug": "welcome-to-the-hub",
+      "draft": true,
+      "warnings": [
+        "Imported as a draft: this markdown file had no Knowledge Hub card, so it was never reachable on the live site."
+      ]
+    }
+  ],
+  "skipped": []
+}

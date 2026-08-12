@@ -1,6 +1,18 @@
 # Decap CMS configuration for Galent.
 # Schema definitions live here. Edits in the /admin/ UI write commits
 # back to this GitHub repo, which triggers a Vercel redeploy.
+#
+# NOTE (2026-08-12): the Knowledge Hub and Posts collections were REMOVED from
+# this file when blog content moved to Sanity. Blogs, whitepapers, news and
+# case studies are now edited in the Sanity Studio, not here:
+#
+#   https://galent.sanity.studio
+#
+# What remains below is the content that still lives in JSON files in this
+# repo: Leadership, Client Outcomes, Service pages and Contact. Those still
+# publish the old way — commit to GitHub, Vercel rebuilds, ~1 minute.
+# Do not re-add a blog collection here; it would fight with Sanity over
+# which system owns a post.
 
 backend:
   name: github
@@ -19,72 +31,6 @@ display_url: https://galent-website.vercel.app
 logo_url: https://galent-website.vercel.app/assets/images/logo.png
 
 collections:
-  # ----------------------------------------------------------------------
-  # KNOWLEDGE HUB — edits content/knowledge.json directly (file mode)
-  # ----------------------------------------------------------------------
-  - name: "knowledge"
-    label: "Knowledge Hub"
-    label_singular: "Hub item"
-    description: "Blogs, whitepapers, and videocasts that appear on the Knowledge Hub page. Add a new item, change copy, or remove one — published changes appear live within ~1 minute."
-    files:
-      - name: "items"
-        label: "Hub items (list)"
-        file: "src/content/knowledge.json"
-        description: "All items shown on the Hub page. Drag to reorder. Click an item to edit."
-        fields:
-          - label: "Categories"
-            name: "categories"
-            widget: "list"
-            collapsed: true
-            summary: "{{fields.label}} ({{fields.id}})"
-            hint: "Tabs shown on the Knowledge Hub. Add a new entry to introduce a new tab (e.g. Podcasts). Drag to reorder. Each item's 'Category' field must match one of these ids."
-            fields:
-              - { name: "id",       label: "ID (slug)",      widget: "string", hint: "Lower-case, hyphens. Used as a key. e.g. blogs, whitepapers, podcasts" }
-              - { name: "label",    label: "Tab label",      widget: "string", hint: "What's shown on the tab button. e.g. Blogs" }
-              - { name: "ctaLabel", label: "Card CTA label", widget: "string", hint: "Button text on cards in this category. e.g. Read essay, Watch, Listen" }
-
-          - label: "Items"
-            name: "items"
-            widget: "list"
-            summary: "{{fields.kind}} · {{fields.title}}"
-            fields:
-              - { name: "id",         label: "Slug",          widget: "string", hint: "Lower-case, hyphens. Used as a key. e.g. why-pocs-fail" }
-              - { name: "category",   label: "Category",      widget: "string", hint: "Must exactly match an ID from the Categories list above. e.g. blogs, whitepapers, videocasts, or any new ID you added." }
-              - { name: "kind",       label: "Kind label",    widget: "string", default: "ESSAY", hint: "Shown on the card — ESSAY, WHITEPAPER, VIDEOCAST, FIELD NOTE, BRIEF" }
-              - { name: "title",      label: "Title",         widget: "string" }
-              - { name: "excerpt",    label: "Excerpt",       widget: "text",   hint: "1–2 sentence preview shown on the card" }
-              - { name: "domain",     label: "Domain tag",    widget: "select", options: ["industry", "delivery", "platform", "talent", "governance", "culture"] }
-              - { name: "length",     label: "Length",        widget: "string", hint: "e.g. 10 MIN or 32 PAGES" }
-              - { name: "author",     label: "Author / byline", widget: "string", required: false, default: "COMING SOON", hint: "Optional. Most imported items have no byline yet — leave blank and no byline is shown." }
-              - { name: "href",       label: "Link target",   widget: "string", hint: "Where the card links to. e.g. knowledge/your-post.html" }
-              - { name: "thumbStyle", label: "Thumb tint",    widget: "select", options: ["alt-1", "alt-2", "alt-3", "alt-4", "alt-5", "alt-6"], default: "alt-1", hint: "Used if you don't upload a Card image below." }
-              - { name: "cardImage",   label: "Card image",      widget: "image", required: false, hint: "Banner image shown on the Hub-listing card. If left blank, a coloured tile is used instead. Recommended ~800×500." }
-              - { name: "bannerImage", label: "Banner image",  widget: "image", required: false, hint: "Hero banner shown at the TOP of the actual blog post when it opens. Recommended ~1600×900. Leave blank for no banner." }
-              - { name: "runtime",     label: "Runtime (videocasts only)", widget: "string", required: false, hint: "HH:MM e.g. 22:14" }
-
-  # ----------------------------------------------------------------------
-  # POSTS — Markdown blog bodies. Each post is its own .md file in posts/.
-  # New posts show at /post.html?slug=<filename>.
-  # ----------------------------------------------------------------------
-  - name: "posts"
-    label: "Posts (full essays)"
-    label_singular: "Post"
-    description: "Write the body of a blog post or essay here. After publishing, add a corresponding card under 'Knowledge Hub' pointing to post.html?slug=<filename> to surface it on the Hub page."
-    folder: "src/content/posts"
-    create: true
-    slug: "{{slug}}"
-    extension: "md"
-    format: "frontmatter"
-    summary: "{{title}} ({{kind}})"
-    fields:
-      - { name: "title",   label: "Title",   widget: "string" }
-      - { name: "excerpt", label: "Excerpt / one-line preview", widget: "text", hint: "Shown on the card and at the top of the post. 1–2 sentences." }
-      - { name: "kind",    label: "Kind",    widget: "select", options: ["ESSAY", "WHITEPAPER", "FIELD NOTE", "BRIEF"], default: "ESSAY" }
-      - { name: "length",  label: "Length",  widget: "string", hint: "Reading time. e.g. 8 MIN", default: "5 MIN" }
-      - { name: "author",  label: "Author byline", widget: "string", required: false, default: "BY THE GALENT TEAM", hint: "Optional. Leave blank if the post has no named author." }
-      - { name: "domain",  label: "Domain",  widget: "select", options: ["industry", "delivery", "platform", "talent", "governance", "culture"], default: "platform" }
-      - { name: "body",    label: "Body",    widget: "markdown", hint: "Write the full essay here. You can use bold, italics, headings, lists, links, quotes and images — toolbar buttons handle the formatting." }
-
   # ----------------------------------------------------------------------
   # LEADERSHIP — About page founder cards. Lives in content/leadership.json.
   # ----------------------------------------------------------------------

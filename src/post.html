@@ -80,10 +80,11 @@
     <div class="bottom">© 2026 Galent</div>
   </footer>
 
-  <!-- Markdown renderer (loaded from CDN, no build step) -->
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <!-- Sanity content layer (no build step; sanity-config.js must load first) -->
+  <script src="js/sanity-config.js?v=sanity-1"></script>
+  <script src="js/sanity.js?v=sanity-1"></script>
   <script src="js/animations.js?v=net-dark-3"></script>
-  <script src="js/post-cms.js?v=post-2"></script>
+  <script src="js/post-cms.js?v=post-3"></script>
   <script>
     Galent.stickyNav('site-nav');
   </script>

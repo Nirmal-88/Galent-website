@@ -1,19 +1,53 @@
 /* Galent Knowledge Hub — content-driven CMS layer.
  *
- * Content lives in /content/knowledge.json. This module fetches that JSON
- * on page load, renders the cards into the existing tab panels, then wires
- * up the tab switching and search/filter behaviour.
+ * Content lives in Sanity. This module queries it on page load, renders the
+ * cards into the existing tab panels, then wires up the tab switching and
+ * search/filter behaviour.
  *
  * Editing flow:
- *   1. Edit content/knowledge.json (locally or via GitHub web editor)
- *   2. Commit + push
- *   3. Vercel redeploys, page reflects the change
+ *   1. Edit the post in the Studio
+ *   2. Hit Publish
+ *   3. Reload — no commit, no redeploy
+ *
+ * The GROQ projection below is written to return the exact shape this file
+ * already rendered when content came from knowledge.json ({categories, items}
+ * with an `href` per item), so everything downstream of the fetch is unchanged.
  *
  * No build step, no auth, no framework. Vanilla JS.
  */
 (function () {
   const HubCMS = {};
-  const CONTENT_URL = 'content/knowledge.json';
+
+  /* Drafts are excluded explicitly. The dataset is public, so unpublished work
+   * would otherwise be readable — and visible on the Hub — by anyone. */
+  const HUB_QUERY = `{
+    "categories": *[_type == "category" && !(_id in path("drafts.**"))]
+      | order(order asc) {
+        "id": slug.current,
+        "label": title,
+        ctaLabel
+      },
+    "items": *[
+      _type == "post"
+      && !(_id in path("drafts.**"))
+      && defined(slug.current)
+      && defined(category)
+    ] | order(order asc) {
+      "id": slug.current,
+      "category": category->slug.current,
+      "href": "post.html?slug=" + slug.current,
+      kind,
+      title,
+      excerpt,
+      domain,
+      length,
+      author,
+      thumbStyle,
+      runtime,
+      "cardImage": cardImage.asset->url,
+      "bannerImage": bannerImage.asset->url
+    }
+  }`;
 
   /* ------------------------------------------------------------------
    * Renderers
@@ -218,7 +252,7 @@
   }
 
   /* Hero "running slides" — a clickable, cross-fading slideshow of the latest
-   * posts' card images. Driven by the same knowledge.json as the grid, so it
+   * posts' card images. Driven by the same Sanity query as the grid, so it
    * auto-updates on add/edit/delete. Only items that have a card image and a
    * link are shown; falls back to the static markup if there are none. */
   let heroTimer = null;
@@ -409,15 +443,22 @@
    * ------------------------------------------------------------------ */
   HubCMS.init = async function () {
     try {
-      const res = await fetch(CONTENT_URL, { cache: 'no-store' });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
+      if (!window.Sanity) throw new Error('js/sanity.js did not load');
+      const data = await window.Sanity.query(HUB_QUERY);
+
+      // Let the Sanity CDN do the resizing rather than shipping full-size
+      // originals to a card that renders at ~400px wide.
+      (data && data.items ? data.items : []).forEach((item) => {
+        if (item.cardImage) item.cardImage = window.Sanity.imageUrl(item.cardImage, { width: 1000 });
+        if (item.bannerImage) item.bannerImage = window.Sanity.imageUrl(item.bannerImage, { width: 1600 });
+      });
+
       HubCMS.render(data);
     } catch (err) {
       console.error('[HubCMS] Failed to load content:', err);
       const panelsHost = document.querySelector('.hub-panels');
       if (panelsHost) {
-        panelsHost.innerHTML = `<div class="hub-panel active"><div class="card-grid"><div class="hub-empty" style="display:block;"><strong>Couldn't load content.</strong>Check <code>content/knowledge.json</code> for syntax errors.</div></div></div>`;
+        panelsHost.innerHTML = `<div class="hub-panel active"><div class="card-grid"><div class="hub-empty" style="display:block;"><strong>Couldn't load content.</strong>The Knowledge Hub couldn't reach the CMS. Try a refresh — if it keeps happening, check the browser console.</div></div></div>`;
       }
     }
     // Tabs + search wired AFTER render() builds the shell

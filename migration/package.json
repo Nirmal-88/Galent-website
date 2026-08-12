@@ -1,0 +1,15 @@
+{
+  "name": "galent-migration",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Decap CMS -> Sanity migration for the Galent Knowledge Hub.",
+  "type": "module",
+  "scripts": {
+    "transform": "node scripts/transform.mjs",
+    "validate": "node scripts/validate.mjs"
+  },
+  "dependencies": {
+    "@portabletext/markdown": "^1.0.0",
+    "gray-matter": "^4.0.3"
+  }
+}

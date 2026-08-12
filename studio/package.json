@@ -1,0 +1,22 @@
+{
+  "name": "galent-studio",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Sanity Studio for the Galent Knowledge Hub.",
+  "type": "module",
+  "scripts": {
+    "dev": "sanity dev",
+    "start": "sanity start",
+    "build": "sanity build",
+    "deploy": "sanity deploy",
+    "import": "sanity dataset import ../migration/import.ndjson production --replace --allow-assets-in-drafts",
+    "extract": "sanity schema extract"
+  },
+  "dependencies": {
+    "@sanity/vision": "^4.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "sanity": "^4.0.0",
+    "styled-components": "^6.1.0"
+  }
+}

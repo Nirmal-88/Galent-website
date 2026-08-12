@@ -7939,6 +7939,44 @@ blockquote,
 }
 @media (max-width: 720px) { .post-cover { border-radius: 14px; } }
 
+/* Post embed — responsive video / audio player from the CMS "Video / embed"
+   field. Breaks out of .post-body's 68ch measure so players stay watchable. */
+.post-embed {
+  margin: 0 0 clamp(28px, 3.4vw, 48px);
+  width: 100%;
+  max-width: none;
+}
+.post-embed-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--surface-container);
+}
+.post-embed-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+.post-embed figcaption {
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--on-surface-muted, var(--on-surface));
+  opacity: 0.75;
+}
+/* Audio embeds (Spotify / SoundCloud) are short strips, not 16:9 boxes. */
+.post-embed-frame:has(iframe[src*="spotify.com"]),
+.post-embed-frame:has(iframe[src*="soundcloud.com"]) {
+  aspect-ratio: auto;
+  height: 180px;
+}
+@media (max-width: 720px) { .post-embed-frame { border-radius: 14px; } }
+
 /* Home hero single-line lede — tighter, more breathing room above the CTAs */
 .hero .hero-lede {
   max-width: 58ch;
@@ -10335,8 +10373,11 @@ body[data-page^="service-"] .hero .t-hero { letter-spacing: -0.02em; }
   background: #ffffff;
   padding: 6px;
 }
-/* Author headshot embedded in the markdown body → small centered avatar */
-.post-body img[src*="-author"] {
+/* Author headshot embedded in the body → small centered avatar.
+ * Driven by the image's "Display as" field in the Studio rather than by a
+ * filename match, because Sanity's CDN URLs do not carry the original
+ * filename that the old [src*="-author"] selector relied on. */
+.post-body .post-figure.is-avatar img {
   background: transparent;
   padding: 0;
   width: 128px;
@@ -10347,6 +10388,49 @@ body[data-page^="service-"] .hero .t-hero { letter-spacing: -0.02em; }
   border-radius: 50%;
   display: block;
   margin: 1.8em auto 0.6em;
+}
+
+/* ==================================================================
+ * PORTABLE TEXT BLOCKS (Sanity migration, 2026-08-12)
+ * Figures, tables and dividers emitted by js/sanity.js. Images inside
+ * .post-figure still inherit every .post-body img rule above.
+ * ================================================================== */
+.post-body .post-figure { margin: 0; }
+.post-body .post-figure figcaption {
+  font-size: 13px;
+  opacity: 0.7;
+  text-align: center;
+  margin-top: 0.4em;
+}
+
+/* Wide tables scroll inside their own box so the page never scrolls sideways. */
+.post-body .post-table-wrap {
+  overflow-x: auto;
+  margin: 1.6em 0;
+  -webkit-overflow-scrolling: touch;
+}
+.post-body .post-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+.post-body .post-table th,
+.post-body .post-table td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+  white-space: nowrap;
+}
+.post-body .post-table th {
+  font-weight: 600;
+  color: var(--on-surface);
+  border-bottom-color: rgba(255,255,255,0.22);
+}
+/* Metric tables read as label + value, so the value column carries the weight
+ * that inline bold used to provide in the source Markdown. */
+.post-body .post-table td:last-child {
+  font-weight: 600;
+  color: var(--on-surface);
 }
 
 /* ==================================================================
